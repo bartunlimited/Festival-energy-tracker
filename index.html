@@ -1082,11 +1082,10 @@ function slotAt(arr, t){
 
 // "Weer van vandaag"-mapping: when t (e.g. a simulated festival day) falls
 // outside the forecast window, project today's Boom weather onto that day —
-// same clock time, today's pattern. Returns the ms offset to add to t.
-function wxTimeOffset(t, w){
-  w = w||wx;
-  if(!w.minutely.length && !w.hourly.length) return 0;
-  if(slotAt(w.minutely, t) || slotAt(w.hourly, t)) return 0;
+// same clock time, today's pattern. Offset is computed PER data array, so a
+// synthetic ?rain=demo minutely set at sim-time still maps hourly temp/cloud.
+function wxOffsetFor(arr, t){
+  if(!arr.length || slotAt(arr, t)) return 0;
   const nowReal = new Date();
   const mapped = new Date(nowReal.getFullYear(), nowReal.getMonth(), nowReal.getDate(), t.getHours(), t.getMinutes());
   if(t.getHours() < 6) mapped.setDate(mapped.getDate()+1);  // na middernacht => morgenvroeg
@@ -1095,19 +1094,19 @@ function wxTimeOffset(t, w){
 
 function tempAt(t, w){
   w = w||wx;
-  const s = slotAt(w.hourly, new Date(t.getTime() + wxTimeOffset(t, w)));
+  const s = slotAt(w.hourly, new Date(t.getTime() + wxOffsetFor(w.hourly, t)));
   return s ? s.temp : null;
 }
 function cloudAt(t, w){
   w = w||wx;
-  const s = slotAt(w.hourly, new Date(t.getTime() + wxTimeOffset(t, w)));
+  const s = slotAt(w.hourly, new Date(t.getTime() + wxOffsetFor(w.hourly, t)));
   return s && s.cloud!=null ? s.cloud : null;
 }
 
 function rainStatus(t, w){
   w = w||wx;
   const th = CONFIG.rain.threshMm;
-  const tt = new Date(t.getTime() + wxTimeOffset(t, w));
+  const tt = new Date(t.getTime() + wxOffsetFor(w.minutely, t));
   const cur = slotAt(w.minutely, tt);
   const raining = !!(cur && cur.mm>=th);
   let soon=false, heavy = !!(cur && cur.mm>=CONFIG.rain.heavyMm);
@@ -1122,7 +1121,7 @@ function rainStatus(t, w){
 // times are returned in t's own day (mapped back from today's pattern)
 function nextRainEvent(t){
   const th=CONFIG.rain.threshMm;
-  const off = wxTimeOffset(t, wx);
+  const off = wxOffsetFor(wx.minutely, t);
   const tt = new Date(t.getTime() + off);
   let start=null, end=null, heavy=false;
   for(const s of wx.minutely){
@@ -1163,7 +1162,7 @@ function renderBanners(){
   if(DEMO_DATA) html += `<div class="banner demo">⚠️ DEMODATA — de echte W1-timetable wordt geladen zodra <b>source/tomorrowland-final2.html</b> in de repo staat.</div>`;
   if(wx.stale && wx.ts) html += `<div class="banner stale">Weer: ${fmtHM(wx.ts)} (offline — laatste bekende voorspelling)</div>`;
   if(!wx.ts && wx.minutely.length===0) html += `<div class="banner stale">Geen weerdata — statisch model actief</div>`;
-  if(wxTimeOffset(now(), wx) !== 0) html += `<div class="banner stale">Weer: patroon van vandaag (Boom) toegepast op deze simulatiedag</div>`;
+  if(wxOffsetFor(wx.minutely, now()) !== 0 || wxOffsetFor(wx.hourly, now()) !== 0) html += `<div class="banner stale">Weer: patroon van vandaag (Boom) toegepast op deze simulatiedag</div>`;
 
   const t = now();
   const ev = nextRainEvent(t);
@@ -1288,10 +1287,11 @@ function renderSchema(){
 }
 
 function renderWeer(){
-  const off = wxTimeOffset(now(), wx);
-  const t = new Date(now().getTime() + off);
+  const offMin = wxOffsetFor(wx.minutely, now()), offHr = wxOffsetFor(wx.hourly, now());
+  const t = new Date(now().getTime() + offMin);
+  const tHr = new Date(now().getTime() + offHr);
   let html = "";
-  if(wx.ts) html += `<div class="sub" style="padding:8px 14px">Laatste update: ${fmtHM(wx.ts)}${wx.stale?" (offline)":""}${off!==0?" · patroon van vandaag":""}</div>`;
+  if(wx.ts) html += `<div class="sub" style="padding:8px 14px">Laatste update: ${fmtHM(wx.ts)}${wx.stale?" (offline)":""}${(offMin||offHr)?" · patroon van vandaag":""}</div>`;
   html += `<h2>NEERSLAG KOMENDE 2 UUR</h2>`;
   const slots = wx.minutely.filter(s=>{ const dm=(s.t-t)/60000; return dm>-15 && dm<=120; });
   if(slots.length){
@@ -1304,7 +1304,7 @@ function renderWeer(){
     }
   } else html += `<div class="msg">Geen kwartierdata beschikbaar.</div>`;
   html += `<h2>PER UUR VANDAAG</h2>`;
-  const hrs = wx.hourly.filter(s=>{ const dh=(s.t-t)/3600e3; return dh>-1 && dh<=18; });
+  const hrs = wx.hourly.filter(s=>{ const dh=(s.t-tHr)/3600e3; return dh>-1 && dh<=18; });
   if(hrs.length){
     for(const s of hrs){
       const sky = s.mm>=CONFIG.rain.threshMm ? "🌧" : s.cloud==null ? "" : s.cloud<25 ? "☀️" : s.cloud<60 ? "⛅" : "☁️";
@@ -1356,6 +1356,10 @@ function runTests(){
   const todaySlot = new Date(rt.getFullYear(), rt.getMonth(), rt.getDate(), 22, 0);
   const mapWx = { minutely:[{t:todaySlot, mm:1.0}], hourly:[], ts:new Date(), stale:false };
   ok(`weer-van-vandaag: regen vandaag 22:00 telt op vr 17/7 22:05`, rainStatus(new Date("2026-07-17T22:05:00"), mapWx).raining===true);
+  const demoT = new Date("2026-07-17T21:35:00");
+  const todayHr = new Date(rt.getFullYear(), rt.getMonth(), rt.getDate(), 21, 0);
+  const demoWx = { minutely:[{t:new Date("2026-07-17T21:30:00"), mm:1.2}], hourly:[{t:todayHr, temp:23, prob:0, mm:0, cloud:20}], ts:new Date(), stale:false };
+  ok(`regen-demo: temp/zon van vandaag blijven beschikbaar`, tempAt(demoT, demoWx)===23 && cloudAt(demoT, demoWx)===20);
   const sunSet = TIMETABLE.find(s=>genreFam(s.genre)==="melodic" && STAGES[s.stage].cover==="open");
   const tSun = setDate(sunSet,"start");
   const sunnyWx = { minutely:[], hourly:[{t:tSun, temp:24, prob:0, mm:0}], ts:new Date(), stale:false };
