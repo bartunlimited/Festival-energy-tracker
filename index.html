@@ -1296,8 +1296,11 @@ function renderWeer(){
   const slots = wx.minutely.filter(s=>{ const dm=(s.t-t)/60000; return dm>-15 && dm<=120; });
   if(slots.length){
     for(const s of slots){
-      const bars = s.mm>=CONFIG.rain.threshMm ? "▮".repeat(clamp(Math.ceil(s.mm),1,6)) : "·";
-      html += `<div class="wrow"><span class="t">${fmtHM(s.t)}</span><span class="bar">${bars}</span><span class="mm">${s.mm>0?s.mm.toFixed(1)+" mm":"droog"}</span></div>`;
+      const raining = s.mm>=CONFIG.rain.threshMm;
+      const bars = raining ? "▮".repeat(clamp(Math.ceil(s.mm),1,6)) : "";
+      const cl = cloudAt(s.t);
+      const sky = raining ? "🌧" : cl==null ? "·" : cl<25 ? "☀️" : cl<60 ? "⛅" : "☁️";
+      html += `<div class="wrow"><span class="t">${fmtHM(s.t)}</span><span>${sky}</span><span class="bar">${bars}</span><span class="mm">${s.mm>0?s.mm.toFixed(1)+" mm":"droog"}</span></div>`;
     }
   } else html += `<div class="msg">Geen kwartierdata beschikbaar.</div>`;
   html += `<h2>PER UUR VANDAAG</h2>`;
