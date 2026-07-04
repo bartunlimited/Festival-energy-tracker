@@ -478,23 +478,23 @@ const TIMETABLE = [
 ];
 
 // cover: indoor | covered | open · size XS-XL · dark: enclosed/dark inside
-// verified:false => 2026 layout not confirmed by Bart yet (shown with "?" badge)
+// All cover flags verified by Bart for the 2026 layout (2026-07-04).
 const STAGES = {
-  "mainstage":        { name:"Mainstage",        cover:"open",    size:"XL", dark:false, verified:true  },
-  "freedom":          { name:"Freedom",          cover:"indoor",  size:"L",  dark:true,  verified:true  },  // indoor hall, LED ceiling
-  "atmosphere":       { name:"Atmosphere",       cover:"covered", size:"M",  dark:true,  verified:false },  // dome in eerdere edities
-  "cage":             { name:"Cage",             cover:"covered", size:"M",  dark:true,  verified:false },
-  "core":             { name:"CORE",             cover:"open",    size:"M",  dark:false, verified:true  },  // forest stage
-  "crystal-garden":   { name:"Crystal Garden",   cover:"indoor",  size:"M",  dark:true,  verified:false },
-  "celestia":         { name:"Celestia",         cover:"covered", size:"L",  dark:true,  verified:false },  // theaterzaal-stijl
-  "melodia":          { name:"Melodia",          cover:"open",    size:"M",  dark:false, verified:false },
-  "great-library":    { name:"Great Library",    cover:"indoor",  size:"S",  dark:true,  verified:false },
-  "rave-cave":        { name:"Rave Cave",        cover:"covered", size:"S",  dark:true,  verified:true  },
-  "rose-garden":      { name:"Rose Garden",      cover:"open",    size:"S",  dark:false, verified:false },
-  "planaxis":         { name:"Planaxis",         cover:"open",    size:"M",  dark:false, verified:false },
-  "elixir":           { name:"Elixir",           cover:"covered", size:"S",  dark:false, verified:false },
-  "moose-bar":        { name:"Moose Bar",        cover:"covered", size:"M",  dark:true,  verified:true  },  // tent, altijd feest
-  "house-of-fortune": { name:"House of Fortune", cover:"indoor",  size:"M",  dark:true,  verified:false },
+  "mainstage":        { name:"Mainstage",        cover:"open",    size:"XL", dark:false, verified:true },
+  "freedom":          { name:"Freedom",          cover:"indoor",  size:"L",  dark:true,  verified:true },  // indoor hall, LED ceiling
+  "atmosphere":       { name:"Atmosphere",       cover:"covered", size:"M",  dark:true,  verified:true },  // tent
+  "cage":             { name:"Cage",             cover:"indoor",  size:"M",  dark:true,  verified:true },  // binnen
+  "core":             { name:"CORE",             cover:"open",    size:"M",  dark:false, verified:true },  // forest stage
+  "crystal-garden":   { name:"Crystal Garden",   cover:"covered", size:"M",  dark:false, verified:true },  // overdekt
+  "celestia":         { name:"Celestia",         cover:"open",    size:"M",  dark:false, verified:true },  // buiten
+  "melodia":          { name:"Melodia",          cover:"open",    size:"XS", dark:false, verified:true },  // buiten, erg klein
+  "great-library":    { name:"Great Library",    cover:"open",    size:"S",  dark:false, verified:true },  // buiten
+  "rave-cave":        { name:"Rave Cave",        cover:"covered", size:"S",  dark:true,  verified:true },
+  "rose-garden":      { name:"Rose Garden",      cover:"open",    size:"S",  dark:false, verified:true },  // buiten
+  "planaxis":         { name:"Planaxis",         cover:"open",    size:"M",  dark:false, verified:true },  // buiten
+  "elixir":           { name:"Elixir",           cover:"covered", size:"S",  dark:false, verified:true },  // buiten, kleine overdekking
+  "moose-bar":        { name:"Moose Bar",        cover:"covered", size:"M",  dark:true,  verified:true },  // tent, altijd feest
+  "house-of-fortune": { name:"House of Fortune", cover:"indoor",  size:"S",  dark:true,  verified:true },  // binnen, klein
 };
 
 // Heuristic energy 0-100 (genre intensity + set type + familiarity + reputation).
