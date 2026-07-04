@@ -961,22 +961,23 @@ function competition(set){
 }
 
 // M_weather(t): needs weather state (wx) — pure given wx snapshot
-function weatherMult(stage, t, wx, set){
+function weatherMult(stage, t, wx, set, atSetTime){
   if(!stage) return 1;
   let m = 1;
   const r = rainStatus(t, wx);
-  if(r.rainingOrSoon){
+  const wet = atSetTime ? r.raining : r.rainingOrSoon;  // set-range mode: only rain in this quarter itself
+  if(wet){
     if(stage.cover==="indoor") m = 1.15;
     else if(stage.cover==="covered") m = 1.10;
     else m = r.heavy ? 0.35 : 0.55;
   }
   const temp = tempAt(t, wx);
   if(temp!=null && temp<CONFIG.cold.tempC && festHour(t)>=CONFIG.cold.fromHour && stage.cover==="open") m -= CONFIG.cold.penalty;
-  if(!r.rainingOrSoon && temp!=null && temp>=CONFIG.heat.tempC){
+  if(!wet && temp!=null && temp>=CONFIG.heat.tempC){
     // too hot: shade under a roof (e.g. Crystal Garden) beats the open field
     if(stage.cover==="covered") m *= CONFIG.heat.shadeBonus;
     else if(stage.cover==="open") m *= CONFIG.heat.openPenalty;
-  } else if(!r.rainingOrSoon && temp!=null && temp>=CONFIG.sun.tempC && stage.cover==="open"){
+  } else if(!wet && temp!=null && temp>=CONFIG.sun.tempC && stage.cover==="open"){
     // pleasantly warm AND actually sunny (cloud cover below threshold; unknown => assume ok)
     const cloud = cloudAt(t, wx);
     if(cloud==null || cloud < CONFIG.sun.maxCloud){
@@ -1007,6 +1008,25 @@ function setMid(set){
   return new Date(base.getTime() + (toMin(set.start)+toMin(set.end))/2*60000);
 }
 function hasWx(){ return wx.minutely.length>0 || wx.hourly.length>0; }
+
+// Weather over a WHOLE set: sample every quarter-hour from start to end.
+// Any bad quarter counts fully (worst wins); if nothing is bad, the best
+// quarter counts (covered stages keep their rain bonus for the whole set).
+function weatherMultRange(set, w){
+  const stage = STAGES[set.stage];
+  if(!stage) return 1;
+  const s0 = setDate(set,"start").getTime(), e0 = setDate(set,"end").getTime();
+  let worst = Infinity, best = -Infinity;
+  for(let t = s0; t < e0; t += 15*60000){
+    const m = weatherMult(stage, new Date(t), w, set, true);
+    if(m < worst) worst = m;
+    if(m > best) best = m;
+  }
+  return worst < 1 ? worst : best;
+}
+function scoreSetWx(set, w){
+  return Math.round(clamp(scoreSet(set, null, w, false) * weatherMultRange(set, w), 0, 100));
+}
 
 function scoreBlocks(sc){
   const f = Math.round(sc/20);
@@ -1248,7 +1268,7 @@ function renderNu(){
     }else{
       body = `<div class="meta">— geen set bezig —</div>`;
     }
-    const nxt = r.next ? `<div class="next">straks ${r.next.start}: ${esc(r.next.artist)}${r.next.pick?" ★":""} · ${hasWx() ? scoreSet(r.next, setDate(r.next,"start"), wx, true) : scoreSet(r.next, null, wx, false)}</div>` : "";
+    const nxt = r.next ? `<div class="next">straks ${r.next.start}: ${esc(r.next.artist)}${r.next.pick?" ★":""} · ${hasWx() ? scoreSetWx(r.next, wx) : scoreSet(r.next, null, wx, false)}</div>` : "";
     html += `<div class="nucard ${r.current?.pick||""}"><div class="stage">${esc(stageName(r.slug)).toUpperCase()}${coverBadge(st)}</div>${body}${nxt}</div>`;
   }
   el("view-nu").innerHTML = html || `<div class="msg">Geen sets vandaag.</div>`;
@@ -1274,7 +1294,7 @@ function renderSchema(){
     .filter(s=>filt.stage==="all" || s.stage===filt.stage)
     .filter(s=>toMin(s.start) >= filt.fromHour*60)
     .filter(s=>!filt.picksOnly || s.pick)
-    .map(s=>({set:s, score: hasWx() ? scoreSet(s, setMid(s), wx, true) : scoreSet(s, null, wx, false)}))
+    .map(s=>({set:s, score: hasWx() ? scoreSetWx(s, wx) : scoreSet(s, null, wx, false)}))
     .filter(r=>!filt.minEnergy || r.score>=CONFIG.energyChipMin)
     .sort((a,b)=>toMin(a.set.start)-toMin(b.set.start));
 
@@ -1373,6 +1393,14 @@ function runTests(){
     const rainAtSet = { minutely:[{t:mid, mm:1.0}], hourly:[], ts:new Date(), stale:false };
     ok(`schema-score daalt bij regen op settijd (${openSet22.artist})`, scoreSet(openSet22, mid, rainAtSet, true) < scoreSet(openSet22, null, wx, false));
   }
+  const longOpen = TIMETABLE.find(s=>STAGES[s.stage].cover==="open" && toMin(s.end)-toMin(s.start)>=100);
+  const ls = setDate(longOpen,"start");
+  const earlyRain = { minutely:[0,15,30].map(m=>({t:new Date(ls.getTime()+m*60000), mm:1.0})), hourly:[], ts:new Date(), stale:false };
+  ok(`slechtste kwartier telt: regen alleen in eerste 45 min drukt hele set (${longOpen.artist})`, scoreSetWx(longOpen, earlyRain) < scoreSet(longOpen, null, wx, false));
+  const covSet = TIMETABLE.find(s=>STAGES[s.stage].cover!=="open" && toMin(s.end)-toMin(s.start)>=100);
+  const cs = setDate(covSet,"start");
+  const covRain = { minutely:[0,15,30].map(m=>({t:new Date(cs.getTime()+m*60000), mm:1.0})), hourly:[], ts:new Date(), stale:false };
+  ok(`overdekt houdt regenbonus over hele set (${covSet.artist})`, scoreSetWx(covSet, covRain) >= scoreSet(covSet, null, wx, false));
   const sunSet = TIMETABLE.find(s=>genreFam(s.genre)==="melodic" && STAGES[s.stage].cover==="open");
   const tSun = setDate(sunSet,"start");
   const sunnyWx = { minutely:[], hourly:[{t:tSun, temp:24, prob:0, mm:0}], ts:new Date(), stale:false };
