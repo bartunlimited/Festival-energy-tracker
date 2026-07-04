@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title>TML W1 — Dance Energy</title>
+<style>
+/* == Bart's readability recipe: pure black, white bold, 22px content == */
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html { background:#000; }
+body {
+  background:#000; color:#fff;
+  font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size:22px; font-weight:700; line-height:1.35;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) 40px env(safe-area-inset-left);
+}
+h1 { font-size:20px; font-weight:800; padding:10px 14px 2px; color:#aaa; letter-spacing:.5px; }
+.sub { font-size:15px; color:#666; padding:0 14px 8px; font-weight:600; }
+
+/* view tabs */
+.viewtabs { display:flex; gap:8px; padding:6px 14px 10px; position:sticky; top:0; background:#000; z-index:30; }
+.viewtabs button {
+  flex:1; font:inherit; font-size:20px; font-weight:800; color:#fff;
+  background:#111; border:2px solid #333; border-radius:12px; padding:12px 4px;
+}
+.viewtabs button.on { background:#fff; color:#000; border-color:#fff; }
+
+/* chip bars */
+.chips { display:flex; gap:8px; overflow-x:auto; padding:6px 14px; scrollbar-width:none; }
+.chips::-webkit-scrollbar { display:none; }
+.chip {
+  font:inherit; font-size:18px; font-weight:800; color:#fff; white-space:nowrap;
+  background:#111; border:2px solid #333; border-radius:999px; padding:11px 16px;
+}
+.chip.on { background:#fff; color:#000; border-color:#fff; }
+.chip.toggle.on { background:#ffd60a; border-color:#ffd60a; }
+
+/* banners */
+.banner { margin:8px 14px; border-radius:12px; padding:14px; font-size:20px; }
+.banner.rain { background:#0a2540; border:2px solid #3b82f6; }
+.banner.rain .go { color:#7dd3fc; font-size:22px; margin-top:6px; }
+.banner.demo { background:#2e1e08; border:2px solid #ffa940; font-size:17px; color:#ffd9a0; }
+.banner.stale { background:#1a1a1a; border:2px solid #555; font-size:16px; color:#999; padding:8px 14px; }
+
+/* time headers */
+.th {
+  position:sticky; top:64px; background:#000; z-index:10;
+  font-size:20px; color:#888; padding:14px 14px 4px; border-bottom:1px solid #222;
+}
+
+/* set cards */
+.card { margin:8px 14px; border-radius:12px; padding:12px 14px; background:#0d0d0d; border-left:6px solid #333; }
+.card.must { background:#38070c; border-left-color:#ff4d5a; }
+.card.rec  { background:#2e1e08; border-left-color:#ffa940; }
+.card .art { font-weight:800; }
+.card .meta { font-size:19px; color:#bbb; margin-top:2px; }
+.card .meta i { color:#8fa; font-style:italic; font-weight:600; }
+.card .score { margin-top:4px; font-size:20px; letter-spacing:2px; }
+.card .score b { letter-spacing:0; margin-left:8px; }
+.badge { font-size:14px; font-weight:800; border-radius:6px; padding:2px 7px; vertical-align:3px; margin-left:8px; }
+.badge.must { background:#ff4d5a; color:#000; }
+.badge.rec  { background:#ffa940; color:#000; }
+.badge.cover { background:#123; color:#7dd3fc; }
+.badge.unverified { background:#333; color:#999; }
+
+/* NU view */
+.nucard { margin:8px 14px; border-radius:12px; padding:12px 14px; background:#0d0d0d; border-left:6px solid #333; }
+.nucard .stage { font-size:17px; color:#7dd3fc; font-weight:800; }
+.nucard .next { font-size:18px; color:#888; margin-top:4px; font-weight:600; }
+.msg { padding:24px 14px; color:#888; font-size:20px; }
+
+/* weather view */
+.wrow { display:flex; gap:10px; padding:6px 14px; font-size:20px; align-items:baseline; }
+.wrow .t { width:70px; color:#888; font-size:18px; }
+.wrow .bar { color:#3b82f6; letter-spacing:1px; }
+.wrow .mm { color:#bbb; font-size:17px; }
+h2 { font-size:19px; color:#aaa; padding:16px 14px 4px; font-weight:800; }
+</style>
+</head>
+<body>
+<h1>TML W1 · DANCE ENERGY</h1>
+<div class="sub" id="clockline"></div>
+<div class="viewtabs">
+  <button id="tab-nu" onclick="setView('nu')">NU</button>
+  <button id="tab-schema" onclick="setView('schema')">SCHEMA</button>
+  <button id="tab-weer" onclick="setView('weer')">WEER</button>
+</div>
+<div id="banners"></div>
+<div id="view-nu"></div>
+<div id="view-schema"></div>
+<div id="view-weer"></div>
+
+<script>
+/* =====================================================================
+   DATA BLOCK
+   ===================================================================== */
+
+// Real W1 timetable extracted from source/tomorrowland-final2.html.
+const DEMO_DATA = false;
+
+const DAY_DATES = { 1:"2026-07-17", 2:"2026-07-18", 3:"2026-07-19" };
+const DAY_LABELS = { 1:"Vr 17", 2:"Za 18", 3:"Zo 19" };
+
+// Extracted 1:1 from source/tomorrowland-final2.html — 368 sets, picks preserved.
+// Schema per set: {day, stage, artist, start, end, pick:"must"|"rec"|"", genre}
+// Times "HH:MM"; hours < 06:00 belong to the previous festival day.
+const TIMETABLE = [
+  {day:1, stage:"cage", artist:"RAYZEN", start:"13:00", end:"14:00", pick:"", genre:"Hard techno"},
+  {day:1, stage:"celestia", artist:"MRMK", start:"13:00", end:"14:00", pick:"", genre:"Melodic techno"},
+  {day:1, stage:"elixir", artist:"Monsieur", start:"13:00", end:"14:30", pick:"", genre:"Eclectic"},
+  {day:1, stage:"house-of-fortune", artist:"More to be announced", start:"13:00", end:"14:00", pick:"", genre:"?"},
+  {day:1, stage:"planaxis", artist:"Yannick Thiry", start:"13:00", end:"14:00", pick:"", genre:"Psytrance"},
+  {day:1, stage:"great-library", artist:"Manuals", start:"13:00", end:"14:00", pick:"", genre:"EDM"},
+  {day:1, stage:"crystal-garden", artist:"Eridu", start:"13:30", end:"15:00", pick:"", genre:"House"},
+  {day:1, stage:"freedom", artist:"Jesabel", start:"13:30", end:"15:00", pick:"", genre:"House / techno"},
+  {day:1, stage:"melodia", artist:"Lerato Tsotetsi", start:"13:30", end:"15:00", pick:"", genre:"Afro house"},
+  {day:1, stage:"rose-garden", artist:"MAE.LIEN", start:"13:30", end:"14:30", pick:"", genre:"Hardstyle"},
+  {day:1, stage:"atmosphere", artist:"ROW1", start:"14:00", end:"15:30", pick:"rec", genre:"Techno"},
+  {day:1, stage:"cage", artist:"SANDY WAREZ b2b Revenja", start:"14:00", end:"15:00", pick:"", genre:"Hard techno"},
+  {day:1, stage:"celestia", artist:"Juno", start:"14:00", end:"15:30", pick:"", genre:"Melodic techno"},
+  {day:1, stage:"core", artist:"John Noseda b2b Kenny Montana", start:"14:00", end:"17:00", pick:"rec", genre:"House / eclectic"},
+  {day:1, stage:"house-of-fortune", artist:"Fran Ares", start:"14:00", end:"15:00", pick:"", genre:"House"},
+  {day:1, stage:"mainstage", artist:"Vintage Culture", start:"14:00", end:"15:30", pick:"rec", genre:"House"},
+  {day:1, stage:"planaxis", artist:"Trip-Tamine", start:"14:00", end:"15:00", pick:"", genre:"Psytrance"},
+  {day:1, stage:"great-library", artist:"Tomas Grey", start:"14:00", end:"15:00", pick:"", genre:"EDM"},
+  {day:1, stage:"elixir", artist:"High Grade Sound", start:"14:30", end:"16:00", pick:"", genre:"Reggae / bass"},
+  {day:1, stage:"rave-cave", artist:"Thomas Moulene", start:"14:30", end:"16:00", pick:"", genre:"Tech house"},
+  {day:1, stage:"rose-garden", artist:"Anton Invicta", start:"14:30", end:"16:00", pick:"", genre:"Hardstyle"},
+  {day:1, stage:"cage", artist:"elMefti", start:"15:00", end:"16:00", pick:"rec", genre:"Hard techno"},
+  {day:1, stage:"crystal-garden", artist:"Marsolo", start:"15:00", end:"16:30", pick:"", genre:"House"},
+  {day:1, stage:"freedom", artist:"Rose Ringed", start:"15:00", end:"16:30", pick:"", genre:"House"},
+  {day:1, stage:"house-of-fortune", artist:"Lucca Van Da...", start:"15:00", end:"16:00", pick:"", genre:"House"},
+  {day:1, stage:"melodia", artist:"Rosey Gold", start:"15:00", end:"16:30", pick:"", genre:"Afro house"},
+  {day:1, stage:"planaxis", artist:"John OO Fleming", start:"15:00", end:"16:00", pick:"", genre:"Psytrance"},
+  {day:1, stage:"great-library", artist:"DJ Sally", start:"15:00", end:"16:00", pick:"", genre:"EDM"},
+  {day:1, stage:"atmosphere", artist:"Peterblue", start:"15:30", end:"17:00", pick:"rec", genre:"Hard techno"},
+  {day:1, stage:"celestia", artist:"Rozie", start:"15:30", end:"17:00", pick:"", genre:"Melodic techno"},
+  {day:1, stage:"mainstage", artist:"Disco Lines", start:"15:30", end:"16:30", pick:"rec", genre:"House"},
+  {day:1, stage:"cage", artist:"Lolalita & Brennt (live)", start:"16:00", end:"17:00", pick:"rec", genre:"Hard techno"},
+  {day:1, stage:"elixir", artist:"Milinguap", start:"16:00", end:"17:00", pick:"", genre:"Eclectic"},
+  {day:1, stage:"house-of-fortune", artist:"StadiumX", start:"16:00", end:"17:00", pick:"", genre:"House"},
+  {day:1, stage:"moose-bar", artist:"Rino", start:"16:00", end:"19:00", pick:"", genre:"Eclectic"},
+  {day:1, stage:"planaxis", artist:"Firaga", start:"16:00", end:"17:00", pick:"", genre:"Psytrance"},
+  {day:1, stage:"great-library", artist:"Whisnu Santika", start:"16:00", end:"17:00", pick:"", genre:"EDM"},
+  {day:1, stage:"rave-cave", artist:"Panda Sound", start:"16:00", end:"17:00", pick:"", genre:"Eclectic"},
+  {day:1, stage:"rose-garden", artist:"STOOG3S", start:"16:00", end:"17:00", pick:"", genre:"Hardstyle"},
+  {day:1, stage:"crystal-garden", artist:"Camila Jun", start:"16:30", end:"18:00", pick:"", genre:"House"},
+  {day:1, stage:"freedom", artist:"Frank Verstraeten", start:"16:30", end:"18:00", pick:"", genre:"House"},
+  {day:1, stage:"mainstage", artist:"Bassjackers", start:"16:30", end:"17:30", pick:"", genre:"EDM"},
+  {day:1, stage:"melodia", artist:"Thakzin", start:"16:30", end:"18:00", pick:"rec", genre:"Afro / melodic house"},
+  {day:1, stage:"atmosphere", artist:"sim0ne b2b Southstar", start:"17:00", end:"18:30", pick:"rec", genre:"Techno"},
+  {day:1, stage:"cage", artist:"VON BIKRÄV", start:"17:00", end:"18:00", pick:"rec", genre:"Hard / industrial techno"},
+  {day:1, stage:"celestia", artist:"Diffrent", start:"17:00", end:"18:30", pick:"rec", genre:"Melodic techno"},
+  {day:1, stage:"core", artist:"Bibi Seck", start:"17:00", end:"19:00", pick:"rec", genre:"House / techno"},
+  {day:1, stage:"elixir", artist:"Soul Shakers", start:"17:00", end:"18:00", pick:"", genre:"Funk / soul"},
+  {day:1, stage:"house-of-fortune", artist:"Amber Broos", start:"17:00", end:"18:00", pick:"rec", genre:"House"},
+  {day:1, stage:"planaxis", artist:"Somnia", start:"17:00", end:"18:00", pick:"", genre:"Psytrance"},
+  {day:1, stage:"great-library", artist:"Mike Williams", start:"17:00", end:"18:00", pick:"rec", genre:"EDM"},
+  {day:1, stage:"rave-cave", artist:"Paloma", start:"17:00", end:"18:30", pick:"", genre:"House"},
+  {day:1, stage:"rose-garden", artist:"Blooom b2b S...", start:"17:00", end:"18:00", pick:"", genre:"Hardstyle"},
+  {day:1, stage:"mainstage", artist:"Henri PFR", start:"17:35", end:"18:35", pick:"must", genre:"EDM"},
+  {day:1, stage:"cage", artist:"DITHER", start:"18:00", end:"19:00", pick:"rec", genre:"Hard techno"},
+  {day:1, stage:"elixir", artist:"Flavour Drop", start:"18:00", end:"19:30", pick:"", genre:"Eclectic"},
+  {day:1, stage:"freedom", artist:"Max Styler", start:"18:00", end:"19:30", pick:"", genre:"Tech house"},
+  {day:1, stage:"house-of-fortune", artist:"Conrad Taylor", start:"18:00", end:"19:00", pick:"", genre:"House"},
+  {day:1, stage:"melodia", artist:"Danni Gato", start:"18:00", end:"19:00", pick:"", genre:"Afro house"},
+  {day:1, stage:"planaxis", artist:"Hi Profile", start:"18:00", end:"19:00", pick:"", genre:"Psytrance"},
+  {day:1, stage:"great-library", artist:"Sam Feldt", start:"18:00", end:"19:00", pick:"", genre:"House"},
+  {day:1, stage:"rose-garden", artist:"Primate", start:"18:00", end:"19:00", pick:"", genre:"Hardstyle"},
+  {day:1, stage:"atmosphere", artist:"KUKO", start:"18:30", end:"20:00", pick:"rec", genre:"Techno"},
+  {day:1, stage:"celestia", artist:"MPH", start:"18:30", end:"20:00", pick:"rec", genre:"Melodic techno"},
+  {day:1, stage:"rave-cave", artist:"ZUKE", start:"18:30", end:"19:30", pick:"", genre:"Tech house"},
+  {day:1, stage:"mainstage", artist:"NERVO", start:"18:40", end:"19:40", pick:"rec", genre:"EDM"},
+  {day:1, stage:"cage", artist:"GPF b2b DR DONK", start:"19:00", end:"20:00", pick:"", genre:"Hard techno"},
+  {day:1, stage:"core", artist:"Sally C", start:"19:00", end:"21:00", pick:"rec", genre:"House"},
+  {day:1, stage:"house-of-fortune", artist:"Nicky Romero", start:"19:00", end:"20:00", pick:"rec", genre:"EDM"},
+  {day:1, stage:"melodia", artist:"Vanco", start:"19:00", end:"20:30", pick:"", genre:"Afro house"},
+  {day:1, stage:"moose-bar", artist:"Wilbert Pigmans", start:"19:00", end:"20:00", pick:"", genre:"Eclectic"},
+  {day:1, stage:"planaxis", artist:"Fabio Fusco", start:"19:00", end:"20:00", pick:"", genre:"Psytrance"},
+  {day:1, stage:"great-library", artist:"Da Tweekaz", start:"19:00", end:"20:00", pick:"", genre:"Hardstyle"},
+  {day:1, stage:"rose-garden", artist:"ÆON:MODE", start:"19:00", end:"20:00", pick:"", genre:"Hardstyle"},
+  {day:1, stage:"crystal-garden", artist:"BLOND:ISH", start:"19:30", end:"21:00", pick:"rec", genre:"House"},
+  {day:1, stage:"elixir", artist:"Tola OG", start:"19:30", end:"20:30", pick:"", genre:"Eclectic"},
+  {day:1, stage:"freedom", artist:"Miss Monique", start:"19:30", end:"21:00", pick:"rec", genre:"Melodic techno"},
+  {day:1, stage:"rave-cave", artist:"Justin Wilkes", start:"19:30", end:"21:00", pick:"", genre:"House"},
+  {day:1, stage:"mainstage", artist:"Marlon Hoffstadt", start:"19:40", end:"20:40", pick:"rec", genre:"House / rave"},
+  {day:1, stage:"atmosphere", artist:"MANDY b2b NEGITIV", start:"20:00", end:"21:30", pick:"rec", genre:"Hard techno"},
+  {day:1, stage:"cage", artist:"MIND COMPRESSOR", start:"20:00", end:"21:00", pick:"rec", genre:"Industrial techno"},
+  {day:1, stage:"celestia", artist:"Olive Anguz", start:"20:00", end:"21:30", pick:"rec", genre:"Melodic techno"},
+  {day:1, stage:"house-of-fortune", artist:"Mike Williams", start:"20:00", end:"21:00", pick:"", genre:"EDM"},
+  {day:1, stage:"moose-bar", artist:"Funktastix", start:"20:00", end:"00:00", pick:"", genre:"Eclectic"},
+  {day:1, stage:"planaxis", artist:"Neelix", start:"20:00", end:"21:30", pick:"", genre:"Psytrance"},
+  {day:1, stage:"great-library", artist:"Ofenbach", start:"20:00", end:"21:00", pick:"rec", genre:"House"},
+  {day:1, stage:"rose-garden", artist:"Murdock", start:"20:00", end:"21:00", pick:"", genre:"Drum & bass"},
+  {day:1, stage:"elixir", artist:"Nona Van Bra...", start:"20:30", end:"21:30", pick:"", genre:"Eclectic"},
+  {day:1, stage:"melodia", artist:"AWEN", start:"20:30", end:"22:00", pick:"", genre:"Melodic house"},
+  {day:1, stage:"mainstage", artist:"Novah", start:"20:40", end:"21:40", pick:"", genre:"EDM"},
+  {day:1, stage:"cage", artist:"LUNAKORPZ", start:"21:00", end:"22:00", pick:"", genre:"Hard techno"},
+  {day:1, stage:"core", artist:"Sasha b2b Young Marco", start:"21:00", end:"23:00", pick:"rec", genre:"House / progressive"},
+  {day:1, stage:"crystal-garden", artist:"Kettama b2b Michael Bibi", start:"21:00", end:"23:00", pick:"rec", genre:"House / tech house"},
+  {day:1, stage:"freedom", artist:"Mind Against", start:"21:00", end:"22:30", pick:"rec", genre:"Dark melodic techno"},
+  {day:1, stage:"house-of-fortune", artist:"Gravagerz", start:"21:00", end:"22:00", pick:"", genre:"Hardstyle"},
+  {day:1, stage:"great-library", artist:"R3hab", start:"21:00", end:"22:00", pick:"rec", genre:"EDM"},
+  {day:1, stage:"rave-cave", artist:"Nastya Dikikh", start:"21:00", end:"22:00", pick:"rec", genre:"Techno"},
+  {day:1, stage:"rose-garden", artist:"A Little Sound", start:"21:00", end:"22:00", pick:"", genre:"Drum & bass"},
+  {day:1, stage:"atmosphere", artist:"Nico Moreno", start:"21:30", end:"23:00", pick:"must", genre:"Hard techno"},
+  {day:1, stage:"celestia", artist:"Bennett", start:"21:30", end:"23:00", pick:"", genre:"Melodic techno"},
+  {day:1, stage:"elixir", artist:"Unregular", start:"21:30", end:"22:30", pick:"", genre:"Eclectic"},
+  {day:1, stage:"planaxis", artist:"Omiki", start:"21:30", end:"22:30", pick:"", genre:"Psytrance"},
+  {day:1, stage:"mainstage", artist:"The Chainsmokers", start:"21:45", end:"22:45", pick:"must", genre:"Pop / EDM"},
+  {day:1, stage:"cage", artist:"VERNEX b2b NRKi", start:"22:00", end:"23:00", pick:"", genre:"Hard techno"},
+  {day:1, stage:"melodia", artist:"Da Capo b2b Caiiro b2b Enoo Napa", start:"22:00", end:"00:00", pick:"rec", genre:"Afro house"},
+  {day:1, stage:"great-library", artist:"Artbat", start:"22:00", end:"23:00", pick:"rec", genre:"Melodic techno"},
+  {day:1, stage:"rave-cave", artist:"CVNTS", start:"22:00", end:"23:00", pick:"", genre:"Tech house"},
+  {day:1, stage:"rose-garden", artist:"Kanine", start:"22:00", end:"23:00", pick:"", genre:"Drum & bass"},
+  {day:1, stage:"elixir", artist:"Audiowave", start:"22:30", end:"23:30", pick:"", genre:"Eclectic"},
+  {day:1, stage:"freedom", artist:"4444 OF A KIND", start:"22:30", end:"23:30", pick:"rec", genre:"Techno"},
+  {day:1, stage:"planaxis", artist:"Mad Maxx", start:"22:30", end:"00:00", pick:"", genre:"Psytrance"},
+  {day:1, stage:"mainstage", artist:"Sebastian Ingrosso", start:"22:50", end:"23:50", pick:"must", genre:"House / EDM"},
+  {day:1, stage:"atmosphere", artist:"Sara Landry", start:"23:00", end:"00:55", pick:"must", genre:"Hard techno"},
+  {day:1, stage:"core", artist:"Modeselektor (DJ-set)", start:"23:00", end:"00:50", pick:"rec", genre:"Electronic / techno"},
+  {day:1, stage:"crystal-garden", artist:"Franky Rizardo", start:"23:00", end:"00:30", pick:"rec", genre:"House"},
+  {day:1, stage:"great-library", artist:"Nicky Romero", start:"23:00", end:"00:00", pick:"rec", genre:"EDM"},
+  {day:1, stage:"rave-cave", artist:"Junkie Kid", start:"23:00", end:"00:00", pick:"", genre:"Tech house"},
+  {day:1, stage:"rose-garden", artist:"Alison Wonderland", start:"23:00", end:"00:00", pick:"", genre:"Bass / electronic"},
+  {day:1, stage:"elixir", artist:"Rick & James 80's Party", start:"23:30", end:"01:00", pick:"", genre:"Disco / retro"},
+  {day:1, stage:"freedom", artist:"Holy Priest", start:"23:30", end:"00:30", pick:"rec", genre:"Techno"},
+  {day:1, stage:"mainstage", artist:"Martin Garrix", start:"23:50", end:"00:50", pick:"must", genre:"EDM"},
+  {day:1, stage:"great-library", artist:"Hardwell b2b Sub Zero Project", start:"00:00", end:"00:55", pick:"rec", genre:"EDM / hardstyle"},
+  {day:1, stage:"rose-garden", artist:"Camo & Krooked", start:"00:00", end:"01:00", pick:"", genre:"Drum & bass"},
+  {day:2, stage:"celestia", artist:"Sebsky", start:"13:00", end:"14:00", pick:"", genre:"Melodic techno"},
+  {day:2, stage:"elixir", artist:"Sojuju & Julia...", start:"13:00", end:"14:00", pick:"", genre:"Eclectic"},
+  {day:2, stage:"house-of-fortune", artist:"Makasi", start:"13:00", end:"14:00", pick:"", genre:"House"},
+  {day:2, stage:"planaxis", artist:"Chocolate Puma", start:"13:00", end:"14:00", pick:"", genre:"House"},
+  {day:2, stage:"great-library", artist:"CIEL.", start:"13:00", end:"14:00", pick:"", genre:"House"},
+  {day:2, stage:"rave-cave", artist:"The Spook", start:"13:00", end:"14:00", pick:"", genre:"Tech house"},
+  {day:2, stage:"rose-garden", artist:"Phi Phi", start:"13:00", end:"14:00", pick:"", genre:"Hard techno"},
+  {day:2, stage:"core", artist:"Curol", start:"13:30", end:"15:00", pick:"", genre:"House / techno"},
+  {day:2, stage:"crystal-garden", artist:"DALI", start:"13:30", end:"15:00", pick:"", genre:"House"},
+  {day:2, stage:"freedom", artist:"Luna & Lenthe", start:"13:30", end:"15:00", pick:"", genre:"Techno"},
+  {day:2, stage:"melodia", artist:"Hermanos Inglesos", start:"13:30", end:"15:00", pick:"", genre:"Melodic house"},
+  {day:2, stage:"atmosphere", artist:"Marhu", start:"14:00", end:"15:30", pick:"", genre:"Techno"},
+  {day:2, stage:"cage", artist:"Maike Depas", start:"14:00", end:"15:30", pick:"rec", genre:"Hard techno"},
+  {day:2, stage:"celestia", artist:"Encure b2b Ho...", start:"14:00", end:"15:00", pick:"", genre:"Melodic techno"},
+  {day:2, stage:"elixir", artist:"Lordesius & A...", start:"14:00", end:"15:00", pick:"", genre:"Eclectic"},
+  {day:2, stage:"house-of-fortune", artist:"Lennert Wolfs", start:"14:00", end:"15:00", pick:"", genre:"House"},
+  {day:2, stage:"mainstage", artist:"Merow", start:"14:00", end:"15:00", pick:"", genre:"House"},
+  {day:2, stage:"planaxis", artist:"Marnik", start:"14:00", end:"15:00", pick:"", genre:"EDM"},
+  {day:2, stage:"great-library", artist:"Marwan Dua", start:"14:00", end:"15:00", pick:"", genre:"House"},
+  {day:2, stage:"rave-cave", artist:"Los Bomberos", start:"14:00", end:"15:00", pick:"", genre:"Tech house"},
+  {day:2, stage:"rose-garden", artist:"Jente b2b Neall", start:"14:00", end:"15:00", pick:"", genre:"Hardstyle"},
+  {day:2, stage:"celestia", artist:"Joyse b2b Rya...", start:"15:00", end:"16:00", pick:"", genre:"Melodic techno"},
+  {day:2, stage:"core", artist:"Betical", start:"15:00", end:"16:30", pick:"", genre:"House"},
+  {day:2, stage:"crystal-garden", artist:"NOSI", start:"15:00", end:"17:00", pick:"", genre:"House"},
+  {day:2, stage:"elixir", artist:"Pretty Girls Li...", start:"15:00", end:"16:00", pick:"", genre:"Eclectic"},
+  {day:2, stage:"freedom", artist:"Plastik Funk b2b Olympe", start:"15:00", end:"16:30", pick:"", genre:"House"},
+  {day:2, stage:"house-of-fortune", artist:"Mark Roma", start:"15:00", end:"16:00", pick:"", genre:"House"},
+  {day:2, stage:"mainstage", artist:"Stephani B", start:"15:00", end:"16:00", pick:"", genre:"House"},
+  {day:2, stage:"melodia", artist:"Emiliano Demarco", start:"15:00", end:"16:30", pick:"", genre:"Afro house"},
+  {day:2, stage:"moose-bar", artist:"Funkhauser", start:"15:00", end:"19:00", pick:"", genre:"Eclectic"},
+  {day:2, stage:"planaxis", artist:"Kaaze", start:"15:00", end:"16:00", pick:"", genre:"EDM"},
+  {day:2, stage:"great-library", artist:"Linska", start:"15:00", end:"16:00", pick:"", genre:"House"},
+  {day:2, stage:"rave-cave", artist:"Aghatixx", start:"15:00", end:"16:00", pick:"", genre:"Tech house"},
+  {day:2, stage:"rose-garden", artist:"Blvckprint", start:"15:00", end:"16:00", pick:"", genre:"Hardstyle"},
+  {day:2, stage:"atmosphere", artist:"Estella Boersma", start:"15:30", end:"17:00", pick:"rec", genre:"Hard techno"},
+  {day:2, stage:"cage", artist:"Not My Type", start:"15:30", end:"17:00", pick:"rec", genre:"Hard techno"},
+  {day:2, stage:"celestia", artist:"Block & Crown...", start:"16:00", end:"17:00", pick:"", genre:"House"},
+  {day:2, stage:"elixir", artist:"Ballantine & D...", start:"16:00", end:"17:00", pick:"", genre:"Eclectic"},
+  {day:2, stage:"house-of-fortune", artist:"Fonsi Nieto", start:"16:00", end:"17:00", pick:"", genre:"House"},
+  {day:2, stage:"mainstage", artist:"Omdat Het Ka...", start:"16:00", end:"17:00", pick:"", genre:"EDM"},
+  {day:2, stage:"planaxis", artist:"Ian Asher", start:"16:00", end:"17:00", pick:"", genre:"EDM"},
+  {day:2, stage:"rave-cave", artist:"Brits & Boen", start:"16:00", end:"17:30", pick:"", genre:"Tech house"},
+  {day:2, stage:"rose-garden", artist:"Greg S.", start:"16:00", end:"17:00", pick:"", genre:"Hardstyle"},
+  {day:2, stage:"core", artist:"Dino Lenny", start:"16:30", end:"18:00", pick:"rec", genre:"House / melodic"},
+  {day:2, stage:"freedom", artist:"Space 92", start:"16:30", end:"18:00", pick:"rec", genre:"Techno"},
+  {day:2, stage:"melodia", artist:"UNREAD", start:"16:30", end:"18:00", pick:"", genre:"Melodic house"},
+  {day:2, stage:"atmosphere", artist:"Elli Acula", start:"17:00", end:"18:30", pick:"rec", genre:"Techno"},
+  {day:2, stage:"cage", artist:"A.N.I.", start:"17:00", end:"18:30", pick:"rec", genre:"Hard techno"},
+  {day:2, stage:"celestia", artist:"Diego Miranda...", start:"17:00", end:"18:00", pick:"", genre:"Melodic"},
+  {day:2, stage:"crystal-garden", artist:"Dean Turnley", start:"17:00", end:"18:30", pick:"", genre:"House"},
+  {day:2, stage:"elixir", artist:"WEF", start:"17:00", end:"18:00", pick:"", genre:"Eclectic"},
+  {day:2, stage:"house-of-fortune", artist:"More to be an...", start:"17:00", end:"18:00", pick:"", genre:"?"},
+  {day:2, stage:"planaxis", artist:"Quintino", start:"17:00", end:"18:00", pick:"", genre:"EDM"},
+  {day:2, stage:"great-library", artist:"Jazzy", start:"17:00", end:"18:00", pick:"", genre:"House"},
+  {day:2, stage:"rose-garden", artist:"DJ Furax", start:"17:00", end:"18:00", pick:"", genre:"Hardstyle"},
+  {day:2, stage:"mainstage", artist:"Maddix", start:"17:05", end:"18:05", pick:"rec", genre:"Techno / rave"},
+  {day:2, stage:"rave-cave", artist:"Monta", start:"17:30", end:"19:00", pick:"", genre:"Tech house"},
+  {day:2, stage:"celestia", artist:"Dimitri Vangeli...", start:"18:00", end:"19:00", pick:"", genre:"House"},
+  {day:2, stage:"core", artist:"Antdot", start:"18:00", end:"19:30", pick:"rec", genre:"Melodic / tech house"},
+  {day:2, stage:"elixir", artist:"MELV!EE", start:"18:00", end:"19:00", pick:"", genre:"Eclectic"},
+  {day:2, stage:"freedom", artist:"Symphony Of Harmony", start:"18:00", end:"19:00", pick:"must", genre:"Orkest / live"},
+  {day:2, stage:"house-of-fortune", artist:"Lucas & Steve", start:"18:00", end:"19:00", pick:"", genre:"EDM"},
+  {day:2, stage:"melodia", artist:"Chinonegro", start:"18:00", end:"19:00", pick:"", genre:"Afro house"},
+  {day:2, stage:"planaxis", artist:"Laidback Luke", start:"18:00", end:"19:00", pick:"", genre:"EDM"},
+  {day:2, stage:"great-library", artist:"Andromedik", start:"18:00", end:"19:00", pick:"", genre:"Drum & bass"},
+  {day:2, stage:"rose-garden", artist:"DJ Ghost", start:"18:00", end:"19:00", pick:"", genre:"Hardstyle"},
+  {day:2, stage:"mainstage", artist:"HALÒ", start:"18:10", end:"19:10", pick:"rec", genre:"EDM"},
+  {day:2, stage:"atmosphere", artist:"Ben Klock", start:"18:30", end:"20:00", pick:"must", genre:"Dark techno"},
+  {day:2, stage:"cage", artist:"Dexphase", start:"18:30", end:"20:00", pick:"rec", genre:"Hard techno"},
+  {day:2, stage:"crystal-garden", artist:"Ben Hemsley", start:"18:30", end:"20:00", pick:"rec", genre:"Trance / house"},
+  {day:2, stage:"celestia", artist:"Yves V", start:"19:00", end:"20:00", pick:"", genre:"EDM"},
+  {day:2, stage:"elixir", artist:"Vunzige Deunt...", start:"19:00", end:"20:00", pick:"", genre:"Eclectic"},
+  {day:2, stage:"freedom", artist:"Meduza³", start:"19:00", end:"20:00", pick:"rec", genre:"House / melodic"},
+  {day:2, stage:"house-of-fortune", artist:"Kris Kross Am...", start:"19:00", end:"20:00", pick:"", genre:"EDM"},
+  {day:2, stage:"melodia", artist:"Idemi", start:"19:00", end:"20:30", pick:"", genre:"Afro house"},
+  {day:2, stage:"moose-bar", artist:"Je Broer", start:"19:00", end:"20:00", pick:"", genre:"Eclectic"},
+  {day:2, stage:"planaxis", artist:"SURPRISE", start:"19:00", end:"20:00", pick:"", genre:"?"},
+  {day:2, stage:"great-library", artist:"Marten Hörger", start:"19:00", end:"20:00", pick:"rec", genre:"Tech / bass house"},
+  {day:2, stage:"rave-cave", artist:"Vitucci", start:"19:00", end:"20:30", pick:"", genre:"Tech house"},
+  {day:2, stage:"rose-garden", artist:"Push", start:"19:00", end:"20:00", pick:"", genre:"Trance"},
+  {day:2, stage:"mainstage", artist:"Boris Brejcha", start:"19:10", end:"20:10", pick:"rec", genre:"Minimal / melodic techno"},
+  {day:2, stage:"core", artist:"SAMM b2b Ajna", start:"19:30", end:"21:30", pick:"rec", genre:"Melodic techno"},
+  {day:2, stage:"atmosphere", artist:"BIIA b2b Charlie Sparks", start:"20:00", end:"21:30", pick:"must", genre:"Hard / fast techno"},
+  {day:2, stage:"cage", artist:"Byorn", start:"20:00", end:"21:30", pick:"rec", genre:"Hard techno"},
+  {day:2, stage:"celestia", artist:"Dj Nano", start:"20:00", end:"21:00", pick:"", genre:"Trance"},
+  {day:2, stage:"crystal-garden", artist:"Morten b2b Malaa", start:"20:00", end:"21:30", pick:"rec", genre:"House / bass"},
+  {day:2, stage:"elixir", artist:"Kurashi Sound...", start:"20:00", end:"21:00", pick:"", genre:"Eclectic"},
+  {day:2, stage:"freedom", artist:"Netsky", start:"20:00", end:"21:00", pick:"", genre:"Drum & bass"},
+  {day:2, stage:"house-of-fortune", artist:"Yuuki Yoshiyama", start:"20:00", end:"21:00", pick:"", genre:"House"},
+  {day:2, stage:"moose-bar", artist:"Jelle DK", start:"20:00", end:"00:00", pick:"", genre:"Eclectic"},
+  {day:2, stage:"planaxis", artist:"Lucas & Steve", start:"20:00", end:"21:00", pick:"", genre:"EDM"},
+  {day:2, stage:"great-library", artist:"Agents Of Time", start:"20:00", end:"21:30", pick:"rec", genre:"Melodic techno (live)"},
+  {day:2, stage:"rose-garden", artist:"Jan Vervloet", start:"20:00", end:"21:00", pick:"", genre:"Retro / classics"},
+  {day:2, stage:"mainstage", artist:"John Newman", start:"20:10", end:"21:10", pick:"rec", genre:"Pop"},
+  {day:2, stage:"melodia", artist:"Sam Shure", start:"20:30", end:"22:00", pick:"rec", genre:"Melodic / organic house"},
+  {day:2, stage:"rave-cave", artist:"Soulcity", start:"20:30", end:"22:00", pick:"", genre:"House"},
+  {day:2, stage:"celestia", artist:"Matisse & Sadko", start:"21:00", end:"22:00", pick:"", genre:"EDM"},
+  {day:2, stage:"elixir", artist:"Encore Sounds...", start:"21:00", end:"22:00", pick:"", genre:"Eclectic"},
+  {day:2, stage:"freedom", artist:"Symphony Of Harmony", start:"21:00", end:"22:00", pick:"must", genre:"Orkest / live"},
+  {day:2, stage:"house-of-fortune", artist:"MANDY", start:"21:00", end:"22:00", pick:"rec", genre:"Hard techno"},
+  {day:2, stage:"planaxis", artist:"Bassjackers", start:"21:00", end:"22:00", pick:"", genre:"EDM"},
+  {day:2, stage:"rose-garden", artist:"Funkhauser", start:"21:00", end:"22:00", pick:"", genre:"Hardstyle"},
+  {day:2, stage:"mainstage", artist:"Fisher", start:"21:15", end:"22:15", pick:"rec", genre:"Tech house"},
+  {day:2, stage:"atmosphere", artist:"Indira Paganotto", start:"21:30", end:"23:30", pick:"must", genre:"Psy / hard techno"},
+  {day:2, stage:"cage", artist:"Vieze Asbak", start:"21:30", end:"23:00", pick:"", genre:"Hard techno"},
+  {day:2, stage:"core", artist:"Carlita b2b Malive", start:"21:30", end:"23:00", pick:"rec", genre:"Melodic house"},
+  {day:2, stage:"crystal-garden", artist:"Steve Angello", start:"21:30", end:"00:30", pick:"rec", genre:"House / EDM"},
+  {day:2, stage:"great-library", artist:"Lost Frequencies", start:"21:30", end:"22:45", pick:"must", genre:"House / pop"},
+  {day:2, stage:"celestia", artist:"Will Sparks", start:"22:00", end:"23:00", pick:"", genre:"EDM"},
+  {day:2, stage:"elixir", artist:"Rockefellababe", start:"22:00", end:"23:00", pick:"", genre:"Eclectic"},
+  {day:2, stage:"freedom", artist:"Armin van Buuren", start:"22:00", end:"00:30", pick:"must", genre:"Trance"},
+  {day:2, stage:"melodia", artist:"Twenty Six", start:"22:00", end:"23:00", pick:"", genre:"Melodic house"},
+  {day:2, stage:"planaxis", artist:"DVBBS", start:"22:00", end:"23:00", pick:"", genre:"EDM"},
+  {day:2, stage:"rave-cave", artist:"Bobby & Djenko", start:"22:00", end:"23:30", pick:"", genre:"Tech house"},
+  {day:2, stage:"rose-garden", artist:"Franky Kloeck", start:"22:00", end:"23:00", pick:"", genre:"Hardstyle"},
+  {day:2, stage:"mainstage", artist:"Dimitri Vegas & Like Mike", start:"22:20", end:"23:35", pick:"", genre:"EDM"},
+  {day:2, stage:"great-library", artist:"Oliver Heldens", start:"22:45", end:"00:00", pick:"rec", genre:"House"},
+  {day:2, stage:"core", artist:"Bedouin", start:"23:00", end:"00:50", pick:"rec", genre:"Melodic / deep house"},
+  {day:2, stage:"elixir", artist:"Afrolosjes Sou...", start:"23:00", end:"00:00", pick:"", genre:"Afro"},
+  {day:2, stage:"melodia", artist:"Arado", start:"23:00", end:"00:00", pick:"", genre:"Melodic house"},
+  {day:2, stage:"planaxis", artist:"Steve Aoki", start:"23:00", end:"23:50", pick:"", genre:"EDM"},
+  {day:2, stage:"rose-garden", artist:"X-Tof", start:"23:00", end:"00:00", pick:"", genre:"Hardstyle"},
+  {day:2, stage:"atmosphere", artist:"Reinier Zonneveld (live)", start:"23:30", end:"00:55", pick:"rec", genre:"Acid / live techno"},
+  {day:2, stage:"rave-cave", artist:"Jonas van Opstal", start:"23:30", end:"01:00", pick:"", genre:"Tech house"},
+  {day:2, stage:"mainstage", artist:"David Guetta", start:"23:35", end:"00:50", pick:"rec", genre:"EDM"},
+  {day:2, stage:"elixir", artist:"Steww Sounds...", start:"00:00", end:"01:00", pick:"", genre:"Eclectic"},
+  {day:2, stage:"rose-garden", artist:"Bonzai All Stars", start:"00:00", end:"01:00", pick:"", genre:"Hardstyle / classics"},
+  {day:3, stage:"elixir", artist:"G-Lo", start:"13:00", end:"14:00", pick:"", genre:"Eclectic"},
+  {day:3, stage:"house-of-fortune", artist:"DJ GAB", start:"13:00", end:"14:00", pick:"", genre:"House"},
+  {day:3, stage:"great-library", artist:"Yazzmin", start:"13:00", end:"14:00", pick:"", genre:"House"},
+  {day:3, stage:"rave-cave", artist:"YERUN", start:"13:00", end:"15:00", pick:"", genre:"Tech house"},
+  {day:3, stage:"rose-garden", artist:"The Z.", start:"13:00", end:"14:30", pick:"", genre:"Hardstyle"},
+  {day:3, stage:"planaxis", artist:"Punctual", start:"13:15", end:"15:00", pick:"", genre:"Bass"},
+  {day:3, stage:"celestia", artist:"Cyria (Hybrid)", start:"13:30", end:"15:00", pick:"", genre:"Melodic techno"},
+  {day:3, stage:"crystal-garden", artist:"Re-Type", start:"13:30", end:"15:00", pick:"", genre:"House"},
+  {day:3, stage:"freedom", artist:"DJ Licious", start:"13:30", end:"15:00", pick:"", genre:"House"},
+  {day:3, stage:"melodia", artist:"DJ Gee", start:"13:30", end:"14:30", pick:"", genre:"Afro house"},
+  {day:3, stage:"atmosphere", artist:"VE/RA", start:"14:00", end:"16:00", pick:"rec", genre:"Techno"},
+  {day:3, stage:"cage", artist:"Hurts F2F ROW 1", start:"14:00", end:"15:30", pick:"rec", genre:"Techno"},
+  {day:3, stage:"core", artist:"Ineffekt", start:"14:00", end:"16:00", pick:"rec", genre:"Melodic / deep"},
+  {day:3, stage:"elixir", artist:"Sako Glitch", start:"14:00", end:"15:00", pick:"", genre:"Eclectic"},
+  {day:3, stage:"house-of-fortune", artist:"Krevix", start:"14:00", end:"15:00", pick:"", genre:"House"},
+  {day:3, stage:"great-library", artist:"James Carter", start:"14:00", end:"15:00", pick:"", genre:"House"},
+  {day:3, stage:"mainstage", artist:"Hannah Laing", start:"14:30", end:"15:30", pick:"rec", genre:"Techno / rave"},
+  {day:3, stage:"melodia", artist:"Christian82", start:"14:30", end:"15:30", pick:"", genre:"Afro house"},
+  {day:3, stage:"rose-garden", artist:"Adrenalize", start:"14:30", end:"15:30", pick:"", genre:"Hardstyle"},
+  {day:3, stage:"celestia", artist:"Fake Mood", start:"15:00", end:"16:30", pick:"rec", genre:"Melodic techno"},
+  {day:3, stage:"crystal-garden", artist:"Hitty", start:"15:00", end:"16:30", pick:"", genre:"House"},
+  {day:3, stage:"elixir", artist:"Favella Som Si...", start:"15:00", end:"16:00", pick:"", genre:"Baile funk"},
+  {day:3, stage:"freedom", artist:"Aline Rocha", start:"15:00", end:"16:00", pick:"", genre:"Techno"},
+  {day:3, stage:"house-of-fortune", artist:"AdamK", start:"15:00", end:"16:00", pick:"", genre:"House"},
+  {day:3, stage:"planaxis", artist:"SABAI", start:"15:00", end:"16:00", pick:"", genre:"Bass / melodic"},
+  {day:3, stage:"great-library", artist:"Viktor", start:"15:00", end:"16:00", pick:"", genre:"House"},
+  {day:3, stage:"rave-cave", artist:"Mell Tierra", start:"15:00", end:"16:30", pick:"", genre:"Tech house"},
+  {day:3, stage:"cage", artist:"FUMI F2F HUJUS", start:"15:30", end:"17:00", pick:"rec", genre:"Techno"},
+  {day:3, stage:"mainstage", artist:"Karakals", start:"15:30", end:"16:30", pick:"", genre:"House"},
+  {day:3, stage:"melodia", artist:"Tania Moon", start:"15:30", end:"16:30", pick:"", genre:"Melodic house"},
+  {day:3, stage:"rose-garden", artist:"TNT", start:"15:30", end:"16:30", pick:"", genre:"Hardstyle"},
+  {day:3, stage:"atmosphere", artist:"Blondex", start:"16:00", end:"17:30", pick:"rec", genre:"Techno"},
+  {day:3, stage:"core", artist:"Fafi Abdel Nour", start:"16:00", end:"18:00", pick:"rec", genre:"Melodic / deep house"},
+  {day:3, stage:"elixir", artist:"DJ FASTA", start:"16:00", end:"17:00", pick:"", genre:"Eclectic"},
+  {day:3, stage:"freedom", artist:"Arielle Free", start:"16:00", end:"17:30", pick:"", genre:"House"},
+  {day:3, stage:"house-of-fortune", artist:"Sofía Cristo", start:"16:00", end:"17:00", pick:"", genre:"House"},
+  {day:3, stage:"moose-bar", artist:"Les Mecs Eclectics", start:"16:00", end:"19:00", pick:"", genre:"Eclectic"},
+  {day:3, stage:"planaxis", artist:"[IVY]", start:"16:00", end:"17:00", pick:"", genre:"Bass"},
+  {day:3, stage:"great-library", artist:"Hypaton", start:"16:00", end:"17:00", pick:"", genre:"EDM"},
+  {day:3, stage:"celestia", artist:"Öona Dahl", start:"16:30", end:"18:00", pick:"rec", genre:"Melodic / deep"},
+  {day:3, stage:"crystal-garden", artist:"ELFIGO", start:"16:30", end:"18:00", pick:"", genre:"House"},
+  {day:3, stage:"mainstage", artist:"Malugi", start:"16:30", end:"17:30", pick:"", genre:"House"},
+  {day:3, stage:"melodia", artist:"CRISTINA TOSIO", start:"16:30", end:"18:00", pick:"", genre:"Melodic house"},
+  {day:3, stage:"rave-cave", artist:"Dries Smet", start:"16:30", end:"17:30", pick:"", genre:"Tech house"},
+  {day:3, stage:"rose-garden", artist:"Rooler", start:"16:30", end:"17:30", pick:"", genre:"Hardstyle / raw"},
+  {day:3, stage:"cage", artist:"David Löhlein F2F Yasmin r...", start:"17:00", end:"18:30", pick:"rec", genre:"Techno"},
+  {day:3, stage:"elixir", artist:"Noah", start:"17:00", end:"18:00", pick:"", genre:"Eclectic"},
+  {day:3, stage:"house-of-fortune", artist:"Sam Hofman", start:"17:00", end:"18:00", pick:"", genre:"House"},
+  {day:3, stage:"planaxis", artist:"Nostalgix", start:"17:00", end:"18:00", pick:"", genre:"Bass house"},
+  {day:3, stage:"great-library", artist:"Gabry Ponte", start:"17:00", end:"18:00", pick:"rec", genre:"EDM"},
+  {day:3, stage:"atmosphere", artist:"SHDW b2b ÜBERKIKZ", start:"17:30", end:"19:00", pick:"rec", genre:"Dark / hypnotic techno"},
+  {day:3, stage:"freedom", artist:"Jack Shore", start:"17:30", end:"18:30", pick:"rec", genre:"Hard techno"},
+  {day:3, stage:"rave-cave", artist:"Noaffection b2b OM3N", start:"17:30", end:"19:00", pick:"", genre:"Techno"},
+  {day:3, stage:"rose-garden", artist:"Isaac", start:"17:30", end:"18:30", pick:"", genre:"Hardstyle"},
+  {day:3, stage:"mainstage", artist:"Kevin de Vries", start:"17:35", end:"18:35", pick:"rec", genre:"Melodic techno"},
+  {day:3, stage:"celestia", artist:"Helsloot", start:"18:00", end:"19:30", pick:"rec", genre:"Melodic techno"},
+  {day:3, stage:"core", artist:"Sedef Adasï", start:"18:00", end:"20:00", pick:"rec", genre:"Eclectic / house"},
+  {day:3, stage:"crystal-garden", artist:"Wade", start:"18:00", end:"19:30", pick:"rec", genre:"Tech house"},
+  {day:3, stage:"elixir", artist:"Team Damp", start:"18:00", end:"19:00", pick:"", genre:"Eclectic"},
+  {day:3, stage:"house-of-fortune", artist:"NORO$T", start:"18:00", end:"19:00", pick:"", genre:"House"},
+  {day:3, stage:"melodia", artist:"Lunnas", start:"18:00", end:"19:00", pick:"", genre:"Melodic house"},
+  {day:3, stage:"planaxis", artist:"LEVEL UP", start:"18:00", end:"19:00", pick:"", genre:"Dubstep / bass"},
+  {day:3, stage:"great-library", artist:"MATTN", start:"18:00", end:"19:00", pick:"rec", genre:"EDM"},
+  {day:3, stage:"cage", artist:"EMILIJA F2F Frederic.", start:"18:30", end:"20:00", pick:"rec", genre:"Techno"},
+  {day:3, stage:"freedom", artist:"Pegassi", start:"18:30", end:"20:00", pick:"rec", genre:"Techno"},
+  {day:3, stage:"rose-garden", artist:"Rebelion", start:"18:30", end:"19:30", pick:"", genre:"Hardstyle / raw"},
+  {day:3, stage:"mainstage", artist:"B Jones", start:"18:40", end:"19:40", pick:"", genre:"Tech house"},
+  {day:3, stage:"atmosphere", artist:"Øtta", start:"19:00", end:"20:30", pick:"rec", genre:"Hypnotic techno"},
+  {day:3, stage:"elixir", artist:"Heaven Sam", start:"19:00", end:"20:00", pick:"", genre:"Eclectic"},
+  {day:3, stage:"house-of-fortune", artist:"Da Tweekaz", start:"19:00", end:"20:00", pick:"", genre:"Hardstyle"},
+  {day:3, stage:"melodia", artist:"Marta Loe b2b...", start:"19:00", end:"20:00", pick:"rec", genre:"Melodic techno"},
+  {day:3, stage:"moose-bar", artist:"Effe Serieus", start:"19:00", end:"20:00", pick:"", genre:"Eclectic"},
+  {day:3, stage:"planaxis", artist:"Arcando", start:"19:00", end:"20:00", pick:"", genre:"Bass"},
+  {day:3, stage:"great-library", artist:"Blasterjaxx", start:"19:00", end:"20:00", pick:"", genre:"EDM"},
+  {day:3, stage:"rave-cave", artist:"Nederhand", start:"19:00", end:"20:00", pick:"", genre:"Tech house"},
+  {day:3, stage:"celestia", artist:"MXGPU (Hybrid)", start:"19:30", end:"21:00", pick:"", genre:"Melodic techno"},
+  {day:3, stage:"crystal-garden", artist:"DJ Gigola", start:"19:30", end:"21:00", pick:"rec", genre:"Trance / techno"},
+  {day:3, stage:"rose-garden", artist:"Pat B", start:"19:30", end:"20:30", pick:"", genre:"Hardstyle"},
+  {day:3, stage:"mainstage", artist:"SURPRISE", start:"19:40", end:"20:40", pick:"", genre:"?"},
+  {day:3, stage:"cage", artist:"Serafina F2F zwilling", start:"20:00", end:"21:30", pick:"rec", genre:"Techno"},
+  {day:3, stage:"core", artist:"Avalon Emerson b2b Ben UFO", start:"20:00", end:"22:00", pick:"rec", genre:"House / eclectic"},
+  {day:3, stage:"elixir", artist:"Karyo", start:"20:00", end:"21:00", pick:"", genre:"Eclectic"},
+  {day:3, stage:"freedom", artist:"Chase & Status (DJ set)", start:"20:00", end:"21:00", pick:"", genre:"Drum & bass"},
+  {day:3, stage:"house-of-fortune", artist:"More to be an...", start:"20:00", end:"21:00", pick:"", genre:"?"},
+  {day:3, stage:"melodia", artist:"Delafino", start:"20:00", end:"21:00", pick:"", genre:"Melodic house"},
+  {day:3, stage:"moose-bar", artist:"Jerrooo", start:"20:00", end:"00:00", pick:"", genre:"Eclectic"},
+  {day:3, stage:"planaxis", artist:"Malaa's Alter...", start:"20:00", end:"21:00", pick:"", genre:"Bass house"},
+  {day:3, stage:"great-library", artist:"Gryffin", start:"20:00", end:"21:00", pick:"rec", genre:"Melodic EDM"},
+  {day:3, stage:"rave-cave", artist:"Foxed Up", start:"20:00", end:"21:00", pick:"", genre:"Tech house"},
+  {day:3, stage:"atmosphere", artist:"Anetha", start:"20:30", end:"22:30", pick:"must", genre:"Hard / hypnotic techno"},
+  {day:3, stage:"rose-garden", artist:"Sub Zero Project", start:"20:30", end:"22:00", pick:"", genre:"Hardstyle"},
+  {day:3, stage:"mainstage", artist:"John Summit", start:"20:40", end:"21:40", pick:"must", genre:"Tech house"},
+  {day:3, stage:"celestia", artist:"Nico Morano b2b Xinobi", start:"21:00", end:"22:30", pick:"rec", genre:"Melodic / deep house"},
+  {day:3, stage:"crystal-garden", artist:"Oscar and the...", start:"21:00", end:"22:00", pick:"must", genre:"Electronic / pop"},
+  {day:3, stage:"elixir", artist:"Tribal Kush", start:"21:00", end:"22:00", pick:"", genre:"Eclectic"},
+  {day:3, stage:"freedom", artist:"ALOK: Rave T...", start:"21:00", end:"22:00", pick:"", genre:"EDM"},
+  {day:3, stage:"house-of-fortune", artist:"Blasterjaxx", start:"21:00", end:"22:00", pick:"", genre:"EDM"},
+  {day:3, stage:"melodia", artist:"Dave Hang", start:"21:00", end:"22:00", pick:"", genre:"Melodic house"},
+  {day:3, stage:"planaxis", artist:"Liquid Stranger", start:"21:00", end:"22:00", pick:"", genre:"Dubstep / bass"},
+  {day:3, stage:"great-library", artist:"Dimitri Vegas...", start:"21:00", end:"22:00", pick:"", genre:"EDM"},
+  {day:3, stage:"rave-cave", artist:"Mitched", start:"21:00", end:"22:00", pick:"", genre:"Tech house"},
+  {day:3, stage:"cage", artist:"Adrián Mills F2F SISU", start:"21:30", end:"23:00", pick:"rec", genre:"Techno"},
+  {day:3, stage:"mainstage", artist:"Alesso", start:"21:45", end:"22:45", pick:"must", genre:"EDM"},
+  {day:3, stage:"core", artist:"Job Jobse", start:"22:00", end:"23:50", pick:"rec", genre:"House / melodic techno"},
+  {day:3, stage:"crystal-garden", artist:"DJ Tennis b2b Vintage Culture", start:"22:00", end:"23:30", pick:"rec", genre:"Melodic / house"},
+  {day:3, stage:"elixir", artist:"Sleazy Stereo", start:"22:00", end:"23:00", pick:"", genre:"Eclectic"},
+  {day:3, stage:"freedom", artist:"I Hate Models", start:"22:00", end:"23:30", pick:"rec", genre:"Hard / dark techno"},
+  {day:3, stage:"melodia", artist:"Felix Da Funk", start:"22:00", end:"23:00", pick:"", genre:"House"},
+  {day:3, stage:"planaxis", artist:"Seven Lions", start:"22:00", end:"23:00", pick:"", genre:"Melodic dubstep"},
+  {day:3, stage:"great-library", artist:"Afrojack", start:"22:00", end:"23:00", pick:"rec", genre:"EDM"},
+  {day:3, stage:"rave-cave", artist:"Coco Bevan", start:"22:00", end:"23:00", pick:"", genre:"Tech house"},
+  {day:3, stage:"rose-garden", artist:"The Saints", start:"22:00", end:"23:00", pick:"", genre:"Hardstyle"},
+  {day:3, stage:"atmosphere", artist:"Amelie Lens", start:"22:30", end:"23:55", pick:"must", genre:"Dark techno"},
+  {day:3, stage:"mainstage", artist:"Calvin Harris", start:"22:50", end:"23:50", pick:"must", genre:"EDM / pop"},
+  {day:3, stage:"elixir", artist:"Jeronimø", start:"23:00", end:"00:00", pick:"", genre:"Eclectic"},
+  {day:3, stage:"planaxis", artist:"Subtronics", start:"23:00", end:"00:00", pick:"", genre:"Dubstep"},
+  {day:3, stage:"great-library", artist:"Vini Vici", start:"23:00", end:"23:55", pick:"", genre:"Psytrance"},
+  {day:3, stage:"rave-cave", artist:"Godtripper", start:"23:00", end:"23:50", pick:"", genre:"Tech house"},
+];
+
+// cover: indoor | covered | open · size XS-XL · dark: enclosed/dark inside
+// verified:false => 2026 layout not confirmed by Bart yet (shown with "?" badge)
+const STAGES = {
+  "mainstage":        { name:"Mainstage",        cover:"open",    size:"XL", dark:false, verified:true  },
+  "freedom":          { name:"Freedom",          cover:"indoor",  size:"L",  dark:true,  verified:true  },  // indoor hall, LED ceiling
+  "atmosphere":       { name:"Atmosphere",       cover:"covered", size:"M",  dark:true,  verified:false },  // dome in eerdere edities
+  "cage":             { name:"Cage",             cover:"covered", size:"M",  dark:true,  verified:false },
+  "core":             { name:"CORE",             cover:"open",    size:"M",  dark:false, verified:true  },  // forest stage
+  "crystal-garden":   { name:"Crystal Garden",   cover:"indoor",  size:"M",  dark:true,  verified:false },
+  "celestia":         { name:"Celestia",         cover:"covered", size:"L",  dark:true,  verified:false },  // theaterzaal-stijl
+  "melodia":          { name:"Melodia",          cover:"open",    size:"M",  dark:false, verified:false },
+  "great-library":    { name:"Great Library",    cover:"indoor",  size:"S",  dark:true,  verified:false },
+  "rave-cave":        { name:"Rave Cave",        cover:"covered", size:"S",  dark:true,  verified:true  },
+  "rose-garden":      { name:"Rose Garden",      cover:"open",    size:"S",  dark:false, verified:false },
+  "planaxis":         { name:"Planaxis",         cover:"open",    size:"M",  dark:false, verified:false },
+  "elixir":           { name:"Elixir",           cover:"covered", size:"S",  dark:false, verified:false },
+  "moose-bar":        { name:"Moose Bar",        cover:"covered", size:"M",  dark:true,  verified:true  },  // tent, altijd feest
+  "house-of-fortune": { name:"House of Fortune", cover:"indoor",  size:"M",  dark:true,  verified:false },
+};
+
+// Heuristic energy 0-100 (genre intensity + set type + familiarity + reputation).
+// Generated per design doc §6 — Bart calibrates via docs/artist-energy-review.md.
+const ARTISTS = {
+  "4444 OF A KIND": { energy:60 },
+  "[IVY]": { energy:62 },
+  "A Little Sound": { energy:68 },
+  "A.N.I.": { energy:79 },
+  "AdamK": { energy:63 },
+  "Adrenalize": { energy:77 },
+  "Adrián Mills F2F SISU": { energy:60 },
+  "Afrojack": { energy:65 },
+  "Afrolosjes Sou...": { energy:59 },
+  "Agents Of Time": { energy:63 },
+  "Aghatixx": { energy:67 },
+  "Alesso": { energy:65 },
+  "Aline Rocha": { energy:60 },
+  "Alison Wonderland": { energy:62 },
+  "ALOK: Rave T...": { energy:65, note:"afgekapte naam — check" },
+  "Amber Broos": { energy:63 },
+  "Amelie Lens": { energy:88, note:"BE techno queen, home crowd" },
+  "Andromedik": { energy:70, note:"BE" },
+  "Anetha": { energy:87, note:"relentless" },
+  "Antdot": { energy:67 },
+  "Anton Invicta": { energy:77 },
+  "Arado": { energy:58 },
+  "Arcando": { energy:62 },
+  "Arielle Free": { energy:63 },
+  "Armin van Buuren": { energy:76, note:"trance peak, proven mover" },
+  "Artbat": { energy:65 },
+  "Audiowave": { energy:58 },
+  "Avalon Emerson b2b Ben UFO": { energy:65, note:"selectors, kenners-floor" },
+  "AWEN": { energy:58 },
+  "B Jones": { energy:67 },
+  "Ballantine & D...": { energy:58 },
+  "Bassjackers": { energy:63 },
+  "Bedouin": { energy:57 },
+  "Ben Hemsley": { energy:66 },
+  "Ben Klock": { energy:85, note:"Berghain resident, pure floor" },
+  "Bennett": { energy:61 },
+  "Betical": { energy:63 },
+  "Bibi Seck": { energy:70 },
+  "BIIA b2b Charlie Sparks": { energy:80 },
+  "Blasterjaxx": { energy:63 },
+  "Block & Crown...": { energy:63 },
+  "BLOND:ISH": { energy:65 },
+  "Blondex": { energy:60 },
+  "Blooom b2b S...": { energy:77 },
+  "Blvckprint": { energy:77 },
+  "Bobby & Djenko": { energy:67 },
+  "Bonzai All Stars": { energy:74 },
+  "Boris Brejcha": { energy:67, note:"high-tech minimal show" },
+  "Brits & Boen": { energy:67 },
+  "Byorn": { energy:79 },
+  "Calvin Harris": { energy:63, note:"hit machine" },
+  "Camila Jun": { energy:63 },
+  "Camo & Krooked": { energy:72 },
+  "Carlita b2b Malive": { energy:58 },
+  "Chase & Status (DJ set)": { energy:76, note:"dnb main-room pressure" },
+  "Chinonegro": { energy:60 },
+  "Chocolate Puma": { energy:65, note:"BE/NL classic" },
+  "Christian82": { energy:60 },
+  "CIEL.": { energy:63 },
+  "Coco Bevan": { energy:67 },
+  "Conrad Taylor": { energy:63 },
+  "CRISTINA TOSIO": { energy:58 },
+  "Curol": { energy:70 },
+  "CVNTS": { energy:67 },
+  "Cyria (Hybrid)": { energy:56 },
+  "Da Capo b2b Caiiro b2b Enoo Napa": { energy:63 },
+  "Da Tweekaz": { energy:83, note:"party hardstyle" },
+  "DALI": { energy:63 },
+  "Danni Gato": { energy:60 },
+  "Dave Hang": { energy:58 },
+  "David Guetta": { energy:69, note:"hits but the whole field moves" },
+  "David Löhlein F2F Yasmin r...": { energy:60 },
+  "Dean Turnley": { energy:63 },
+  "Delafino": { energy:58 },
+  "Dexphase": { energy:79 },
+  "Diego Miranda...": { energy:58 },
+  "Diffrent": { energy:61 },
+  "Dimitri Vangeli...": { energy:63 },
+  "Dimitri Vegas & Like Mike": { energy:65, note:"crowd beweegt, Bart-dislike staat los van energie" },
+  "Dimitri Vegas...": { energy:63, note:"afgekapte naam — check" },
+  "Dino Lenny": { energy:58 },
+  "Disco Lines": { energy:63 },
+  "DITHER": { energy:79 },
+  "DJ FASTA": { energy:58 },
+  "DJ Furax": { energy:77 },
+  "DJ GAB": { energy:63 },
+  "DJ Gee": { energy:60 },
+  "DJ Ghost": { energy:80, note:"BE cult" },
+  "DJ Gigola": { energy:72 },
+  "DJ Licious": { energy:63 },
+  "Dj Nano": { energy:66 },
+  "DJ Sally": { energy:61 },
+  "DJ Tennis b2b Vintage Culture": { energy:58 },
+  "Dries Smet": { energy:67 },
+  "DVBBS": { energy:61 },
+  "Effe Serieus": { energy:58 },
+  "ELFIGO": { energy:63 },
+  "Elli Acula": { energy:60 },
+  "elMefti": { energy:79 },
+  "Emiliano Demarco": { energy:60 },
+  "EMILIJA F2F Frederic.": { energy:60 },
+  "Encore Sounds...": { energy:58 },
+  "Encure b2b Ho...": { energy:61 },
+  "Eridu": { energy:63 },
+  "Estella Boersma": { energy:79 },
+  "Fabio Fusco": { energy:75 },
+  "Fafi Abdel Nour": { energy:57 },
+  "Fake Mood": { energy:61 },
+  "Favella Som Si...": { energy:62 },
+  "Felix Da Funk": { energy:63 },
+  "Firaga": { energy:75 },
+  "Fisher": { energy:76, note:"circus, iedereen los" },
+  "Flavour Drop": { energy:58 },
+  "Fonsi Nieto": { energy:63 },
+  "Foxed Up": { energy:67 },
+  "Fran Ares": { energy:63 },
+  "Frank Verstraeten": { energy:63 },
+  "Franky Kloeck": { energy:77 },
+  "Franky Rizardo": { energy:65 },
+  "FUMI F2F HUJUS": { energy:60 },
+  "Funkhauser": { energy:58 },
+  "Funktastix": { energy:58 },
+  "G-Lo": { energy:58 },
+  "Gabry Ponte": { energy:63 },
+  "Godtripper": { energy:67 },
+  "GPF b2b DR DONK": { energy:79 },
+  "Gravagerz": { energy:77 },
+  "Greg S.": { energy:77 },
+  "Gryffin": { energy:57 },
+  "HALÒ": { energy:61 },
+  "Hannah Laing": { energy:78 },
+  "Hardwell b2b Sub Zero Project": { energy:88, note:"big-room x hardstyle, explosive" },
+  "Heaven Sam": { energy:58 },
+  "Helsloot": { energy:61 },
+  "Henri PFR": { energy:62, note:"BE" },
+  "Hermanos Inglesos": { energy:58 },
+  "Hi Profile": { energy:75 },
+  "High Grade Sound": { energy:62 },
+  "Hitty": { energy:63 },
+  "Holy Priest": { energy:60 },
+  "Hurts F2F ROW 1": { energy:60 },
+  "Hypaton": { energy:61 },
+  "I Hate Models": { energy:87, note:"rave hysteria" },
+  "Ian Asher": { energy:61 },
+  "Idemi": { energy:60 },
+  "Indira Paganotto": { energy:86, note:"psy-techno surge" },
+  "Ineffekt": { energy:57 },
+  "Isaac": { energy:77 },
+  "Jack Shore": { energy:79 },
+  "James Carter": { energy:63 },
+  "Jan Vervloet": { energy:57 },
+  "Jazzy": { energy:65 },
+  "Je Broer": { energy:58 },
+  "Jelle DK": { energy:58 },
+  "Jente b2b Neall": { energy:77 },
+  "Jeronimø": { energy:58 },
+  "Jerrooo": { energy:58 },
+  "Jesabel": { energy:70 },
+  "Job Jobse": { energy:61 },
+  "John Newman": { energy:49, note:"zang, geen dansvloer" },
+  "John Noseda b2b Kenny Montana": { energy:61 },
+  "John OO Fleming": { energy:75 },
+  "John Summit": { energy:75 },
+  "Jonas van Opstal": { energy:67 },
+  "Joyse b2b Rya...": { energy:61 },
+  "Junkie Kid": { energy:67 },
+  "Juno": { energy:61 },
+  "Justin Wilkes": { energy:63 },
+  "Kaaze": { energy:61 },
+  "Kanine": { energy:68 },
+  "Karakals": { energy:63 },
+  "Karyo": { energy:58 },
+  "Kettama b2b Michael Bibi": { energy:73 },
+  "Kevin de Vries": { energy:64 },
+  "Krevix": { energy:63 },
+  "Kris Kross Am...": { energy:63, note:"afgekapt — check" },
+  "KUKO": { energy:60 },
+  "Kurashi Sound...": { energy:58 },
+  "Laidback Luke": { energy:63 },
+  "Lennert Wolfs": { energy:63 },
+  "Lerato Tsotetsi": { energy:60 },
+  "Les Mecs Eclectics": { energy:58 },
+  "LEVEL UP": { energy:62 },
+  "Linska": { energy:63 },
+  "Liquid Stranger": { energy:64 },
+  "Lolalita & Brennt (live)": { energy:70 },
+  "Lordesius & A...": { energy:58 },
+  "Los Bomberos": { energy:67 },
+  "Lost Frequencies": { energy:57, note:"BE homecrowd" },
+  "Lucas & Steve": { energy:61 },
+  "Lucca Van Da...": { energy:63 },
+  "Luna & Lenthe": { energy:60 },
+  "LUNAKORPZ": { energy:79 },
+  "Lunnas": { energy:58 },
+  "Mad Maxx": { energy:75 },
+  "Maddix": { energy:81, note:"techno-rave anthems" },
+  "MAE.LIEN": { energy:77 },
+  "Maike Depas": { energy:79 },
+  "Makasi": { energy:63 },
+  "Malaa's Alter...": { energy:69, note:"afgekapt — check" },
+  "Malugi": { energy:63 },
+  "MANDY": { energy:79 },
+  "MANDY b2b NEGITIV": { energy:79 },
+  "Manuals": { energy:61 },
+  "Marhu": { energy:60 },
+  "Mark Roma": { energy:63 },
+  "Marlon Hoffstadt": { energy:76, note:"DJ Daddy Trance hype" },
+  "Marnik": { energy:61 },
+  "Marsolo": { energy:63 },
+  "Marta Loe b2b...": { energy:61 },
+  "Marten Hörger": { energy:66 },
+  "Martin Garrix": { energy:69, note:"closing-level crowd control" },
+  "Marwan Dua": { energy:63 },
+  "Matisse & Sadko": { energy:61 },
+  "MATTN": { energy:61 },
+  "Max Styler": { energy:67 },
+  "Meduza³": { energy:62 },
+  "Mell Tierra": { energy:67 },
+  "MELV!EE": { energy:58 },
+  "Merow": { energy:63 },
+  "Mike Williams": { energy:61 },
+  "Milinguap": { energy:58 },
+  "Mind Against": { energy:70 },
+  "MIND COMPRESSOR": { energy:79 },
+  "Miss Monique": { energy:61 },
+  "Mitched": { energy:67 },
+  "Modeselektor (DJ-set)": { energy:73 },
+  "Monsieur": { energy:58 },
+  "Monta": { energy:67 },
+  "More to be an...": { energy:50, note:"TBA" },
+  "More to be announced": { energy:50, note:"TBA" },
+  "Morten b2b Malaa": { energy:68 },
+  "MPH": { energy:61 },
+  "MRMK": { energy:61 },
+  "Murdock": { energy:70, note:"BE dnb staple" },
+  "MXGPU (Hybrid)": { energy:56 },
+  "Nastya Dikikh": { energy:60 },
+  "Nederhand": { energy:67 },
+  "Neelix": { energy:79 },
+  "NERVO": { energy:61 },
+  "Netsky": { energy:74, note:"BE homecrowd" },
+  "Nicky Romero": { energy:63 },
+  "Nico Morano b2b Xinobi": { energy:57 },
+  "Nico Moreno": { energy:87, note:"industrial mosh" },
+  "Noaffection b2b OM3N": { energy:60 },
+  "Noah": { energy:58 },
+  "Nona Van Bra...": { energy:58 },
+  "NORO$T": { energy:63 },
+  "NOSI": { energy:63 },
+  "Nostalgix": { energy:66 },
+  "Not My Type": { energy:79 },
+  "Novah": { energy:61 },
+  "Ofenbach": { energy:63 },
+  "Olive Anguz": { energy:61 },
+  "Oliver Heldens": { energy:67 },
+  "Omdat Het Ka...": { energy:61 },
+  "Omiki": { energy:75 },
+  "Oscar and the...": { energy:53 },
+  "Paloma": { energy:63 },
+  "Panda Sound": { energy:58 },
+  "Pat B": { energy:79 },
+  "Pegassi": { energy:60 },
+  "Peterblue": { energy:79 },
+  "Phi Phi": { energy:79 },
+  "Plastik Funk b2b Olympe": { energy:63 },
+  "Pretty Girls Li...": { energy:58 },
+  "Primate": { energy:77 },
+  "Punctual": { energy:62 },
+  "Push": { energy:68, note:"BE trance legend" },
+  "Quintino": { energy:61 },
+  "R3hab": { energy:63 },
+  "RAYZEN": { energy:79 },
+  "Re-Type": { energy:63 },
+  "Rebelion": { energy:82 },
+  "Reinier Zonneveld (live)": { energy:76, note:"live acid marathon" },
+  "Rick & James 80's Party": { energy:55 },
+  "Rino": { energy:58 },
+  "Rockefellababe": { energy:58 },
+  "Rooler": { energy:82 },
+  "Rose Ringed": { energy:63 },
+  "Rosey Gold": { energy:60 },
+  "ROW1": { energy:60 },
+  "Rozie": { energy:61 },
+  "SABAI": { energy:58 },
+  "Sako Glitch": { energy:58 },
+  "Sally C": { energy:63 },
+  "Sam Feldt": { energy:63 },
+  "Sam Hofman": { energy:63 },
+  "Sam Shure": { energy:56 },
+  "SAMM b2b Ajna": { energy:61 },
+  "SANDY WAREZ b2b Revenja": { energy:79 },
+  "Sara Landry": { energy:89, note:"hard techno headliner" },
+  "Sasha b2b Young Marco": { energy:64 },
+  "Sebastian Ingrosso": { energy:65 },
+  "Sebsky": { energy:61 },
+  "Sedef Adasï": { energy:61 },
+  "Serafina F2F zwilling": { energy:60 },
+  "Seven Lions": { energy:60 },
+  "SHDW b2b ÜBERKIKZ": { energy:81 },
+  "sim0ne b2b Southstar": { energy:60 },
+  "Sleazy Stereo": { energy:58 },
+  "Sofía Cristo": { energy:63 },
+  "Sojuju & Julia...": { energy:58 },
+  "Somnia": { energy:75 },
+  "Soul Shakers": { energy:52 },
+  "Soulcity": { energy:63 },
+  "Space 92": { energy:64 },
+  "StadiumX": { energy:63 },
+  "Stephani B": { energy:63 },
+  "Steve Angello": { energy:65 },
+  "Steve Aoki": { energy:63, note:"cake > dans" },
+  "Steww Sounds...": { energy:58 },
+  "STOOG3S": { energy:77 },
+  "Sub Zero Project": { energy:83 },
+  "Subtronics": { energy:66, note:"headbang crowd" },
+  "SURPRISE": { energy:50, note:"TBA" },
+  "Symphony Of Harmony": { energy:31, note:"orkest — kijken, niet dansen" },
+  "Tania Moon": { energy:58 },
+  "Team Damp": { energy:58 },
+  "Thakzin": { energy:59 },
+  "The Chainsmokers": { energy:59 },
+  "The Saints": { energy:77 },
+  "The Spook": { energy:67 },
+  "The Z.": { energy:77 },
+  "Thomas Moulene": { energy:67 },
+  "TNT": { energy:77 },
+  "Tola OG": { energy:58 },
+  "Tomas Grey": { energy:61 },
+  "Tribal Kush": { energy:58 },
+  "Trip-Tamine": { energy:75 },
+  "Twenty Six": { energy:58 },
+  "UNREAD": { energy:58 },
+  "Unregular": { energy:58 },
+  "Vanco": { energy:60 },
+  "VE/RA": { energy:60 },
+  "VERNEX b2b NRKi": { energy:79 },
+  "Vieze Asbak": { energy:79 },
+  "Viktor": { energy:63 },
+  "Vini Vici": { energy:82, note:"psytrance mainstage proof" },
+  "Vintage Culture": { energy:68 },
+  "Vitucci": { energy:67 },
+  "VON BIKRÄV": { energy:80 },
+  "Vunzige Deunt...": { energy:58 },
+  "Wade": { energy:67 },
+  "WEF": { energy:58 },
+  "Whisnu Santika": { energy:61 },
+  "Wilbert Pigmans": { energy:58 },
+  "Will Sparks": { energy:64, note:"melbourne bounce" },
+  "X-Tof": { energy:77 },
+  "Yannick Thiry": { energy:75 },
+  "Yazzmin": { energy:63 },
+  "YERUN": { energy:67 },
+  "Yuuki Yoshiyama": { energy:63 },
+  "Yves V": { energy:61 },
+  "ZUKE": { energy:67 },
+  "ÆON:MODE": { energy:77 },
+  "Öona Dahl": { energy:57 },
+  "Øtta": { energy:76 },
+};
+
+const CONFIG = {
+  weights: { artist:0.40, slot:0.25, stage:0.20, competition:0.15 },
+  // timeslot curve in festival-hour space (hours <06:00 => +24)
+  slotCurve: [ [12,15,0.35],[15,17,0.50],[17,19,0.65],[19,21,0.80],[21,24,1.00],[24,25,0.90],[25,30,0.85],[6,12,0.30] ],
+  darkSlotFloor: 0.7,          // dark/indoor stages: S = max(S, floor)
+  rain: { threshMm:0.3, heavyMm:2.0, lookaheadMin:60, soonMin:45, moveByBufferMin:15 },
+  cold: { tempC:14, fromHour:19, penalty:0.10 },   // open stages, cold evening
+  weather: {
+    lat:51.087, lon:4.379, tz:"Europe/Brussels",
+    pollMs: 10*60*1000,
+    url: "https://api.open-meteo.com/v1/forecast?latitude=51.087&longitude=4.379&minutely_15=precipitation&hourly=temperature_2m,precipitation_probability,precipitation&forecast_days=2&timezone=Europe%2FBrussels",
+  },
+  energyChipMin: 70,
+};
+
+/* =====================================================================
+   APP BLOCK — scoring engine (pure functions, no I/O)
+   ===================================================================== */
+const clamp = (v,a,b)=>Math.min(b,Math.max(a,v));
+
+// "HH:MM" -> minutes in festival-day space (00:30 => 24h30 = 1470)
+function toMin(hhmm){ const [h,m]=hhmm.split(":").map(Number); return ((h<6?h+24:h)*60)+m; }
+
+// absolute Date for a set boundary (device runs in Europe/Brussels)
+function setDate(set, which){
+  const base = new Date(DAY_DATES[set.day]+"T00:00:00");
+  return new Date(base.getTime() + toMin(which==="start"?set.start:set.end)*60000);
+}
+
+// festival-hour (12..30) for an absolute Date
+function festHour(t){ const h = t.getHours()+t.getMinutes()/60; return h<6 ? h+24 : h; }
+
+function slotValueAtHour(fh){
+  for(const [a,b,v] of CONFIG.slotCurve) if(fh>=a && fh<b) return v;
+  return 0.3;
+}
+
+// S(t): timeslot curve; dark stages get a floor (inside, daytime barely matters)
+function slotValue(stage, fh){
+  let s = slotValueAtHour(fh);
+  if(stage && stage.dark) s = Math.max(s, CONFIG.darkSlotFloor);
+  return s;
+}
+
+// G: stage fit
+function stageFit(stage){
+  if(!stage) return 0.75;
+  const covered = stage.cover==="indoor" || stage.cover==="covered";
+  if(covered && stage.dark) return 1.0;
+  if(covered) return 0.85;
+  if(stage.size==="XL" || stage.size==="L") return 0.6;
+  return 0.75;
+}
+
+// crude genre family for competition matching
+function genreFam(g){
+  g=(g||"").toLowerCase();
+  if(/hard|rawstyle|hardstyle|industrial/.test(g)) return "hard";
+  if(/melodic/.test(g)) return "melodic";
+  if(/peak|techno/.test(g)) return "techno";
+  if(/tech house|house/.test(g)) return "house";
+  if(/trance|big room|edm|progressive|mainstage/.test(g)) return "main";
+  if(/drum|dnb|d&b/.test(g)) return "dnb";
+  if(/down|ambient|chill/.test(g)) return "down";
+  return "other";
+}
+
+// C: competition from simultaneous same-family sets with >= artist energy
+function competition(set){
+  const s0=toMin(set.start), e0=toMin(set.end), fam=genreFam(set.genre);
+  const myE = (ARTISTS[set.artist]?.energy ?? 50);
+  let n=0;
+  for(const o of TIMETABLE){
+    if(o===set || o.day!==set.day) continue;
+    if(genreFam(o.genre)!==fam) continue;
+    const s1=toMin(o.start), e1=toMin(o.end);
+    if(s1<e0 && s0<e1 && (ARTISTS[o.artist]?.energy ?? 50) >= myE) n++;
+  }
+  return n===0 ? 1.0 : n===1 ? 0.85 : 0.7;
+}
+
+// M_weather(t): needs weather state (wx) — pure given wx snapshot
+function weatherMult(stage, t, wx){
+  if(!stage) return 1;
+  let m = 1;
+  const r = rainStatus(t, wx);
+  if(r.rainingOrSoon){
+    if(stage.cover==="indoor") m = 1.15;
+    else if(stage.cover==="covered") m = 1.10;
+    else m = r.heavy ? 0.35 : 0.55;
+  }
+  const temp = tempAt(t, wx);
+  if(temp!=null && temp<CONFIG.cold.tempC && festHour(t)>=CONFIG.cold.fromHour && stage.cover==="open") m -= CONFIG.cold.penalty;
+  return Math.max(0, m);
+}
+
+// score(set, t). live=false => static/dry score (Dag-schema), S at set midpoint.
+function scoreSet(set, t, wx, live){
+  const stage = STAGES[set.stage];
+  const A = (ARTISTS[set.artist]?.energy ?? 50)/100;
+  const fh = live && t ? festHour(t) : (toMin(set.start)+toMin(set.end))/2/60;
+  const S = slotValue(stage, fh);
+  const G = stageFit(stage);
+  const C = competition(set);
+  const w = CONFIG.weights;
+  const base = clamp((w.artist*A + w.slot*S + w.stage*G + w.competition*C)*100, 0, 100);
+  const M = live ? weatherMult(stage, t, wx) : 1;
+  return Math.round(clamp(base*M, 0, 100));
+}
+
+function scoreBlocks(sc){
+  const f = Math.round(sc/20);
+  return "▮".repeat(f) + "▯".repeat(5-f);
+}
+
+/* ============================ clock module =========================== */
+const params = new URLSearchParams(location.search);
+const NOW_OVERRIDE = params.get("now") ? new Date(params.get("now")) : null;
+function now(){ return NOW_OVERRIDE ? new Date(NOW_OVERRIDE) : new Date(); }
+function fmtHM(t){ return String(t.getHours()).padStart(2,"0")+":"+String(t.getMinutes()).padStart(2,"0"); }
+
+// which festival day is "live" at t (day runs 11:00 -> 06:00 next morning)
+function festivalDay(t){
+  for(const d of [1,2,3]){
+    const base = new Date(DAY_DATES[d]+"T00:00:00").getTime();
+    if(t.getTime() >= base+11*3600e3 && t.getTime() < base+30*3600e3) return d;
+  }
+  return null;
+}
+
+/* =========================== weather module ========================== */
+// wx = { minutely:[{t:Date, mm}], hourly:[{t:Date, temp, prob, mm}], ts:Date|null, stale:bool }
+let wx = { minutely:[], hourly:[], ts:null, stale:false };
+
+function parseWeather(json){
+  const minutely=[], hourly=[];
+  if(json.minutely_15) json.minutely_15.time.forEach((tm,i)=>minutely.push({ t:new Date(tm), mm:json.minutely_15.precipitation[i] ?? 0 }));
+  if(json.hourly) json.hourly.time.forEach((tm,i)=>hourly.push({
+    t:new Date(tm), temp:json.hourly.temperature_2m[i],
+    prob:json.hourly.precipitation_probability[i], mm:json.hourly.precipitation[i] ?? 0 }));
+  return {minutely, hourly};
+}
+
+async function fetchWeather(){
+  try{
+    const res = await fetch(CONFIG.weather.url);
+    if(!res.ok) throw new Error("HTTP "+res.status);
+    const json = await res.json();
+    localStorage.setItem("few_wx", JSON.stringify({json, ts:Date.now()}));
+    applyWeather(json, new Date(), false);
+  }catch(e){
+    const cached = localStorage.getItem("few_wx");
+    if(cached){
+      const {json, ts} = JSON.parse(cached);
+      applyWeather(json, new Date(ts), true);
+    } // else: wx stays empty -> static model only
+  }
+  render();
+}
+
+function applyWeather(json, ts, stale){
+  const p = parseWeather(json);
+  wx = { ...p, ts, stale };
+  if(params.get("rain")==="demo") injectDemoRain();
+}
+
+// ?rain=demo: synthetic shower starting now+30m, 45m long, 1.2mm/15m
+function injectDemoRain(){
+  const t0 = now();
+  const minutely=[];
+  for(let m=-60; m<=180; m+=15){
+    const t = new Date(t0.getTime()+m*60000);
+    const inRain = m>=30 && m<75;
+    minutely.push({t, mm: inRain?1.2:0});
+  }
+  wx.minutely = minutely;
+  if(!wx.ts) wx.ts = t0;
+}
+
+function slotAt(arr, t){
+  for(let i=arr.length-1;i>=0;i--) if(t>=arr[i].t) {
+    // slot width: minutely 15m, hourly 60m — accept if within width
+    const width = arr.length>1 ? (arr[1].t-arr[0].t) : 3600e3;
+    return (t - arr[i].t) < width ? arr[i] : null;
+  }
+  return null;
+}
+function tempAt(t, w){ const s = slotAt((w||wx).hourly, t); return s ? s.temp : null; }
+
+function rainStatus(t, w){
+  w = w||wx;
+  const th = CONFIG.rain.threshMm;
+  const cur = slotAt(w.minutely, t);
+  const raining = !!(cur && cur.mm>=th);
+  let soon=false, heavy = !!(cur && cur.mm>=CONFIG.rain.heavyMm);
+  for(const s of w.minutely){
+    const dm = (s.t - t)/60000;
+    if(dm>0 && dm<=CONFIG.rain.soonMin && s.mm>=th){ soon=true; if(s.mm>=CONFIG.rain.heavyMm) heavy=true; }
+  }
+  return { raining, soon, rainingOrSoon: raining||soon, heavy };
+}
+
+// first rain event within lookahead: {start, end(Date|null), heavy}
+function nextRainEvent(t){
+  const th=CONFIG.rain.threshMm;
+  let start=null, end=null, heavy=false;
+  for(const s of wx.minutely){
+    const dm=(s.t-t)/60000;
+    if(dm<-15) continue;
+    if(!start){
+      if(dm<=CONFIG.rain.lookaheadMin && s.mm>=th){ start=s.t; heavy=s.mm>=CONFIG.rain.heavyMm; }
+    }else{
+      if(s.mm>=CONFIG.rain.heavyMm) heavy=true;
+      if(s.mm<th){ end=s.t; break; }
+    }
+  }
+  return start ? {start, end, heavy} : null;
+}
+
+/* ============================== render =============================== */
+let view = "nu";
+let filt = { day: festivalDay(now()) || 1, stage:"all", fromHour:12, picksOnly:false, minEnergy:false };
+
+function setView(v){ view=v; render(); }
+function el(id){ return document.getElementById(id); }
+function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
+
+function pickBadge(p){
+  return p==="must" ? ' <span class="badge must">MUST</span>' : p==="rec" ? ' <span class="badge rec">TIP</span>' : "";
+}
+function coverBadge(st){
+  if(!st) return "";
+  const label = st.cover==="indoor" ? "BINNEN" : st.cover==="covered" ? "DAK" : "";
+  let out = label ? ` <span class="badge cover">${label}</span>` : "";
+  if(!st.verified) out += ' <span class="badge unverified">?</span>';
+  return out;
+}
+function stageName(slug){ return STAGES[slug]?.name || slug; }
+
+function renderBanners(){
+  let html = "";
+  if(DEMO_DATA) html += `<div class="banner demo">⚠️ DEMODATA — de echte W1-timetable wordt geladen zodra <b>source/tomorrowland-final2.html</b> in de repo staat.</div>`;
+  if(wx.stale && wx.ts) html += `<div class="banner stale">Weer: ${fmtHM(wx.ts)} (offline — laatste bekende voorspelling)</div>`;
+  if(!wx.ts && wx.minutely.length===0) html += `<div class="banner stale">Geen weerdata — statisch model actief</div>`;
+
+  const t = now();
+  const ev = nextRainEvent(t);
+  if(ev){
+    const moveBy = new Date(ev.start.getTime() - CONFIG.rain.moveByBufferMin*60000);
+    const recs = coveredRecsAt(ev.start).slice(0,3);
+    let lines = "";
+    if(recs.length){
+      const top = recs[0];
+      lines += `<div class="go">Ga vóór ${fmtHM(moveBy)} naar ${esc(stageName(top.set.stage))} — ${esc(top.set.artist)} (energie ${ARTISTS[top.set.artist]?.energy ?? 50}).</div>`;
+      for(const r of recs.slice(1))
+        lines += `<div class="next">of: ${esc(stageName(r.set.stage))} — ${esc(r.set.artist)} (score ${r.score})</div>`;
+    }
+    const dur = ev.end ? ` tot ~${fmtHM(ev.end)}` : "";
+    html += `<div class="banner rain">🌧 ${ev.heavy?"Zware regen":"Regen"} ~${fmtHM(ev.start)} (±15 min)${dur}.${lines}</div>`;
+  }
+  el("banners").innerHTML = html;
+}
+
+// covered/indoor sets playing at time t, scored at t, sorted desc
+function coveredRecsAt(t){
+  const d = festivalDay(t);
+  if(!d) return [];
+  const out=[];
+  for(const set of TIMETABLE){
+    if(set.day!==d) continue;
+    const st = STAGES[set.stage];
+    if(!st || st.cover==="open") continue;
+    const s=setDate(set,"start"), e=setDate(set,"end");
+    // playing at rain time, or starting shortly after
+    if(s<=t && t<e || (s>t && (s-t)<=30*60000)){
+      out.push({set, score: scoreSet(set, t, wx, true)});
+    }
+  }
+  return out.sort((a,b)=>b.score-a.score);
+}
+
+function renderNu(){
+  const t = now();
+  const d = festivalDay(t);
+  if(!d){
+    el("view-nu").innerHTML = `<div class="msg">Festival is nu niet bezig.<br>Vr 17 juli vanaf 12:00.<br><br>Test met <b>?now=2026-07-17T22:00</b> en <b>?rain=demo</b>.</div>`;
+    return;
+  }
+  const byStage = {};
+  for(const set of TIMETABLE){
+    if(set.day!==d) continue;
+    const s=setDate(set,"start"), e=setDate(set,"end");
+    const b = byStage[set.stage] ??= {current:null, next:null};
+    if(s<=t && t<e) b.current = set;
+    else if(s>t && (!b.next || setDate(b.next,"start")>s)) b.next = set;
+  }
+  const rows = Object.entries(byStage).map(([slug,b])=>({
+    slug, ...b, score: b.current ? scoreSet(b.current, t, wx, true) : -1
+  })).sort((a,b)=>b.score-a.score || (a.next&&b.next ? setDate(a.next,"start")-setDate(b.next,"start") : a.next?-1:1));
+
+  let html = "";
+  for(const r of rows){
+    const st = STAGES[r.slug];
+    let body;
+    if(r.current){
+      body = `<div class="art">${esc(r.current.artist)}${pickBadge(r.current.pick)}</div>
+        <div class="meta">${r.current.start}–${r.current.end} · <i>${esc(r.current.genre)}</i></div>
+        <div class="score">${scoreBlocks(r.score)}<b>${r.score}</b></div>`;
+    }else{
+      body = `<div class="meta">— geen set bezig —</div>`;
+    }
+    const nxt = r.next ? `<div class="next">straks ${r.next.start}: ${esc(r.next.artist)}${r.next.pick?" ★":""}</div>` : "";
+    html += `<div class="nucard ${r.current?.pick||""}"><div class="stage">${esc(stageName(r.slug)).toUpperCase()}${coverBadge(st)}</div>${body}${nxt}</div>`;
+  }
+  el("view-nu").innerHTML = html || `<div class="msg">Geen sets vandaag.</div>`;
+}
+
+function renderSchema(){
+  const inDay = new Set(TIMETABLE.filter(s=>s.day===filt.day).map(s=>s.stage));
+  const stagesInDay = Object.keys(STAGES).filter(s=>inDay.has(s));
+  const dayChips = [1,2,3].map(d=>
+    `<button class="chip ${filt.day===d?"on":""}" onclick="filt.day=${d};render()">${DAY_LABELS[d]}</button>`).join("");
+  const stageChips = [`<button class="chip ${filt.stage==="all"?"on":""}" onclick="filt.stage='all';render()">Alle</button>`]
+    .concat(stagesInDay.map(s=>`<button class="chip ${filt.stage===s?"on":""}" onclick="filt.stage='${s}';render()">${esc(stageName(s))}</button>`)).join("");
+  const hours=[]; for(let h=12;h<=25;h++) hours.push(h);
+  const hourChips = hours.map(h=>{
+    const label = h>=24 ? String(h-24).padStart(2,"0") : String(h);
+    return `<button class="chip ${filt.fromHour===h?"on":""}" onclick="filt.fromHour=${h};render()">${label}</button>`;
+  }).join("");
+  const toggles =
+    `<button class="chip toggle ${filt.picksOnly?"on":""}" onclick="filt.picksOnly=!filt.picksOnly;render()">★ picks</button>`+
+    `<button class="chip toggle ${filt.minEnergy?"on":""}" onclick="filt.minEnergy=!filt.minEnergy;render()">⚡ ≥${CONFIG.energyChipMin}</button>`;
+
+  let sets = TIMETABLE.filter(s=>s.day===filt.day)
+    .filter(s=>filt.stage==="all" || s.stage===filt.stage)
+    .filter(s=>toMin(s.start) >= filt.fromHour*60)
+    .filter(s=>!filt.picksOnly || s.pick)
+    .map(s=>({set:s, score:scoreSet(s, null, wx, false)}))
+    .filter(r=>!filt.minEnergy || r.score>=CONFIG.energyChipMin)
+    .sort((a,b)=>toMin(a.set.start)-toMin(b.set.start));
+
+  let html = `<div class="chips">${dayChips}</div><div class="chips">${stageChips}</div><div class="chips">${hourChips}</div><div class="chips">${toggles}</div>`;
+  let lastStart = null;
+  for(const {set,score} of sets){
+    if(set.start!==lastStart){ html += `<div class="th">${set.start}</div>`; lastStart=set.start; }
+    const st = STAGES[set.stage];
+    html += `<div class="card ${set.pick}">
+      <div class="art">${set.pick==="must"?"🔴 ":set.pick==="rec"?"🟠 ":""}${esc(set.artist)}${pickBadge(set.pick)}</div>
+      <div class="meta">${set.start}–${set.end} · ${esc(stageName(set.stage))}${coverBadge(st)} · <i>${esc(set.genre)}</i></div>
+      <div class="score">${scoreBlocks(score)}<b>${score}</b></div>
+    </div>`;
+  }
+  if(!sets.length) html += `<div class="msg">Niets gevonden met deze filters.</div>`;
+  el("view-schema").innerHTML = html;
+}
+
+function renderWeer(){
+  const t = now();
+  let html = "";
+  if(wx.ts) html += `<div class="sub" style="padding:8px 14px">Laatste update: ${fmtHM(wx.ts)}${wx.stale?" (offline)":""}</div>`;
+  html += `<h2>NEERSLAG KOMENDE 2 UUR</h2>`;
+  const slots = wx.minutely.filter(s=>{ const dm=(s.t-t)/60000; return dm>-15 && dm<=120; });
+  if(slots.length){
+    for(const s of slots){
+      const bars = s.mm>=CONFIG.rain.threshMm ? "▮".repeat(clamp(Math.ceil(s.mm),1,6)) : "·";
+      html += `<div class="wrow"><span class="t">${fmtHM(s.t)}</span><span class="bar">${bars}</span><span class="mm">${s.mm>0?s.mm.toFixed(1)+" mm":"droog"}</span></div>`;
+    }
+  } else html += `<div class="msg">Geen kwartierdata beschikbaar.</div>`;
+  html += `<h2>PER UUR VANDAAG</h2>`;
+  const hrs = wx.hourly.filter(s=>{ const dh=(s.t-t)/3600e3; return dh>-1 && dh<=18; });
+  if(hrs.length){
+    for(const s of hrs){
+      html += `<div class="wrow"><span class="t">${fmtHM(s.t)}</span><span>${Math.round(s.temp)}°</span><span class="mm">${s.prob!=null?s.prob+"%":""} ${s.mm>0?s.mm.toFixed(1)+" mm":""}</span></div>`;
+    }
+  } else html += `<div class="msg">Geen uurdata beschikbaar.</div>`;
+  el("view-weer").innerHTML = html;
+}
+
+function render(){
+  el("tab-nu").className = view==="nu"?"on":"";
+  el("tab-schema").className = view==="schema"?"on":"";
+  el("tab-weer").className = view==="weer"?"on":"";
+  el("view-nu").style.display = view==="nu"?"":"none";
+  el("view-schema").style.display = view==="schema"?"":"none";
+  el("view-weer").style.display = view==="weer"?"":"none";
+  el("clockline").textContent = (NOW_OVERRIDE?"SIM ":"") + fmtHM(now()) + " · " + (festivalDay(now()) ? DAY_LABELS[festivalDay(now())] : "vóór festival");
+  renderBanners();
+  if(view==="nu") renderNu();
+  else if(view==="schema") renderSchema();
+  else renderWeer();
+}
+
+/* ============================ sanity tests =========================== */
+// ?test=1 — quick engine assertions in console
+function runTests(){
+  const get=(a)=>TIMETABLE.find(s=>s.artist===a);
+  const results=[];
+  const ok=(name,cond)=>results.push((cond?"✅ ":"❌ ")+name);
+  ok(`368 sets geladen`, TIMETABLE.length===368);
+  ok(`19 musts / 101 tips`, TIMETABLE.filter(s=>s.pick==="must").length===19 && TIMETABLE.filter(s=>s.pick==="rec").length===101);
+  const landry = scoreSet(get("Sara Landry"), null, wx, false);
+  const vintage = scoreSet(get("Vintage Culture"), null, wx, false);
+  ok(`23:00 Sara Landry (covered/dark) [${landry}] > 14:00 Vintage Culture open XL [${vintage}]`, landry>vintage);
+  const lens = get("Amelie Lens");
+  const t3 = new Date("2026-07-19T23:00:00");
+  const rainWx3 = { minutely:[{t:t3, mm:1.0}], hourly:[], ts:new Date(), stale:false };
+  ok(`covered score rises in rain`, scoreSet(lens, t3, rainWx3, true) > scoreSet(lens, t3, {minutely:[],hourly:[]}, true));
+  const guetta = get("David Guetta");
+  const t2 = new Date("2026-07-18T23:45:00");
+  const rainWx2 = { minutely:[{t:t2, mm:1.0}], hourly:[], ts:new Date(), stale:false };
+  ok(`open stage collapses in rain`, scoreSet(guetta, t2, {minutely:[],hourly:[]}, true) > scoreSet(guetta, t2, rainWx2, true));
+  ok(`toMin 00:30 => 1470`, toMin("00:30")===1470);
+  console.log("TML engine tests:\n"+results.join("\n"));
+  if(results.some(r=>r.startsWith("❌"))) alert("Engine tests FAILED — zie console");
+}
+
+/* ============================== startup ============================== */
+if(params.get("rain")==="demo") injectDemoRain();
+render();
+fetchWeather();
+setInterval(()=>{ if(!NOW_OVERRIDE) render(); }, 60*1000);
+setInterval(fetchWeather, CONFIG.weather.pollMs);
+document.addEventListener("visibilitychange", ()=>{ if(document.visibilityState==="visible") fetchWeather(); });
+if(params.get("test")==="1") runTests();
+</script>
+</body>
+</html>
