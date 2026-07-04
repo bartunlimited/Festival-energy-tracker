@@ -483,7 +483,7 @@ const TIMETABLE = [
 // cover: indoor | covered | open · size XS-XL · dark: enclosed/dark inside
 // All cover flags verified by Bart for the 2026 layout (2026-07-04).
 const STAGES = {
-  "mainstage":        { name:"Mainstage",        cover:"open",    size:"XL", dark:false, verified:true },
+  "mainstage":        { name:"Mainstage",        cover:"open",    size:"XL", dark:false, verified:true, fit:0.8 },  // TML: topgeluid, altijd wel een dansplek (Bart)
   "freedom":          { name:"Freedom",          cover:"indoor",  size:"L",  dark:true,  verified:true },  // indoor hall, LED ceiling
   "atmosphere":       { name:"Atmosphere",       cover:"covered", size:"M",  dark:true,  verified:true },  // tent
   "cage":             { name:"Cage",             cover:"indoor",  size:"M",  dark:true,  verified:true },  // binnen
@@ -870,6 +870,7 @@ const CONFIG = {
   darkSlotFloor: 0.7,          // dark/indoor stages: S = max(S, floor)
   rain: { threshMm:0.3, heavyMm:2.0, lookaheadMin:60, soonMin:45, moveByBufferMin:15 },
   cold: { tempC:14, fromHour:19, penalty:0.10 },   // open stages, cold evening
+  sun:  { tempC:20, openBonus:1.05, melodicOpenBonus:1.10 },  // mooi weer: buiten leeft, zeker melodic/house (Bart)
   weather: {
     lat:51.087, lon:4.379, tz:"Europe/Brussels",
     pollMs: 10*60*1000,
@@ -910,6 +911,7 @@ function slotValue(stage, fh){
 // G: stage fit
 function stageFit(stage){
   if(!stage) return 0.75;
+  if(stage.fit) return stage.fit;  // per-stage override (e.g. Mainstage)
   const covered = stage.cover==="indoor" || stage.cover==="covered";
   if(covered && stage.dark) return 1.0;
   if(covered) return 0.85;
@@ -945,7 +947,7 @@ function competition(set){
 }
 
 // M_weather(t): needs weather state (wx) — pure given wx snapshot
-function weatherMult(stage, t, wx){
+function weatherMult(stage, t, wx, set){
   if(!stage) return 1;
   let m = 1;
   const r = rainStatus(t, wx);
@@ -956,6 +958,11 @@ function weatherMult(stage, t, wx){
   }
   const temp = tempAt(t, wx);
   if(temp!=null && temp<CONFIG.cold.tempC && festHour(t)>=CONFIG.cold.fromHour && stage.cover==="open") m -= CONFIG.cold.penalty;
+  // sunny & warm: open stages come alive, melodic/house floors especially
+  if(!r.rainingOrSoon && temp!=null && temp>=CONFIG.sun.tempC && stage.cover==="open"){
+    const fam = set ? genreFam(set.genre) : "";
+    m *= (fam==="melodic" || fam==="house" || fam==="down") ? CONFIG.sun.melodicOpenBonus : CONFIG.sun.openBonus;
+  }
   return Math.max(0, m);
 }
 
@@ -969,7 +976,7 @@ function scoreSet(set, t, wx, live){
   const C = competition(set);
   const w = CONFIG.weights;
   const base = clamp((w.artist*A + w.slot*S + w.stage*G + w.competition*C)*100, 0, 100);
-  const M = live ? weatherMult(stage, t, wx) : 1;
+  const M = live ? weatherMult(stage, t, wx, set) : 1;
   return Math.round(clamp(base*M, 0, 100));
 }
 
@@ -1275,6 +1282,12 @@ function runTests(){
   const rainWx2 = { minutely:[{t:t2, mm:1.0}], hourly:[], ts:new Date(), stale:false };
   ok(`open stage collapses in rain`, scoreSet(guetta, t2, {minutely:[],hourly:[]}, true) > scoreSet(guetta, t2, rainWx2, true));
   ok(`toMin 00:30 => 1470`, toMin("00:30")===1470);
+  ok(`Mainstage fit-override 0.8`, stageFit(STAGES["mainstage"])===0.8);
+  const sunSet = TIMETABLE.find(s=>genreFam(s.genre)==="melodic" && STAGES[s.stage].cover==="open");
+  const tSun = setDate(sunSet,"start");
+  const sunnyWx = { minutely:[], hourly:[{t:tSun, temp:24, prob:0, mm:0}], ts:new Date(), stale:false };
+  const coolWx  = { minutely:[], hourly:[{t:tSun, temp:16, prob:0, mm:0}], ts:new Date(), stale:false };
+  ok(`zon-bonus: open melodic set (${sunSet.artist}) stijgt bij 24° vs 16°`, scoreSet(sunSet, tSun, sunnyWx, true) > scoreSet(sunSet, tSun, coolWx, true));
   console.log("TML engine tests:\n"+results.join("\n"));
   if(results.some(r=>r.startsWith("❌"))) alert("Engine tests FAILED — zie console");
 }
