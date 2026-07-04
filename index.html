@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="theme-color" content="#000000">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-180.png">
 <title>TML W1 — Dance Energy</title>
 <style>
 /* == Bart's readability recipe: pure black, white bold, 22px content == */
@@ -1283,6 +1286,7 @@ fetchWeather();
 setInterval(()=>{ if(!NOW_OVERRIDE) render(); }, 60*1000);
 setInterval(fetchWeather, CONFIG.weather.pollMs);
 document.addEventListener("visibilitychange", ()=>{ if(document.visibilityState==="visible") fetchWeather(); });
+if("serviceWorker" in navigator && location.protocol==="https:") navigator.serviceWorker.register("./sw.js");
 if(params.get("test")==="1") runTests();
 </script>
 </body>
