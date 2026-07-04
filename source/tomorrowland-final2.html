@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tomorrowland W1</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html { -webkit-text-size-adjust:100%; }
+body { background:#000; color:#fff; font-family:-apple-system,'SF Pro','Helvetica Neue',sans-serif; padding-bottom:80px; }
+.hdr { padding:20px 16px 6px; padding-top:calc(20px + env(safe-area-inset-top)); }
+.ttl { font-size:30px; font-weight:800; letter-spacing:-0.5px; color:#fff; }
+.sub { font-size:17px; color:#ccc; margin-top:4px; }
+input[type=radio], input[type=checkbox] { display:none; }
+.tabs { display:flex; gap:8px; padding:14px 12px 10px; }
+.tabs label { flex:1; padding:16px 0; text-align:center; border-radius:12px; background:#1c1c1e; color:#ccc; font-weight:800; font-size:19px; cursor:pointer; border:1px solid #333; }
+.opts { padding:0 12px 10px; }
+.opts label { display:inline-block; padding:12px 20px; border-radius:24px; background:#1c1c1e; color:#ccc; font-size:17px; font-weight:700; cursor:pointer; border:1px solid #333; }
+.day { display:none; padding:0 12px; }
+#d1:checked ~ .tabs label[for=d1], #d2:checked ~ .tabs label[for=d2], #d3:checked ~ .tabs label[for=d3] { background:#e63946; color:#fff; border-color:#e63946; }
+#d1:checked ~ #day1 { display:block; }
+#d2:checked ~ #day2 { display:block; }
+#d3:checked ~ #day3 { display:block; }
+#po:checked ~ .opts label[for=po] { background:#e63946; color:#fff; border-color:#e63946; }
+#po:checked ~ .day .card.none { display:none !important; }
+#po:checked ~ .day .th { display:none; }
+.hnav, .snav { display:flex; gap:6px; overflow-x:auto; -webkit-overflow-scrolling:touch; padding:4px 0 10px; scrollbar-width:none; }
+.hnav::-webkit-scrollbar, .snav::-webkit-scrollbar { display:none; }
+.hnav label, .snav label { flex-shrink:0; padding:11px 16px; border-radius:10px; background:#1c1c1e; color:#fff; font-size:18px; font-weight:800; border:1px solid #333; font-variant-numeric:tabular-nums; cursor:pointer; }
+.snav label { font-size:16px; }
+.th { position:sticky; top:0; background:#000; padding:14px 4px 8px; font-size:20px; font-weight:800; color:#fff; z-index:10; border-bottom:2px solid #333; font-variant-numeric:tabular-nums; }
+.card { border-radius:12px; padding:14px 14px; margin:8px 0; background:#111; border:1px solid #2a2a2a; border-left:6px solid #444; }
+.card.must { background:#38070c; border-left-color:#ff4d5a; border-color:#7a1620; }
+.card.rec { background:#2e1e08; border-left-color:#ffa940; border-color:#7a5416; }
+.ct { display:flex; justify-content:space-between; align-items:flex-start; gap:10px; }
+.a { font-weight:800; font-size:22px; color:#e8e8e8; line-height:1.25; }
+.card.must .a, .card.rec .a { color:#fff; }
+.bdg { font-size:14px; font-weight:800; padding:5px 10px; border-radius:6px; white-space:nowrap; flex-shrink:0; letter-spacing:0.5px; }
+.bdg.m { background:#ff4d5a; color:#fff; }
+.bdg.t { background:#ffa940; color:#000; }
+.cm { display:flex; flex-wrap:wrap; gap:4px 14px; margin-top:8px; font-size:22px; }
+.tm { color:#fff; font-weight:800; font-variant-numeric:tabular-nums; }
+.st { color:#fff; font-weight:800; }
+.gm { margin-top:4px; font-size:22px; }
+.g { font-style:italic; color:#fff; font-weight:700; }
+#f12:checked ~ .day label[for=f12] { background:#00b8d4; color:#000; border-color:#00b8d4; }
+#f13:checked ~ .day .h12 { display:none; }
+#f13:checked ~ .day label[for=f13] { background:#00b8d4; color:#000; border-color:#00b8d4; }
+#f14:checked ~ .day .h12, #f14:checked ~ .day .h13 { display:none; }
+#f14:checked ~ .day label[for=f14] { background:#00b8d4; color:#000; border-color:#00b8d4; }
+#f15:checked ~ .day .h12, #f15:checked ~ .day .h13, #f15:checked ~ .day .h14 { display:none; }
+#f15:checked ~ .day label[for=f15] { background:#00b8d4; color:#000; border-color:#00b8d4; }
+#f16:checked ~ .day .h12, #f16:checked ~ .day .h13, #f16:checked ~ .day .h14, #f16:checked ~ .day .h15 { display:none; }
+#f16:checked ~ .day label[for=f16] { background:#00b8d4; color:#000; border-color:#00b8d4; }
+#f17:checked ~ .day .h12, #f17:checked ~ .day .h13, #f17:checked ~ .day .h14, #f17:checked ~ .day .h15, #f17:checked ~ .day .h16 { display:none; }
+#f17:checked ~ .day label[for=f17] { background:#00b8d4; color:#000; border-color:#00b8d4; }
+#f18:checked ~ .day .h12, #f18:checked ~ .day .h13, #f18:checked ~ .day .h14, #f18:checked ~ .day .h15, #f18:checked ~ .day .h16, #f18:checked ~ .day .h17 { display:none; }
+#f18:checked ~ .day label[for=f18] { background:#00b8d4; color:#000; border-color:#00b8d4; }
+#f19:checked ~ .day .h12, #f19:checked ~ .day .h13, #f19:checked ~ .day .h14, #f19:checked ~ .day .h15, #f19:checked ~ .day .h16, #f19:checked ~ .day .h17, #f19:checked ~ .day .h18 { display:none; }
+#f19:checked ~ .day label[for=f19] { background:#00b8d4; color:#000; border-color:#00b8d4; }
+#f20:checked ~ .day .h12, #f20:checked ~ .day .h13, #f20:checked ~ .day .h14, #f20:checked ~ .day .h15, #f20:checked ~ .day .h16, #f20:checked ~ .day .h17, #f20:checked ~ .day .h18, #f20:checked ~ .day .h19 { display:none; }
+#f20:checked ~ .day label[for=f20] { background:#00b8d4; color:#000; border-color:#00b8d4; }
+#f21:checked ~ .day .h12, #f21:checked ~ .day .h13, #f21:checked ~ .day .h14, #f21:checked ~ .day .h15, #f21:checked ~ .day .h16, #f21:checked ~ .day .h17, #f21:checked ~ .day .h18, #f21:checked ~ .day .h19, #f21:checked ~ .day .h20 { display:none; }
+#f21:checked ~ .day label[for=f21] { background:#00b8d4; color:#000; border-color:#00b8d4; }
+#f22:checked ~ .day .h12, #f22:checked ~ .day .h13, #f22:checked ~ .day .h14, #f22:checked ~ .day .h15, #f22:checked ~ .day .h16, #f22:checked ~ .day .h17, #f22:checked ~ .day .h18, #f22:checked ~ .day .h19, #f22:checked ~ .day .h20, #f22:checked ~ .day .h21 { display:none; }
+#f22:checked ~ .day label[for=f22] { background:#00b8d4; color:#000; border-color:#00b8d4; }
+#f23:checked ~ .day .h12, #f23:checked ~ .day .h13, #f23:checked ~ .day .h14, #f23:checked ~ .day .h15, #f23:checked ~ .day .h16, #f23:checked ~ .day .h17, #f23:checked ~ .day .h18, #f23:checked ~ .day .h19, #f23:checked ~ .day .h20, #f23:checked ~ .day .h21, #f23:checked ~ .day .h22 { display:none; }
+#f23:checked ~ .day label[for=f23] { background:#00b8d4; color:#000; border-color:#00b8d4; }
+#f24:checked ~ .day .h12, #f24:checked ~ .day .h13, #f24:checked ~ .day .h14, #f24:checked ~ .day .h15, #f24:checked ~ .day .h16, #f24:checked ~ .day .h17, #f24:checked ~ .day .h18, #f24:checked ~ .day .h19, #f24:checked ~ .day .h20, #f24:checked ~ .day .h21, #f24:checked ~ .day .h22, #f24:checked ~ .day .h23 { display:none; }
+#f24:checked ~ .day label[for=f24] { background:#00b8d4; color:#000; border-color:#00b8d4; }
+#f25:checked ~ .day .h12, #f25:checked ~ .day .h13, #f25:checked ~ .day .h14, #f25:checked ~ .day .h15, #f25:checked ~ .day .h16, #f25:checked ~ .day .h17, #f25:checked ~ .day .h18, #f25:checked ~ .day .h19, #f25:checked ~ .day .h20, #f25:checked ~ .day .h21, #f25:checked ~ .day .h22, #f25:checked ~ .day .h23, #f25:checked ~ .day .h24 { display:none; }
+#f25:checked ~ .day label[for=f25] { background:#00b8d4; color:#000; border-color:#00b8d4; }
+#fall:checked ~ .day label[for=fall] { background:#00b8d4; color:#000; border-color:#00b8d4; }
+#s0r:checked ~ .day .card:not(.s0) { display:none !important; }
+#s0r:checked ~ .day label[for=s0r] { background:#9b5de5; color:#fff; border-color:#9b5de5; }
+#s1r:checked ~ .day .card:not(.s1) { display:none !important; }
+#s1r:checked ~ .day label[for=s1r] { background:#9b5de5; color:#fff; border-color:#9b5de5; }
+#s2r:checked ~ .day .card:not(.s2) { display:none !important; }
+#s2r:checked ~ .day label[for=s2r] { background:#9b5de5; color:#fff; border-color:#9b5de5; }
+#s3r:checked ~ .day .card:not(.s3) { display:none !important; }
+#s3r:checked ~ .day label[for=s3r] { background:#9b5de5; color:#fff; border-color:#9b5de5; }
+#s4r:checked ~ .day .card:not(.s4) { display:none !important; }
+#s4r:checked ~ .day label[for=s4r] { background:#9b5de5; color:#fff; border-color:#9b5de5; }
+#s5r:checked ~ .day .card:not(.s5) { display:none !important; }
+#s5r:checked ~ .day label[for=s5r] { background:#9b5de5; color:#fff; border-color:#9b5de5; }
+#s6r:checked ~ .day .card:not(.s6) { display:none !important; }
+#s6r:checked ~ .day label[for=s6r] { background:#9b5de5; color:#fff; border-color:#9b5de5; }
+#s7r:checked ~ .day .card:not(.s7) { display:none !important; }
+#s7r:checked ~ .day label[for=s7r] { background:#9b5de5; color:#fff; border-color:#9b5de5; }
+#s8r:checked ~ .day .card:not(.s8) { display:none !important; }
+#s8r:checked ~ .day label[for=s8r] { background:#9b5de5; color:#fff; border-color:#9b5de5; }
+#s9r:checked ~ .day .card:not(.s9) { display:none !important; }
+#s9r:checked ~ .day label[for=s9r] { background:#9b5de5; color:#fff; border-color:#9b5de5; }
+#s10r:checked ~ .day .card:not(.s10) { display:none !important; }
+#s10r:checked ~ .day label[for=s10r] { background:#9b5de5; color:#fff; border-color:#9b5de5; }
+#s11r:checked ~ .day .card:not(.s11) { display:none !important; }
+#s11r:checked ~ .day label[for=s11r] { background:#9b5de5; color:#fff; border-color:#9b5de5; }
+#s12r:checked ~ .day .card:not(.s12) { display:none !important; }
+#s12r:checked ~ .day label[for=s12r] { background:#9b5de5; color:#fff; border-color:#9b5de5; }
+#s13r:checked ~ .day .card:not(.s13) { display:none !important; }
+#s13r:checked ~ .day label[for=s13r] { background:#9b5de5; color:#fff; border-color:#9b5de5; }
+#s14r:checked ~ .day .card:not(.s14) { display:none !important; }
+#s14r:checked ~ .day label[for=s14r] { background:#9b5de5; color:#fff; border-color:#9b5de5; }
+#sallr:checked ~ .day label[for=sallr] { background:#9b5de5; color:#fff; border-color:#9b5de5; }
+</style>
+</head>
+<body>
+<div class="hdr">
+  <div class="ttl">Tomorrowland W1</div>
+  <div class="sub">&#128308; must-see &nbsp; &#128992; aanrader</div>
+</div>
+
+<input type="radio" name="day" id="d1" checked>
+<input type="radio" name="day" id="d2">
+<input type="radio" name="day" id="d3">
+<input type="checkbox" id="po">
+<input type="radio" name="fh" id="fall" checked><input type="radio" name="fh" id="f12"><input type="radio" name="fh" id="f13"><input type="radio" name="fh" id="f14"><input type="radio" name="fh" id="f15"><input type="radio" name="fh" id="f16"><input type="radio" name="fh" id="f17"><input type="radio" name="fh" id="f18"><input type="radio" name="fh" id="f19"><input type="radio" name="fh" id="f20"><input type="radio" name="fh" id="f21"><input type="radio" name="fh" id="f22"><input type="radio" name="fh" id="f23"><input type="radio" name="fh" id="f24"><input type="radio" name="fh" id="f25">
+<input type="radio" name="fs" id="sallr" checked><input type="radio" name="fs" id="s0r"><input type="radio" name="fs" id="s1r"><input type="radio" name="fs" id="s2r"><input type="radio" name="fs" id="s3r"><input type="radio" name="fs" id="s4r"><input type="radio" name="fs" id="s5r"><input type="radio" name="fs" id="s6r"><input type="radio" name="fs" id="s7r"><input type="radio" name="fs" id="s8r"><input type="radio" name="fs" id="s9r"><input type="radio" name="fs" id="s10r"><input type="radio" name="fs" id="s11r"><input type="radio" name="fs" id="s12r"><input type="radio" name="fs" id="s13r"><input type="radio" name="fs" id="s14r">
+
+<div class="tabs">
+  <label for="d1">Vr 17</label>
+  <label for="d2">Za 18</label>
+  <label for="d3">Zo 19</label>
+</div>
+<div class="opts">
+  <label for="po">&#128293; Alleen picks</label>
+</div>
+
+<div class="day" id="day1"><div class="snav"><label for="sallr">Alle stages</label><label for="s0r">Mainstage</label><label for="s1r">Freedom</label><label for="s2r">Atmosphere</label><label for="s3r">Cage</label><label for="s4r">Core</label><label for="s5r">Crystal Garden</label><label for="s6r">Celestia</label><label for="s7r">Melodia</label><label for="s8r">Great Library</label><label for="s9r">Rave Cave</label><label for="s10r">Rose Garden</label><label for="s11r">Planaxis</label><label for="s12r">Elixir</label><label for="s13r">Moose Bar</label><label for="s14r">House of Fortune</label></div><div class="hnav"><label for="fall">Alles</label><label for="f13">13</label><label for="f14">14</label><label for="f15">15</label><label for="f16">16</label><label for="f17">17</label><label for="f18">18</label><label for="f19">19</label><label for="f20">20</label><label for="f21">21</label><label for="f22">22</label><label for="f23">23</label><label for="f24">00</label></div><div class="th h13">13:00</div><div class="card none h13 s3">
+<div class="ct"><span class="a">RAYZEN</span></div>
+<div class="cm"><span class="tm">13:00&ndash;14:00</span><span class="st">Cage</span></div>
+<div class="gm"><span class="g">Hard techno</span></div>
+</div><div class="card none h13 s6">
+<div class="ct"><span class="a">MRMK</span></div>
+<div class="cm"><span class="tm">13:00&ndash;14:00</span><span class="st">Celestia</span></div>
+<div class="gm"><span class="g">Melodic techno</span></div>
+</div><div class="card none h13 s12">
+<div class="ct"><span class="a">Monsieur</span></div>
+<div class="cm"><span class="tm">13:00&ndash;14:30</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card none h13 s14">
+<div class="ct"><span class="a">More to be announced</span></div>
+<div class="cm"><span class="tm">13:00&ndash;14:00</span><span class="st">House of Fortune</span></div>
+
+</div><div class="card none h13 s11">
+<div class="ct"><span class="a">Yannick Thiry</span></div>
+<div class="cm"><span class="tm">13:00&ndash;14:00</span><span class="st">Planaxis</span></div>
+<div class="gm"><span class="g">Psytrance</span></div>
+</div><div class="card none h13 s8">
+<div class="ct"><span class="a">Manuals</span></div>
+<div class="cm"><span class="tm">13:00&ndash;14:00</span><span class="st">Great Library</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="th h13">13:30</div><div class="card none h13 s5">
+<div class="ct"><span class="a">Eridu</span></div>
+<div class="cm"><span class="tm">13:30&ndash;15:00</span><span class="st">Crystal Garden</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h13 s1">
+<div class="ct"><span class="a">Jesabel</span></div>
+<div class="cm"><span class="tm">13:30&ndash;15:00</span><span class="st">Freedom</span></div>
+<div class="gm"><span class="g">House / techno</span></div>
+</div><div class="card none h13 s7">
+<div class="ct"><span class="a">Lerato Tsotetsi</span></div>
+<div class="cm"><span class="tm">13:30&ndash;15:00</span><span class="st">Melodia</span></div>
+<div class="gm"><span class="g">Afro house</span></div>
+</div><div class="card none h13 s10">
+<div class="ct"><span class="a">MAE.LIEN</span></div>
+<div class="cm"><span class="tm">13:30&ndash;14:30</span><span class="st">Rose Garden</span></div>
+<div class="gm"><span class="g">Hardstyle</span></div>
+</div><div class="th h14">14:00</div><div class="card rec h14 s2">
+<div class="ct"><span class="a">&#128992; ROW1</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">14:00&ndash;15:30</span><span class="st">Atmosphere</span></div>
+<div class="gm"><span class="g">Techno</span></div>
+</div><div class="card none h14 s3">
+<div class="ct"><span class="a">SANDY WAREZ b2b Revenja</span></div>
+<div class="cm"><span class="tm">14:00&ndash;15:00</span><span class="st">Cage</span></div>
+<div class="gm"><span class="g">Hard techno</span></div>
+</div><div class="card none h14 s6">
+<div class="ct"><span class="a">Juno</span></div>
+<div class="cm"><span class="tm">14:00&ndash;15:30</span><span class="st">Celestia</span></div>
+<div class="gm"><span class="g">Melodic techno</span></div>
+</div><div class="card rec h14 s4">
+<div class="ct"><span class="a">&#128992; John Noseda b2b Kenny Montana</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">14:00&ndash;17:00</span><span class="st">Core</span></div>
+<div class="gm"><span class="g">House / eclectic</span></div>
+</div><div class="card none h14 s14">
+<div class="ct"><span class="a">Fran Ares</span></div>
+<div class="cm"><span class="tm">14:00&ndash;15:00</span><span class="st">House of Fortune</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card rec h14 s0">
+<div class="ct"><span class="a">&#128992; Vintage Culture</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">14:00&ndash;15:30</span><span class="st">Mainstage</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h14 s11">
+<div class="ct"><span class="a">Trip-Tamine</span></div>
+<div class="cm"><span class="tm">14:00&ndash;15:00</span><span class="st">Planaxis</span></div>
+<div class="gm"><span class="g">Psytrance</span></div>
+</div><div class="card none h14 s8">
+<div class="ct"><span class="a">Tomas Grey</span></div>
+<div class="cm"><span class="tm">14:00&ndash;15:00</span><span class="st">Great Library</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="th h14">14:30</div><div class="card none h14 s12">
+<div class="ct"><span class="a">High Grade Sound</span></div>
+<div class="cm"><span class="tm">14:30&ndash;16:00</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Reggae / bass</span></div>
+</div><div class="card none h14 s9">
+<div class="ct"><span class="a">Thomas Moulene</span></div>
+<div class="cm"><span class="tm">14:30&ndash;16:00</span><span class="st">Rave Cave</span></div>
+<div class="gm"><span class="g">Tech house</span></div>
+</div><div class="card none h14 s10">
+<div class="ct"><span class="a">Anton Invicta</span></div>
+<div class="cm"><span class="tm">14:30&ndash;16:00</span><span class="st">Rose Garden</span></div>
+<div class="gm"><span class="g">Hardstyle</span></div>
+</div><div class="th h15">15:00</div><div class="card rec h15 s3">
+<div class="ct"><span class="a">&#128992; elMefti</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">15:00&ndash;16:00</span><span class="st">Cage</span></div>
+<div class="gm"><span class="g">Hard techno</span></div>
+</div><div class="card none h15 s5">
+<div class="ct"><span class="a">Marsolo</span></div>
+<div class="cm"><span class="tm">15:00&ndash;16:30</span><span class="st">Crystal Garden</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h15 s1">
+<div class="ct"><span class="a">Rose Ringed</span></div>
+<div class="cm"><span class="tm">15:00&ndash;16:30</span><span class="st">Freedom</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h15 s14">
+<div class="ct"><span class="a">Lucca Van Da...</span></div>
+<div class="cm"><span class="tm">15:00&ndash;16:00</span><span class="st">House of Fortune</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h15 s7">
+<div class="ct"><span class="a">Rosey Gold</span></div>
+<div class="cm"><span class="tm">15:00&ndash;16:30</span><span class="st">Melodia</span></div>
+<div class="gm"><span class="g">Afro house</span></div>
+</div><div class="card none h15 s11">
+<div class="ct"><span class="a">John OO Fleming</span></div>
+<div class="cm"><span class="tm">15:00&ndash;16:00</span><span class="st">Planaxis</span></div>
+<div class="gm"><span class="g">Psytrance</span></div>
+</div><div class="card none h15 s8">
+<div class="ct"><span class="a">DJ Sally</span></div>
+<div class="cm"><span class="tm">15:00&ndash;16:00</span><span class="st">Great Library</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="th h15">15:30</div><div class="card rec h15 s2">
+<div class="ct"><span class="a">&#128992; Peterblue</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">15:30&ndash;17:00</span><span class="st">Atmosphere</span></div>
+<div class="gm"><span class="g">Hard techno</span></div>
+</div><div class="card none h15 s6">
+<div class="ct"><span class="a">Rozie</span></div>
+<div class="cm"><span class="tm">15:30&ndash;17:00</span><span class="st">Celestia</span></div>
+<div class="gm"><span class="g">Melodic techno</span></div>
+</div><div class="card rec h15 s0">
+<div class="ct"><span class="a">&#128992; Disco Lines</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">15:30&ndash;16:30</span><span class="st">Mainstage</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="th h16">16:00</div><div class="card rec h16 s3">
+<div class="ct"><span class="a">&#128992; Lolalita &amp; Brennt (live)</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">16:00&ndash;17:00</span><span class="st">Cage</span></div>
+<div class="gm"><span class="g">Hard techno</span></div>
+</div><div class="card none h16 s12">
+<div class="ct"><span class="a">Milinguap</span></div>
+<div class="cm"><span class="tm">16:00&ndash;17:00</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card none h16 s14">
+<div class="ct"><span class="a">StadiumX</span></div>
+<div class="cm"><span class="tm">16:00&ndash;17:00</span><span class="st">House of Fortune</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h16 s13">
+<div class="ct"><span class="a">Rino</span></div>
+<div class="cm"><span class="tm">16:00&ndash;19:00</span><span class="st">Moose Bar</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card none h16 s11">
+<div class="ct"><span class="a">Firaga</span></div>
+<div class="cm"><span class="tm">16:00&ndash;17:00</span><span class="st">Planaxis</span></div>
+<div class="gm"><span class="g">Psytrance</span></div>
+</div><div class="card none h16 s8">
+<div class="ct"><span class="a">Whisnu Santika</span></div>
+<div class="cm"><span class="tm">16:00&ndash;17:00</span><span class="st">Great Library</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="card none h16 s9">
+<div class="ct"><span class="a">Panda Sound</span></div>
+<div class="cm"><span class="tm">16:00&ndash;17:00</span><span class="st">Rave Cave</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card none h16 s10">
+<div class="ct"><span class="a">STOOG3S</span></div>
+<div class="cm"><span class="tm">16:00&ndash;17:00</span><span class="st">Rose Garden</span></div>
+<div class="gm"><span class="g">Hardstyle</span></div>
+</div><div class="th h16">16:30</div><div class="card none h16 s5">
+<div class="ct"><span class="a">Camila Jun</span></div>
+<div class="cm"><span class="tm">16:30&ndash;18:00</span><span class="st">Crystal Garden</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h16 s1">
+<div class="ct"><span class="a">Frank Verstraeten</span></div>
+<div class="cm"><span class="tm">16:30&ndash;18:00</span><span class="st">Freedom</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h16 s0">
+<div class="ct"><span class="a">Bassjackers</span></div>
+<div class="cm"><span class="tm">16:30&ndash;17:30</span><span class="st">Mainstage</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="card rec h16 s7">
+<div class="ct"><span class="a">&#128992; Thakzin</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">16:30&ndash;18:00</span><span class="st">Melodia</span></div>
+<div class="gm"><span class="g">Afro / melodic house</span></div>
+</div><div class="th h17">17:00</div><div class="card rec h17 s2">
+<div class="ct"><span class="a">&#128992; sim0ne b2b Southstar</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">17:00&ndash;18:30</span><span class="st">Atmosphere</span></div>
+<div class="gm"><span class="g">Techno</span></div>
+</div><div class="card rec h17 s3">
+<div class="ct"><span class="a">&#128992; VON BIKRÄV</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">17:00&ndash;18:00</span><span class="st">Cage</span></div>
+<div class="gm"><span class="g">Hard / industrial techno</span></div>
+</div><div class="card rec h17 s6">
+<div class="ct"><span class="a">&#128992; Diffrent</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">17:00&ndash;18:30</span><span class="st">Celestia</span></div>
+<div class="gm"><span class="g">Melodic techno</span></div>
+</div><div class="card rec h17 s4">
+<div class="ct"><span class="a">&#128992; Bibi Seck</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">17:00&ndash;19:00</span><span class="st">Core</span></div>
+<div class="gm"><span class="g">House / techno</span></div>
+</div><div class="card none h17 s12">
+<div class="ct"><span class="a">Soul Shakers</span></div>
+<div class="cm"><span class="tm">17:00&ndash;18:00</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Funk / soul</span></div>
+</div><div class="card rec h17 s14">
+<div class="ct"><span class="a">&#128992; Amber Broos</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">17:00&ndash;18:00</span><span class="st">House of Fortune</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h17 s11">
+<div class="ct"><span class="a">Somnia</span></div>
+<div class="cm"><span class="tm">17:00&ndash;18:00</span><span class="st">Planaxis</span></div>
+<div class="gm"><span class="g">Psytrance</span></div>
+</div><div class="card rec h17 s8">
+<div class="ct"><span class="a">&#128992; Mike Williams</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">17:00&ndash;18:00</span><span class="st">Great Library</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="card none h17 s9">
+<div class="ct"><span class="a">Paloma</span></div>
+<div class="cm"><span class="tm">17:00&ndash;18:30</span><span class="st">Rave Cave</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h17 s10">
+<div class="ct"><span class="a">Blooom b2b S...</span></div>
+<div class="cm"><span class="tm">17:00&ndash;18:00</span><span class="st">Rose Garden</span></div>
+<div class="gm"><span class="g">Hardstyle</span></div>
+</div><div class="th h17">17:35</div><div class="card must h17 s0">
+<div class="ct"><span class="a">&#128308; Henri PFR</span><span class="bdg m">MUST</span></div>
+<div class="cm"><span class="tm">17:35&ndash;18:35</span><span class="st">Mainstage</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="th h18">18:00</div><div class="card rec h18 s3">
+<div class="ct"><span class="a">&#128992; DITHER</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">18:00&ndash;19:00</span><span class="st">Cage</span></div>
+<div class="gm"><span class="g">Hard techno</span></div>
+</div><div class="card none h18 s12">
+<div class="ct"><span class="a">Flavour Drop</span></div>
+<div class="cm"><span class="tm">18:00&ndash;19:30</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card none h18 s1">
+<div class="ct"><span class="a">Max Styler</span></div>
+<div class="cm"><span class="tm">18:00&ndash;19:30</span><span class="st">Freedom</span></div>
+<div class="gm"><span class="g">Tech house</span></div>
+</div><div class="card none h18 s14">
+<div class="ct"><span class="a">Conrad Taylor</span></div>
+<div class="cm"><span class="tm">18:00&ndash;19:00</span><span class="st">House of Fortune</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h18 s7">
+<div class="ct"><span class="a">Danni Gato</span></div>
+<div class="cm"><span class="tm">18:00&ndash;19:00</span><span class="st">Melodia</span></div>
+<div class="gm"><span class="g">Afro house</span></div>
+</div><div class="card none h18 s11">
+<div class="ct"><span class="a">Hi Profile</span></div>
+<div class="cm"><span class="tm">18:00&ndash;19:00</span><span class="st">Planaxis</span></div>
+<div class="gm"><span class="g">Psytrance</span></div>
+</div><div class="card none h18 s8">
+<div class="ct"><span class="a">Sam Feldt</span></div>
+<div class="cm"><span class="tm">18:00&ndash;19:00</span><span class="st">Great Library</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h18 s10">
+<div class="ct"><span class="a">Primate</span></div>
+<div class="cm"><span class="tm">18:00&ndash;19:00</span><span class="st">Rose Garden</span></div>
+<div class="gm"><span class="g">Hardstyle</span></div>
+</div><div class="th h18">18:30</div><div class="card rec h18 s2">
+<div class="ct"><span class="a">&#128992; KUKO</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">18:30&ndash;20:00</span><span class="st">Atmosphere</span></div>
+<div class="gm"><span class="g">Techno</span></div>
+</div><div class="card rec h18 s6">
+<div class="ct"><span class="a">&#128992; MPH</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">18:30&ndash;20:00</span><span class="st">Celestia</span></div>
+<div class="gm"><span class="g">Melodic techno</span></div>
+</div><div class="card none h18 s9">
+<div class="ct"><span class="a">ZUKE</span></div>
+<div class="cm"><span class="tm">18:30&ndash;19:30</span><span class="st">Rave Cave</span></div>
+<div class="gm"><span class="g">Tech house</span></div>
+</div><div class="th h18">18:40</div><div class="card rec h18 s0">
+<div class="ct"><span class="a">&#128992; NERVO</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">18:40&ndash;19:40</span><span class="st">Mainstage</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="th h19">19:00</div><div class="card none h19 s3">
+<div class="ct"><span class="a">GPF b2b DR DONK</span></div>
+<div class="cm"><span class="tm">19:00&ndash;20:00</span><span class="st">Cage</span></div>
+<div class="gm"><span class="g">Hard techno</span></div>
+</div><div class="card rec h19 s4">
+<div class="ct"><span class="a">&#128992; Sally C</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">19:00&ndash;21:00</span><span class="st">Core</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card rec h19 s14">
+<div class="ct"><span class="a">&#128992; Nicky Romero</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">19:00&ndash;20:00</span><span class="st">House of Fortune</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="card none h19 s7">
+<div class="ct"><span class="a">Vanco</span></div>
+<div class="cm"><span class="tm">19:00&ndash;20:30</span><span class="st">Melodia</span></div>
+<div class="gm"><span class="g">Afro house</span></div>
+</div><div class="card none h19 s13">
+<div class="ct"><span class="a">Wilbert Pigmans</span></div>
+<div class="cm"><span class="tm">19:00&ndash;20:00</span><span class="st">Moose Bar</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card none h19 s11">
+<div class="ct"><span class="a">Fabio Fusco</span></div>
+<div class="cm"><span class="tm">19:00&ndash;20:00</span><span class="st">Planaxis</span></div>
+<div class="gm"><span class="g">Psytrance</span></div>
+</div><div class="card none h19 s8">
+<div class="ct"><span class="a">Da Tweekaz</span></div>
+<div class="cm"><span class="tm">19:00&ndash;20:00</span><span class="st">Great Library</span></div>
+<div class="gm"><span class="g">Hardstyle</span></div>
+</div><div class="card none h19 s10">
+<div class="ct"><span class="a">ÆON:MODE</span></div>
+<div class="cm"><span class="tm">19:00&ndash;20:00</span><span class="st">Rose Garden</span></div>
+<div class="gm"><span class="g">Hardstyle</span></div>
+</div><div class="th h19">19:30</div><div class="card rec h19 s5">
+<div class="ct"><span class="a">&#128992; BLOND:ISH</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">19:30&ndash;21:00</span><span class="st">Crystal Garden</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h19 s12">
+<div class="ct"><span class="a">Tola OG</span></div>
+<div class="cm"><span class="tm">19:30&ndash;20:30</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card rec h19 s1">
+<div class="ct"><span class="a">&#128992; Miss Monique</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">19:30&ndash;21:00</span><span class="st">Freedom</span></div>
+<div class="gm"><span class="g">Melodic techno</span></div>
+</div><div class="card none h19 s9">
+<div class="ct"><span class="a">Justin Wilkes</span></div>
+<div class="cm"><span class="tm">19:30&ndash;21:00</span><span class="st">Rave Cave</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="th h19">19:40</div><div class="card rec h19 s0">
+<div class="ct"><span class="a">&#128992; Marlon Hoffstadt</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">19:40&ndash;20:40</span><span class="st">Mainstage</span></div>
+<div class="gm"><span class="g">House / rave</span></div>
+</div><div class="th h20">20:00</div><div class="card rec h20 s2">
+<div class="ct"><span class="a">&#128992; MANDY b2b NEGITIV</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">20:00&ndash;21:30</span><span class="st">Atmosphere</span></div>
+<div class="gm"><span class="g">Hard techno</span></div>
+</div><div class="card rec h20 s3">
+<div class="ct"><span class="a">&#128992; MIND COMPRESSOR</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">20:00&ndash;21:00</span><span class="st">Cage</span></div>
+<div class="gm"><span class="g">Industrial techno</span></div>
+</div><div class="card rec h20 s6">
+<div class="ct"><span class="a">&#128992; Olive Anguz</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">20:00&ndash;21:30</span><span class="st">Celestia</span></div>
+<div class="gm"><span class="g">Melodic techno</span></div>
+</div><div class="card none h20 s14">
+<div class="ct"><span class="a">Mike Williams</span></div>
+<div class="cm"><span class="tm">20:00&ndash;21:00</span><span class="st">House of Fortune</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="card none h20 s13">
+<div class="ct"><span class="a">Funktastix</span></div>
+<div class="cm"><span class="tm">20:00&ndash;00:00</span><span class="st">Moose Bar</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card none h20 s11">
+<div class="ct"><span class="a">Neelix</span></div>
+<div class="cm"><span class="tm">20:00&ndash;21:30</span><span class="st">Planaxis</span></div>
+<div class="gm"><span class="g">Psytrance</span></div>
+</div><div class="card rec h20 s8">
+<div class="ct"><span class="a">&#128992; Ofenbach</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">20:00&ndash;21:00</span><span class="st">Great Library</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h20 s10">
+<div class="ct"><span class="a">Murdock</span></div>
+<div class="cm"><span class="tm">20:00&ndash;21:00</span><span class="st">Rose Garden</span></div>
+<div class="gm"><span class="g">Drum &amp; bass</span></div>
+</div><div class="th h20">20:30</div><div class="card none h20 s12">
+<div class="ct"><span class="a">Nona Van Bra...</span></div>
+<div class="cm"><span class="tm">20:30&ndash;21:30</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card none h20 s7">
+<div class="ct"><span class="a">AWEN</span></div>
+<div class="cm"><span class="tm">20:30&ndash;22:00</span><span class="st">Melodia</span></div>
+<div class="gm"><span class="g">Melodic house</span></div>
+</div><div class="th h20">20:40</div><div class="card none h20 s0">
+<div class="ct"><span class="a">Novah</span></div>
+<div class="cm"><span class="tm">20:40&ndash;21:40</span><span class="st">Mainstage</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="th h21">21:00</div><div class="card none h21 s3">
+<div class="ct"><span class="a">LUNAKORPZ</span></div>
+<div class="cm"><span class="tm">21:00&ndash;22:00</span><span class="st">Cage</span></div>
+<div class="gm"><span class="g">Hard techno</span></div>
+</div><div class="card rec h21 s4">
+<div class="ct"><span class="a">&#128992; Sasha b2b Young Marco</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">21:00&ndash;23:00</span><span class="st">Core</span></div>
+<div class="gm"><span class="g">House / progressive</span></div>
+</div><div class="card rec h21 s5">
+<div class="ct"><span class="a">&#128992; Kettama b2b Michael Bibi</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">21:00&ndash;23:00</span><span class="st">Crystal Garden</span></div>
+<div class="gm"><span class="g">House / tech house</span></div>
+</div><div class="card rec h21 s1">
+<div class="ct"><span class="a">&#128992; Mind Against</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">21:00&ndash;22:30</span><span class="st">Freedom</span></div>
+<div class="gm"><span class="g">Dark melodic techno</span></div>
+</div><div class="card none h21 s14">
+<div class="ct"><span class="a">Gravagerz</span></div>
+<div class="cm"><span class="tm">21:00&ndash;22:00</span><span class="st">House of Fortune</span></div>
+<div class="gm"><span class="g">Hardstyle</span></div>
+</div><div class="card rec h21 s8">
+<div class="ct"><span class="a">&#128992; R3hab</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">21:00&ndash;22:00</span><span class="st">Great Library</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="card rec h21 s9">
+<div class="ct"><span class="a">&#128992; Nastya Dikikh</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">21:00&ndash;22:00</span><span class="st">Rave Cave</span></div>
+<div class="gm"><span class="g">Techno</span></div>
+</div><div class="card none h21 s10">
+<div class="ct"><span class="a">A Little Sound</span></div>
+<div class="cm"><span class="tm">21:00&ndash;22:00</span><span class="st">Rose Garden</span></div>
+<div class="gm"><span class="g">Drum &amp; bass</span></div>
+</div><div class="th h21">21:30</div><div class="card must h21 s2">
+<div class="ct"><span class="a">&#128308; Nico Moreno</span><span class="bdg m">MUST</span></div>
+<div class="cm"><span class="tm">21:30&ndash;23:00</span><span class="st">Atmosphere</span></div>
+<div class="gm"><span class="g">Hard techno</span></div>
+</div><div class="card none h21 s6">
+<div class="ct"><span class="a">Bennett</span></div>
+<div class="cm"><span class="tm">21:30&ndash;23:00</span><span class="st">Celestia</span></div>
+<div class="gm"><span class="g">Melodic techno</span></div>
+</div><div class="card none h21 s12">
+<div class="ct"><span class="a">Unregular</span></div>
+<div class="cm"><span class="tm">21:30&ndash;22:30</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card none h21 s11">
+<div class="ct"><span class="a">Omiki</span></div>
+<div class="cm"><span class="tm">21:30&ndash;22:30</span><span class="st">Planaxis</span></div>
+<div class="gm"><span class="g">Psytrance</span></div>
+</div><div class="th h21">21:45</div><div class="card must h21 s0">
+<div class="ct"><span class="a">&#128308; The Chainsmokers</span><span class="bdg m">MUST</span></div>
+<div class="cm"><span class="tm">21:45&ndash;22:45</span><span class="st">Mainstage</span></div>
+<div class="gm"><span class="g">Pop / EDM</span></div>
+</div><div class="th h22">22:00</div><div class="card none h22 s3">
+<div class="ct"><span class="a">VERNEX b2b NRKi</span></div>
+<div class="cm"><span class="tm">22:00&ndash;23:00</span><span class="st">Cage</span></div>
+<div class="gm"><span class="g">Hard techno</span></div>
+</div><div class="card rec h22 s7">
+<div class="ct"><span class="a">&#128992; Da Capo b2b Caiiro b2b Enoo Napa</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">22:00&ndash;00:00</span><span class="st">Melodia</span></div>
+<div class="gm"><span class="g">Afro house</span></div>
+</div><div class="card rec h22 s8">
+<div class="ct"><span class="a">&#128992; Artbat</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">22:00&ndash;23:00</span><span class="st">Great Library</span></div>
+<div class="gm"><span class="g">Melodic techno</span></div>
+</div><div class="card none h22 s9">
+<div class="ct"><span class="a">CVNTS</span></div>
+<div class="cm"><span class="tm">22:00&ndash;23:00</span><span class="st">Rave Cave</span></div>
+<div class="gm"><span class="g">Tech house</span></div>
+</div><div class="card none h22 s10">
+<div class="ct"><span class="a">Kanine</span></div>
+<div class="cm"><span class="tm">22:00&ndash;23:00</span><span class="st">Rose Garden</span></div>
+<div class="gm"><span class="g">Drum &amp; bass</span></div>
+</div><div class="th h22">22:30</div><div class="card none h22 s12">
+<div class="ct"><span class="a">Audiowave</span></div>
+<div class="cm"><span class="tm">22:30&ndash;23:30</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card rec h22 s1">
+<div class="ct"><span class="a">&#128992; 4444 OF A KIND</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">22:30&ndash;23:30</span><span class="st">Freedom</span></div>
+<div class="gm"><span class="g">Techno</span></div>
+</div><div class="card none h22 s11">
+<div class="ct"><span class="a">Mad Maxx</span></div>
+<div class="cm"><span class="tm">22:30&ndash;00:00</span><span class="st">Planaxis</span></div>
+<div class="gm"><span class="g">Psytrance</span></div>
+</div><div class="th h22">22:50</div><div class="card must h22 s0">
+<div class="ct"><span class="a">&#128308; Sebastian Ingrosso</span><span class="bdg m">MUST</span></div>
+<div class="cm"><span class="tm">22:50&ndash;23:50</span><span class="st">Mainstage</span></div>
+<div class="gm"><span class="g">House / EDM</span></div>
+</div><div class="th h23">23:00</div><div class="card must h23 s2">
+<div class="ct"><span class="a">&#128308; Sara Landry</span><span class="bdg m">MUST</span></div>
+<div class="cm"><span class="tm">23:00&ndash;00:55</span><span class="st">Atmosphere</span></div>
+<div class="gm"><span class="g">Hard techno</span></div>
+</div><div class="card rec h23 s4">
+<div class="ct"><span class="a">&#128992; Modeselektor (DJ-set)</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">23:00&ndash;00:50</span><span class="st">Core</span></div>
+<div class="gm"><span class="g">Electronic / techno</span></div>
+</div><div class="card rec h23 s5">
+<div class="ct"><span class="a">&#128992; Franky Rizardo</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">23:00&ndash;00:30</span><span class="st">Crystal Garden</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card rec h23 s8">
+<div class="ct"><span class="a">&#128992; Nicky Romero</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">23:00&ndash;00:00</span><span class="st">Great Library</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="card none h23 s9">
+<div class="ct"><span class="a">Junkie Kid</span></div>
+<div class="cm"><span class="tm">23:00&ndash;00:00</span><span class="st">Rave Cave</span></div>
+<div class="gm"><span class="g">Tech house</span></div>
+</div><div class="card none h23 s10">
+<div class="ct"><span class="a">Alison Wonderland</span></div>
+<div class="cm"><span class="tm">23:00&ndash;00:00</span><span class="st">Rose Garden</span></div>
+<div class="gm"><span class="g">Bass / electronic</span></div>
+</div><div class="th h23">23:30</div><div class="card none h23 s12">
+<div class="ct"><span class="a">Rick &amp; James 80's Party</span></div>
+<div class="cm"><span class="tm">23:30&ndash;01:00</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Disco / retro</span></div>
+</div><div class="card rec h23 s1">
+<div class="ct"><span class="a">&#128992; Holy Priest</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">23:30&ndash;00:30</span><span class="st">Freedom</span></div>
+<div class="gm"><span class="g">Techno</span></div>
+</div><div class="th h23">23:50</div><div class="card must h23 s0">
+<div class="ct"><span class="a">&#128308; Martin Garrix</span><span class="bdg m">MUST</span></div>
+<div class="cm"><span class="tm">23:50&ndash;00:50</span><span class="st">Mainstage</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="th h24">00:00</div><div class="card rec h24 s8">
+<div class="ct"><span class="a">&#128992; Hardwell b2b Sub Zero Project</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">00:00&ndash;00:55</span><span class="st">Great Library</span></div>
+<div class="gm"><span class="g">EDM / hardstyle</span></div>
+</div><div class="card none h24 s10">
+<div class="ct"><span class="a">Camo &amp; Krooked</span></div>
+<div class="cm"><span class="tm">00:00&ndash;01:00</span><span class="st">Rose Garden</span></div>
+<div class="gm"><span class="g">Drum &amp; bass</span></div>
+</div></div>
+<div class="day" id="day2"><div class="snav"><label for="sallr">Alle stages</label><label for="s0r">Mainstage</label><label for="s1r">Freedom</label><label for="s2r">Atmosphere</label><label for="s3r">Cage</label><label for="s4r">Core</label><label for="s5r">Crystal Garden</label><label for="s6r">Celestia</label><label for="s7r">Melodia</label><label for="s8r">Great Library</label><label for="s9r">Rave Cave</label><label for="s10r">Rose Garden</label><label for="s11r">Planaxis</label><label for="s12r">Elixir</label><label for="s13r">Moose Bar</label><label for="s14r">House of Fortune</label></div><div class="hnav"><label for="fall">Alles</label><label for="f13">13</label><label for="f14">14</label><label for="f15">15</label><label for="f16">16</label><label for="f17">17</label><label for="f18">18</label><label for="f19">19</label><label for="f20">20</label><label for="f21">21</label><label for="f22">22</label><label for="f23">23</label><label for="f24">00</label></div><div class="th h13">13:00</div><div class="card none h13 s6">
+<div class="ct"><span class="a">Sebsky</span></div>
+<div class="cm"><span class="tm">13:00&ndash;14:00</span><span class="st">Celestia</span></div>
+<div class="gm"><span class="g">Melodic techno</span></div>
+</div><div class="card none h13 s12">
+<div class="ct"><span class="a">Sojuju &amp; Julia...</span></div>
+<div class="cm"><span class="tm">13:00&ndash;14:00</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card none h13 s14">
+<div class="ct"><span class="a">Makasi</span></div>
+<div class="cm"><span class="tm">13:00&ndash;14:00</span><span class="st">House of Fortune</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h13 s11">
+<div class="ct"><span class="a">Chocolate Puma</span></div>
+<div class="cm"><span class="tm">13:00&ndash;14:00</span><span class="st">Planaxis</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h13 s8">
+<div class="ct"><span class="a">CIEL.</span></div>
+<div class="cm"><span class="tm">13:00&ndash;14:00</span><span class="st">Great Library</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h13 s9">
+<div class="ct"><span class="a">The Spook</span></div>
+<div class="cm"><span class="tm">13:00&ndash;14:00</span><span class="st">Rave Cave</span></div>
+<div class="gm"><span class="g">Tech house</span></div>
+</div><div class="card none h13 s10">
+<div class="ct"><span class="a">Phi Phi</span></div>
+<div class="cm"><span class="tm">13:00&ndash;14:00</span><span class="st">Rose Garden</span></div>
+<div class="gm"><span class="g">Hard techno</span></div>
+</div><div class="th h13">13:30</div><div class="card none h13 s4">
+<div class="ct"><span class="a">Curol</span></div>
+<div class="cm"><span class="tm">13:30&ndash;15:00</span><span class="st">Core</span></div>
+<div class="gm"><span class="g">House / techno</span></div>
+</div><div class="card none h13 s5">
+<div class="ct"><span class="a">DALI</span></div>
+<div class="cm"><span class="tm">13:30&ndash;15:00</span><span class="st">Crystal Garden</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h13 s1">
+<div class="ct"><span class="a">Luna &amp; Lenthe</span></div>
+<div class="cm"><span class="tm">13:30&ndash;15:00</span><span class="st">Freedom</span></div>
+<div class="gm"><span class="g">Techno</span></div>
+</div><div class="card none h13 s7">
+<div class="ct"><span class="a">Hermanos Inglesos</span></div>
+<div class="cm"><span class="tm">13:30&ndash;15:00</span><span class="st">Melodia</span></div>
+<div class="gm"><span class="g">Melodic house</span></div>
+</div><div class="th h14">14:00</div><div class="card none h14 s2">
+<div class="ct"><span class="a">Marhu</span></div>
+<div class="cm"><span class="tm">14:00&ndash;15:30</span><span class="st">Atmosphere</span></div>
+<div class="gm"><span class="g">Techno</span></div>
+</div><div class="card rec h14 s3">
+<div class="ct"><span class="a">&#128992; Maike Depas</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">14:00&ndash;15:30</span><span class="st">Cage</span></div>
+<div class="gm"><span class="g">Hard techno</span></div>
+</div><div class="card none h14 s6">
+<div class="ct"><span class="a">Encure b2b Ho...</span></div>
+<div class="cm"><span class="tm">14:00&ndash;15:00</span><span class="st">Celestia</span></div>
+<div class="gm"><span class="g">Melodic techno</span></div>
+</div><div class="card none h14 s12">
+<div class="ct"><span class="a">Lordesius &amp; A...</span></div>
+<div class="cm"><span class="tm">14:00&ndash;15:00</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card none h14 s14">
+<div class="ct"><span class="a">Lennert Wolfs</span></div>
+<div class="cm"><span class="tm">14:00&ndash;15:00</span><span class="st">House of Fortune</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h14 s0">
+<div class="ct"><span class="a">Merow</span></div>
+<div class="cm"><span class="tm">14:00&ndash;15:00</span><span class="st">Mainstage</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h14 s11">
+<div class="ct"><span class="a">Marnik</span></div>
+<div class="cm"><span class="tm">14:00&ndash;15:00</span><span class="st">Planaxis</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="card none h14 s8">
+<div class="ct"><span class="a">Marwan Dua</span></div>
+<div class="cm"><span class="tm">14:00&ndash;15:00</span><span class="st">Great Library</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h14 s9">
+<div class="ct"><span class="a">Los Bomberos</span></div>
+<div class="cm"><span class="tm">14:00&ndash;15:00</span><span class="st">Rave Cave</span></div>
+<div class="gm"><span class="g">Tech house</span></div>
+</div><div class="card none h14 s10">
+<div class="ct"><span class="a">Jente b2b Neall</span></div>
+<div class="cm"><span class="tm">14:00&ndash;15:00</span><span class="st">Rose Garden</span></div>
+<div class="gm"><span class="g">Hardstyle</span></div>
+</div><div class="th h15">15:00</div><div class="card none h15 s6">
+<div class="ct"><span class="a">Joyse b2b Rya...</span></div>
+<div class="cm"><span class="tm">15:00&ndash;16:00</span><span class="st">Celestia</span></div>
+<div class="gm"><span class="g">Melodic techno</span></div>
+</div><div class="card none h15 s4">
+<div class="ct"><span class="a">Betical</span></div>
+<div class="cm"><span class="tm">15:00&ndash;16:30</span><span class="st">Core</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h15 s5">
+<div class="ct"><span class="a">NOSI</span></div>
+<div class="cm"><span class="tm">15:00&ndash;17:00</span><span class="st">Crystal Garden</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h15 s12">
+<div class="ct"><span class="a">Pretty Girls Li...</span></div>
+<div class="cm"><span class="tm">15:00&ndash;16:00</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card none h15 s1">
+<div class="ct"><span class="a">Plastik Funk b2b Olympe</span></div>
+<div class="cm"><span class="tm">15:00&ndash;16:30</span><span class="st">Freedom</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h15 s14">
+<div class="ct"><span class="a">Mark Roma</span></div>
+<div class="cm"><span class="tm">15:00&ndash;16:00</span><span class="st">House of Fortune</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h15 s0">
+<div class="ct"><span class="a">Stephani B</span></div>
+<div class="cm"><span class="tm">15:00&ndash;16:00</span><span class="st">Mainstage</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h15 s7">
+<div class="ct"><span class="a">Emiliano Demarco</span></div>
+<div class="cm"><span class="tm">15:00&ndash;16:30</span><span class="st">Melodia</span></div>
+<div class="gm"><span class="g">Afro house</span></div>
+</div><div class="card none h15 s13">
+<div class="ct"><span class="a">Funkhauser</span></div>
+<div class="cm"><span class="tm">15:00&ndash;19:00</span><span class="st">Moose Bar</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card none h15 s11">
+<div class="ct"><span class="a">Kaaze</span></div>
+<div class="cm"><span class="tm">15:00&ndash;16:00</span><span class="st">Planaxis</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="card none h15 s8">
+<div class="ct"><span class="a">Linska</span></div>
+<div class="cm"><span class="tm">15:00&ndash;16:00</span><span class="st">Great Library</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h15 s9">
+<div class="ct"><span class="a">Aghatixx</span></div>
+<div class="cm"><span class="tm">15:00&ndash;16:00</span><span class="st">Rave Cave</span></div>
+<div class="gm"><span class="g">Tech house</span></div>
+</div><div class="card none h15 s10">
+<div class="ct"><span class="a">Blvckprint</span></div>
+<div class="cm"><span class="tm">15:00&ndash;16:00</span><span class="st">Rose Garden</span></div>
+<div class="gm"><span class="g">Hardstyle</span></div>
+</div><div class="th h15">15:30</div><div class="card rec h15 s2">
+<div class="ct"><span class="a">&#128992; Estella Boersma</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">15:30&ndash;17:00</span><span class="st">Atmosphere</span></div>
+<div class="gm"><span class="g">Hard techno</span></div>
+</div><div class="card rec h15 s3">
+<div class="ct"><span class="a">&#128992; Not My Type</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">15:30&ndash;17:00</span><span class="st">Cage</span></div>
+<div class="gm"><span class="g">Hard techno</span></div>
+</div><div class="th h16">16:00</div><div class="card none h16 s6">
+<div class="ct"><span class="a">Block &amp; Crown...</span></div>
+<div class="cm"><span class="tm">16:00&ndash;17:00</span><span class="st">Celestia</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h16 s12">
+<div class="ct"><span class="a">Ballantine &amp; D...</span></div>
+<div class="cm"><span class="tm">16:00&ndash;17:00</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card none h16 s14">
+<div class="ct"><span class="a">Fonsi Nieto</span></div>
+<div class="cm"><span class="tm">16:00&ndash;17:00</span><span class="st">House of Fortune</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h16 s0">
+<div class="ct"><span class="a">Omdat Het Ka...</span></div>
+<div class="cm"><span class="tm">16:00&ndash;17:00</span><span class="st">Mainstage</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="card none h16 s11">
+<div class="ct"><span class="a">Ian Asher</span></div>
+<div class="cm"><span class="tm">16:00&ndash;17:00</span><span class="st">Planaxis</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="card none h16 s9">
+<div class="ct"><span class="a">Brits &amp; Boen</span></div>
+<div class="cm"><span class="tm">16:00&ndash;17:30</span><span class="st">Rave Cave</span></div>
+<div class="gm"><span class="g">Tech house</span></div>
+</div><div class="card none h16 s10">
+<div class="ct"><span class="a">Greg S.</span></div>
+<div class="cm"><span class="tm">16:00&ndash;17:00</span><span class="st">Rose Garden</span></div>
+<div class="gm"><span class="g">Hardstyle</span></div>
+</div><div class="th h16">16:30</div><div class="card rec h16 s4">
+<div class="ct"><span class="a">&#128992; Dino Lenny</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">16:30&ndash;18:00</span><span class="st">Core</span></div>
+<div class="gm"><span class="g">House / melodic</span></div>
+</div><div class="card rec h16 s1">
+<div class="ct"><span class="a">&#128992; Space 92</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">16:30&ndash;18:00</span><span class="st">Freedom</span></div>
+<div class="gm"><span class="g">Techno</span></div>
+</div><div class="card none h16 s7">
+<div class="ct"><span class="a">UNREAD</span></div>
+<div class="cm"><span class="tm">16:30&ndash;18:00</span><span class="st">Melodia</span></div>
+<div class="gm"><span class="g">Melodic house</span></div>
+</div><div class="th h17">17:00</div><div class="card rec h17 s2">
+<div class="ct"><span class="a">&#128992; Elli Acula</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">17:00&ndash;18:30</span><span class="st">Atmosphere</span></div>
+<div class="gm"><span class="g">Techno</span></div>
+</div><div class="card rec h17 s3">
+<div class="ct"><span class="a">&#128992; A.N.I.</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">17:00&ndash;18:30</span><span class="st">Cage</span></div>
+<div class="gm"><span class="g">Hard techno</span></div>
+</div><div class="card none h17 s6">
+<div class="ct"><span class="a">Diego Miranda...</span></div>
+<div class="cm"><span class="tm">17:00&ndash;18:00</span><span class="st">Celestia</span></div>
+<div class="gm"><span class="g">Melodic</span></div>
+</div><div class="card none h17 s5">
+<div class="ct"><span class="a">Dean Turnley</span></div>
+<div class="cm"><span class="tm">17:00&ndash;18:30</span><span class="st">Crystal Garden</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h17 s12">
+<div class="ct"><span class="a">WEF</span></div>
+<div class="cm"><span class="tm">17:00&ndash;18:00</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card none h17 s14">
+<div class="ct"><span class="a">More to be an...</span></div>
+<div class="cm"><span class="tm">17:00&ndash;18:00</span><span class="st">House of Fortune</span></div>
+
+</div><div class="card none h17 s11">
+<div class="ct"><span class="a">Quintino</span></div>
+<div class="cm"><span class="tm">17:00&ndash;18:00</span><span class="st">Planaxis</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="card none h17 s8">
+<div class="ct"><span class="a">Jazzy</span></div>
+<div class="cm"><span class="tm">17:00&ndash;18:00</span><span class="st">Great Library</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h17 s10">
+<div class="ct"><span class="a">DJ Furax</span></div>
+<div class="cm"><span class="tm">17:00&ndash;18:00</span><span class="st">Rose Garden</span></div>
+<div class="gm"><span class="g">Hardstyle</span></div>
+</div><div class="th h17">17:05</div><div class="card rec h17 s0">
+<div class="ct"><span class="a">&#128992; Maddix</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">17:05&ndash;18:05</span><span class="st">Mainstage</span></div>
+<div class="gm"><span class="g">Techno / rave</span></div>
+</div><div class="th h17">17:30</div><div class="card none h17 s9">
+<div class="ct"><span class="a">Monta</span></div>
+<div class="cm"><span class="tm">17:30&ndash;19:00</span><span class="st">Rave Cave</span></div>
+<div class="gm"><span class="g">Tech house</span></div>
+</div><div class="th h18">18:00</div><div class="card none h18 s6">
+<div class="ct"><span class="a">Dimitri Vangeli...</span></div>
+<div class="cm"><span class="tm">18:00&ndash;19:00</span><span class="st">Celestia</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card rec h18 s4">
+<div class="ct"><span class="a">&#128992; Antdot</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">18:00&ndash;19:30</span><span class="st">Core</span></div>
+<div class="gm"><span class="g">Melodic / tech house</span></div>
+</div><div class="card none h18 s12">
+<div class="ct"><span class="a">MELV!EE</span></div>
+<div class="cm"><span class="tm">18:00&ndash;19:00</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card must h18 s1">
+<div class="ct"><span class="a">&#128308; Symphony Of Harmony</span><span class="bdg m">MUST</span></div>
+<div class="cm"><span class="tm">18:00&ndash;19:00</span><span class="st">Freedom</span></div>
+<div class="gm"><span class="g">Orkest / live</span></div>
+</div><div class="card none h18 s14">
+<div class="ct"><span class="a">Lucas &amp; Steve</span></div>
+<div class="cm"><span class="tm">18:00&ndash;19:00</span><span class="st">House of Fortune</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="card none h18 s7">
+<div class="ct"><span class="a">Chinonegro</span></div>
+<div class="cm"><span class="tm">18:00&ndash;19:00</span><span class="st">Melodia</span></div>
+<div class="gm"><span class="g">Afro house</span></div>
+</div><div class="card none h18 s11">
+<div class="ct"><span class="a">Laidback Luke</span></div>
+<div class="cm"><span class="tm">18:00&ndash;19:00</span><span class="st">Planaxis</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="card none h18 s8">
+<div class="ct"><span class="a">Andromedik</span></div>
+<div class="cm"><span class="tm">18:00&ndash;19:00</span><span class="st">Great Library</span></div>
+<div class="gm"><span class="g">Drum &amp; bass</span></div>
+</div><div class="card none h18 s10">
+<div class="ct"><span class="a">DJ Ghost</span></div>
+<div class="cm"><span class="tm">18:00&ndash;19:00</span><span class="st">Rose Garden</span></div>
+<div class="gm"><span class="g">Hardstyle</span></div>
+</div><div class="th h18">18:10</div><div class="card rec h18 s0">
+<div class="ct"><span class="a">&#128992; HALÒ</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">18:10&ndash;19:10</span><span class="st">Mainstage</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="th h18">18:30</div><div class="card must h18 s2">
+<div class="ct"><span class="a">&#128308; Ben Klock</span><span class="bdg m">MUST</span></div>
+<div class="cm"><span class="tm">18:30&ndash;20:00</span><span class="st">Atmosphere</span></div>
+<div class="gm"><span class="g">Dark techno</span></div>
+</div><div class="card rec h18 s3">
+<div class="ct"><span class="a">&#128992; Dexphase</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">18:30&ndash;20:00</span><span class="st">Cage</span></div>
+<div class="gm"><span class="g">Hard techno</span></div>
+</div><div class="card rec h18 s5">
+<div class="ct"><span class="a">&#128992; Ben Hemsley</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">18:30&ndash;20:00</span><span class="st">Crystal Garden</span></div>
+<div class="gm"><span class="g">Trance / house</span></div>
+</div><div class="th h19">19:00</div><div class="card none h19 s6">
+<div class="ct"><span class="a">Yves V</span></div>
+<div class="cm"><span class="tm">19:00&ndash;20:00</span><span class="st">Celestia</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="card none h19 s12">
+<div class="ct"><span class="a">Vunzige Deunt...</span></div>
+<div class="cm"><span class="tm">19:00&ndash;20:00</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card rec h19 s1">
+<div class="ct"><span class="a">&#128992; Meduza³</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">19:00&ndash;20:00</span><span class="st">Freedom</span></div>
+<div class="gm"><span class="g">House / melodic</span></div>
+</div><div class="card none h19 s14">
+<div class="ct"><span class="a">Kris Kross Am...</span></div>
+<div class="cm"><span class="tm">19:00&ndash;20:00</span><span class="st">House of Fortune</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="card none h19 s7">
+<div class="ct"><span class="a">Idemi</span></div>
+<div class="cm"><span class="tm">19:00&ndash;20:30</span><span class="st">Melodia</span></div>
+<div class="gm"><span class="g">Afro house</span></div>
+</div><div class="card none h19 s13">
+<div class="ct"><span class="a">Je Broer</span></div>
+<div class="cm"><span class="tm">19:00&ndash;20:00</span><span class="st">Moose Bar</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card none h19 s11">
+<div class="ct"><span class="a">SURPRISE</span></div>
+<div class="cm"><span class="tm">19:00&ndash;20:00</span><span class="st">Planaxis</span></div>
+<div class="gm"><span class="g">?</span></div>
+</div><div class="card rec h19 s8">
+<div class="ct"><span class="a">&#128992; Marten Hörger</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">19:00&ndash;20:00</span><span class="st">Great Library</span></div>
+<div class="gm"><span class="g">Tech / bass house</span></div>
+</div><div class="card none h19 s9">
+<div class="ct"><span class="a">Vitucci</span></div>
+<div class="cm"><span class="tm">19:00&ndash;20:30</span><span class="st">Rave Cave</span></div>
+<div class="gm"><span class="g">Tech house</span></div>
+</div><div class="card none h19 s10">
+<div class="ct"><span class="a">Push</span></div>
+<div class="cm"><span class="tm">19:00&ndash;20:00</span><span class="st">Rose Garden</span></div>
+<div class="gm"><span class="g">Trance</span></div>
+</div><div class="th h19">19:10</div><div class="card rec h19 s0">
+<div class="ct"><span class="a">&#128992; Boris Brejcha</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">19:10&ndash;20:10</span><span class="st">Mainstage</span></div>
+<div class="gm"><span class="g">Minimal / melodic techno</span></div>
+</div><div class="th h19">19:30</div><div class="card rec h19 s4">
+<div class="ct"><span class="a">&#128992; SAMM b2b Ajna</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">19:30&ndash;21:30</span><span class="st">Core</span></div>
+<div class="gm"><span class="g">Melodic techno</span></div>
+</div><div class="th h20">20:00</div><div class="card must h20 s2">
+<div class="ct"><span class="a">&#128308; BIIA b2b Charlie Sparks</span><span class="bdg m">MUST</span></div>
+<div class="cm"><span class="tm">20:00&ndash;21:30</span><span class="st">Atmosphere</span></div>
+<div class="gm"><span class="g">Hard / fast techno</span></div>
+</div><div class="card rec h20 s3">
+<div class="ct"><span class="a">&#128992; Byorn</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">20:00&ndash;21:30</span><span class="st">Cage</span></div>
+<div class="gm"><span class="g">Hard techno</span></div>
+</div><div class="card none h20 s6">
+<div class="ct"><span class="a">Dj Nano</span></div>
+<div class="cm"><span class="tm">20:00&ndash;21:00</span><span class="st">Celestia</span></div>
+<div class="gm"><span class="g">Trance</span></div>
+</div><div class="card rec h20 s5">
+<div class="ct"><span class="a">&#128992; Morten b2b Malaa</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">20:00&ndash;21:30</span><span class="st">Crystal Garden</span></div>
+<div class="gm"><span class="g">House / bass</span></div>
+</div><div class="card none h20 s12">
+<div class="ct"><span class="a">Kurashi Sound...</span></div>
+<div class="cm"><span class="tm">20:00&ndash;21:00</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card none h20 s1">
+<div class="ct"><span class="a">Netsky</span></div>
+<div class="cm"><span class="tm">20:00&ndash;21:00</span><span class="st">Freedom</span></div>
+<div class="gm"><span class="g">Drum &amp; bass</span></div>
+</div><div class="card none h20 s14">
+<div class="ct"><span class="a">Yuuki Yoshiyama</span></div>
+<div class="cm"><span class="tm">20:00&ndash;21:00</span><span class="st">House of Fortune</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h20 s13">
+<div class="ct"><span class="a">Jelle DK</span></div>
+<div class="cm"><span class="tm">20:00&ndash;00:00</span><span class="st">Moose Bar</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card none h20 s11">
+<div class="ct"><span class="a">Lucas &amp; Steve</span></div>
+<div class="cm"><span class="tm">20:00&ndash;21:00</span><span class="st">Planaxis</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="card rec h20 s8">
+<div class="ct"><span class="a">&#128992; Agents Of Time</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">20:00&ndash;21:30</span><span class="st">Great Library</span></div>
+<div class="gm"><span class="g">Melodic techno (live)</span></div>
+</div><div class="card none h20 s10">
+<div class="ct"><span class="a">Jan Vervloet</span></div>
+<div class="cm"><span class="tm">20:00&ndash;21:00</span><span class="st">Rose Garden</span></div>
+<div class="gm"><span class="g">Retro / classics</span></div>
+</div><div class="th h20">20:10</div><div class="card rec h20 s0">
+<div class="ct"><span class="a">&#128992; John Newman</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">20:10&ndash;21:10</span><span class="st">Mainstage</span></div>
+<div class="gm"><span class="g">Pop</span></div>
+</div><div class="th h20">20:30</div><div class="card rec h20 s7">
+<div class="ct"><span class="a">&#128992; Sam Shure</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">20:30&ndash;22:00</span><span class="st">Melodia</span></div>
+<div class="gm"><span class="g">Melodic / organic house</span></div>
+</div><div class="card none h20 s9">
+<div class="ct"><span class="a">Soulcity</span></div>
+<div class="cm"><span class="tm">20:30&ndash;22:00</span><span class="st">Rave Cave</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="th h21">21:00</div><div class="card none h21 s6">
+<div class="ct"><span class="a">Matisse &amp; Sadko</span></div>
+<div class="cm"><span class="tm">21:00&ndash;22:00</span><span class="st">Celestia</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="card none h21 s12">
+<div class="ct"><span class="a">Encore Sounds...</span></div>
+<div class="cm"><span class="tm">21:00&ndash;22:00</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card must h21 s1">
+<div class="ct"><span class="a">&#128308; Symphony Of Harmony</span><span class="bdg m">MUST</span></div>
+<div class="cm"><span class="tm">21:00&ndash;22:00</span><span class="st">Freedom</span></div>
+<div class="gm"><span class="g">Orkest / live</span></div>
+</div><div class="card rec h21 s14">
+<div class="ct"><span class="a">&#128992; MANDY</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">21:00&ndash;22:00</span><span class="st">House of Fortune</span></div>
+<div class="gm"><span class="g">Hard techno</span></div>
+</div><div class="card none h21 s11">
+<div class="ct"><span class="a">Bassjackers</span></div>
+<div class="cm"><span class="tm">21:00&ndash;22:00</span><span class="st">Planaxis</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="card none h21 s10">
+<div class="ct"><span class="a">Funkhauser</span></div>
+<div class="cm"><span class="tm">21:00&ndash;22:00</span><span class="st">Rose Garden</span></div>
+<div class="gm"><span class="g">Hardstyle</span></div>
+</div><div class="th h21">21:15</div><div class="card rec h21 s0">
+<div class="ct"><span class="a">&#128992; Fisher</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">21:15&ndash;22:15</span><span class="st">Mainstage</span></div>
+<div class="gm"><span class="g">Tech house</span></div>
+</div><div class="th h21">21:30</div><div class="card must h21 s2">
+<div class="ct"><span class="a">&#128308; Indira Paganotto</span><span class="bdg m">MUST</span></div>
+<div class="cm"><span class="tm">21:30&ndash;23:30</span><span class="st">Atmosphere</span></div>
+<div class="gm"><span class="g">Psy / hard techno</span></div>
+</div><div class="card none h21 s3">
+<div class="ct"><span class="a">Vieze Asbak</span></div>
+<div class="cm"><span class="tm">21:30&ndash;23:00</span><span class="st">Cage</span></div>
+<div class="gm"><span class="g">Hard techno</span></div>
+</div><div class="card rec h21 s4">
+<div class="ct"><span class="a">&#128992; Carlita b2b Malive</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">21:30&ndash;23:00</span><span class="st">Core</span></div>
+<div class="gm"><span class="g">Melodic house</span></div>
+</div><div class="card rec h21 s5">
+<div class="ct"><span class="a">&#128992; Steve Angello</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">21:30&ndash;00:30</span><span class="st">Crystal Garden</span></div>
+<div class="gm"><span class="g">House / EDM</span></div>
+</div><div class="card must h21 s8">
+<div class="ct"><span class="a">&#128308; Lost Frequencies</span><span class="bdg m">MUST</span></div>
+<div class="cm"><span class="tm">21:30&ndash;22:45</span><span class="st">Great Library</span></div>
+<div class="gm"><span class="g">House / pop</span></div>
+</div><div class="th h22">22:00</div><div class="card none h22 s6">
+<div class="ct"><span class="a">Will Sparks</span></div>
+<div class="cm"><span class="tm">22:00&ndash;23:00</span><span class="st">Celestia</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="card none h22 s12">
+<div class="ct"><span class="a">Rockefellababe</span></div>
+<div class="cm"><span class="tm">22:00&ndash;23:00</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card must h22 s1">
+<div class="ct"><span class="a">&#128308; Armin van Buuren</span><span class="bdg m">MUST</span></div>
+<div class="cm"><span class="tm">22:00&ndash;00:30</span><span class="st">Freedom</span></div>
+<div class="gm"><span class="g">Trance</span></div>
+</div><div class="card none h22 s7">
+<div class="ct"><span class="a">Twenty Six</span></div>
+<div class="cm"><span class="tm">22:00&ndash;23:00</span><span class="st">Melodia</span></div>
+<div class="gm"><span class="g">Melodic house</span></div>
+</div><div class="card none h22 s11">
+<div class="ct"><span class="a">DVBBS</span></div>
+<div class="cm"><span class="tm">22:00&ndash;23:00</span><span class="st">Planaxis</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="card none h22 s9">
+<div class="ct"><span class="a">Bobby &amp; Djenko</span></div>
+<div class="cm"><span class="tm">22:00&ndash;23:30</span><span class="st">Rave Cave</span></div>
+<div class="gm"><span class="g">Tech house</span></div>
+</div><div class="card none h22 s10">
+<div class="ct"><span class="a">Franky Kloeck</span></div>
+<div class="cm"><span class="tm">22:00&ndash;23:00</span><span class="st">Rose Garden</span></div>
+<div class="gm"><span class="g">Hardstyle</span></div>
+</div><div class="th h22">22:20</div><div class="card none h22 s0">
+<div class="ct"><span class="a">Dimitri Vegas &amp; Like Mike</span></div>
+<div class="cm"><span class="tm">22:20&ndash;23:35</span><span class="st">Mainstage</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="th h22">22:45</div><div class="card rec h22 s8">
+<div class="ct"><span class="a">&#128992; Oliver Heldens</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">22:45&ndash;00:00</span><span class="st">Great Library</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="th h23">23:00</div><div class="card rec h23 s4">
+<div class="ct"><span class="a">&#128992; Bedouin</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">23:00&ndash;00:50</span><span class="st">Core</span></div>
+<div class="gm"><span class="g">Melodic / deep house</span></div>
+</div><div class="card none h23 s12">
+<div class="ct"><span class="a">Afrolosjes Sou...</span></div>
+<div class="cm"><span class="tm">23:00&ndash;00:00</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Afro</span></div>
+</div><div class="card none h23 s7">
+<div class="ct"><span class="a">Arado</span></div>
+<div class="cm"><span class="tm">23:00&ndash;00:00</span><span class="st">Melodia</span></div>
+<div class="gm"><span class="g">Melodic house</span></div>
+</div><div class="card none h23 s11">
+<div class="ct"><span class="a">Steve Aoki</span></div>
+<div class="cm"><span class="tm">23:00&ndash;23:50</span><span class="st">Planaxis</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="card none h23 s10">
+<div class="ct"><span class="a">X-Tof</span></div>
+<div class="cm"><span class="tm">23:00&ndash;00:00</span><span class="st">Rose Garden</span></div>
+<div class="gm"><span class="g">Hardstyle</span></div>
+</div><div class="th h23">23:30</div><div class="card rec h23 s2">
+<div class="ct"><span class="a">&#128992; Reinier Zonneveld (live)</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">23:30&ndash;00:55</span><span class="st">Atmosphere</span></div>
+<div class="gm"><span class="g">Acid / live techno</span></div>
+</div><div class="card none h23 s9">
+<div class="ct"><span class="a">Jonas van Opstal</span></div>
+<div class="cm"><span class="tm">23:30&ndash;01:00</span><span class="st">Rave Cave</span></div>
+<div class="gm"><span class="g">Tech house</span></div>
+</div><div class="th h23">23:35</div><div class="card rec h23 s0">
+<div class="ct"><span class="a">&#128992; David Guetta</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">23:35&ndash;00:50</span><span class="st">Mainstage</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="th h24">00:00</div><div class="card none h24 s12">
+<div class="ct"><span class="a">Steww Sounds...</span></div>
+<div class="cm"><span class="tm">00:00&ndash;01:00</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card none h24 s10">
+<div class="ct"><span class="a">Bonzai All Stars</span></div>
+<div class="cm"><span class="tm">00:00&ndash;01:00</span><span class="st">Rose Garden</span></div>
+<div class="gm"><span class="g">Hardstyle / classics</span></div>
+</div></div>
+<div class="day" id="day3"><div class="snav"><label for="sallr">Alle stages</label><label for="s0r">Mainstage</label><label for="s1r">Freedom</label><label for="s2r">Atmosphere</label><label for="s3r">Cage</label><label for="s4r">Core</label><label for="s5r">Crystal Garden</label><label for="s6r">Celestia</label><label for="s7r">Melodia</label><label for="s8r">Great Library</label><label for="s9r">Rave Cave</label><label for="s10r">Rose Garden</label><label for="s11r">Planaxis</label><label for="s12r">Elixir</label><label for="s13r">Moose Bar</label><label for="s14r">House of Fortune</label></div><div class="hnav"><label for="fall">Alles</label><label for="f13">13</label><label for="f14">14</label><label for="f15">15</label><label for="f16">16</label><label for="f17">17</label><label for="f18">18</label><label for="f19">19</label><label for="f20">20</label><label for="f21">21</label><label for="f22">22</label><label for="f23">23</label></div><div class="th h13">13:00</div><div class="card none h13 s12">
+<div class="ct"><span class="a">G-Lo</span></div>
+<div class="cm"><span class="tm">13:00&ndash;14:00</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card none h13 s14">
+<div class="ct"><span class="a">DJ GAB</span></div>
+<div class="cm"><span class="tm">13:00&ndash;14:00</span><span class="st">House of Fortune</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h13 s8">
+<div class="ct"><span class="a">Yazzmin</span></div>
+<div class="cm"><span class="tm">13:00&ndash;14:00</span><span class="st">Great Library</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h13 s9">
+<div class="ct"><span class="a">YERUN</span></div>
+<div class="cm"><span class="tm">13:00&ndash;15:00</span><span class="st">Rave Cave</span></div>
+<div class="gm"><span class="g">Tech house</span></div>
+</div><div class="card none h13 s10">
+<div class="ct"><span class="a">The Z.</span></div>
+<div class="cm"><span class="tm">13:00&ndash;14:30</span><span class="st">Rose Garden</span></div>
+<div class="gm"><span class="g">Hardstyle</span></div>
+</div><div class="th h13">13:15</div><div class="card none h13 s11">
+<div class="ct"><span class="a">Punctual</span></div>
+<div class="cm"><span class="tm">13:15&ndash;15:00</span><span class="st">Planaxis</span></div>
+<div class="gm"><span class="g">Bass</span></div>
+</div><div class="th h13">13:30</div><div class="card none h13 s6">
+<div class="ct"><span class="a">Cyria (Hybrid)</span></div>
+<div class="cm"><span class="tm">13:30&ndash;15:00</span><span class="st">Celestia</span></div>
+<div class="gm"><span class="g">Melodic techno</span></div>
+</div><div class="card none h13 s5">
+<div class="ct"><span class="a">Re-Type</span></div>
+<div class="cm"><span class="tm">13:30&ndash;15:00</span><span class="st">Crystal Garden</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h13 s1">
+<div class="ct"><span class="a">DJ Licious</span></div>
+<div class="cm"><span class="tm">13:30&ndash;15:00</span><span class="st">Freedom</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h13 s7">
+<div class="ct"><span class="a">DJ Gee</span></div>
+<div class="cm"><span class="tm">13:30&ndash;14:30</span><span class="st">Melodia</span></div>
+<div class="gm"><span class="g">Afro house</span></div>
+</div><div class="th h14">14:00</div><div class="card rec h14 s2">
+<div class="ct"><span class="a">&#128992; VE/RA</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">14:00&ndash;16:00</span><span class="st">Atmosphere</span></div>
+<div class="gm"><span class="g">Techno</span></div>
+</div><div class="card rec h14 s3">
+<div class="ct"><span class="a">&#128992; Hurts F2F ROW 1</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">14:00&ndash;15:30</span><span class="st">Cage</span></div>
+<div class="gm"><span class="g">Techno</span></div>
+</div><div class="card rec h14 s4">
+<div class="ct"><span class="a">&#128992; Ineffekt</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">14:00&ndash;16:00</span><span class="st">Core</span></div>
+<div class="gm"><span class="g">Melodic / deep</span></div>
+</div><div class="card none h14 s12">
+<div class="ct"><span class="a">Sako Glitch</span></div>
+<div class="cm"><span class="tm">14:00&ndash;15:00</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card none h14 s14">
+<div class="ct"><span class="a">Krevix</span></div>
+<div class="cm"><span class="tm">14:00&ndash;15:00</span><span class="st">House of Fortune</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h14 s8">
+<div class="ct"><span class="a">James Carter</span></div>
+<div class="cm"><span class="tm">14:00&ndash;15:00</span><span class="st">Great Library</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="th h14">14:30</div><div class="card rec h14 s0">
+<div class="ct"><span class="a">&#128992; Hannah Laing</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">14:30&ndash;15:30</span><span class="st">Mainstage</span></div>
+<div class="gm"><span class="g">Techno / rave</span></div>
+</div><div class="card none h14 s7">
+<div class="ct"><span class="a">Christian82</span></div>
+<div class="cm"><span class="tm">14:30&ndash;15:30</span><span class="st">Melodia</span></div>
+<div class="gm"><span class="g">Afro house</span></div>
+</div><div class="card none h14 s10">
+<div class="ct"><span class="a">Adrenalize</span></div>
+<div class="cm"><span class="tm">14:30&ndash;15:30</span><span class="st">Rose Garden</span></div>
+<div class="gm"><span class="g">Hardstyle</span></div>
+</div><div class="th h15">15:00</div><div class="card rec h15 s6">
+<div class="ct"><span class="a">&#128992; Fake Mood</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">15:00&ndash;16:30</span><span class="st">Celestia</span></div>
+<div class="gm"><span class="g">Melodic techno</span></div>
+</div><div class="card none h15 s5">
+<div class="ct"><span class="a">Hitty</span></div>
+<div class="cm"><span class="tm">15:00&ndash;16:30</span><span class="st">Crystal Garden</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h15 s12">
+<div class="ct"><span class="a">Favella Som Si...</span></div>
+<div class="cm"><span class="tm">15:00&ndash;16:00</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Baile funk</span></div>
+</div><div class="card none h15 s1">
+<div class="ct"><span class="a">Aline Rocha</span></div>
+<div class="cm"><span class="tm">15:00&ndash;16:00</span><span class="st">Freedom</span></div>
+<div class="gm"><span class="g">Techno</span></div>
+</div><div class="card none h15 s14">
+<div class="ct"><span class="a">AdamK</span></div>
+<div class="cm"><span class="tm">15:00&ndash;16:00</span><span class="st">House of Fortune</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h15 s11">
+<div class="ct"><span class="a">SABAI</span></div>
+<div class="cm"><span class="tm">15:00&ndash;16:00</span><span class="st">Planaxis</span></div>
+<div class="gm"><span class="g">Bass / melodic</span></div>
+</div><div class="card none h15 s8">
+<div class="ct"><span class="a">Viktor</span></div>
+<div class="cm"><span class="tm">15:00&ndash;16:00</span><span class="st">Great Library</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h15 s9">
+<div class="ct"><span class="a">Mell Tierra</span></div>
+<div class="cm"><span class="tm">15:00&ndash;16:30</span><span class="st">Rave Cave</span></div>
+<div class="gm"><span class="g">Tech house</span></div>
+</div><div class="th h15">15:30</div><div class="card rec h15 s3">
+<div class="ct"><span class="a">&#128992; FUMI F2F HUJUS</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">15:30&ndash;17:00</span><span class="st">Cage</span></div>
+<div class="gm"><span class="g">Techno</span></div>
+</div><div class="card none h15 s0">
+<div class="ct"><span class="a">Karakals</span></div>
+<div class="cm"><span class="tm">15:30&ndash;16:30</span><span class="st">Mainstage</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h15 s7">
+<div class="ct"><span class="a">Tania Moon</span></div>
+<div class="cm"><span class="tm">15:30&ndash;16:30</span><span class="st">Melodia</span></div>
+<div class="gm"><span class="g">Melodic house</span></div>
+</div><div class="card none h15 s10">
+<div class="ct"><span class="a">TNT</span></div>
+<div class="cm"><span class="tm">15:30&ndash;16:30</span><span class="st">Rose Garden</span></div>
+<div class="gm"><span class="g">Hardstyle</span></div>
+</div><div class="th h16">16:00</div><div class="card rec h16 s2">
+<div class="ct"><span class="a">&#128992; Blondex</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">16:00&ndash;17:30</span><span class="st">Atmosphere</span></div>
+<div class="gm"><span class="g">Techno</span></div>
+</div><div class="card rec h16 s4">
+<div class="ct"><span class="a">&#128992; Fafi Abdel Nour</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">16:00&ndash;18:00</span><span class="st">Core</span></div>
+<div class="gm"><span class="g">Melodic / deep house</span></div>
+</div><div class="card none h16 s12">
+<div class="ct"><span class="a">DJ FASTA</span></div>
+<div class="cm"><span class="tm">16:00&ndash;17:00</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card none h16 s1">
+<div class="ct"><span class="a">Arielle Free</span></div>
+<div class="cm"><span class="tm">16:00&ndash;17:30</span><span class="st">Freedom</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h16 s14">
+<div class="ct"><span class="a">Sofía Cristo</span></div>
+<div class="cm"><span class="tm">16:00&ndash;17:00</span><span class="st">House of Fortune</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h16 s13">
+<div class="ct"><span class="a">Les Mecs Eclectics</span></div>
+<div class="cm"><span class="tm">16:00&ndash;19:00</span><span class="st">Moose Bar</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card none h16 s11">
+<div class="ct"><span class="a">[IVY]</span></div>
+<div class="cm"><span class="tm">16:00&ndash;17:00</span><span class="st">Planaxis</span></div>
+<div class="gm"><span class="g">Bass</span></div>
+</div><div class="card none h16 s8">
+<div class="ct"><span class="a">Hypaton</span></div>
+<div class="cm"><span class="tm">16:00&ndash;17:00</span><span class="st">Great Library</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="th h16">16:30</div><div class="card rec h16 s6">
+<div class="ct"><span class="a">&#128992; Öona Dahl</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">16:30&ndash;18:00</span><span class="st">Celestia</span></div>
+<div class="gm"><span class="g">Melodic / deep</span></div>
+</div><div class="card none h16 s5">
+<div class="ct"><span class="a">ELFIGO</span></div>
+<div class="cm"><span class="tm">16:30&ndash;18:00</span><span class="st">Crystal Garden</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h16 s0">
+<div class="ct"><span class="a">Malugi</span></div>
+<div class="cm"><span class="tm">16:30&ndash;17:30</span><span class="st">Mainstage</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h16 s7">
+<div class="ct"><span class="a">CRISTINA TOSIO</span></div>
+<div class="cm"><span class="tm">16:30&ndash;18:00</span><span class="st">Melodia</span></div>
+<div class="gm"><span class="g">Melodic house</span></div>
+</div><div class="card none h16 s9">
+<div class="ct"><span class="a">Dries Smet</span></div>
+<div class="cm"><span class="tm">16:30&ndash;17:30</span><span class="st">Rave Cave</span></div>
+<div class="gm"><span class="g">Tech house</span></div>
+</div><div class="card none h16 s10">
+<div class="ct"><span class="a">Rooler</span></div>
+<div class="cm"><span class="tm">16:30&ndash;17:30</span><span class="st">Rose Garden</span></div>
+<div class="gm"><span class="g">Hardstyle / raw</span></div>
+</div><div class="th h17">17:00</div><div class="card rec h17 s3">
+<div class="ct"><span class="a">&#128992; David Löhlein F2F Yasmin r...</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">17:00&ndash;18:30</span><span class="st">Cage</span></div>
+<div class="gm"><span class="g">Techno</span></div>
+</div><div class="card none h17 s12">
+<div class="ct"><span class="a">Noah</span></div>
+<div class="cm"><span class="tm">17:00&ndash;18:00</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card none h17 s14">
+<div class="ct"><span class="a">Sam Hofman</span></div>
+<div class="cm"><span class="tm">17:00&ndash;18:00</span><span class="st">House of Fortune</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h17 s11">
+<div class="ct"><span class="a">Nostalgix</span></div>
+<div class="cm"><span class="tm">17:00&ndash;18:00</span><span class="st">Planaxis</span></div>
+<div class="gm"><span class="g">Bass house</span></div>
+</div><div class="card rec h17 s8">
+<div class="ct"><span class="a">&#128992; Gabry Ponte</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">17:00&ndash;18:00</span><span class="st">Great Library</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="th h17">17:30</div><div class="card rec h17 s2">
+<div class="ct"><span class="a">&#128992; SHDW b2b ÜBERKIKZ</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">17:30&ndash;19:00</span><span class="st">Atmosphere</span></div>
+<div class="gm"><span class="g">Dark / hypnotic techno</span></div>
+</div><div class="card rec h17 s1">
+<div class="ct"><span class="a">&#128992; Jack Shore</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">17:30&ndash;18:30</span><span class="st">Freedom</span></div>
+<div class="gm"><span class="g">Hard techno</span></div>
+</div><div class="card none h17 s9">
+<div class="ct"><span class="a">Noaffection b2b OM3N</span></div>
+<div class="cm"><span class="tm">17:30&ndash;19:00</span><span class="st">Rave Cave</span></div>
+<div class="gm"><span class="g">Techno</span></div>
+</div><div class="card none h17 s10">
+<div class="ct"><span class="a">Isaac</span></div>
+<div class="cm"><span class="tm">17:30&ndash;18:30</span><span class="st">Rose Garden</span></div>
+<div class="gm"><span class="g">Hardstyle</span></div>
+</div><div class="th h17">17:35</div><div class="card rec h17 s0">
+<div class="ct"><span class="a">&#128992; Kevin de Vries</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">17:35&ndash;18:35</span><span class="st">Mainstage</span></div>
+<div class="gm"><span class="g">Melodic techno</span></div>
+</div><div class="th h18">18:00</div><div class="card rec h18 s6">
+<div class="ct"><span class="a">&#128992; Helsloot</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">18:00&ndash;19:30</span><span class="st">Celestia</span></div>
+<div class="gm"><span class="g">Melodic techno</span></div>
+</div><div class="card rec h18 s4">
+<div class="ct"><span class="a">&#128992; Sedef Adasï</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">18:00&ndash;20:00</span><span class="st">Core</span></div>
+<div class="gm"><span class="g">Eclectic / house</span></div>
+</div><div class="card rec h18 s5">
+<div class="ct"><span class="a">&#128992; Wade</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">18:00&ndash;19:30</span><span class="st">Crystal Garden</span></div>
+<div class="gm"><span class="g">Tech house</span></div>
+</div><div class="card none h18 s12">
+<div class="ct"><span class="a">Team Damp</span></div>
+<div class="cm"><span class="tm">18:00&ndash;19:00</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card none h18 s14">
+<div class="ct"><span class="a">NORO$T</span></div>
+<div class="cm"><span class="tm">18:00&ndash;19:00</span><span class="st">House of Fortune</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h18 s7">
+<div class="ct"><span class="a">Lunnas</span></div>
+<div class="cm"><span class="tm">18:00&ndash;19:00</span><span class="st">Melodia</span></div>
+<div class="gm"><span class="g">Melodic house</span></div>
+</div><div class="card none h18 s11">
+<div class="ct"><span class="a">LEVEL UP</span></div>
+<div class="cm"><span class="tm">18:00&ndash;19:00</span><span class="st">Planaxis</span></div>
+<div class="gm"><span class="g">Dubstep / bass</span></div>
+</div><div class="card rec h18 s8">
+<div class="ct"><span class="a">&#128992; MATTN</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">18:00&ndash;19:00</span><span class="st">Great Library</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="th h18">18:30</div><div class="card rec h18 s3">
+<div class="ct"><span class="a">&#128992; EMILIJA F2F Frederic.</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">18:30&ndash;20:00</span><span class="st">Cage</span></div>
+<div class="gm"><span class="g">Techno</span></div>
+</div><div class="card rec h18 s1">
+<div class="ct"><span class="a">&#128992; Pegassi</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">18:30&ndash;20:00</span><span class="st">Freedom</span></div>
+<div class="gm"><span class="g">Techno</span></div>
+</div><div class="card none h18 s10">
+<div class="ct"><span class="a">Rebelion</span></div>
+<div class="cm"><span class="tm">18:30&ndash;19:30</span><span class="st">Rose Garden</span></div>
+<div class="gm"><span class="g">Hardstyle / raw</span></div>
+</div><div class="th h18">18:40</div><div class="card none h18 s0">
+<div class="ct"><span class="a">B Jones</span></div>
+<div class="cm"><span class="tm">18:40&ndash;19:40</span><span class="st">Mainstage</span></div>
+<div class="gm"><span class="g">Tech house</span></div>
+</div><div class="th h19">19:00</div><div class="card rec h19 s2">
+<div class="ct"><span class="a">&#128992; Øtta</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">19:00&ndash;20:30</span><span class="st">Atmosphere</span></div>
+<div class="gm"><span class="g">Hypnotic techno</span></div>
+</div><div class="card none h19 s12">
+<div class="ct"><span class="a">Heaven Sam</span></div>
+<div class="cm"><span class="tm">19:00&ndash;20:00</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card none h19 s14">
+<div class="ct"><span class="a">Da Tweekaz</span></div>
+<div class="cm"><span class="tm">19:00&ndash;20:00</span><span class="st">House of Fortune</span></div>
+<div class="gm"><span class="g">Hardstyle</span></div>
+</div><div class="card rec h19 s7">
+<div class="ct"><span class="a">&#128992; Marta Loe b2b...</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">19:00&ndash;20:00</span><span class="st">Melodia</span></div>
+<div class="gm"><span class="g">Melodic techno</span></div>
+</div><div class="card none h19 s13">
+<div class="ct"><span class="a">Effe Serieus</span></div>
+<div class="cm"><span class="tm">19:00&ndash;20:00</span><span class="st">Moose Bar</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card none h19 s11">
+<div class="ct"><span class="a">Arcando</span></div>
+<div class="cm"><span class="tm">19:00&ndash;20:00</span><span class="st">Planaxis</span></div>
+<div class="gm"><span class="g">Bass</span></div>
+</div><div class="card none h19 s8">
+<div class="ct"><span class="a">Blasterjaxx</span></div>
+<div class="cm"><span class="tm">19:00&ndash;20:00</span><span class="st">Great Library</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="card none h19 s9">
+<div class="ct"><span class="a">Nederhand</span></div>
+<div class="cm"><span class="tm">19:00&ndash;20:00</span><span class="st">Rave Cave</span></div>
+<div class="gm"><span class="g">Tech house</span></div>
+</div><div class="th h19">19:30</div><div class="card none h19 s6">
+<div class="ct"><span class="a">MXGPU (Hybrid)</span></div>
+<div class="cm"><span class="tm">19:30&ndash;21:00</span><span class="st">Celestia</span></div>
+<div class="gm"><span class="g">Melodic techno</span></div>
+</div><div class="card rec h19 s5">
+<div class="ct"><span class="a">&#128992; DJ Gigola</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">19:30&ndash;21:00</span><span class="st">Crystal Garden</span></div>
+<div class="gm"><span class="g">Trance / techno</span></div>
+</div><div class="card none h19 s10">
+<div class="ct"><span class="a">Pat B</span></div>
+<div class="cm"><span class="tm">19:30&ndash;20:30</span><span class="st">Rose Garden</span></div>
+<div class="gm"><span class="g">Hardstyle</span></div>
+</div><div class="th h19">19:40</div><div class="card none h19 s0">
+<div class="ct"><span class="a">SURPRISE</span></div>
+<div class="cm"><span class="tm">19:40&ndash;20:40</span><span class="st">Mainstage</span></div>
+<div class="gm"><span class="g">?</span></div>
+</div><div class="th h20">20:00</div><div class="card rec h20 s3">
+<div class="ct"><span class="a">&#128992; Serafina F2F zwilling</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">20:00&ndash;21:30</span><span class="st">Cage</span></div>
+<div class="gm"><span class="g">Techno</span></div>
+</div><div class="card rec h20 s4">
+<div class="ct"><span class="a">&#128992; Avalon Emerson b2b Ben UFO</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">20:00&ndash;22:00</span><span class="st">Core</span></div>
+<div class="gm"><span class="g">House / eclectic</span></div>
+</div><div class="card none h20 s12">
+<div class="ct"><span class="a">Karyo</span></div>
+<div class="cm"><span class="tm">20:00&ndash;21:00</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card none h20 s1">
+<div class="ct"><span class="a">Chase &amp; Status (DJ set)</span></div>
+<div class="cm"><span class="tm">20:00&ndash;21:00</span><span class="st">Freedom</span></div>
+<div class="gm"><span class="g">Drum &amp; bass</span></div>
+</div><div class="card none h20 s14">
+<div class="ct"><span class="a">More to be an...</span></div>
+<div class="cm"><span class="tm">20:00&ndash;21:00</span><span class="st">House of Fortune</span></div>
+
+</div><div class="card none h20 s7">
+<div class="ct"><span class="a">Delafino</span></div>
+<div class="cm"><span class="tm">20:00&ndash;21:00</span><span class="st">Melodia</span></div>
+<div class="gm"><span class="g">Melodic house</span></div>
+</div><div class="card none h20 s13">
+<div class="ct"><span class="a">Jerrooo</span></div>
+<div class="cm"><span class="tm">20:00&ndash;00:00</span><span class="st">Moose Bar</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card none h20 s11">
+<div class="ct"><span class="a">Malaa's Alter...</span></div>
+<div class="cm"><span class="tm">20:00&ndash;21:00</span><span class="st">Planaxis</span></div>
+<div class="gm"><span class="g">Bass house</span></div>
+</div><div class="card rec h20 s8">
+<div class="ct"><span class="a">&#128992; Gryffin</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">20:00&ndash;21:00</span><span class="st">Great Library</span></div>
+<div class="gm"><span class="g">Melodic EDM</span></div>
+</div><div class="card none h20 s9">
+<div class="ct"><span class="a">Foxed Up</span></div>
+<div class="cm"><span class="tm">20:00&ndash;21:00</span><span class="st">Rave Cave</span></div>
+<div class="gm"><span class="g">Tech house</span></div>
+</div><div class="th h20">20:30</div><div class="card must h20 s2">
+<div class="ct"><span class="a">&#128308; Anetha</span><span class="bdg m">MUST</span></div>
+<div class="cm"><span class="tm">20:30&ndash;22:30</span><span class="st">Atmosphere</span></div>
+<div class="gm"><span class="g">Hard / hypnotic techno</span></div>
+</div><div class="card none h20 s10">
+<div class="ct"><span class="a">Sub Zero Project</span></div>
+<div class="cm"><span class="tm">20:30&ndash;22:00</span><span class="st">Rose Garden</span></div>
+<div class="gm"><span class="g">Hardstyle</span></div>
+</div><div class="th h20">20:40</div><div class="card must h20 s0">
+<div class="ct"><span class="a">&#128308; John Summit</span><span class="bdg m">MUST</span></div>
+<div class="cm"><span class="tm">20:40&ndash;21:40</span><span class="st">Mainstage</span></div>
+<div class="gm"><span class="g">Tech house</span></div>
+</div><div class="th h21">21:00</div><div class="card rec h21 s6">
+<div class="ct"><span class="a">&#128992; Nico Morano b2b Xinobi</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">21:00&ndash;22:30</span><span class="st">Celestia</span></div>
+<div class="gm"><span class="g">Melodic / deep house</span></div>
+</div><div class="card must h21 s5">
+<div class="ct"><span class="a">&#128308; Oscar and the...</span><span class="bdg m">MUST</span></div>
+<div class="cm"><span class="tm">21:00&ndash;22:00</span><span class="st">Crystal Garden</span></div>
+<div class="gm"><span class="g">Electronic / pop</span></div>
+</div><div class="card none h21 s12">
+<div class="ct"><span class="a">Tribal Kush</span></div>
+<div class="cm"><span class="tm">21:00&ndash;22:00</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card none h21 s1">
+<div class="ct"><span class="a">ALOK: Rave T...</span></div>
+<div class="cm"><span class="tm">21:00&ndash;22:00</span><span class="st">Freedom</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="card none h21 s14">
+<div class="ct"><span class="a">Blasterjaxx</span></div>
+<div class="cm"><span class="tm">21:00&ndash;22:00</span><span class="st">House of Fortune</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="card none h21 s7">
+<div class="ct"><span class="a">Dave Hang</span></div>
+<div class="cm"><span class="tm">21:00&ndash;22:00</span><span class="st">Melodia</span></div>
+<div class="gm"><span class="g">Melodic house</span></div>
+</div><div class="card none h21 s11">
+<div class="ct"><span class="a">Liquid Stranger</span></div>
+<div class="cm"><span class="tm">21:00&ndash;22:00</span><span class="st">Planaxis</span></div>
+<div class="gm"><span class="g">Dubstep / bass</span></div>
+</div><div class="card none h21 s8">
+<div class="ct"><span class="a">Dimitri Vegas...</span></div>
+<div class="cm"><span class="tm">21:00&ndash;22:00</span><span class="st">Great Library</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="card none h21 s9">
+<div class="ct"><span class="a">Mitched</span></div>
+<div class="cm"><span class="tm">21:00&ndash;22:00</span><span class="st">Rave Cave</span></div>
+<div class="gm"><span class="g">Tech house</span></div>
+</div><div class="th h21">21:30</div><div class="card rec h21 s3">
+<div class="ct"><span class="a">&#128992; Adrián Mills F2F SISU</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">21:30&ndash;23:00</span><span class="st">Cage</span></div>
+<div class="gm"><span class="g">Techno</span></div>
+</div><div class="th h21">21:45</div><div class="card must h21 s0">
+<div class="ct"><span class="a">&#128308; Alesso</span><span class="bdg m">MUST</span></div>
+<div class="cm"><span class="tm">21:45&ndash;22:45</span><span class="st">Mainstage</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="th h22">22:00</div><div class="card rec h22 s4">
+<div class="ct"><span class="a">&#128992; Job Jobse</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">22:00&ndash;23:50</span><span class="st">Core</span></div>
+<div class="gm"><span class="g">House / melodic techno</span></div>
+</div><div class="card rec h22 s5">
+<div class="ct"><span class="a">&#128992; DJ Tennis b2b Vintage Culture</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">22:00&ndash;23:30</span><span class="st">Crystal Garden</span></div>
+<div class="gm"><span class="g">Melodic / house</span></div>
+</div><div class="card none h22 s12">
+<div class="ct"><span class="a">Sleazy Stereo</span></div>
+<div class="cm"><span class="tm">22:00&ndash;23:00</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card rec h22 s1">
+<div class="ct"><span class="a">&#128992; I Hate Models</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">22:00&ndash;23:30</span><span class="st">Freedom</span></div>
+<div class="gm"><span class="g">Hard / dark techno</span></div>
+</div><div class="card none h22 s7">
+<div class="ct"><span class="a">Felix Da Funk</span></div>
+<div class="cm"><span class="tm">22:00&ndash;23:00</span><span class="st">Melodia</span></div>
+<div class="gm"><span class="g">House</span></div>
+</div><div class="card none h22 s11">
+<div class="ct"><span class="a">Seven Lions</span></div>
+<div class="cm"><span class="tm">22:00&ndash;23:00</span><span class="st">Planaxis</span></div>
+<div class="gm"><span class="g">Melodic dubstep</span></div>
+</div><div class="card rec h22 s8">
+<div class="ct"><span class="a">&#128992; Afrojack</span><span class="bdg t">TIP</span></div>
+<div class="cm"><span class="tm">22:00&ndash;23:00</span><span class="st">Great Library</span></div>
+<div class="gm"><span class="g">EDM</span></div>
+</div><div class="card none h22 s9">
+<div class="ct"><span class="a">Coco Bevan</span></div>
+<div class="cm"><span class="tm">22:00&ndash;23:00</span><span class="st">Rave Cave</span></div>
+<div class="gm"><span class="g">Tech house</span></div>
+</div><div class="card none h22 s10">
+<div class="ct"><span class="a">The Saints</span></div>
+<div class="cm"><span class="tm">22:00&ndash;23:00</span><span class="st">Rose Garden</span></div>
+<div class="gm"><span class="g">Hardstyle</span></div>
+</div><div class="th h22">22:30</div><div class="card must h22 s2">
+<div class="ct"><span class="a">&#128308; Amelie Lens</span><span class="bdg m">MUST</span></div>
+<div class="cm"><span class="tm">22:30&ndash;23:55</span><span class="st">Atmosphere</span></div>
+<div class="gm"><span class="g">Dark techno</span></div>
+</div><div class="th h22">22:50</div><div class="card must h22 s0">
+<div class="ct"><span class="a">&#128308; Calvin Harris</span><span class="bdg m">MUST</span></div>
+<div class="cm"><span class="tm">22:50&ndash;23:50</span><span class="st">Mainstage</span></div>
+<div class="gm"><span class="g">EDM / pop</span></div>
+</div><div class="th h23">23:00</div><div class="card none h23 s12">
+<div class="ct"><span class="a">Jeronimø</span></div>
+<div class="cm"><span class="tm">23:00&ndash;00:00</span><span class="st">Elixir</span></div>
+<div class="gm"><span class="g">Eclectic</span></div>
+</div><div class="card none h23 s11">
+<div class="ct"><span class="a">Subtronics</span></div>
+<div class="cm"><span class="tm">23:00&ndash;00:00</span><span class="st">Planaxis</span></div>
+<div class="gm"><span class="g">Dubstep</span></div>
+</div><div class="card none h23 s8">
+<div class="ct"><span class="a">Vini Vici</span></div>
+<div class="cm"><span class="tm">23:00&ndash;23:55</span><span class="st">Great Library</span></div>
+<div class="gm"><span class="g">Psytrance</span></div>
+</div><div class="card none h23 s9">
+<div class="ct"><span class="a">Godtripper</span></div>
+<div class="cm"><span class="tm">23:00&ndash;23:50</span><span class="st">Rave Cave</span></div>
+<div class="gm"><span class="g">Tech house</span></div>
+</div></div>
+</body>
+</html>

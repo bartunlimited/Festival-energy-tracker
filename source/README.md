@@ -8,7 +8,9 @@ Dit bestand bevat de volledige W1-timetable (3 dagen × 16 stages × 330+ acts,
 gebouwd op basis van officiële screenshots — NIET her-scrapen van fan-sites)
 plus zijn persoonlijke picks (must/tip-markeringen).
 
-Zodra het bestand hier staat:
+✅ Gedaan — de extractie is uitgevoerd (368 sets, 19 musts, 101 tips, 15 stages).
+
+Het oorspronkelijke stappenplan:
 
 1. Parse het naar `TIMETABLE`-records: `{day, stage, artist, start, end, pick, genre}`
    — picks 1:1 overnemen.
