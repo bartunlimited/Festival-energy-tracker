@@ -39,6 +39,7 @@ h1 { font-size:20px; font-weight:800; padding:10px 14px 2px; color:#aaa; letter-
 }
 .chip.on { background:#fff; color:#000; border-color:#fff; }
 .chip.toggle.on { background:#ffd60a; border-color:#ffd60a; }
+a.chip { text-decoration:none; display:inline-block; }
 
 /* banners */
 .banner { margin:8px 14px; border-radius:12px; padding:14px; font-size:20px; }
@@ -483,7 +484,7 @@ const TIMETABLE = [
 // cover: indoor | covered | open · size XS-XL · dark: enclosed/dark inside
 // All cover flags verified by Bart for the 2026 layout (2026-07-04).
 const STAGES = {
-  "mainstage":        { name:"Mainstage",        cover:"open",    size:"XL", dark:false, verified:true, fit:0.8 },  // TML: topgeluid, altijd wel een dansplek (Bart)
+  "mainstage":        { name:"Mainstage",        cover:"open",    size:"XL", dark:false, verified:true, fit:0.8, lightshow:true },  // TML: topgeluid, altijd wel een dansplek (Bart)
   "freedom":          { name:"Freedom",          cover:"indoor",  size:"L",  dark:true,  verified:true },  // indoor hall, LED ceiling
   "atmosphere":       { name:"Atmosphere",       cover:"covered", size:"M",  dark:true,  verified:true },  // tent
   "cage":             { name:"Cage",             cover:"indoor",  size:"M",  dark:true,  verified:true },  // binnen
@@ -491,7 +492,7 @@ const STAGES = {
   "crystal-garden":   { name:"Crystal Garden",   cover:"covered", size:"M",  dark:false, verified:true },  // overdekt
   "celestia":         { name:"Celestia",         cover:"open",    size:"M",  dark:false, verified:true },  // buiten
   "melodia":          { name:"Melodia",          cover:"open",    size:"XS", dark:false, verified:true },  // buiten, erg klein
-  "great-library":    { name:"Great Library",    cover:"open",    size:"S",  dark:false, verified:true },  // buiten
+  "great-library":    { name:"Great Library",    cover:"open",    size:"S",  dark:false, verified:true, lightshow:true },  // buiten, lichtshow na donker
   "rave-cave":        { name:"Rave Cave",        cover:"covered", size:"S",  dark:true,  verified:true },
   "rose-garden":      { name:"Rose Garden",      cover:"open",    size:"S",  dark:false, verified:true },  // buiten
   "planaxis":         { name:"Planaxis",         cover:"open",    size:"M",  dark:false, verified:true },  // buiten
@@ -869,8 +870,9 @@ const CONFIG = {
   slotCurve: [ [12,15,0.35],[15,17,0.50],[17,19,0.65],[19,21,0.80],[21,24,1.00],[24,25,0.90],[25,30,0.85],[6,12,0.30] ],
   darkSlotFloor: 0.7,          // dark/indoor stages: S = max(S, floor)
   rain: { threshMm:0.3, heavyMm:2.0, lookaheadMin:60, soonMin:45, moveByBufferMin:15 },
-  cold: { tempC:14, fromHour:19, penalty:0.10 },   // open stages, cold evening
+  cold: { tempC:19, fromHour:19, penalty:0.10 },   // open stages, cold evening (<19° per Bart)
   sun:  { tempC:20, openBonus:1.05, melodicOpenBonus:1.10 },  // mooi weer: buiten leeft, zeker melodic/house (Bart)
+  lightshow: { fromHour:22.5, bonus:0.15, closingBonus:0.05 }, // na donker: lichtshow-stages aantrekkelijker, closing extra (Bart)
   weather: {
     lat:51.087, lon:4.379, tz:"Europe/Brussels",
     pollMs: 10*60*1000,
@@ -917,6 +919,17 @@ function stageFit(stage){
   if(covered) return 0.85;
   if(stage.size==="XL" || stage.size==="L") return 0.6;
   return 0.75;
+}
+
+// lightshow stages (Mainstage, Great Library) get extra pull after dark;
+// the stage's closing set even more ("zeker closing bij Main" — Bart)
+function isClosing(set){
+  const s0 = toMin(set.start);
+  return !TIMETABLE.some(o => o!==set && o.day===set.day && o.stage===set.stage && toMin(o.start)>s0);
+}
+function lightBonus(stage, set, fh){
+  if(!stage || !stage.lightshow || fh < CONFIG.lightshow.fromHour) return 0;
+  return CONFIG.lightshow.bonus + (isClosing(set) ? CONFIG.lightshow.closingBonus : 0);
 }
 
 // crude genre family for competition matching
@@ -972,7 +985,7 @@ function scoreSet(set, t, wx, live){
   const A = (ARTISTS[set.artist]?.energy ?? 50)/100;
   const fh = live && t ? festHour(t) : (toMin(set.start)+toMin(set.end))/2/60;
   const S = slotValue(stage, fh);
-  const G = stageFit(stage);
+  const G = Math.min(1, stageFit(stage) + lightBonus(stage, set, fh));
   const C = competition(set);
   const w = CONFIG.weights;
   const base = clamp((w.artist*A + w.slot*S + w.stage*G + w.competition*C)*100, 0, 100);
@@ -1155,7 +1168,18 @@ function renderNu(){
   const t = now();
   const d = festivalDay(t);
   if(!d){
-    el("view-nu").innerHTML = `<div class="msg">Festival is nu niet bezig.<br>Vr 17 juli vanaf 12:00.<br><br>Test met <b>?now=2026-07-17T22:00</b> en <b>?rain=demo</b>.</div>`;
+    const start = new Date(DAY_DATES[1]+"T12:00:00");
+    const days = Math.max(0, Math.ceil((start - t)/864e5));
+    const countdown = t < start
+      ? `Nog <b>${days} ${days===1?"dag":"dagen"}</b> tot Tomorrowland W1.<br>Vr 17 juli vanaf 12:00.`
+      : `Weekend 1 zit erop. 🖤`;
+    el("view-nu").innerHTML = `<div class="msg">${countdown}<br><br>Alvast proefdraaien:</div>
+      <div class="chips">
+        <a class="chip" href="?now=2026-07-17T22:00">▶︎ Vr 22:00</a>
+        <a class="chip" href="?now=2026-07-18T23:00">▶︎ Za 23:00</a>
+        <a class="chip" href="?now=2026-07-17T21:30&rain=demo">🌧 Regen-demo</a>
+        <a class="chip" href="index.html">↺ Live-klok</a>
+      </div>`;
     return;
   }
   const byStage = {};
@@ -1283,6 +1307,9 @@ function runTests(){
   ok(`open stage collapses in rain`, scoreSet(guetta, t2, {minutely:[],hourly:[]}, true) > scoreSet(guetta, t2, rainWx2, true));
   ok(`toMin 00:30 => 1470`, toMin("00:30")===1470);
   ok(`Mainstage fit-override 0.8`, stageFit(STAGES["mainstage"])===0.8);
+  const closing = TIMETABLE.filter(s=>s.day===2 && s.stage==="mainstage").sort((a,b)=>toMin(b.start)-toMin(a.start))[0];
+  ok(`lichtshow: closing Mainstage +0.20 na donker (${closing.artist})`, lightBonus(STAGES["mainstage"], closing, 23.5)===0.20 && lightBonus(STAGES["mainstage"], closing, 18)===0);
+  ok(`koudegrens 19°`, CONFIG.cold.tempC===19);
   const sunSet = TIMETABLE.find(s=>genreFam(s.genre)==="melodic" && STAGES[s.stage].cover==="open");
   const tSun = setDate(sunSet,"start");
   const sunnyWx = { minutely:[], hourly:[{t:tSun, temp:24, prob:0, mm:0}], ts:new Date(), stale:false };
