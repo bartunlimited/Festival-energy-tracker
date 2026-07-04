@@ -23,10 +23,12 @@ Boom). Reageert live op regen: aanbeveling voor overdekte/indoor stages
 ✅ Echte W1-timetable geladen: **368 sets, 3 dagen, 15 stages, 19 musts + 101 tips**,
 1:1 geëxtraheerd uit `source/tomorrowland-final2.html` (Barts geverifieerde tool).
 
+✅ Alle 15 stage-classificaties (binnen/overdekt/buiten) door Bart geverifieerd
+voor de 2026-layout.
+
 Nog te doen door Bart:
-- **Stage-verificatie**: stages met `verified:false` (het `?`-badge in de UI) —
-  klopt indoor/overdekt/open voor de 2026-layout?
 - **Energie-kalibratie**: corrigeer scores in `docs/artist-energy-review.md`.
+- **Afgekapte artiestennamen** (27 stuks, uit het bronbestand) aanvullen.
 
 ## Architectuur
 
