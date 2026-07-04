@@ -1001,6 +1001,13 @@ function scoreSet(set, t, wx, live){
   return Math.round(clamp(base*M, 0, 100));
 }
 
+// absolute Date at the midpoint of a set (weather is evaluated at set time)
+function setMid(set){
+  const base = new Date(DAY_DATES[set.day]+"T00:00:00");
+  return new Date(base.getTime() + (toMin(set.start)+toMin(set.end))/2*60000);
+}
+function hasWx(){ return wx.minutely.length>0 || wx.hourly.length>0; }
+
 function scoreBlocks(sc){
   const f = Math.round(sc/20);
   return "▮".repeat(f) + "▯".repeat(5-f);
@@ -1241,7 +1248,7 @@ function renderNu(){
     }else{
       body = `<div class="meta">— geen set bezig —</div>`;
     }
-    const nxt = r.next ? `<div class="next">straks ${r.next.start}: ${esc(r.next.artist)}${r.next.pick?" ★":""}</div>` : "";
+    const nxt = r.next ? `<div class="next">straks ${r.next.start}: ${esc(r.next.artist)}${r.next.pick?" ★":""} · ${hasWx() ? scoreSet(r.next, setDate(r.next,"start"), wx, true) : scoreSet(r.next, null, wx, false)}</div>` : "";
     html += `<div class="nucard ${r.current?.pick||""}"><div class="stage">${esc(stageName(r.slug)).toUpperCase()}${coverBadge(st)}</div>${body}${nxt}</div>`;
   }
   el("view-nu").innerHTML = html || `<div class="msg">Geen sets vandaag.</div>`;
@@ -1267,7 +1274,7 @@ function renderSchema(){
     .filter(s=>filt.stage==="all" || s.stage===filt.stage)
     .filter(s=>toMin(s.start) >= filt.fromHour*60)
     .filter(s=>!filt.picksOnly || s.pick)
-    .map(s=>({set:s, score:scoreSet(s, null, wx, false)}))
+    .map(s=>({set:s, score: hasWx() ? scoreSet(s, setMid(s), wx, true) : scoreSet(s, null, wx, false)}))
     .filter(r=>!filt.minEnergy || r.score>=CONFIG.energyChipMin)
     .sort((a,b)=>toMin(a.set.start)-toMin(b.set.start));
 
@@ -1360,6 +1367,12 @@ function runTests(){
   const todayHr = new Date(rt.getFullYear(), rt.getMonth(), rt.getDate(), 21, 0);
   const demoWx = { minutely:[{t:new Date("2026-07-17T21:30:00"), mm:1.2}], hourly:[{t:todayHr, temp:23, prob:0, mm:0, cloud:20}], ts:new Date(), stale:false };
   ok(`regen-demo: temp/zon van vandaag blijven beschikbaar`, tempAt(demoT, demoWx)===23 && cloudAt(demoT, demoWx)===20);
+  const openSet22 = TIMETABLE.find(s=>s.day===1 && STAGES[s.stage].cover==="open" && toMin(s.start)===22*60);
+  if(openSet22){
+    const mid = setMid(openSet22);
+    const rainAtSet = { minutely:[{t:mid, mm:1.0}], hourly:[], ts:new Date(), stale:false };
+    ok(`schema-score daalt bij regen op settijd (${openSet22.artist})`, scoreSet(openSet22, mid, rainAtSet, true) < scoreSet(openSet22, null, wx, false));
+  }
   const sunSet = TIMETABLE.find(s=>genreFam(s.genre)==="melodic" && STAGES[s.stage].cover==="open");
   const tSun = setDate(sunSet,"start");
   const sunnyWx = { minutely:[], hourly:[{t:tSun, temp:24, prob:0, mm:0}], ts:new Date(), stale:false };
