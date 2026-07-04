@@ -871,12 +871,13 @@ const CONFIG = {
   darkSlotFloor: 0.7,          // dark/indoor stages: S = max(S, floor)
   rain: { threshMm:0.3, heavyMm:2.0, lookaheadMin:60, soonMin:45, moveByBufferMin:15 },
   cold: { tempC:19, fromHour:19, penalty:0.10 },   // open stages, cold evening (<19° per Bart)
-  sun:  { tempC:20, openBonus:1.05, melodicOpenBonus:1.10 },  // mooi weer: buiten leeft, zeker melodic/house (Bart)
+  sun:  { tempC:20, maxCloud:60, openBonus:1.05, melodicOpenBonus:1.10 },  // mooi weer (warm + zon): buiten leeft, zeker melodic/house (Bart)
+  heat: { tempC:28, openPenalty:0.85, shadeBonus:1.08 },  // te warm: schaduw onder afdak (bv. Crystal Garden) wint van open weide (Bart)
   lightshow: { fromHour:22.5, bonus:0.15, closingBonus:0.05 }, // na donker: lichtshow-stages aantrekkelijker, closing extra (Bart)
   weather: {
     lat:51.087, lon:4.379, tz:"Europe/Brussels",
     pollMs: 10*60*1000,
-    url: "https://api.open-meteo.com/v1/forecast?latitude=51.087&longitude=4.379&minutely_15=precipitation&hourly=temperature_2m,precipitation_probability,precipitation&forecast_days=2&timezone=Europe%2FBrussels",
+    url: "https://api.open-meteo.com/v1/forecast?latitude=51.087&longitude=4.379&minutely_15=precipitation&hourly=temperature_2m,precipitation_probability,precipitation,cloud_cover&forecast_days=2&timezone=Europe%2FBrussels",
   },
   energyChipMin: 70,
 };
@@ -971,10 +972,17 @@ function weatherMult(stage, t, wx, set){
   }
   const temp = tempAt(t, wx);
   if(temp!=null && temp<CONFIG.cold.tempC && festHour(t)>=CONFIG.cold.fromHour && stage.cover==="open") m -= CONFIG.cold.penalty;
-  // sunny & warm: open stages come alive, melodic/house floors especially
-  if(!r.rainingOrSoon && temp!=null && temp>=CONFIG.sun.tempC && stage.cover==="open"){
-    const fam = set ? genreFam(set.genre) : "";
-    m *= (fam==="melodic" || fam==="house" || fam==="down") ? CONFIG.sun.melodicOpenBonus : CONFIG.sun.openBonus;
+  if(!r.rainingOrSoon && temp!=null && temp>=CONFIG.heat.tempC){
+    // too hot: shade under a roof (e.g. Crystal Garden) beats the open field
+    if(stage.cover==="covered") m *= CONFIG.heat.shadeBonus;
+    else if(stage.cover==="open") m *= CONFIG.heat.openPenalty;
+  } else if(!r.rainingOrSoon && temp!=null && temp>=CONFIG.sun.tempC && stage.cover==="open"){
+    // pleasantly warm AND actually sunny (cloud cover below threshold; unknown => assume ok)
+    const cloud = cloudAt(t, wx);
+    if(cloud==null || cloud < CONFIG.sun.maxCloud){
+      const fam = set ? genreFam(set.genre) : "";
+      m *= (fam==="melodic" || fam==="house" || fam==="down") ? CONFIG.sun.melodicOpenBonus : CONFIG.sun.openBonus;
+    }
   }
   return Math.max(0, m);
 }
@@ -1022,7 +1030,8 @@ function parseWeather(json){
   if(json.minutely_15) json.minutely_15.time.forEach((tm,i)=>minutely.push({ t:new Date(tm), mm:json.minutely_15.precipitation[i] ?? 0 }));
   if(json.hourly) json.hourly.time.forEach((tm,i)=>hourly.push({
     t:new Date(tm), temp:json.hourly.temperature_2m[i],
-    prob:json.hourly.precipitation_probability[i], mm:json.hourly.precipitation[i] ?? 0 }));
+    prob:json.hourly.precipitation_probability[i], mm:json.hourly.precipitation[i] ?? 0,
+    cloud:json.hourly.cloud_cover ? json.hourly.cloud_cover[i] : null }));
   return {minutely, hourly};
 }
 
@@ -1088,6 +1097,11 @@ function tempAt(t, w){
   w = w||wx;
   const s = slotAt(w.hourly, new Date(t.getTime() + wxTimeOffset(t, w)));
   return s ? s.temp : null;
+}
+function cloudAt(t, w){
+  w = w||wx;
+  const s = slotAt(w.hourly, new Date(t.getTime() + wxTimeOffset(t, w)));
+  return s && s.cloud!=null ? s.cloud : null;
 }
 
 function rainStatus(t, w){
@@ -1290,7 +1304,8 @@ function renderWeer(){
   const hrs = wx.hourly.filter(s=>{ const dh=(s.t-t)/3600e3; return dh>-1 && dh<=18; });
   if(hrs.length){
     for(const s of hrs){
-      html += `<div class="wrow"><span class="t">${fmtHM(s.t)}</span><span>${Math.round(s.temp)}°</span><span class="mm">${s.prob!=null?s.prob+"%":""} ${s.mm>0?s.mm.toFixed(1)+" mm":""}</span></div>`;
+      const sky = s.mm>=CONFIG.rain.threshMm ? "🌧" : s.cloud==null ? "" : s.cloud<25 ? "☀️" : s.cloud<60 ? "⛅" : "☁️";
+      html += `<div class="wrow"><span class="t">${fmtHM(s.t)}</span><span>${sky} ${Math.round(s.temp)}°</span><span class="mm">${s.prob!=null?s.prob+"%":""} ${s.mm>0?s.mm.toFixed(1)+" mm":""}</span></div>`;
     }
   } else html += `<div class="msg">Geen uurdata beschikbaar.</div>`;
   el("view-weer").innerHTML = html;
@@ -1343,6 +1358,15 @@ function runTests(){
   const sunnyWx = { minutely:[], hourly:[{t:tSun, temp:24, prob:0, mm:0}], ts:new Date(), stale:false };
   const coolWx  = { minutely:[], hourly:[{t:tSun, temp:16, prob:0, mm:0}], ts:new Date(), stale:false };
   ok(`zon-bonus: open melodic set (${sunSet.artist}) stijgt bij 24° vs 16°`, scoreSet(sunSet, tSun, sunnyWx, true) > scoreSet(sunSet, tSun, coolWx, true));
+  const cloudyWx = { minutely:[], hourly:[{t:tSun, temp:24, prob:0, mm:0, cloud:90}], ts:new Date(), stale:false };
+  ok(`bewolkt (90%) => geen zon-bonus`, scoreSet(sunSet, tSun, cloudyWx, true) < scoreSet(sunSet, tSun, sunnyWx, true));
+  const hotWx = { minutely:[], hourly:[{t:tSun, temp:31, prob:0, mm:0, cloud:10}], ts:new Date(), stale:false };
+  ok(`hitte (31°): open set zakt onder mild (24°)`, scoreSet(sunSet, tSun, hotWx, true) < scoreSet(sunSet, tSun, sunnyWx, true));
+  const shadeSet = TIMETABLE.find(s=>s.stage==="crystal-garden");
+  const tSh = setDate(shadeSet,"start");
+  const hotSh  = { minutely:[], hourly:[{t:tSh, temp:31, prob:0, mm:0, cloud:10}], ts:new Date(), stale:false };
+  const mildSh = { minutely:[], hourly:[{t:tSh, temp:24, prob:0, mm:0, cloud:10}], ts:new Date(), stale:false };
+  ok(`hitte: Crystal Garden (afdak/schaduw) stijgt juist`, scoreSet(shadeSet, tSh, hotSh, true) >= scoreSet(shadeSet, tSh, mildSh, true));
   console.log("TML engine tests:\n"+results.join("\n"));
   if(results.some(r=>r.startsWith("❌"))) alert("Engine tests FAILED — zie console");
 }
