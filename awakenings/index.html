@@ -164,18 +164,18 @@ const TIMETABLE = [
 ];
 
 // cover: indoor | covered | open · size XS-XL · dark: enclosed/dark inside
-// Awakenings Hilvarenbeek areas — cover/dark are GUESSES (verified:false,
-// "?"-badge in UI) until Bart confirms the 2026 layout.
+// Awakenings areas — cover flags verified by Bart (2026-07-10):
+// Y = tent, C = dak (open zijkanten), rest = buiten.
 const STAGES = {
-  "area-v": { name:"Area V", cover:"open",    size:"XL", dark:false, verified:false, fit:0.8, lightshow:true },  // main
-  "area-w": { name:"Area W", cover:"open",    size:"L",  dark:false, verified:false, lightshow:true },
-  "area-x": { name:"Area X", cover:"covered", size:"L",  dark:true,  verified:false },  // tent?
-  "area-y": { name:"Area Y", cover:"covered", size:"M",  dark:true,  verified:false },  // tent?
-  "area-u": { name:"Area U", cover:"covered", size:"M",  dark:true,  verified:false },  // tent?
-  "area-c": { name:"Area C", cover:"open",    size:"M",  dark:false, verified:false },
-  "area-d": { name:"Area D", cover:"covered", size:"M",  dark:true,  verified:false },  // tent?
-  "area-h": { name:"Area H", cover:"covered", size:"S",  dark:false, verified:false },
-  "area-l": { name:"Area L", cover:"covered", size:"S",  dark:true,  verified:false },  // tent?
+  "area-v": { name:"Area V", cover:"open",    size:"XL", dark:false, verified:true, fit:0.8, lightshow:true },  // main
+  "area-w": { name:"Area W", cover:"open",    size:"L",  dark:false, verified:true, lightshow:true },
+  "area-x": { name:"Area X", cover:"open",    size:"L",  dark:false, verified:true },
+  "area-y": { name:"Area Y", cover:"covered", size:"M",  dark:true,  verified:true },  // tent
+  "area-u": { name:"Area U", cover:"open",    size:"M",  dark:false, verified:true },
+  "area-c": { name:"Area C", cover:"covered", size:"M",  dark:false, verified:true },  // dak
+  "area-d": { name:"Area D", cover:"open",    size:"M",  dark:false, verified:true },
+  "area-h": { name:"Area H", cover:"open",    size:"S",  dark:false, verified:true },
+  "area-l": { name:"Area L", cover:"open",    size:"S",  dark:false, verified:true },
 };
 
 // Heuristic energy 0-100 (genre + set type + familiarity + reputation).
@@ -733,10 +733,10 @@ function runTests(){
   const ihm = scoreSet(get("I Hate Models"), null, wx, false);
   const sama = scoreSet(get("SAMA"), null, wx, false);
   ok(`avond-tent I Hate Models [${ihm}] > 13:00 open main SAMA [${sama}]`, ihm>sama);
-  const lens = get("Amelie Lens");
+  const ihmSet = get("I Hate Models");
   const tL = new Date("2026-07-12T22:00:00");
   const rainWx = { minutely:[{t:tL, mm:1.0}], hourly:[], ts:new Date(), stale:false };
-  ok(`tent stijgt bij regen`, scoreSet(lens, tL, rainWx, true) > scoreSet(lens, tL, {minutely:[],hourly:[]}, true));
+  ok(`tent (Y) stijgt bij regen`, scoreSet(ihmSet, tL, rainWx, true) > scoreSet(ihmSet, tL, {minutely:[],hourly:[]}, true));
   const rz = get("Reinier Zonneveld (live)");
   ok(`open main stort in bij regen`, scoreSet(rz, tL, {minutely:[],hourly:[]}, true) > scoreSet(rz, tL, rainWx, true));
   const cl = get("Chris Liebing & Luke Slater");
