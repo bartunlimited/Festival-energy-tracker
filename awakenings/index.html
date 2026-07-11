@@ -112,122 +112,94 @@ const DAY_LABELS = { 1:"Zo 12" };
 // Schema per set: {day, stage, artist, start, end, pick:"must"|"rec"|"", genre}
 // Times "HH:MM"; hours < 06:00 belong to the previous festival day.
 const TIMETABLE = [
-  {day:1, stage:"area-v", artist:"SAMA", start:"13:00", end:"14:30", pick:"", genre:"Techno"},
-  {day:1, stage:"area-v", artist:"Bart Skils", start:"14:30", end:"16:15", pick:"", genre:"Techno"},
-  {day:1, stage:"area-v", artist:"Indira Paganotto", start:"16:15", end:"17:45", pick:"rec", genre:"Psy / hard techno"},
-  {day:1, stage:"area-v", artist:"Chris Liebing & Luke Slater", start:"17:45", end:"19:45", pick:"rec", genre:"Hard / dark techno"},
-  {day:1, stage:"area-v", artist:"Joseph Capriati", start:"19:45", end:"21:30", pick:"rec", genre:"Techno"},
-  {day:1, stage:"area-v", artist:"Reinier Zonneveld (live)", start:"21:30", end:"23:30", pick:"must", genre:"Acid / live techno"},
-  {day:1, stage:"area-w", artist:"Nicky Elisabeth", start:"13:00", end:"15:00", pick:"", genre:"Melodic house"},
-  {day:1, stage:"area-w", artist:"Kevin de Vries", start:"15:00", end:"17:00", pick:"", genre:"Melodic techno"},
-  {day:1, stage:"area-w", artist:"Anfisa Letyago", start:"17:00", end:"18:30", pick:"", genre:"Techno"},
-  {day:1, stage:"area-w", artist:"Stephan Bodzin (live)", start:"18:30", end:"20:00", pick:"", genre:"Melodic techno (live)"},
-  {day:1, stage:"area-w", artist:"Adriatique", start:"20:00", end:"21:30", pick:"", genre:"Melodic techno"},
-  {day:1, stage:"area-w", artist:"Tale Of Us", start:"21:30", end:"23:30", pick:"rec", genre:"Melodic techno"},
-  {day:1, stage:"area-x", artist:"Abstract Division", start:"13:00", end:"14:30", pick:"", genre:"Techno"},
-  {day:1, stage:"area-x", artist:"Shinedoe & Hemka", start:"14:30", end:"16:00", pick:"", genre:"Techno"},
-  {day:1, stage:"area-x", artist:"ROD", start:"16:00", end:"17:45", pick:"", genre:"Techno"},
-  {day:1, stage:"area-x", artist:"Freddy K", start:"17:45", end:"19:30", pick:"", genre:"Hard techno"},
-  {day:1, stage:"area-x", artist:"Speedy J", start:"19:30", end:"21:00", pick:"rec", genre:"Techno"},
-  {day:1, stage:"area-x", artist:"Amelie Lens", start:"21:00", end:"23:00", pick:"must", genre:"Dark techno"},
-  {day:1, stage:"area-y", artist:"Lee Ann Roberts", start:"13:00", end:"14:30", pick:"", genre:"Hard techno"},
-  {day:1, stage:"area-y", artist:"Charlie Sparks", start:"14:30", end:"16:30", pick:"rec", genre:"Hard techno"},
-  {day:1, stage:"area-y", artist:"Cera Khin", start:"16:30", end:"18:00", pick:"", genre:"Hard techno"},
-  {day:1, stage:"area-y", artist:"Rebekah", start:"18:00", end:"19:30", pick:"", genre:"Hard / industrial techno"},
-  {day:1, stage:"area-y", artist:"Paula Temple & SNTS", start:"19:30", end:"21:15", pick:"rec", genre:"Industrial techno"},
-  {day:1, stage:"area-y", artist:"I Hate Models", start:"21:15", end:"23:30", pick:"must", genre:"Hard / dark techno"},
-  {day:1, stage:"area-u", artist:"IGNEZ", start:"13:00", end:"14:30", pick:"", genre:"Techno"},
-  {day:1, stage:"area-u", artist:"Zenker Brothers", start:"14:30", end:"16:00", pick:"", genre:"Techno"},
-  {day:1, stage:"area-u", artist:"Adiel", start:"16:00", end:"17:30", pick:"", genre:"Techno"},
-  {day:1, stage:"area-u", artist:"Robert Hood", start:"17:30", end:"19:00", pick:"rec", genre:"Techno"},
-  {day:1, stage:"area-u", artist:"Daria Kolosova & Etapp Kyle", start:"19:00", end:"21:00", pick:"", genre:"Techno"},
-  {day:1, stage:"area-u", artist:"Ellen Allien", start:"21:00", end:"22:30", pick:"", genre:"Techno"},
-  {day:1, stage:"area-c", artist:"CINCITY", start:"13:00", end:"15:00", pick:"", genre:"Afro house"},
-  {day:1, stage:"area-c", artist:"AMÉMÉ", start:"15:00", end:"17:00", pick:"", genre:"Afro house"},
-  {day:1, stage:"area-c", artist:"Chloé Caillet", start:"17:00", end:"18:30", pick:"", genre:"House"},
-  {day:1, stage:"area-c", artist:"Chris Stussy", start:"18:30", end:"20:15", pick:"", genre:"Tech house"},
-  {day:1, stage:"area-d", artist:"BELLA", start:"13:00", end:"14:30", pick:"", genre:"House"},
-  {day:1, stage:"area-d", artist:"Fafi Abdel Nour", start:"14:30", end:"16:00", pick:"", genre:"House"},
-  {day:1, stage:"area-d", artist:"Sally C", start:"16:00", end:"17:30", pick:"", genre:"House"},
-  {day:1, stage:"area-d", artist:"Chaos In The CBD", start:"17:30", end:"19:00", pick:"", genre:"Deep house"},
-  {day:1, stage:"area-d", artist:"TSHA", start:"19:00", end:"20:30", pick:"", genre:"House"},
-  {day:1, stage:"area-d", artist:"Honey Dijon", start:"20:30", end:"22:00", pick:"", genre:"House"},
-  {day:1, stage:"area-h", artist:"PH Project", start:"14:00", end:"16:00", pick:"", genre:"Deep house"},
-  {day:1, stage:"area-h", artist:"Ogazón", start:"16:00", end:"17:30", pick:"", genre:"Deep house"},
-  {day:1, stage:"area-h", artist:"Samuel Deep", start:"17:30", end:"19:00", pick:"", genre:"Deep house"},
-  {day:1, stage:"area-h", artist:"Quest", start:"19:00", end:"20:30", pick:"", genre:"Deep house"},
-  {day:1, stage:"area-l", artist:"DJ Rush", start:"16:30", end:"17:30", pick:"rec", genre:"Hard techno"},
-  {day:1, stage:"area-l", artist:"Phara", start:"17:30", end:"18:30", pick:"", genre:"Hard techno"},
-  {day:1, stage:"area-l", artist:"Ben Klock", start:"18:30", end:"19:30", pick:"rec", genre:"Dark techno"},
-  {day:1, stage:"area-l", artist:"Fadi Mohem", start:"19:30", end:"21:00", pick:"", genre:"Techno"},
-  {day:1, stage:"area-l", artist:"Cera Khin", start:"21:00", end:"22:00", pick:"", genre:"Hard techno"},
+  {day:1, stage:"area-v", artist:"Julya Karma", start:"13:00", end:"15:00", pick:"", genre:"Melodic techno"},
+  {day:1, stage:"area-v", artist:"Innellea", start:"15:00", end:"16:30", pick:"", genre:"Melodic techno"},
+  {day:1, stage:"area-v", artist:"Boris Brejcha", start:"16:30", end:"18:00", pick:"rec", genre:"Minimal / melodic techno"},
+  {day:1, stage:"area-v", artist:"Adriatique", start:"18:00", end:"19:30", pick:"", genre:"Melodic techno"},
+  {day:1, stage:"area-v", artist:"Richie Hawtin", start:"19:30", end:"21:00", pick:"rec", genre:"Techno"},
+  {day:1, stage:"area-v", artist:"Charlotte de Witte", start:"21:00", end:"23:00", pick:"must", genre:"Peak techno"},
+  {day:1, stage:"area-a", artist:"Lisa Korver", start:"13:00", end:"14:30", pick:"", genre:"House"},
+  {day:1, stage:"area-a", artist:"Lucky Done Gone", start:"14:30", end:"16:00", pick:"", genre:"Eclectic / house"},
+  {day:1, stage:"area-a", artist:"Lammer", start:"16:00", end:"18:00", pick:"", genre:"House"},
+  {day:1, stage:"area-a", artist:"Bad Boombox", start:"18:00", end:"19:30", pick:"", genre:"House / rave"},
+  {day:1, stage:"area-a", artist:"ØTTA", start:"19:30", end:"21:15", pick:"", genre:"Hypnotic techno"},
+  {day:1, stage:"area-a", artist:"MCR-T & Partiboi69", start:"21:15", end:"23:00", pick:"rec", genre:"Ghettotech / party"},
+  {day:1, stage:"area-b", artist:"EASTTOWN", start:"13:00", end:"15:00", pick:"", genre:"House"},
+  {day:1, stage:"area-b", artist:"Joëlla Jackson", start:"15:00", end:"16:30", pick:"", genre:"House"},
+  {day:1, stage:"area-b", artist:"Toman", start:"16:30", end:"18:00", pick:"", genre:"Tech house"},
+  {day:1, stage:"area-b", artist:"Mau P", start:"18:00", end:"19:30", pick:"rec", genre:"Tech house"},
+  {day:1, stage:"area-b", artist:"Franky Rizardo", start:"19:30", end:"21:00", pick:"", genre:"Tech house"},
+  {day:1, stage:"area-b", artist:"Marco Carola", start:"21:00", end:"23:00", pick:"rec", genre:"Tech house"},
+  {day:1, stage:"area-c", artist:"Kaufmann", start:"13:00", end:"14:30", pick:"", genre:"Melodic techno"},
+  {day:1, stage:"area-c", artist:"Mha Iri", start:"14:30", end:"16:00", pick:"", genre:"Melodic techno"},
+  {day:1, stage:"area-c", artist:"Chris Avantgarde", start:"16:00", end:"17:45", pick:"", genre:"Melodic techno"},
+  {day:1, stage:"area-c", artist:"Bart Skils", start:"17:45", end:"19:15", pick:"", genre:"Techno"},
+  {day:1, stage:"area-c", artist:"Pan-Pot", start:"19:15", end:"21:00", pick:"rec", genre:"Techno"},
+  {day:1, stage:"area-c", artist:"Eli Brown & HI-LO", start:"21:00", end:"23:00", pick:"rec", genre:"Techno / rave"},
+  {day:1, stage:"area-x", artist:"Julia Maria", start:"13:00", end:"14:45", pick:"", genre:"Techno"},
+  {day:1, stage:"area-x", artist:"IGNEZ", start:"14:45", end:"16:30", pick:"", genre:"Techno"},
+  {day:1, stage:"area-x", artist:"Nina Kraviz", start:"16:30", end:"18:00", pick:"rec", genre:"Techno"},
+  {day:1, stage:"area-x", artist:"Freddy K", start:"18:00", end:"19:30", pick:"", genre:"Hard techno"},
+  {day:1, stage:"area-x", artist:"Ben Klock", start:"19:30", end:"21:00", pick:"rec", genre:"Dark techno"},
+  {day:1, stage:"area-x", artist:"CHLÄR & Yanamaste", start:"21:00", end:"23:00", pick:"", genre:"Hard techno"},
+  {day:1, stage:"area-y", artist:"SAMOH (live)", start:"13:00", end:"14:30", pick:"", genre:"Melodic techno (live)"},
+  {day:1, stage:"area-y", artist:"NIKOLINA", start:"14:30", end:"16:00", pick:"", genre:"Hard techno"},
+  {day:1, stage:"area-y", artist:"BIIA", start:"16:00", end:"17:30", pick:"", genre:"Hard techno"},
+  {day:1, stage:"area-y", artist:"NOVAH", start:"17:30", end:"19:00", pick:"", genre:"Hard techno"},
+  {day:1, stage:"area-y", artist:"999999999", start:"19:00", end:"21:00", pick:"rec", genre:"Hard techno"},
+  {day:1, stage:"area-y", artist:"Cynthia Spiering & Reinier Zonneveld", start:"21:00", end:"23:00", pick:"must", genre:"Hard / acid techno"},
 ];
 
 // cover: indoor | covered | open · size XS-XL · dark: enclosed/dark inside
 // Awakenings areas — cover flags verified by Bart (2026-07-10):
-// Y = tent, C = dak (open zijkanten), rest = buiten.
+// Y = tent, B en C = dak (open zijkanten), rest = buiten.
 const STAGES = {
   "area-v": { name:"Area V", cover:"open",    size:"XL", dark:false, verified:true, fit:0.8, lightshow:true },  // main
-  "area-w": { name:"Area W", cover:"open",    size:"L",  dark:false, verified:true, lightshow:true },
+  "area-a": { name:"Area A", cover:"open",    size:"M",  dark:false, verified:true },
+  "area-b": { name:"Area B", cover:"covered", size:"M",  dark:false, verified:true },  // dak
+  "area-c": { name:"Area C", cover:"covered", size:"M",  dark:false, verified:true },  // dak
   "area-x": { name:"Area X", cover:"open",    size:"L",  dark:false, verified:true },
   "area-y": { name:"Area Y", cover:"covered", size:"M",  dark:true,  verified:true },  // tent
-  "area-u": { name:"Area U", cover:"open",    size:"M",  dark:false, verified:true },
-  "area-c": { name:"Area C", cover:"covered", size:"M",  dark:false, verified:true },  // dak
-  "area-d": { name:"Area D", cover:"open",    size:"M",  dark:false, verified:true },
-  "area-h": { name:"Area H", cover:"open",    size:"S",  dark:false, verified:true },
-  "area-l": { name:"Area L", cover:"open",    size:"S",  dark:false, verified:true },
 };
 
 // Heuristic energy 0-100 (genre + set type + familiarity + reputation).
 const ARTISTS = {
-  "Abstract Division": { energy:73 },
-  "Adiel": { energy:74 },
+  "999999999": { energy:84, note:"live hard techno chaos" },
   "Adriatique": { energy:66 },
-  "Amelie Lens": { energy:89, note:"BE techno queen" },
-  "AMÉMÉ": { energy:61 },
-  "Anfisa Letyago": { energy:76 },
+  "Bad Boombox": { energy:68, note:"fun rave energy" },
   "Bart Skils": { energy:75 },
-  "BELLA": { energy:62 },
   "Ben Klock": { energy:85, note:"Berghain resident" },
-  "Cera Khin": { energy:81 },
-  "Chaos In The CBD": { energy:61 },
-  "Charlie Sparks": { energy:83, note:"rave hysteria" },
-  "Chloé Caillet": { energy:65 },
-  "Chris Liebing & Luke Slater": { energy:82, note:"two legends b2b" },
-  "Chris Stussy": { energy:73, note:"NL tech house held" },
-  "CINCITY": { energy:60 },
-  "Daria Kolosova & Etapp Kyle": { energy:76 },
-  "DJ Rush": { energy:83, note:"Chicago hard legend" },
-  "Ellen Allien": { energy:77, note:"Berlijn energie" },
-  "Fadi Mohem": { energy:74 },
-  "Fafi Abdel Nour": { energy:64 },
+  "BIIA": { energy:78 },
+  "Boris Brejcha": { energy:72, note:"high-tech minimal show" },
+  "Charlotte de Witte": { energy:89, note:"BE headline techno, full throttle" },
+  "CHLÄR & Yanamaste": { energy:80, note:"hard closing b2b" },
+  "Chris Avantgarde": { energy:68 },
+  "Cynthia Spiering & Reinier Zonneveld": { energy:85, note:"hard acid b2b, NL vuurwerk" },
+  "EASTTOWN": { energy:60 },
+  "Eli Brown & HI-LO": { energy:82, note:"rave anthems b2b" },
+  "Franky Rizardo": { energy:70 },
   "Freddy K": { energy:80, note:"relentless" },
-  "Honey Dijon": { energy:68, note:"house party" },
-  "I Hate Models": { energy:88, note:"rave hysteria" },
   "IGNEZ": { energy:73 },
-  "Indira Paganotto": { energy:86, note:"psy-techno surge" },
-  "Joseph Capriati": { energy:80, note:"marathon groove" },
-  "Kevin de Vries": { energy:64 },
-  "Lee Ann Roberts": { energy:80 },
-  "Nicky Elisabeth": { energy:58 },
-  "Ogazón": { energy:58 },
-  "Paula Temple & SNTS": { energy:85, note:"industrial pressure" },
-  "PH Project": { energy:57 },
-  "Phara": { energy:78 },
-  "Quest": { energy:58 },
-  "Rebekah": { energy:82 },
-  "Reinier Zonneveld (live)": { energy:81, note:"live acid marathon" },
-  "Robert Hood": { energy:81, note:"Detroit legend" },
-  "ROD": { energy:74 },
-  "Sally C": { energy:64 },
-  "SAMA": { energy:74 },
-  "Samuel Deep": { energy:59 },
-  "Shinedoe & Hemka": { energy:73 },
-  "Speedy J": { energy:79, note:"NL veteraan" },
-  "Stephan Bodzin (live)": { energy:60, note:"live melodic, kijkers" },
-  "Tale Of Us": { energy:70, note:"melodic spektakel" },
-  "TSHA": { energy:66 },
-  "Zenker Brothers": { energy:72 },
+  "Innellea": { energy:63 },
+  "Joëlla Jackson": { energy:63 },
+  "Julia Maria": { energy:70 },
+  "Julya Karma": { energy:58 },
+  "Kaufmann": { energy:64 },
+  "Lammer": { energy:64 },
+  "Lisa Korver": { energy:60 },
+  "Lucky Done Gone": { energy:62 },
+  "Marco Carola": { energy:78, note:"tech house legende" },
+  "Mau P": { energy:76, note:"driving tech house" },
+  "MCR-T & Partiboi69": { energy:78, note:"party chaos, iedereen los" },
+  "Mha Iri": { energy:68 },
+  "NIKOLINA": { energy:76 },
+  "Nina Kraviz": { energy:81, note:"eigenzinnig, grote naam" },
+  "NOVAH": { energy:78 },
+  "Pan-Pot": { energy:78, note:"Berlijn duo, betrouwbaar hard" },
+  "Richie Hawtin": { energy:78, note:"techno pionier" },
+  "SAMOH (live)": { energy:55, note:"live melodic, kijkers" },
+  "Toman": { energy:68, note:"NL groove" },
+  "ØTTA": { energy:75, note:"hypnotisch, kenners-floor" },
 };
 
 const CONFIG = {
@@ -727,19 +699,19 @@ function runTests(){
   const get=(a)=>TIMETABLE.find(s=>s.artist===a);
   const results=[];
   const ok=(name,cond)=>results.push((cond?"✅ ":"❌ ")+name);
-  ok(`49 sets geladen`, TIMETABLE.length===49);
+  ok(`36 sets geladen`, TIMETABLE.length===36);
   ok(`alle stages bekend`, TIMETABLE.every(s=>STAGES[s.stage]));
   ok(`alle artiesten hebben energie`, TIMETABLE.every(s=>ARTISTS[s.artist]));
-  const ihm = scoreSet(get("I Hate Models"), null, wx, false);
-  const sama = scoreSet(get("SAMA"), null, wx, false);
-  ok(`avond-tent I Hate Models [${ihm}] > 13:00 open main SAMA [${sama}]`, ihm>sama);
-  const ihmSet = get("I Hate Models");
+  const cdw = scoreSet(get("Charlotte de Witte"), null, wx, false);
+  const jk = scoreSet(get("Julya Karma"), null, wx, false);
+  ok(`21:00 Charlotte de Witte [${cdw}] > 13:00 opener [${jk}]`, cdw>jk);
+  const cyn = get("Cynthia Spiering & Reinier Zonneveld");
   const tL = new Date("2026-07-12T22:00:00");
   const rainWx = { minutely:[{t:tL, mm:1.0}], hourly:[], ts:new Date(), stale:false };
-  ok(`tent (Y) stijgt bij regen`, scoreSet(ihmSet, tL, rainWx, true) > scoreSet(ihmSet, tL, {minutely:[],hourly:[]}, true));
-  const rz = get("Reinier Zonneveld (live)");
+  ok(`tent (Y) stijgt bij regen`, scoreSet(cyn, tL, rainWx, true) > scoreSet(cyn, tL, {minutely:[],hourly:[]}, true));
+  const rz = get("Charlotte de Witte");
   ok(`open main stort in bij regen`, scoreSet(rz, tL, {minutely:[],hourly:[]}, true) > scoreSet(rz, tL, rainWx, true));
-  const cl = get("Chris Liebing & Luke Slater");
+  const cl = get("Julya Karma");
   const cls = setDate(cl,"start");
   const earlyRain = { minutely:[0,15,30].map(m=>({t:new Date(cls.getTime()+m*60000), mm:1.0})), hourly:[], ts:new Date(), stale:false };
   ok(`slechtste kwartier telt over hele set`, scoreSetWx(cl, earlyRain) < scoreSet(cl, null, wx, false));
