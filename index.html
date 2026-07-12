@@ -119,7 +119,7 @@ const TIMETABLE = [
   {day:1, stage:"the-gathering", artist:"Alycia Bezgo b2...", start:"16:45", end:"17:45", pick:"", genre:"House"},
   {day:1, stage:"the-gathering", artist:"5NAPBAC...", start:"17:45", end:"18:30", pick:"", genre:"EDM"},
   {day:1, stage:"the-gathering", artist:"Amber Broos", start:"18:30", end:"19:30", pick:"rec", genre:"House"},
-  {day:1, stage:"the-gathering", artist:"Henri PFR", start:"19:30", end:"20:15", pick:"must", genre:"EDM"},
+  {day:1, stage:"the-gathering", artist:"Henri PFR", start:"19:30", end:"20:15", pick:"rec", genre:"EDM"},
   {day:1, stage:"the-gathering", artist:"Mark Wit...", start:"20:15", end:"21:00", pick:"", genre:"EDM"},
   {day:1, stage:"the-gathering", artist:"SURPRISE", start:"21:00", end:"22:00", pick:"", genre:"?"},
   {day:1, stage:"the-gathering", artist:"NO SURPRISE", start:"22:00", end:"23:00", pick:"", genre:"?"},
@@ -132,7 +132,7 @@ const TIMETABLE = [
   {day:2, stage:"mainstage", artist:"Vintage Culture", start:"14:00", end:"15:30", pick:"rec", genre:"House"},
   {day:2, stage:"mainstage", artist:"Disco Lines", start:"15:30", end:"16:30", pick:"rec", genre:"House"},
   {day:2, stage:"mainstage", artist:"Bassjackers", start:"16:30", end:"17:30", pick:"", genre:"EDM"},
-  {day:2, stage:"mainstage", artist:"Henri PFR", start:"17:35", end:"18:35", pick:"must", genre:"EDM"},
+  {day:2, stage:"mainstage", artist:"Henri PFR", start:"17:35", end:"18:35", pick:"rec", genre:"EDM"},
   {day:2, stage:"mainstage", artist:"NERVO", start:"18:40", end:"19:40", pick:"rec", genre:"EDM"},
   {day:2, stage:"mainstage", artist:"Marlon Hoffstadt", start:"19:40", end:"20:40", pick:"rec", genre:"House / rave"},
   {day:2, stage:"mainstage", artist:"Novah", start:"20:40", end:"21:40", pick:"", genre:"EDM"},
@@ -238,7 +238,7 @@ const TIMETABLE = [
   {day:2, stage:"crystal-garden", artist:"Eridu", start:"13:30", end:"15:00", pick:"", genre:"House"},
   {day:2, stage:"crystal-garden", artist:"Marsolo", start:"15:00", end:"16:30", pick:"", genre:"House"},
   {day:2, stage:"crystal-garden", artist:"Camila Jun", start:"16:30", end:"18:00", pick:"", genre:"House"},
-  {day:2, stage:"crystal-garden", artist:"Manda Moor b2b Sirus Hood", start:"18:00", end:"19:30", pick:"", genre:"Tech house"},
+  {day:2, stage:"crystal-garden", artist:"Manda Moor b2b Sirus Hood", start:"18:00", end:"19:30", pick:"rec", genre:"Tech house"},
   {day:2, stage:"crystal-garden", artist:"BLOND:ISH", start:"19:30", end:"21:00", pick:"rec", genre:"House"},
   {day:2, stage:"crystal-garden", artist:"Kettama b2b Michael Bibi", start:"21:00", end:"23:00", pick:"rec", genre:"House / tech house"},
   {day:2, stage:"crystal-garden", artist:"Franky Rizardo", start:"23:00", end:"00:30", pick:"rec", genre:"House"},
@@ -521,8 +521,8 @@ const STAGES = {
   "elixir":           { name:"Elixir",           cover:"covered", size:"S",  dark:false, verified:true },  // buiten, kleine overdekking
   "moose-bar":        { name:"Moose Bar",        cover:"covered", size:"M",  dark:true,  verified:true },  // tent, altijd feest
   "house-of-fortune": { name:"House of Fortune", cover:"indoor",  size:"S",  dark:true,  verified:true },  // binnen, klein
-  "the-gathering":    { name:"The Gathering",    cover:"open",    size:"L",  dark:false, verified:false },  // DreamVille, do 16/7
-  "the-gathering-ii": { name:"Gathering II",     cover:"open",    size:"M",  dark:false, verified:false },  // DreamVille, do 16/7
+  "the-gathering":    { name:"The Gathering",    cover:"open",    size:"L",  dark:false, verified:true },  // DreamVille, buiten (Bart)
+  "the-gathering-ii": { name:"Gathering II",     cover:"open",    size:"M",  dark:false, verified:true },  // DreamVille, buiten (Bart)
 };
 
 // Heuristic energy 0-100 (genre intensity + set type + familiarity + reputation).
@@ -1395,7 +1395,7 @@ function runTests(){
   const results=[];
   const ok=(name,cond)=>results.push((cond?"✅ ":"❌ ")+name);
   ok(`388 sets geladen`, TIMETABLE.length===388);
-  ok(`20 musts / 101 tips`, TIMETABLE.filter(s=>s.pick==="must").length===20 && TIMETABLE.filter(s=>s.pick==="rec").length===101);
+  ok(`18 musts / 104 tips`, TIMETABLE.filter(s=>s.pick==="must").length===18 && TIMETABLE.filter(s=>s.pick==="rec").length===104);
   const landry = scoreSet(get("Sara Landry"), null, wx, false);
   const vintage = scoreSet(get("Vintage Culture"), null, wx, false);
   ok(`23:00 Sara Landry (covered/dark) [${landry}] > 14:00 Vintage Culture open XL [${vintage}]`, landry>vintage);
