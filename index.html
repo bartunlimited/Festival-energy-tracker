@@ -116,11 +116,11 @@ const TIMETABLE = [
   {day:1, stage:"the-gathering", artist:"Luna & Lenthe", start:"14:00", end:"15:00", pick:"", genre:"Techno"},
   {day:1, stage:"the-gathering", artist:"Lennert Wolfs", start:"15:00", end:"16:00", pick:"", genre:"House"},
   {day:1, stage:"the-gathering", artist:"Flavour Drop", start:"16:00", end:"16:45", pick:"", genre:"Eclectic"},
-  {day:1, stage:"the-gathering", artist:"Alycia Bezgo b2...", start:"16:45", end:"17:45", pick:"", genre:"House"},
-  {day:1, stage:"the-gathering", artist:"5NAPBAC...", start:"17:45", end:"18:30", pick:"", genre:"EDM"},
+  {day:1, stage:"the-gathering", artist:"Alycia Bezgo b2b Portex", start:"16:45", end:"17:45", pick:"", genre:"House"},
+  {day:1, stage:"the-gathering", artist:"5NAPBACK b2b Karakals", start:"17:45", end:"18:30", pick:"", genre:"EDM"},
   {day:1, stage:"the-gathering", artist:"Amber Broos", start:"18:30", end:"19:30", pick:"rec", genre:"House"},
   {day:1, stage:"the-gathering", artist:"Henri PFR", start:"19:30", end:"20:15", pick:"rec", genre:"EDM"},
-  {day:1, stage:"the-gathering", artist:"Mark Wit...", start:"20:15", end:"21:00", pick:"", genre:"EDM"},
+  {day:1, stage:"the-gathering", artist:"Mark With A K & MC Chucky: Classics Set", start:"20:15", end:"21:00", pick:"rec", genre:"Rave / classics"},
   {day:1, stage:"the-gathering", artist:"SURPRISE", start:"21:00", end:"22:00", pick:"", genre:"?"},
   {day:1, stage:"the-gathering", artist:"NO SURPRISE", start:"22:00", end:"23:00", pick:"", genre:"?"},
   {day:1, stage:"the-gathering", artist:"SURPRISE", start:"23:00", end:"00:00", pick:"", genre:"?"},
@@ -282,7 +282,7 @@ const TIMETABLE = [
   {day:3, stage:"great-library", artist:"Agents Of Time", start:"20:00", end:"21:30", pick:"rec", genre:"Melodic techno (live)"},
   {day:3, stage:"great-library", artist:"Lost Frequencies", start:"21:30", end:"22:45", pick:"must", genre:"House / pop"},
   {day:3, stage:"great-library", artist:"Oliver Heldens", start:"22:45", end:"00:00", pick:"rec", genre:"House"},
-  {day:3, stage:"great-library", artist:"Illenium", start:"00:00", end:"00:55", pick:"", genre:"Melodic EDM"},
+  {day:3, stage:"great-library", artist:"Illenium", start:"00:00", end:"00:55", pick:"rec", genre:"Melodic EDM"},
   {day:3, stage:"rose-garden", artist:"Phi Phi", start:"13:00", end:"14:00", pick:"", genre:"Hard techno"},
   {day:3, stage:"rose-garden", artist:"Jente b2b Neall", start:"14:00", end:"15:00", pick:"", genre:"Hardstyle"},
   {day:3, stage:"rose-garden", artist:"Blvckprint", start:"15:00", end:"16:00", pick:"", genre:"Hardstyle"},
@@ -528,7 +528,7 @@ const STAGES = {
 // Heuristic energy 0-100 (genre intensity + set type + familiarity + reputation).
 const ARTISTS = {
   "4444 OF A KIND": { energy:60 },
-  "5NAPBAC...": { energy:60, note:"afgekapt — check" },
+  "5NAPBACK b2b Karakals": { energy:62 },
   "[IVY]": { energy:62 },
   "A Little Sound": { energy:68 },
   "A.N.I.": { energy:79 },
@@ -543,7 +543,7 @@ const ARTISTS = {
   "Aline Rocha": { energy:60 },
   "Alison Wonderland": { energy:62 },
   "ALOK: Rave T...": { energy:65, note:"afgekapte naam — check" },
-  "Alycia Bezgo b2...": { energy:58, note:"afgekapt — check" },
+  "Alycia Bezgo b2b Portex": { energy:58 },
   "Amber Broos": { energy:63 },
   "Amelie Lens": { energy:88, note:"BE techno queen, home crowd" },
   "Andromedik": { energy:70, note:"BE" },
@@ -740,7 +740,7 @@ const ARTISTS = {
   "Manuals": { energy:61 },
   "Marhu": { energy:60 },
   "Mark Roma": { energy:63 },
-  "Mark Wit...": { energy:60, note:"afgekapt — check" },
+  "Mark With A K & MC Chucky: Classics Set": { energy:74, note:"BE rave classics, feestgarantie" },
   "Marlon Hoffstadt": { energy:76, note:"DJ Daddy Trance hype" },
   "Marnik": { energy:61 },
   "Marsolo": { energy:63 },
@@ -1395,7 +1395,7 @@ function runTests(){
   const results=[];
   const ok=(name,cond)=>results.push((cond?"✅ ":"❌ ")+name);
   ok(`388 sets geladen`, TIMETABLE.length===388);
-  ok(`18 musts / 104 tips`, TIMETABLE.filter(s=>s.pick==="must").length===18 && TIMETABLE.filter(s=>s.pick==="rec").length===104);
+  ok(`18 musts / 106 tips`, TIMETABLE.filter(s=>s.pick==="must").length===18 && TIMETABLE.filter(s=>s.pick==="rec").length===106);
   const landry = scoreSet(get("Sara Landry"), null, wx, false);
   const vintage = scoreSet(get("Vintage Culture"), null, wx, false);
   ok(`23:00 Sara Landry (covered/dark) [${landry}] > 14:00 Vintage Culture open XL [${vintage}]`, landry>vintage);
