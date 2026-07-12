@@ -504,7 +504,7 @@ function nextRainEvent(t){
 
 /* ============================== render =============================== */
 let view = "nu";
-let filt = { day: festivalDay(now()) || 1, stage:"all", fromHour:13, picksOnly:false, minEnergy:false };
+let filt = { day: festivalDay(now()) || 1, stage:"all", fromHour:13, picksOnly:false, minEnergy:false, showPast:false };
 
 function setView(v){ view=v; render(); }
 function el(id){ return document.getElementById(id); }
@@ -624,17 +624,29 @@ function renderSchema(){
     const label = h>=24 ? String(h-24).padStart(2,"0") : String(h);
     return `<button class="chip ${filt.fromHour===h?"on":""}" onclick="filt.fromHour=${h};render()">${label}</button>`;
   }).join("");
-  const toggles =
-    `<button class="chip toggle ${filt.picksOnly?"on":""}" onclick="filt.picksOnly=!filt.picksOnly;render()">★ picks</button>`+
-    `<button class="chip toggle ${filt.minEnergy?"on":""}" onclick="filt.minEnergy=!filt.minEnergy;render()">⚡ ≥${CONFIG.energyChipMin}</button>`;
+  // auto-hide finished sets when looking at the current festival day
+  const tNow = now();
+  const viewingToday = festivalDay(tNow) === filt.day;
+  let pastHidden = 0;
 
   let sets = TIMETABLE.filter(s=>s.day===filt.day)
     .filter(s=>filt.stage==="all" || s.stage===filt.stage)
     .filter(s=>toMin(s.start) >= filt.fromHour*60)
     .filter(s=>!filt.picksOnly || s.pick)
+    .filter(s=>{
+      if(!viewingToday || filt.showPast) return true;
+      if(setDate(s,"end") <= tNow){ pastHidden++; return false; }
+      return true;
+    })
     .map(s=>({set:s, score: hasWx() ? scoreSetWx(s, wx) : scoreSet(s, null, wx, false)}))
     .filter(r=>!filt.minEnergy || r.score>=CONFIG.energyChipMin)
     .sort((a,b)=>toMin(a.set.start)-toMin(b.set.start));
+
+  const toggles =
+    `<button class="chip toggle ${filt.picksOnly?"on":""}" onclick="filt.picksOnly=!filt.picksOnly;render()">★ picks</button>`+
+    `<button class="chip toggle ${filt.minEnergy?"on":""}" onclick="filt.minEnergy=!filt.minEnergy;render()">⚡ ≥${CONFIG.energyChipMin}</button>`+
+    (viewingToday && (pastHidden>0 || filt.showPast)
+      ? `<button class="chip toggle ${filt.showPast?"on":""}" onclick="filt.showPast=!filt.showPast;render()">⏱ voorbij${filt.showPast?"":" ("+pastHidden+")"}</button>` : "");
 
   let html = `<div class="chips">${dayChips}</div><div class="chips">${stageChips}</div><div class="chips">${hourChips}</div><div class="chips">${toggles}</div>`;
   // group by quarter-hour so 17:35 sits under the 17:30 header
