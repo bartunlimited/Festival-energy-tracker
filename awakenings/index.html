@@ -637,9 +637,14 @@ function renderSchema(){
     .sort((a,b)=>toMin(a.set.start)-toMin(b.set.start));
 
   let html = `<div class="chips">${dayChips}</div><div class="chips">${stageChips}</div><div class="chips">${hourChips}</div><div class="chips">${toggles}</div>`;
-  let lastStart = null;
+  // group by quarter-hour so 17:35 sits under the 17:30 header
+  let lastBucket = null;
   for(const {set,score} of sets){
-    if(set.start!==lastStart){ html += `<div class="th">${set.start}</div>`; lastStart=set.start; }
+    const b = Math.floor(toMin(set.start)/15)*15;
+    if(b!==lastBucket){
+      html += `<div class="th">${String(Math.floor(b/60)%24).padStart(2,"0")}:${String(b%60).padStart(2,"0")}</div>`;
+      lastBucket = b;
+    }
     const st = STAGES[set.stage];
     html += `<div class="card ${set.pick}">
       <div class="art">${set.pick==="must"?"🔴 ":set.pick==="rec"?"🟠 ":""}${esc(set.artist)}${pickBadge(set.pick)}</div>

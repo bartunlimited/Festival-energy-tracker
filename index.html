@@ -501,6 +501,9 @@ const TIMETABLE = [
   {day:4, stage:"house-of-fortune", artist:"Da Tweekaz", start:"19:00", end:"20:00", pick:"", genre:"Hardstyle"},
   {day:4, stage:"house-of-fortune", artist:"More to be an...", start:"20:00", end:"21:00", pick:"", genre:"?"},
   {day:4, stage:"house-of-fortune", artist:"Blasterjaxx", start:"21:00", end:"22:00", pick:"", genre:"EDM"},
+  {day:2, stage:"mainstage", artist:"Openingsshow", start:"17:30", end:"17:45", pick:"rec", genre:"Show"},
+  {day:3, stage:"mainstage", artist:"Openingsshow", start:"17:30", end:"17:45", pick:"rec", genre:"Show"},
+  {day:4, stage:"mainstage", artist:"Openingsshow", start:"17:30", end:"17:45", pick:"rec", genre:"Show"},
 ];
 
 // cover: indoor | covered | open · size XS-XL · dark: enclosed/dark inside
@@ -527,6 +530,7 @@ const STAGES = {
 
 // Heuristic energy 0-100 (genre intensity + set type + familiarity + reputation).
 const ARTISTS = {
+  "Openingsshow": { energy:70, note:"iconische TML mainstage-opening" },
   "4444 OF A KIND": { energy:60 },
   "5NAPBACK b2b Karakals": { energy:62 },
   "[IVY]": { energy:62 },
@@ -1332,9 +1336,14 @@ function renderSchema(){
     .sort((a,b)=>toMin(a.set.start)-toMin(b.set.start));
 
   let html = `<div class="chips">${dayChips}</div><div class="chips">${stageChips}</div><div class="chips">${hourChips}</div><div class="chips">${toggles}</div>`;
-  let lastStart = null;
+  // group by quarter-hour so 17:35 sits under the 17:30 header
+  let lastBucket = null;
   for(const {set,score} of sets){
-    if(set.start!==lastStart){ html += `<div class="th">${set.start}</div>`; lastStart=set.start; }
+    const b = Math.floor(toMin(set.start)/15)*15;
+    if(b!==lastBucket){
+      html += `<div class="th">${String(Math.floor(b/60)%24).padStart(2,"0")}:${String(b%60).padStart(2,"0")}</div>`;
+      lastBucket = b;
+    }
     const st = STAGES[set.stage];
     html += `<div class="card ${set.pick}">
       <div class="art">${set.pick==="must"?"🔴 ":set.pick==="rec"?"🟠 ":""}${esc(set.artist)}${pickBadge(set.pick)}</div>
@@ -1394,8 +1403,8 @@ function runTests(){
   const get=(a)=>TIMETABLE.find(s=>s.artist===a);
   const results=[];
   const ok=(name,cond)=>results.push((cond?"✅ ":"❌ ")+name);
-  ok(`388 sets geladen`, TIMETABLE.length===388);
-  ok(`18 musts / 106 tips`, TIMETABLE.filter(s=>s.pick==="must").length===18 && TIMETABLE.filter(s=>s.pick==="rec").length===106);
+  ok(`391 sets geladen`, TIMETABLE.length===391);
+  ok(`18 musts / 109 tips`, TIMETABLE.filter(s=>s.pick==="must").length===18 && TIMETABLE.filter(s=>s.pick==="rec").length===109);
   const landry = scoreSet(get("Sara Landry"), null, wx, false);
   const vintage = scoreSet(get("Vintage Culture"), null, wx, false);
   ok(`23:00 Sara Landry (covered/dark) [${landry}] > 14:00 Vintage Culture open XL [${vintage}]`, landry>vintage);
