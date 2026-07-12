@@ -154,7 +154,7 @@ const TIMETABLE = [
   {day:2, stage:"great-library", artist:"Mike Williams", start:"17:00", end:"18:00", pick:"", genre:"EDM"},
   {day:2, stage:"great-library", artist:"Sam Feldt", start:"18:00", end:"19:00", pick:"", genre:"House"},
   {day:2, stage:"great-library", artist:"Da Tweekaz", start:"19:00", end:"20:00", pick:"", genre:"Hardstyle"},
-  {day:2, stage:"great-library", artist:"Ofenbach", start:"20:00", end:"21:00", pick:"rec", genre:"House"},
+  {day:2, stage:"great-library", artist:"Ofenbach", start:"20:00", end:"21:00", pick:"must", genre:"House"},
   {day:2, stage:"great-library", artist:"R3hab", start:"21:00", end:"22:00", pick:"rec", genre:"EDM"},
   {day:2, stage:"great-library", artist:"Artbat", start:"22:00", end:"23:00", pick:"rec", genre:"Melodic techno"},
   {day:2, stage:"great-library", artist:"Nicky Romero", start:"23:00", end:"00:00", pick:"rec", genre:"EDM"},
@@ -221,7 +221,7 @@ const TIMETABLE = [
   {day:2, stage:"celestia", artist:"Rozie", start:"15:30", end:"17:00", pick:"", genre:"Melodic techno"},
   {day:2, stage:"celestia", artist:"Diffrent", start:"17:00", end:"18:30", pick:"rec", genre:"Melodic techno"},
   {day:2, stage:"celestia", artist:"MPH", start:"18:30", end:"20:00", pick:"rec", genre:"Melodic techno"},
-  {day:2, stage:"celestia", artist:"Olive Anguz", start:"20:00", end:"21:30", pick:"rec", genre:"Melodic techno"},
+  {day:2, stage:"celestia", artist:"Olive Anguz", start:"20:00", end:"21:30", pick:"must", genre:"Melodic techno"},
   {day:2, stage:"celestia", artist:"Bennett", start:"21:30", end:"23:00", pick:"", genre:"Melodic techno"},
   {day:2, stage:"atmosphere", artist:"ROW1", start:"14:00", end:"15:30", pick:"rec", genre:"Techno"},
   {day:2, stage:"atmosphere", artist:"Peterblue", start:"15:30", end:"17:00", pick:"rec", genre:"Hard techno"},
@@ -1404,7 +1404,7 @@ function runTests(){
   const results=[];
   const ok=(name,cond)=>results.push((cond?"✅ ":"❌ ")+name);
   ok(`391 sets geladen`, TIMETABLE.length===391);
-  ok(`18 musts / 109 tips`, TIMETABLE.filter(s=>s.pick==="must").length===18 && TIMETABLE.filter(s=>s.pick==="rec").length===109);
+  ok(`20 musts / 107 tips`, TIMETABLE.filter(s=>s.pick==="must").length===20 && TIMETABLE.filter(s=>s.pick==="rec").length===107);
   const landry = scoreSet(get("Sara Landry"), null, wx, false);
   const vintage = scoreSet(get("Vintage Culture"), null, wx, false);
   ok(`23:00 Sara Landry (covered/dark) [${landry}] > 14:00 Vintage Culture open XL [${vintage}]`, landry>vintage);
