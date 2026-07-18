@@ -649,20 +649,32 @@ function renderSchema(){
       ? `<button class="chip toggle ${filt.showPast?"on":""}" onclick="filt.showPast=!filt.showPast;render()">⏱ voorbij${filt.showPast?"":" ("+pastHidden+")"}</button>` : "");
 
   let html = `<div class="chips">${dayChips}</div><div class="chips">${stageChips}</div><div class="chips">${hourChips}</div><div class="chips">${toggles}</div>`;
-  // group by quarter-hour so 17:35 sits under the 17:30 header
-  let lastBucket = null;
-  for(const {set,score} of sets){
-    const b = Math.floor(toMin(set.start)/15)*15;
-    if(b!==lastBucket){
-      html += `<div class="th">${String(Math.floor(b/60)%24).padStart(2,"0")}:${String(b%60).padStart(2,"0")}</div>`;
-      lastBucket = b;
-    }
+  const card = ({set,score}) => {
     const st = STAGES[set.stage];
-    html += `<div class="card ${set.pick}">
+    return `<div class="card ${set.pick}">
       <div class="art">${set.pick==="must"?"🔴 ":set.pick==="rec"?"🟠 ":""}${esc(set.artist)}${pickBadge(set.pick)}</div>
       <div class="meta">${set.start}–${set.end} · ${esc(stageName(set.stage))}${coverBadge(st)} · <i>${esc(set.genre)}</i></div>
       <div class="score">${scoreBlocks(score)}<b>${score}</b></div>
     </div>`;
+  };
+  // on the current day: running sets get their own block on top, so you
+  // never have to dig for "what plays right now" under old start times
+  const isRunning = (r) => viewingToday && !filt.showPast && setDate(r.set,"start")<=tNow && tNow<setDate(r.set,"end");
+  const running = sets.filter(isRunning);
+  const upcoming = sets.filter(r=>!isRunning(r));
+  if(running.length){
+    html += `<div class="th">▶ NU BEZIG</div>`;
+    for(const r of running) html += card(r);
+  }
+  // group by quarter-hour so 17:35 sits under the 17:30 header
+  let lastBucket = null;
+  for(const r of upcoming){
+    const b = Math.floor(toMin(r.set.start)/15)*15;
+    if(b!==lastBucket){
+      html += `<div class="th">${String(Math.floor(b/60)%24).padStart(2,"0")}:${String(b%60).padStart(2,"0")}</div>`;
+      lastBucket = b;
+    }
+    html += card(r);
   }
   if(!sets.length) html += `<div class="msg">Niets gevonden met deze filters.</div>`;
   el("view-schema").innerHTML = html;
