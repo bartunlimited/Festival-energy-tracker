@@ -388,7 +388,7 @@ const TIMETABLE = [
   {day:4, stage:"mainstage", artist:"Malugi", start:"16:30", end:"17:30", pick:"", genre:"House"},
   {day:4, stage:"mainstage", artist:"Kevin de Vries", start:"17:35", end:"18:35", pick:"rec", genre:"Melodic techno"},
   {day:4, stage:"mainstage", artist:"B Jones", start:"18:40", end:"19:40", pick:"", genre:"Tech house"},
-  {day:4, stage:"mainstage", artist:"SURPRISE", start:"19:40", end:"20:40", pick:"", genre:"?"},
+  {day:4, stage:"mainstage", artist:"Charlotte de Witte", start:"19:40", end:"20:40", pick:"must", genre:"Peak techno"},
   {day:4, stage:"mainstage", artist:"John Summit", start:"20:40", end:"21:40", pick:"must", genre:"Tech house"},
   {day:4, stage:"mainstage", artist:"Alesso", start:"21:45", end:"22:45", pick:"must", genre:"EDM"},
   {day:4, stage:"mainstage", artist:"Calvin Harris", start:"22:50", end:"23:50", pick:"must", genre:"EDM / pop"},
@@ -530,6 +530,7 @@ const STAGES = {
 
 // Heuristic energy 0-100 (genre intensity + set type + familiarity + reputation).
 const ARTISTS = {
+  "Charlotte de Witte": { energy:89, note:"BE headline techno, full throttle — surprise-act" },
   "Openingsshow": { energy:70, note:"iconische TML mainstage-opening" },
   "4444 OF A KIND": { energy:60 },
   "5NAPBACK b2b Karakals": { energy:62 },
@@ -1428,7 +1429,7 @@ function runTests(){
   const results=[];
   const ok=(name,cond)=>results.push((cond?"✅ ":"❌ ")+name);
   ok(`391 sets geladen`, TIMETABLE.length===391);
-  ok(`20 musts / 107 tips`, TIMETABLE.filter(s=>s.pick==="must").length===20 && TIMETABLE.filter(s=>s.pick==="rec").length===107);
+  ok(`21 musts / 107 tips`, TIMETABLE.filter(s=>s.pick==="must").length===21 && TIMETABLE.filter(s=>s.pick==="rec").length===107);
   const landry = scoreSet(get("Sara Landry"), null, wx, false);
   const vintage = scoreSet(get("Vintage Culture"), null, wx, false);
   ok(`23:00 Sara Landry (covered/dark) [${landry}] > 14:00 Vintage Culture open XL [${vintage}]`, landry>vintage);
