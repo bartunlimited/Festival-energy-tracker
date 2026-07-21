@@ -1,9 +1,10 @@
 # Festival Energy Tracker
 
-Twee apps, één engine:
+Drie apps, één engine:
 
 - **Tomorrowland W1** (17–19 juli 2026, Boom): `/` — https://bartunlimited.github.io/Festival-energy-tracker/
 - **Awakenings Sunday** (12 juli 2026, Hilvarenbeek): `/awakenings/` — https://bartunlimited.github.io/Festival-energy-tracker/awakenings/
+- **TML W2 vrijdag — Jesse** (24 juli 2026, Boom): `/jesse/` — https://bartunlimited.github.io/Festival-energy-tracker/jesse/
 
 ## Tomorrowland W1 2026
 
