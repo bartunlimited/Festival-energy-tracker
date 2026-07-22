@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="theme-color" content="#000000">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-180.png">
+<title>Milkshake — Dance Energy</title>
+<style>
+/* == Bart's readability recipe: pure black, white bold, 22px content == */
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html { background:#000; }
+body {
+  background:#000; color:#fff;
+  font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size:22px; font-weight:700; line-height:1.35;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) 40px env(safe-area-inset-left);
+}
+h1 { font-size:20px; font-weight:800; padding:10px 14px 2px; color:#aaa; letter-spacing:.5px; }
+.sub { font-size:15px; color:#666; padding:0 14px 8px; font-weight:600; }
+
+/* view tabs */
+.viewtabs { display:flex; gap:8px; padding:6px 14px 10px; position:sticky; top:0; background:#000; z-index:30; }
+.viewtabs button {
+  flex:1; font:inherit; font-size:20px; font-weight:800; color:#fff;
+  background:#111; border:2px solid #333; border-radius:12px; padding:12px 4px;
+}
+.viewtabs button.on { background:#fff; color:#000; border-color:#fff; }
+
+/* chip bars */
+.chips { display:flex; gap:8px; overflow-x:auto; padding:6px 14px; scrollbar-width:none; }
+.chips::-webkit-scrollbar { display:none; }
+.chip {
+  font:inherit; font-size:18px; font-weight:800; color:#fff; white-space:nowrap;
+  background:#111; border:2px solid #333; border-radius:999px; padding:11px 16px;
+}
+.chip.on { background:#fff; color:#000; border-color:#fff; }
+.chip.toggle.on { background:#ffd60a; border-color:#ffd60a; }
+a.chip { text-decoration:none; display:inline-block; }
+
+/* banners */
+.banner { margin:8px 14px; border-radius:12px; padding:14px; font-size:20px; }
+.banner.rain { background:#0a2540; border:2px solid #3b82f6; }
+.banner.rain .go { color:#7dd3fc; font-size:22px; margin-top:6px; }
+.banner.demo { background:#2e1e08; border:2px solid #ffa940; font-size:17px; color:#ffd9a0; }
+.banner.stale { background:#1a1a1a; border:2px solid #555; font-size:16px; color:#999; padding:8px 14px; }
+
+/* time headers */
+.th {
+  position:sticky; top:64px; background:#000; z-index:10;
+  font-size:20px; color:#888; padding:14px 14px 4px; border-bottom:1px solid #222;
+}
+
+/* set cards */
+.card { margin:8px 14px; border-radius:12px; padding:12px 14px; background:#0d0d0d; border-left:6px solid #333; }
+.card.must { background:#38070c; border-left-color:#ff4d5a; }
+.card.rec  { background:#2e1e08; border-left-color:#ffa940; }
+.card .art { font-weight:800; }
+.card .meta { font-size:19px; color:#bbb; margin-top:2px; }
+.card .meta i { color:#8fa; font-style:italic; font-weight:600; }
+.card .score { margin-top:4px; font-size:20px; letter-spacing:2px; }
+.card .score b { letter-spacing:0; margin-left:8px; }
+.badge { font-size:14px; font-weight:800; border-radius:6px; padding:2px 7px; vertical-align:3px; margin-left:8px; }
+.badge.must { background:#ff4d5a; color:#000; }
+.badge.rec  { background:#ffa940; color:#000; }
+.badge.cover { background:#123; color:#7dd3fc; }
+.badge.unverified { background:#333; color:#999; }
+
+/* NU view */
+.nucard { margin:8px 14px; border-radius:12px; padding:12px 14px; background:#0d0d0d; border-left:6px solid #333; }
+.nucard .stage { font-size:17px; color:#7dd3fc; font-weight:800; }
+.nucard .next { font-size:18px; color:#888; margin-top:4px; font-weight:600; }
+.msg { padding:24px 14px; color:#888; font-size:20px; }
+
+/* weather view */
+.wrow { display:flex; gap:10px; padding:6px 14px; font-size:20px; align-items:baseline; }
+.wrow .t { width:70px; color:#888; font-size:18px; }
+.wrow .bar { color:#3b82f6; letter-spacing:1px; }
+.wrow .mm { color:#bbb; font-size:17px; }
+h2 { font-size:19px; color:#aaa; padding:16px 14px 4px; font-weight:800; }
+</style>
+</head>
+<body>
+<h1>MILKSHAKE · DANCE ENERGY</h1>
+<div class="sub" id="clockline"></div>
+<div class="viewtabs">
+  <button id="tab-nu" onclick="setView('nu')">NU</button>
+  <button id="tab-schema" onclick="setView('schema')">SCHEMA</button>
+  <button id="tab-weer" onclick="setView('weer')">WEER</button>
+</div>
+<div id="banners"></div>
+<div id="view-nu"></div>
+<div id="view-schema"></div>
+<div id="view-weer"></div>
+
+<script>
+/* =====================================================================
+   DATA BLOCK
+   ===================================================================== */
+
+// Real W1 timetable extracted from source/tomorrowland-final2.html.
+const DEMO_DATA = false;
+
+const DAY_DATES = { 1:"2026-07-26" };
+const DAY_LABELS = { 1:"Zo 26" };
+
+// Milkshake Festival — Sunday 26 July 2026, from Bart's poster screenshot.
+// Korte drag-optredens staan er als eigen (korte) sets in; eindtijden zijn
+// afgeleid van de volgende set. Onzekere leesbare tijden: zie chat.
+// Schema per set: {day, stage, artist, start, end, pick:"must"|"rec"|"", genre}
+const TIMETABLE = [
+  {day:1, stage:"supertoys", artist:"Bestley", start:"13:00", end:"15:00", pick:"", genre:"House"},
+  {day:1, stage:"supertoys", artist:"Kyara", start:"15:00", end:"15:10", pick:"", genre:"Drag / show"},
+  {day:1, stage:"supertoys", artist:"Babette & Katja", start:"15:30", end:"15:40", pick:"", genre:"Drag / show"},
+  {day:1, stage:"supertoys", artist:"Juliana X", start:"15:40", end:"17:10", pick:"", genre:"House"},
+  {day:1, stage:"supertoys", artist:"Amanda Lepore", start:"17:10", end:"17:30", pick:"", genre:"Drag / show"},
+  {day:1, stage:"supertoys", artist:"Pabllo Vittar presents Club Vittar", start:"17:30", end:"19:00", pick:"", genre:"Pop / club show"},
+  {day:1, stage:"supertoys", artist:"Sasha Colby", start:"19:00", end:"19:05", pick:"", genre:"Drag / show"},
+  {day:1, stage:"supertoys", artist:"Byron Yeates", start:"19:05", end:"20:10", pick:"rec", genre:"Hard house / trance"},
+  {day:1, stage:"supertoys", artist:"Envy Peru", start:"20:10", end:"20:15", pick:"", genre:"Drag / show"},
+  {day:1, stage:"supertoys", artist:"Milkshake Finale", start:"20:15", end:"20:20", pick:"", genre:"Show"},
+  {day:1, stage:"supertoys", artist:"Dee Diggs b2b Ultra Naté", start:"20:20", end:"21:30", pick:"rec", genre:"House / vocal"},
+  {day:1, stage:"supertoys", artist:"Todd Terry", start:"21:30", end:"23:00", pick:"rec", genre:"House"},
+  {day:1, stage:"poezendek", artist:"Jazz Dalia", start:"13:00", end:"14:30", pick:"", genre:"House / disco"},
+  {day:1, stage:"poezendek", artist:"Soulfania", start:"14:30", end:"15:30", pick:"", genre:"Soul / house"},
+  {day:1, stage:"poezendek", artist:"PGLTM SS", start:"15:30", end:"17:00", pick:"", genre:"Club / eclectic"},
+  {day:1, stage:"poezendek", artist:"Motie van Wanvrouwen", start:"17:00", end:"18:00", pick:"", genre:"Club / eclectic"},
+  {day:1, stage:"poezendek", artist:"Cakes Da Killa", start:"18:00", end:"18:20", pick:"", genre:"Rap / club"},
+  {day:1, stage:"poezendek", artist:"Lordesius", start:"18:20", end:"19:15", pick:"", genre:"Eclectic"},
+  {day:1, stage:"poezendek", artist:"Mixturess", start:"19:15", end:"20:30", pick:"", genre:"Club / eclectic"},
+  {day:1, stage:"poezendek", artist:"Shug La Sheedah", start:"20:30", end:"22:30", pick:"", genre:"House / club"},
+  {day:1, stage:"janey", artist:"Krioro", start:"13:00", end:"13:30", pick:"", genre:"Club"},
+  {day:1, stage:"janey", artist:"Cleyani", start:"13:30", end:"14:00", pick:"", genre:"Club"},
+  {day:1, stage:"janey", artist:"Shaniqua Devine", start:"14:00", end:"14:45", pick:"", genre:"Club / vogue"},
+  {day:1, stage:"janey", artist:"Raphaella Brown", start:"14:45", end:"15:25", pick:"", genre:"Club / vogue"},
+  {day:1, stage:"janey", artist:"Zaya Sabrina", start:"15:25", end:"15:35", pick:"", genre:"Drag / show"},
+  {day:1, stage:"janey", artist:"Chocolat", start:"15:35", end:"16:15", pick:"", genre:"Club"},
+  {day:1, stage:"janey", artist:"Blue", start:"16:15", end:"17:00", pick:"", genre:"Club"},
+  {day:1, stage:"janey", artist:"Doris Bae", start:"17:00", end:"17:45", pick:"", genre:"Club / house"},
+  {day:1, stage:"janey", artist:"Charlie", start:"17:45", end:"18:30", pick:"", genre:"Club / house"},
+  {day:1, stage:"janey", artist:"Rockefellababe", start:"18:30", end:"19:15", pick:"", genre:"Eclectic"},
+  {day:1, stage:"janey", artist:"Nina Sanetti", start:"19:15", end:"20:00", pick:"", genre:"House"},
+  {day:1, stage:"janey", artist:"Lotte", start:"20:00", end:"20:45", pick:"", genre:"House"},
+  {day:1, stage:"janey", artist:"Emma Champagne Queen", start:"20:45", end:"21:15", pick:"", genre:"Drag / show"},
+  {day:1, stage:"janey", artist:"Jennifer Cooke (live)", start:"21:15", end:"22:30", pick:"", genre:"Live / club"},
+  {day:1, stage:"heisas-house", artist:"The Heart Breaks", start:"13:00", end:"14:30", pick:"", genre:"Pop / club"},
+  {day:1, stage:"heisas-house", artist:"Puma Hilton", start:"14:30", end:"16:00", pick:"", genre:"Club / house"},
+  {day:1, stage:"heisas-house", artist:"Heisa Jynx", start:"16:00", end:"17:10", pick:"", genre:"Club / house"},
+  {day:1, stage:"heisas-house", artist:"Soundos", start:"17:10", end:"17:15", pick:"", genre:"Show"},
+  {day:1, stage:"heisas-house", artist:"King Faisel", start:"17:15", end:"17:30", pick:"", genre:"Show"},
+  {day:1, stage:"heisas-house", artist:"Emma Champagne Queen", start:"17:30", end:"19:00", pick:"", genre:"Drag / club"},
+  {day:1, stage:"heisas-house", artist:"Kroes Control", start:"19:00", end:"20:20", pick:"", genre:"House / club"},
+  {day:1, stage:"heisas-house", artist:"Danny Beard", start:"20:20", end:"20:30", pick:"", genre:"Drag / show"},
+  {day:1, stage:"heisas-house", artist:"Hollywood Tramp", start:"20:30", end:"22:30", pick:"", genre:"House / club"},
+  {day:1, stage:"poofdoof", artist:"Nic Holland", start:"13:00", end:"14:00", pick:"", genre:"House"},
+  {day:1, stage:"poofdoof", artist:"Erfaan", start:"14:00", end:"15:00", pick:"", genre:"House"},
+  {day:1, stage:"poofdoof", artist:"Dingo Disco", start:"15:00", end:"16:00", pick:"", genre:"Disco / house"},
+  {day:1, stage:"poofdoof", artist:"Alaika", start:"16:00", end:"17:00", pick:"", genre:"House"},
+  {day:1, stage:"poofdoof", artist:"Atomic Blonde", start:"17:00", end:"18:00", pick:"", genre:"House / club"},
+  {day:1, stage:"poofdoof", artist:"MRCL", start:"18:00", end:"19:00", pick:"", genre:"House"},
+  {day:1, stage:"poofdoof", artist:"Argonaut", start:"19:00", end:"20:00", pick:"", genre:"House / techno"},
+  {day:1, stage:"poofdoof", artist:"Jimi The Kween", start:"20:00", end:"21:00", pick:"", genre:"House / club"},
+  {day:1, stage:"poofdoof", artist:"Baiin Twins", start:"21:00", end:"22:30", pick:"", genre:"House / techno"},
+  {day:1, stage:"bear-necessity", artist:"Bram Sterdam & Big General", start:"13:00", end:"15:00", pick:"", genre:"House / disco"},
+  {day:1, stage:"bear-necessity", artist:"Sergio Cardoso", start:"15:00", end:"17:00", pick:"", genre:"House"},
+  {day:1, stage:"bear-necessity", artist:"Be-Rik", start:"17:00", end:"19:30", pick:"", genre:"House / trance"},
+  {day:1, stage:"bear-necessity", artist:"Chris Bekker", start:"19:30", end:"23:00", pick:"rec", genre:"Trance"},
+  {day:1, stage:"drag-tastic", artist:"Marja van Katendrecht", start:"13:00", end:"13:30", pick:"", genre:"Drag / show"},
+  {day:1, stage:"drag-tastic", artist:"Buuf Helen", start:"13:30", end:"17:45", pick:"", genre:"Drag / show"},
+  {day:1, stage:"drag-tastic", artist:"Abby OMG", start:"17:45", end:"22:30", pick:"", genre:"Drag / show"},
+  {day:1, stage:"yas-karaoke", artist:"DJ Linde Schöne", start:"14:00", end:"15:00", pick:"", genre:"Karaoke / party"},
+  {day:1, stage:"yas-karaoke", artist:"Beyoncé Karaoke by Davey", start:"15:00", end:"17:00", pick:"", genre:"Karaoke / party"},
+  {day:1, stage:"yas-karaoke", artist:"The Aiscream Karaoke Show", start:"17:00", end:"20:30", pick:"", genre:"Karaoke / party"},
+  {day:1, stage:"the-attic", artist:"Juna", start:"13:00", end:"14:30", pick:"", genre:"House / club"},
+  {day:1, stage:"the-attic", artist:"Cleo", start:"14:30", end:"16:00", pick:"", genre:"House / club"},
+  {day:1, stage:"the-attic", artist:"Dey.Rey", start:"16:00", end:"18:00", pick:"", genre:"House / techno"},
+  {day:1, stage:"the-attic", artist:"Armana Khan", start:"18:00", end:"20:00", pick:"", genre:"House / techno"},
+  {day:1, stage:"the-attic", artist:"Alyosha", start:"20:00", end:"22:00", pick:"", genre:"Techno"},
+  {day:1, stage:"spikey-lee", artist:"Tweeman", start:"13:00", end:"14:00", pick:"", genre:"Club / eclectic"},
+  {day:1, stage:"spikey-lee", artist:"Vinvar", start:"14:00", end:"16:00", pick:"", genre:"House"},
+  {day:1, stage:"spikey-lee", artist:"Laure Croft", start:"16:00", end:"18:00", pick:"", genre:"House / club"},
+  {day:1, stage:"spikey-lee", artist:"Spikey Lee", start:"18:00", end:"20:00", pick:"", genre:"House / club"},
+  {day:1, stage:"spikey-lee", artist:"Volvox", start:"20:00", end:"22:00", pick:"rec", genre:"Techno / acid"},
+];
+
+// cover: indoor | covered | open · size XS-XL · dark: enclosed/dark inside
+// Milkshake Westerpark — covers zijn GISSINGEN (verified:false, ?-badge)
+// tot Bart ze bevestigt.
+const STAGES = {
+  "supertoys":      { name:"Supertoys",       cover:"open",    size:"L",  dark:false, verified:false, lightshow:true },  // main
+  "poezendek":      { name:"Poezendek",       cover:"open",    size:"M",  dark:false, verified:false },
+  "janey":          { name:"Janey",           cover:"covered", size:"S",  dark:true,  verified:false },
+  "heisas-house":   { name:"Heisa's House",   cover:"covered", size:"M",  dark:true,  verified:false },
+  "poofdoof":       { name:"Poofdoof",        cover:"covered", size:"M",  dark:true,  verified:false },
+  "bear-necessity": { name:"Bear-Necessity",  cover:"covered", size:"S",  dark:true,  verified:false },
+  "drag-tastic":    { name:"Drag-Tastic",     cover:"covered", size:"S",  dark:true,  verified:false },
+  "yas-karaoke":    { name:"YAS! Karaoke",    cover:"covered", size:"S",  dark:true,  verified:false },
+  "the-attic":      { name:"The Attic",       cover:"indoor",  size:"S",  dark:true,  verified:false },
+  "spikey-lee":     { name:"Spikey Lee & Fr.",cover:"open",    size:"S",  dark:false, verified:false },
+};
+
+// Heuristic energy 0-100 — veel lokale/drag-acts, defaults rond 55-65.
+const ARTISTS = {
+  "Abby OMG": { energy:58 },
+  "Alaika": { energy:58 },
+  "Alyosha": { energy:66 },
+  "Amanda Lepore": { energy:58 },
+  "Argonaut": { energy:64 },
+  "Armana Khan": { energy:64 },
+  "Atomic Blonde": { energy:60 },
+  "Babette & Katja": { energy:55 },
+  "Baiin Twins": { energy:64 },
+  "Be-Rik": { energy:62 },
+  "Bestley": { energy:62 },
+  "Beyoncé Karaoke by Davey": { energy:60 },
+  "Blue": { energy:56 },
+  "Bram Sterdam & Big General": { energy:58 },
+  "Buuf Helen": { energy:56 },
+  "Byron Yeates": { energy:74 },
+  "Cakes Da Killa": { energy:62 },
+  "Charlie": { energy:58 },
+  "Chocolat": { energy:56 },
+  "Chris Bekker": { energy:68 },
+  "Cleo": { energy:60 },
+  "Cleyani": { energy:54 },
+  "Danny Beard": { energy:58 },
+  "Dee Diggs b2b Ultra Naté": { energy:72 },
+  "Dey.Rey": { energy:62 },
+  "Dingo Disco": { energy:60 },
+  "DJ Linde Schöne": { energy:56 },
+  "Doris Bae": { energy:58 },
+  "Emma Champagne Queen": { energy:58 },
+  "Envy Peru": { energy:58 },
+  "Erfaan": { energy:58 },
+  "Heisa Jynx": { energy:60 },
+  "Hollywood Tramp": { energy:62 },
+  "Jazz Dalia": { energy:58 },
+  "Jennifer Cooke (live)": { energy:58 },
+  "Jimi The Kween": { energy:62 },
+  "Juliana X": { energy:64 },
+  "Juna": { energy:58 },
+  "King Faisel": { energy:54 },
+  "Krioro": { energy:54 },
+  "Kroes Control": { energy:62 },
+  "Kyara": { energy:55 },
+  "Laure Croft": { energy:60 },
+  "Lordesius": { energy:60 },
+  "Lotte": { energy:60 },
+  "Marja van Katendrecht": { energy:56 },
+  "Milkshake Finale": { energy:65 },
+  "Mixturess": { energy:60 },
+  "Motie van Wanvrouwen": { energy:56 },
+  "MRCL": { energy:62 },
+  "Nic Holland": { energy:58 },
+  "Nina Sanetti": { energy:60 },
+  "Pabllo Vittar presents Club Vittar": { energy:70 },
+  "PGLTM SS": { energy:56 },
+  "Puma Hilton": { energy:60 },
+  "Raphaella Brown": { energy:56 },
+  "Rockefellababe": { energy:60 },
+  "Sasha Colby": { energy:60 },
+  "Sergio Cardoso": { energy:60 },
+  "Shaniqua Devine": { energy:56 },
+  "Shug La Sheedah": { energy:62 },
+  "Soulfania": { energy:58 },
+  "Soundos": { energy:54 },
+  "Spikey Lee": { energy:64 },
+  "The Aiscream Karaoke Show": { energy:58 },
+  "The Heart Breaks": { energy:56 },
+  "Todd Terry": { energy:78 },
+  "Tweeman": { energy:56 },
+  "Vinvar": { energy:58 },
+  "Volvox": { energy:74 },
+  "Zaya Sabrina": { energy:54 },
+};
+
+const CONFIG = {
+  weights: { artist:0.40, slot:0.25, stage:0.20, competition:0.15 },
+  // timeslot curve in festival-hour space (hours <06:00 => +24)
+  slotCurve: [ [12,15,0.35],[15,17,0.50],[17,19,0.65],[19,21,0.80],[21,24,1.00],[24,25,0.90],[25,30,0.85],[6,12,0.30] ],
+  darkSlotFloor: 0.7,          // dark/indoor stages: S = max(S, floor)
+  rain: { threshMm:0.3, heavyMm:2.0, lookaheadMin:60, soonMin:45, moveByBufferMin:15 },
+  cold: { tempC:19, fromHour:19, penalty:0.10 },   // open stages, cold evening (<19° per Bart)
+  sun:  { tempC:20, maxCloud:60, openBonus:1.05, melodicOpenBonus:1.10 },  // mooi weer (warm + zon): buiten leeft, zeker melodic/house (Bart)
+  heat: { tempC:28, openPenalty:0.85, shadeBonus:1.08 },  // te warm: schaduw onder afdak (bv. Crystal Garden) wint van open weide (Bart)
+  lightshow: { fromHour:22.5, bonus:0.15, closingBonus:0.05 }, // na donker: lichtshow-stages aantrekkelijker, closing extra (Bart)
+  weather: {
+    lat:52.387, lon:4.873, tz:"Europe/Amsterdam",
+    pollMs: 10*60*1000,
+    url: "https://api.open-meteo.com/v1/forecast?latitude=52.387&longitude=4.873&minutely_15=precipitation&hourly=temperature_2m,precipitation_probability,precipitation,cloud_cover&forecast_days=2&timezone=Europe%2FAmsterdam",
+  },
+  energyChipMin: 70,
+};
+
+/* =====================================================================
+   APP BLOCK — scoring engine (pure functions, no I/O)
+   ===================================================================== */
+const clamp = (v,a,b)=>Math.min(b,Math.max(a,v));
+
+// "HH:MM" -> minutes in festival-day space (00:30 => 24h30 = 1470)
+function toMin(hhmm){ const [h,m]=hhmm.split(":").map(Number); return ((h<6?h+24:h)*60)+m; }
+
+// absolute Date for a set boundary (device runs in Europe/Brussels)
+function setDate(set, which){
+  const base = new Date(DAY_DATES[set.day]+"T00:00:00");
+  return new Date(base.getTime() + toMin(which==="start"?set.start:set.end)*60000);
+}
+
+// festival-hour (12..30) for an absolute Date
+function festHour(t){ const h = t.getHours()+t.getMinutes()/60; return h<6 ? h+24 : h; }
+
+function slotValueAtHour(fh){
+  for(const [a,b,v] of CONFIG.slotCurve) if(fh>=a && fh<b) return v;
+  return 0.3;
+}
+
+// S(t): timeslot curve; dark stages get a floor (inside, daytime barely matters)
+function slotValue(stage, fh){
+  let s = slotValueAtHour(fh);
+  if(stage && stage.dark) s = Math.max(s, CONFIG.darkSlotFloor);
+  return s;
+}
+
+// G: stage fit
+function stageFit(stage){
+  if(!stage) return 0.75;
+  if(stage.fit) return stage.fit;  // per-stage override (e.g. Mainstage)
+  const covered = stage.cover==="indoor" || stage.cover==="covered";
+  if(covered && stage.dark) return 1.0;
+  if(covered) return 0.85;
+  if(stage.size==="XL" || stage.size==="L") return 0.6;
+  return 0.75;
+}
+
+// lightshow stages (Mainstage, Great Library) get extra pull after dark;
+// the stage's closing set even more ("zeker closing bij Main" — Bart)
+function isClosing(set){
+  const s0 = toMin(set.start);
+  return !TIMETABLE.some(o => o!==set && o.day===set.day && o.stage===set.stage && toMin(o.start)>s0);
+}
+function lightBonus(stage, set, fh){
+  if(!stage || !stage.lightshow || fh < CONFIG.lightshow.fromHour) return 0;
+  return CONFIG.lightshow.bonus + (isClosing(set) ? CONFIG.lightshow.closingBonus : 0);
+}
+
+// crude genre family for competition matching
+function genreFam(g){
+  g=(g||"").toLowerCase();
+  if(/hard|rawstyle|hardstyle|industrial/.test(g)) return "hard";
+  if(/melodic/.test(g)) return "melodic";
+  if(/peak|techno/.test(g)) return "techno";
+  if(/tech house|house/.test(g)) return "house";
+  if(/trance|big room|edm|progressive|mainstage/.test(g)) return "main";
+  if(/drum|dnb|d&b/.test(g)) return "dnb";
+  if(/down|ambient|chill/.test(g)) return "down";
+  return "other";
+}
+
+// C: competition from simultaneous same-family sets with >= artist energy
+function competition(set){
+  const s0=toMin(set.start), e0=toMin(set.end), fam=genreFam(set.genre);
+  const myE = (ARTISTS[set.artist]?.energy ?? 50);
+  let n=0;
+  for(const o of TIMETABLE){
+    if(o===set || o.day!==set.day) continue;
+    if(genreFam(o.genre)!==fam) continue;
+    const s1=toMin(o.start), e1=toMin(o.end);
+    if(s1<e0 && s0<e1 && (ARTISTS[o.artist]?.energy ?? 50) >= myE) n++;
+  }
+  return n===0 ? 1.0 : n===1 ? 0.85 : 0.7;
+}
+
+// M_weather(t): needs weather state (wx) — pure given wx snapshot
+function weatherMult(stage, t, wx, set, atSetTime){
+  if(!stage) return 1;
+  let m = 1;
+  const r = rainStatus(t, wx);
+  const wet = atSetTime ? r.raining : r.rainingOrSoon;  // set-range mode: only rain in this quarter itself
+  if(wet){
+    if(stage.cover==="indoor") m = 1.15;
+    else if(stage.cover==="covered") m = 1.10;
+    else m = r.heavy ? 0.35 : 0.55;
+  }
+  const temp = tempAt(t, wx);
+  if(temp!=null && temp<CONFIG.cold.tempC && festHour(t)>=CONFIG.cold.fromHour && stage.cover==="open") m -= CONFIG.cold.penalty;
+  if(!wet && temp!=null && temp>=CONFIG.heat.tempC){
+    // too hot: shade under a roof (e.g. Crystal Garden) beats the open field
+    if(stage.cover==="covered") m *= CONFIG.heat.shadeBonus;
+    else if(stage.cover==="open") m *= CONFIG.heat.openPenalty;
+  } else if(!wet && temp!=null && temp>=CONFIG.sun.tempC && stage.cover==="open"){
+    // pleasantly warm AND actually sunny (cloud cover below threshold; unknown => assume ok)
+    const cloud = cloudAt(t, wx);
+    if(cloud==null || cloud < CONFIG.sun.maxCloud){
+      const fam = set ? genreFam(set.genre) : "";
+      m *= (fam==="melodic" || fam==="house" || fam==="down") ? CONFIG.sun.melodicOpenBonus : CONFIG.sun.openBonus;
+    }
+  }
+  return Math.max(0, m);
+}
+
+// score(set, t). live=false => static/dry score (Dag-schema), S at set midpoint.
+function scoreSet(set, t, wx, live){
+  const stage = STAGES[set.stage];
+  const A = (ARTISTS[set.artist]?.energy ?? 50)/100;
+  const fh = live && t ? festHour(t) : (toMin(set.start)+toMin(set.end))/2/60;
+  const S = slotValue(stage, fh);
+  const G = Math.min(1, stageFit(stage) + lightBonus(stage, set, fh));
+  const C = competition(set);
+  const w = CONFIG.weights;
+  const base = clamp((w.artist*A + w.slot*S + w.stage*G + w.competition*C)*100, 0, 100);
+  const M = live ? weatherMult(stage, t, wx, set) : 1;
+  return Math.round(clamp(base*M, 0, 100));
+}
+
+// absolute Date at the midpoint of a set (weather is evaluated at set time)
+function setMid(set){
+  const base = new Date(DAY_DATES[set.day]+"T00:00:00");
+  return new Date(base.getTime() + (toMin(set.start)+toMin(set.end))/2*60000);
+}
+function hasWx(){ return wx.minutely.length>0 || wx.hourly.length>0; }
+
+// Weather over a WHOLE set: sample every quarter-hour from start to end.
+// Any bad quarter counts fully (worst wins); if nothing is bad, the best
+// quarter counts (covered stages keep their rain bonus for the whole set).
+function weatherMultRange(set, w){
+  const stage = STAGES[set.stage];
+  if(!stage) return 1;
+  const s0 = setDate(set,"start").getTime(), e0 = setDate(set,"end").getTime();
+  let worst = Infinity, best = -Infinity;
+  for(let t = s0; t < e0; t += 15*60000){
+    const m = weatherMult(stage, new Date(t), w, set, true);
+    if(m < worst) worst = m;
+    if(m > best) best = m;
+  }
+  return worst < 1 ? worst : best;
+}
+function scoreSetWx(set, w){
+  return Math.round(clamp(scoreSet(set, null, w, false) * weatherMultRange(set, w), 0, 100));
+}
+
+function scoreBlocks(sc){
+  const f = Math.round(sc/20);
+  return "▮".repeat(f) + "▯".repeat(5-f);
+}
+
+/* ============================ clock module =========================== */
+const params = new URLSearchParams(location.search);
+const NOW_OVERRIDE = params.get("now") ? new Date(params.get("now")) : null;
+function now(){ return NOW_OVERRIDE ? new Date(NOW_OVERRIDE) : new Date(); }
+function fmtHM(t){ return String(t.getHours()).padStart(2,"0")+":"+String(t.getMinutes()).padStart(2,"0"); }
+
+// which festival day is "live" at t (day runs 11:00 -> 06:00 next morning)
+function festivalDay(t){
+  for(const d of Object.keys(DAY_DATES).map(Number)){
+    const base = new Date(DAY_DATES[d]+"T00:00:00").getTime();
+    if(t.getTime() >= base+11*3600e3 && t.getTime() < base+30*3600e3) return d;
+  }
+  return null;
+}
+
+/* =========================== weather module ========================== */
+// wx = { minutely:[{t:Date, mm}], hourly:[{t:Date, temp, prob, mm}], ts:Date|null, stale:bool }
+let wx = { minutely:[], hourly:[], ts:null, stale:false };
+
+function parseWeather(json){
+  const minutely=[], hourly=[];
+  if(json.minutely_15) json.minutely_15.time.forEach((tm,i)=>minutely.push({ t:new Date(tm), mm:json.minutely_15.precipitation[i] ?? 0 }));
+  if(json.hourly) json.hourly.time.forEach((tm,i)=>hourly.push({
+    t:new Date(tm), temp:json.hourly.temperature_2m[i],
+    prob:json.hourly.precipitation_probability[i], mm:json.hourly.precipitation[i] ?? 0,
+    cloud:json.hourly.cloud_cover ? json.hourly.cloud_cover[i] : null }));
+  return {minutely, hourly};
+}
+
+async function fetchWeather(){
+  try{
+    const res = await fetch(CONFIG.weather.url);
+    if(!res.ok) throw new Error("HTTP "+res.status);
+    const json = await res.json();
+    localStorage.setItem("few_wx", JSON.stringify({json, ts:Date.now()}));
+    applyWeather(json, new Date(), false);
+  }catch(e){
+    const cached = localStorage.getItem("few_wx");
+    if(cached){
+      const {json, ts} = JSON.parse(cached);
+      applyWeather(json, new Date(ts), true);
+    } // else: wx stays empty -> static model only
+  }
+  render();
+}
+
+function applyWeather(json, ts, stale){
+  const p = parseWeather(json);
+  wx = { ...p, ts, stale };
+  if(params.get("rain")==="demo") injectDemoRain();
+}
+
+// ?rain=demo: synthetic shower starting now+30m, 45m long, 1.2mm/15m
+function injectDemoRain(){
+  const t0 = now();
+  const minutely=[];
+  for(let m=-60; m<=180; m+=15){
+    const t = new Date(t0.getTime()+m*60000);
+    const inRain = m>=30 && m<75;
+    minutely.push({t, mm: inRain?1.2:0});
+  }
+  wx.minutely = minutely;
+  if(!wx.ts) wx.ts = t0;
+}
+
+function slotAt(arr, t){
+  for(let i=arr.length-1;i>=0;i--) if(t>=arr[i].t) {
+    // slot width: minutely 15m, hourly 60m — accept if within width
+    const width = arr.length>1 ? (arr[1].t-arr[0].t) : 3600e3;
+    return (t - arr[i].t) < width ? arr[i] : null;
+  }
+  return null;
+}
+
+// "Weer van vandaag"-mapping: when t (e.g. a simulated festival day) falls
+// outside the forecast window, project today's Boom weather onto that day —
+// same clock time, today's pattern. Offset is computed PER data array, so a
+// synthetic ?rain=demo minutely set at sim-time still maps hourly temp/cloud.
+function wxOffsetFor(arr, t){
+  if(!arr.length || slotAt(arr, t)) return 0;
+  const nowReal = new Date();
+  const mapped = new Date(nowReal.getFullYear(), nowReal.getMonth(), nowReal.getDate(), t.getHours(), t.getMinutes());
+  if(t.getHours() < 6) mapped.setDate(mapped.getDate()+1);  // na middernacht => morgenvroeg
+  return mapped - t;
+}
+
+function tempAt(t, w){
+  w = w||wx;
+  const s = slotAt(w.hourly, new Date(t.getTime() + wxOffsetFor(w.hourly, t)));
+  return s ? s.temp : null;
+}
+function cloudAt(t, w){
+  w = w||wx;
+  const s = slotAt(w.hourly, new Date(t.getTime() + wxOffsetFor(w.hourly, t)));
+  return s && s.cloud!=null ? s.cloud : null;
+}
+
+function rainStatus(t, w){
+  w = w||wx;
+  const th = CONFIG.rain.threshMm;
+  const tt = new Date(t.getTime() + wxOffsetFor(w.minutely, t));
+  const cur = slotAt(w.minutely, tt);
+  const raining = !!(cur && cur.mm>=th);
+  let soon=false, heavy = !!(cur && cur.mm>=CONFIG.rain.heavyMm);
+  for(const s of w.minutely){
+    const dm = (s.t - tt)/60000;
+    if(dm>0 && dm<=CONFIG.rain.soonMin && s.mm>=th){ soon=true; if(s.mm>=CONFIG.rain.heavyMm) heavy=true; }
+  }
+  return { raining, soon, rainingOrSoon: raining||soon, heavy };
+}
+
+// first rain event within lookahead: {start, end(Date|null), heavy}
+// times are returned in t's own day (mapped back from today's pattern)
+function nextRainEvent(t){
+  const th=CONFIG.rain.threshMm;
+  const off = wxOffsetFor(wx.minutely, t);
+  const tt = new Date(t.getTime() + off);
+  let start=null, end=null, heavy=false;
+  for(const s of wx.minutely){
+    const dm=(s.t-tt)/60000;
+    if(dm<-15) continue;
+    if(!start){
+      if(dm<=CONFIG.rain.lookaheadMin && s.mm>=th){ start=new Date(s.t-off); heavy=s.mm>=CONFIG.rain.heavyMm; }
+    }else{
+      if(s.mm>=CONFIG.rain.heavyMm) heavy=true;
+      if(s.mm<th){ end=new Date(s.t-off); break; }
+    }
+  }
+  return start ? {start, end, heavy} : null;
+}
+
+/* ============================== render =============================== */
+let view = "nu";
+let filt = { day: festivalDay(now()) || 1, stage:"all", fromHour:13, picksOnly:false, minEnergy:false, showPast:false };
+
+function setView(v){ view=v; render(); }
+function el(id){ return document.getElementById(id); }
+function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
+
+function pickBadge(p){
+  return p==="must" ? ' <span class="badge must">MUST</span>' : p==="rec" ? ' <span class="badge rec">TIP</span>' : "";
+}
+function coverBadge(st){
+  if(!st) return "";
+  const label = st.cover==="indoor" ? "BINNEN" : st.cover==="covered" ? "DAK" : "";
+  let out = label ? ` <span class="badge cover">${label}</span>` : "";
+  if(!st.verified) out += ' <span class="badge unverified">?</span>';
+  return out;
+}
+function stageName(slug){ return STAGES[slug]?.name || slug; }
+
+function renderBanners(){
+  let html = "";
+  if(DEMO_DATA) html += `<div class="banner demo">⚠️ DEMODATA — de echte W1-timetable wordt geladen zodra <b>source/tomorrowland-final2.html</b> in de repo staat.</div>`;
+  if(wx.stale && wx.ts) html += `<div class="banner stale">Weer: ${fmtHM(wx.ts)} (offline — laatste bekende voorspelling)</div>`;
+  if(!wx.ts && wx.minutely.length===0) html += `<div class="banner stale">Geen weerdata — statisch model actief</div>`;
+  if(wxOffsetFor(wx.minutely, now()) !== 0 || wxOffsetFor(wx.hourly, now()) !== 0) html += `<div class="banner stale">Weer: patroon van vandaag (Amsterdam) toegepast op deze simulatiedag</div>`;
+
+  const t = now();
+  const ev = nextRainEvent(t);
+  if(ev){
+    const moveBy = new Date(ev.start.getTime() - CONFIG.rain.moveByBufferMin*60000);
+    const recs = coveredRecsAt(ev.start).slice(0,3);
+    let lines = "";
+    if(recs.length){
+      const top = recs[0];
+      lines += `<div class="go">Ga vóór ${fmtHM(moveBy)} naar ${esc(stageName(top.set.stage))} — ${esc(top.set.artist)} (energie ${ARTISTS[top.set.artist]?.energy ?? 50}).</div>`;
+      for(const r of recs.slice(1))
+        lines += `<div class="next">of: ${esc(stageName(r.set.stage))} — ${esc(r.set.artist)} (score ${r.score})</div>`;
+    }
+    const dur = ev.end ? ` tot ~${fmtHM(ev.end)}` : "";
+    html += `<div class="banner rain">🌧 ${ev.heavy?"Zware regen":"Regen"} ~${fmtHM(ev.start)} (±15 min)${dur}.${lines}</div>`;
+  }
+  el("banners").innerHTML = html;
+}
+
+// covered/indoor sets playing at time t, scored at t, sorted desc
+function coveredRecsAt(t){
+  const d = festivalDay(t);
+  if(!d) return [];
+  const out=[];
+  for(const set of TIMETABLE){
+    if(set.day!==d) continue;
+    const st = STAGES[set.stage];
+    if(!st || st.cover==="open") continue;
+    const s=setDate(set,"start"), e=setDate(set,"end");
+    // playing at rain time, or starting shortly after
+    if(s<=t && t<e || (s>t && (s-t)<=30*60000)){
+      out.push({set, score: scoreSet(set, t, wx, true)});
+    }
+  }
+  return out.sort((a,b)=>b.score-a.score);
+}
+
+function renderNu(){
+  const t = now();
+  const d = festivalDay(t);
+  if(!d){
+    const start = new Date(DAY_DATES[1]+"T13:00:00");
+    const days = Math.max(0, Math.ceil((start - t)/864e5));
+    const countdown = t < start
+      ? `Nog <b>${days} ${days===1?"dag":"dagen"}</b> tot Milkshake.<br>Zo 26 juli vanaf 13:00, Westerpark.`
+      : `Weekend 1 zit erop. 🖤`;
+    el("view-nu").innerHTML = `<div class="msg">${countdown}<br><br>Alvast proefdraaien:</div>
+      <div class="chips">
+        <a class="chip" href="?now=2026-07-26T16:00">▶︎ Zo 16:00</a>
+        <a class="chip" href="?now=2026-07-26T21:00">▶︎ Zo 21:00</a>
+        <a class="chip" href="?now=2026-07-26T20:00&rain=demo">🌧 Regen-demo</a>
+        <a class="chip" href="index.html">↺ Live-klok</a>
+      </div>`;
+    return;
+  }
+  const byStage = {};
+  for(const set of TIMETABLE){
+    if(set.day!==d) continue;
+    const s=setDate(set,"start"), e=setDate(set,"end");
+    const b = byStage[set.stage] ??= {current:null, next:null};
+    if(s<=t && t<e) b.current = set;
+    else if(s>t && (!b.next || setDate(b.next,"start")>s)) b.next = set;
+  }
+  const rows = Object.entries(byStage).map(([slug,b])=>({
+    slug, ...b, score: b.current ? scoreSet(b.current, t, wx, true) : -1
+  })).sort((a,b)=>b.score-a.score || (a.next&&b.next ? setDate(a.next,"start")-setDate(b.next,"start") : a.next?-1:1));
+
+  let html = "";
+  for(const r of rows){
+    const st = STAGES[r.slug];
+    let body;
+    if(r.current){
+      body = `<div class="art">${esc(r.current.artist)}${pickBadge(r.current.pick)}</div>
+        <div class="meta">${r.current.start}–${r.current.end} · <i>${esc(r.current.genre)}</i></div>
+        <div class="score">${scoreBlocks(r.score)}<b>${r.score}</b></div>`;
+    }else{
+      body = `<div class="meta">— geen set bezig —</div>`;
+    }
+    const nxt = r.next ? `<div class="next">straks ${r.next.start}: ${esc(r.next.artist)}${r.next.pick?" ★":""} · ${hasWx() ? scoreSetWx(r.next, wx) : scoreSet(r.next, null, wx, false)}</div>` : "";
+    html += `<div class="nucard ${r.current?.pick||""}"><div class="stage">${esc(stageName(r.slug)).toUpperCase()}${coverBadge(st)}</div>${body}${nxt}</div>`;
+  }
+  el("view-nu").innerHTML = html || `<div class="msg">Geen sets vandaag.</div>`;
+}
+
+function renderSchema(){
+  const inDay = new Set(TIMETABLE.filter(s=>s.day===filt.day).map(s=>s.stage));
+  const stagesInDay = Object.keys(STAGES).filter(s=>inDay.has(s));
+  const dayChips = Object.keys(DAY_DATES).map(Number).map(d=>
+    `<button class="chip ${filt.day===d?"on":""}" onclick="filt.day=${d};render()">${DAY_LABELS[d]}</button>`).join("");
+  const stageChips = [`<button class="chip ${filt.stage==="all"?"on":""}" onclick="filt.stage='all';render()">Alle</button>`]
+    .concat(stagesInDay.map(s=>`<button class="chip ${filt.stage===s?"on":""}" onclick="filt.stage='${s}';render()">${esc(stageName(s))}</button>`)).join("");
+  const hours=[]; for(let h=13;h<=23;h++) hours.push(h);
+  const hourChips = hours.map(h=>{
+    const label = h>=24 ? String(h-24).padStart(2,"0") : String(h);
+    return `<button class="chip ${filt.fromHour===h?"on":""}" onclick="filt.fromHour=${h};render()">${label}</button>`;
+  }).join("");
+  // auto-hide finished sets when looking at the current festival day
+  const tNow = now();
+  const viewingToday = festivalDay(tNow) === filt.day;
+  let pastHidden = 0;
+
+  let sets = TIMETABLE.filter(s=>s.day===filt.day)
+    .filter(s=>filt.stage==="all" || s.stage===filt.stage)
+    .filter(s=>toMin(s.start) >= filt.fromHour*60)
+    .filter(s=>!filt.picksOnly || s.pick)
+    .filter(s=>{
+      if(!viewingToday || filt.showPast) return true;
+      if(setDate(s,"end") <= tNow){ pastHidden++; return false; }
+      return true;
+    })
+    .map(s=>({set:s, score: hasWx() ? scoreSetWx(s, wx) : scoreSet(s, null, wx, false)}))
+    .filter(r=>!filt.minEnergy || r.score>=CONFIG.energyChipMin)
+    .sort((a,b)=>toMin(a.set.start)-toMin(b.set.start));
+
+  const toggles =
+    `<button class="chip toggle ${filt.picksOnly?"on":""}" onclick="filt.picksOnly=!filt.picksOnly;render()">★ picks</button>`+
+    `<button class="chip toggle ${filt.minEnergy?"on":""}" onclick="filt.minEnergy=!filt.minEnergy;render()">⚡ ≥${CONFIG.energyChipMin}</button>`+
+    (viewingToday && (pastHidden>0 || filt.showPast)
+      ? `<button class="chip toggle ${filt.showPast?"on":""}" onclick="filt.showPast=!filt.showPast;render()">⏱ voorbij${filt.showPast?"":" ("+pastHidden+")"}</button>` : "");
+
+  let html = `<div class="chips">${dayChips}</div><div class="chips">${stageChips}</div><div class="chips">${hourChips}</div><div class="chips">${toggles}</div>`;
+  const card = ({set,score}) => {
+    const st = STAGES[set.stage];
+    return `<div class="card ${set.pick}">
+      <div class="art">${set.pick==="must"?"🔴 ":set.pick==="rec"?"🟠 ":""}${esc(set.artist)}${pickBadge(set.pick)}</div>
+      <div class="meta">${set.start}–${set.end} · ${esc(stageName(set.stage))}${coverBadge(st)} · <i>${esc(set.genre)}</i></div>
+      <div class="score">${scoreBlocks(score)}<b>${score}</b></div>
+    </div>`;
+  };
+  // on the current day: running sets get their own block on top, so you
+  // never have to dig for "what plays right now" under old start times
+  const isRunning = (r) => viewingToday && !filt.showPast && setDate(r.set,"start")<=tNow && tNow<setDate(r.set,"end");
+  const running = sets.filter(isRunning);
+  const upcoming = sets.filter(r=>!isRunning(r));
+  if(running.length){
+    html += `<div class="th">▶ NU BEZIG</div>`;
+    for(const r of running) html += card(r);
+  }
+  // group by quarter-hour so 17:35 sits under the 17:30 header
+  let lastBucket = null;
+  for(const r of upcoming){
+    const b = Math.floor(toMin(r.set.start)/15)*15;
+    if(b!==lastBucket){
+      html += `<div class="th">${String(Math.floor(b/60)%24).padStart(2,"0")}:${String(b%60).padStart(2,"0")}</div>`;
+      lastBucket = b;
+    }
+    html += card(r);
+  }
+  if(!sets.length) html += `<div class="msg">Niets gevonden met deze filters.</div>`;
+  el("view-schema").innerHTML = html;
+}
+
+function renderWeer(){
+  const offMin = wxOffsetFor(wx.minutely, now()), offHr = wxOffsetFor(wx.hourly, now());
+  const t = new Date(now().getTime() + offMin);
+  const tHr = new Date(now().getTime() + offHr);
+  let html = "";
+  if(wx.ts) html += `<div class="sub" style="padding:8px 14px">Laatste update: ${fmtHM(wx.ts)}${wx.stale?" (offline)":""}${(offMin||offHr)?" · patroon van vandaag":""}</div>`;
+  html += `<h2>NEERSLAG KOMENDE 2 UUR</h2>`;
+  const slots = wx.minutely.filter(s=>{ const dm=(s.t-t)/60000; return dm>-15 && dm<=120; });
+  if(slots.length){
+    for(const s of slots){
+      const raining = s.mm>=CONFIG.rain.threshMm;
+      const bars = raining ? "▮".repeat(clamp(Math.ceil(s.mm),1,6)) : "";
+      const cl = cloudAt(s.t);
+      const sky = raining ? "🌧" : cl==null ? "·" : cl<25 ? "☀️" : cl<60 ? "⛅" : "☁️";
+      html += `<div class="wrow"><span class="t">${fmtHM(s.t)}</span><span>${sky}</span><span class="bar">${bars}</span><span class="mm">${s.mm>0?s.mm.toFixed(1)+" mm":"droog"}</span></div>`;
+    }
+  } else html += `<div class="msg">Geen kwartierdata beschikbaar.</div>`;
+  html += `<h2>PER UUR VANDAAG</h2>`;
+  const hrs = wx.hourly.filter(s=>{ const dh=(s.t-tHr)/3600e3; return dh>-1 && dh<=18; });
+  if(hrs.length){
+    for(const s of hrs){
+      const sky = s.mm>=CONFIG.rain.threshMm ? "🌧" : s.cloud==null ? "" : s.cloud<25 ? "☀️" : s.cloud<60 ? "⛅" : "☁️";
+      html += `<div class="wrow"><span class="t">${fmtHM(s.t)}</span><span>${sky} ${Math.round(s.temp)}°</span><span class="mm">${s.prob!=null?s.prob+"%":""} ${s.mm>0?s.mm.toFixed(1)+" mm":""}</span></div>`;
+    }
+  } else html += `<div class="msg">Geen uurdata beschikbaar.</div>`;
+  el("view-weer").innerHTML = html;
+}
+
+function render(){
+  el("tab-nu").className = view==="nu"?"on":"";
+  el("tab-schema").className = view==="schema"?"on":"";
+  el("tab-weer").className = view==="weer"?"on":"";
+  el("view-nu").style.display = view==="nu"?"":"none";
+  el("view-schema").style.display = view==="schema"?"":"none";
+  el("view-weer").style.display = view==="weer"?"":"none";
+  el("clockline").textContent = (NOW_OVERRIDE?"SIM ":"") + fmtHM(now()) + " · " + (festivalDay(now()) ? DAY_LABELS[festivalDay(now())] : "vóór festival");
+  renderBanners();
+  if(view==="nu") renderNu();
+  else if(view==="schema") renderSchema();
+  else renderWeer();
+}
+
+/* ============================ sanity tests =========================== */
+// ?test=1 — quick engine assertions in console
+function runTests(){
+  const get=(a)=>TIMETABLE.find(s=>s.artist===a);
+  const results=[];
+  const ok=(name,cond)=>results.push((cond?"✅ ":"❌ ")+name);
+  ok(`72 sets geladen`, TIMETABLE.length===72);
+  ok(`alle stages bekend`, TIMETABLE.every(s=>STAGES[s.stage]));
+  ok(`alle artiesten hebben energie`, TIMETABLE.every(s=>ARTISTS[s.artist]));
+  const todd = scoreSet(get("Todd Terry"), null, wx, false);
+  const krioro = scoreSet(get("Krioro"), null, wx, false);
+  ok(`avond Todd Terry [${todd}] > middag-opener [${krioro}]`, todd>krioro);
+  const tL = new Date("2026-07-26T21:30:00");
+  const rainWx = { minutely:[{t:tL, mm:1.0}], hourly:[], ts:new Date(), stale:false };
+  const aly = get("Alyosha");
+  ok(`binnen/tent stijgt bij regen`, scoreSet(aly, tL, rainWx, true) > scoreSet(aly, tL, {minutely:[],hourly:[]}, true));
+  const tt2 = get("Todd Terry");
+  const t2 = new Date("2026-07-26T22:00:00");
+  const rainWx2 = { minutely:[{t:t2, mm:1.0}], hourly:[], ts:new Date(), stale:false };
+  ok(`open main stort in bij regen`, scoreSet(tt2, t2, {minutely:[],hourly:[]}, true) > scoreSet(tt2, t2, rainWx2, true));
+  const long = get("Bestley");
+  const ls = setDate(long,"start");
+  const earlyRain = { minutely:[0,15,30].map(m=>({t:new Date(ls.getTime()+m*60000), mm:1.0})), hourly:[], ts:new Date(), stale:false };
+  ok(`slechtste kwartier telt over hele set`, scoreSetWx(long, earlyRain) < scoreSet(long, null, wx, false));
+  console.log("Milkshake engine tests:\n"+results.join("\n"));
+  if(results.some(r=>r.startsWith("❌"))) alert("Engine tests FAILED — zie console");
+}
+
+/* ============================== startup ============================== */
+if(params.get("rain")==="demo") injectDemoRain();
+render();
+fetchWeather();
+setInterval(()=>{ if(!NOW_OVERRIDE) render(); }, 60*1000);
+setInterval(fetchWeather, CONFIG.weather.pollMs);
+document.addEventListener("visibilitychange", ()=>{ if(document.visibilityState==="visible") fetchWeather(); });
+if("serviceWorker" in navigator && location.protocol==="https:") navigator.serviceWorker.register("./sw.js");
+if(params.get("test")==="1") runTests();
+</script>
+</body>
+</html>
