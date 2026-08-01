@@ -1,11 +1,12 @@
 # Festival Energy Tracker
 
-Vier apps, één engine:
+Vijf apps, één engine:
 
 - **Tomorrowland W1** (17–19 juli 2026, Boom): `/` — https://bartunlimited.github.io/Festival-energy-tracker/
 - **Awakenings Sunday** (12 juli 2026, Hilvarenbeek): `/awakenings/` — https://bartunlimited.github.io/Festival-energy-tracker/awakenings/
 - **TML W2 vrijdag — Jesse** (24 juli 2026, Boom): `/jesse/` — https://bartunlimited.github.io/Festival-energy-tracker/jesse/
-- **Milkshake zondag** (26 juli 2026, Westerpark A'dam): `/milkshake/` — https://bartunlimited.github.io/Festival-energy-tracker/milkshake/
+- **Milkshake** (25–26 juli 2026, Westerpark A'dam): `/milkshake/` — https://bartunlimited.github.io/Festival-energy-tracker/milkshake/
+- **Tillatec × WorldPride** (1–3 aug 2026, Amsterdam): `/tillatec/` — https://bartunlimited.github.io/Festival-energy-tracker/tillatec/
 
 ## Tomorrowland W1 2026
 
