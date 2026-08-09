@@ -5,9 +5,17 @@ staat te praten), live reagerend op het weer. Gebouwd voor en met Bart.
 
 ## ⚠️ Lees eerst
 
-**`docs/muziek-dna.md`** — Barts muzieksmaak, uitsluitingen en de regels voor
+**`docs/muziek-dna.md`** — Barts muzieksmaak, de drie dislikes en de regels voor
 aanbevelingen. Zonder dat document geef je verkeerde picks. Lees het voordat je
 ook maar één set markeert.
+
+Achtergrond, alleen nodig bij grotere wijzigingen:
+- `docs/DESIGN-tml-energy-tool.md` — het oorspronkelijke ontwerp: scoringsmodel,
+  gewichten, weer-integratie, stage-metadata.
+- `docs/handover-festival-tool.md` — het recept van Barts eerdere tools (bevat de
+  originele DNA-omschrijving).
+- `tools/` — de generatoren, met een waarschuwing in `tools/README.md`: draai ze niet
+  blind opnieuw.
 
 ## Apps
 
@@ -25,8 +33,8 @@ elke app doorvoeren.
 
 ## Data zit in de HTML zelf
 
-Er zijn geen build-scripts (die stonden in een tijdelijke werkmap en zijn weg). De
-drie datablokken bovenin elk bestand zijn de bron van waarheid en direct te bewerken:
+De drie datablokken bovenin elk bestand zijn de bron van waarheid en direct te
+bewerken. De generatoren in `tools/` zijn naslag, geen build-stap:
 
 ```js
 const TIMETABLE = [ {day, stage, artist, start, end, pick:"must"|"rec"|"", genre}, … ];
