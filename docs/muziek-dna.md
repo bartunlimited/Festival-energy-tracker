@@ -70,7 +70,56 @@ allemaal gemarkeerd: Job Jobse, Carista, I Hate Models, 999999999. De harde kern
 
 ---
 
-## 3. Twee losse assen: energie ≠ pick
+## 3. Ankerpunten — de concrete namen
+
+### 3a. Barts eigen musts (Tomorrowland W1 2026)
+
+Dit zijn zijn **eigen** markeringen, niet gesuggereerd. De harde referentie.
+
+**Techno-kern:** Sara Landry · Amelie Lens · Nico Moreno · Anetha · Ben Klock ·
+Charlotte de Witte · Indira Paganotto · BIIA b2b Charlie Sparks
+
+**Mainstage/EDM-kern:** Martin Garrix · Calvin Harris · Alesso · Sebastian Ingrosso ·
+The Chainsmokers · Armin van Buuren · John Summit · Lost Frequencies
+
+**Buiten categorie:** Ofenbach · Olive Anguz · Symphony Of Harmony (orkest) ·
+Oscar and the Wolf
+
+Die twee kernen naast elkaar zijn typerend: **wie alleen de bovenste rij ziet, beveelt
+te smal aan.** Bart heeft de verbreding naar mainstage-EDM zelf bevestigd (aug 2026).
+
+### 3b. Zijn eigen tips, per genre (W1, 101 stuks — een greep)
+
+| Genre | Namen |
+|---|---|
+| Techno | 4444 OF A KIND · Holy Priest · Elli Acula · Blondex · de hele Cage F2F-reeks |
+| Hard techno | MANDY (b2b NEGITIV) · DITHER · Estella Boersma · Jack Shore · A.N.I. · Dexphase · Byorn |
+| Melodic techno | Artbat · Miss Monique · Kevin de Vries · Helsloot · MPH · Fake Mood · Diffrent |
+| EDM | David Guetta · Afrojack · Nicky Romero · R3hab · NERVO · Henri PFR · HALÒ · Gabry Ponte |
+| House / tech house | Fisher · Oliver Heldens · Vintage Culture · BLOND:ISH · Sally C · Franky Rizardo · Amber Broos |
+| Deep / eclectic | Bedouin · Fafi Abdel Nour · Avalon Emerson b2b Ben UFO · Nico Morano b2b Xinobi |
+| Techno / rave | Maddix · Hannah Laing |
+
+### 3c. Claude-suggesties die Bart goedkeurde (aug 2026)
+
+Bart over deze lijsten: *"houd je aanbevelingen van 2026 aan, die waren behoorlijk
+goed."* Bruikbaar als kalibratie-referentie:
+
+- **Awakenings:** Ben Klock · Freddy K · Nina Kraviz · Richie Hawtin · Boris Brejcha ·
+  Pan-Pot · Marco Carola · Mau P · 999999999 · Eli Brown & HI-LO · MCR-T & Partiboi69
+- **TML W2 (Jesse, Barts smaak):** Azyr · Enrico Sangiuliano · Hardwell · Steve Angello ·
+  Alesso · Fisher · James Hype · Kölsch · Mall Grab · Miss Monique · Hannah Laing ·
+  Blastoyz · Onlynumbers · Dyen · NATTE VISSTICK
+- **Milkshake:** Todd Terry · Horse Meat Disco · Chuckie · Volvox · Byron Yeates ·
+  Chris Bekker · Dee Diggs b2b Ultra Naté · Fafi Abdel Nour b2b Jennifer Loveless
+
+> ⛔ **Tillatec is géén referentie.** Bart: *"dat was te vaag om er iets over te
+> zeggen"* — de line-up bestond grotendeels uit namen die hij niet kende. De picks in
+> `/tillatec/` staan er nog, maar gebruik ze **niet** als bewijs voor zijn smaak.
+
+---
+
+## 4. Twee losse assen: energie ≠ pick
 
 - **Energie** = waar de *crowd* danst → dat voorspelt de app.
 - **Pick** = wat *Bart* wil zien → dat is iets anders.
@@ -87,7 +136,7 @@ score nooit als argument om iets wél aan te bevelen.
 
 ---
 
-## 4. Trefkans per genre (gemeten over W1: 391 sets, 127 gemarkeerd)
+## 5. Trefkans per genre (gemeten over W1: 391 sets, 127 gemarkeerd)
 
 | Genre-familie | Gemarkeerd | Sets | Trefkans |
 |---|---:|---:|---:|
@@ -108,7 +157,7 @@ score nooit als argument om iets wél aan te bevelen.
 
 ---
 
-## 5. Dislikes — de volledige lijst
+## 6. Dislikes — de volledige lijst
 
 Precies drie. Verder niets uitsluiten.
 
@@ -117,9 +166,14 @@ Precies drie. Verder niets uitsluiten.
 2. **Dubstep / bass** — bevestigd door de data (0/17).
 3. **Dimitri Vegas & Like Mike** — persoonlijk, staat los van de energie-score.
 
+**Grensgeval, aug 2026:** **Honey Dijon** — *"vind ik niet leuk, te veel R&B."* Het
+oude profiel van okt 2025 noemde haar nog als crossover-ja; dat is achterhaald.
+Generaliseer dit naar **R&B-/soul-doordrenkte vocal house**: hoge naamsbekendheid,
+maar niet zijn vloer. Niet markeren.
+
 ---
 
-## 6. Vuistregels voor aanbevelingen
+## 7. Vuistregels voor aanbevelingen
 
 1. **Festivalprofiel, altijd** — tenzij het expliciet over thuisluisteren gaat.
 2. **Markeer ruim.** Alle goede DJ's op alle stages; Bart kiest ter plekke op mood,
@@ -137,7 +191,7 @@ Precies drie. Verder niets uitsluiten.
 
 ---
 
-## 7. Wat Bart zelf heeft gekalibreerd (2026)
+## 8. Wat Bart zelf heeft gekalibreerd (2026)
 
 - **Atmosphere is binnen**, geen tent · **The Gathering is buiten** ·
   **Awakenings:** Y = tent, B en C = dak, rest buiten.
@@ -152,11 +206,17 @@ Precies drie. Verder niets uitsluiten.
 
 ---
 
-## 8. Open vragen voor Bart
+## 9. Beantwoorde vragen (aug 2026)
 
-1. **Klopt de verbreding naar mainstage-EDM?** Het profiel van okt 2025 kent die kant
-   niet, je 2026-musts staan er vol mee.
-2. **Honey Dijon / Joris Voorn / Floorplan-achtige crossover** stond in okt 2025 als
-   "ja" — Honey Dijon kwam voorbij bij Awakenings en is niet gemarkeerd. Bewuste keuze?
-3. **Zijn er festivals na Draaimolen 2024 waar je feedback op hebt** die nog nergens
-   verwerkt is? Dat is de snelste manier om dit document scherper te maken.
+1. **Klopt de verbreding naar mainstage-EDM?** → **Ja**, bevestigd door Bart. Het
+   profiel van okt 2025 is op dit punt achterhaald; behandel beide kernen als
+   gelijkwaardig.
+2. **Honey Dijon / crossover?** → **Nee.** Te veel R&B. Zie de dislikes.
+3. **Zijn de 2026-suggesties bruikbaar?** → **Ja, behalve Tillatec.** Zie §3c.
+
+### Nog open
+
+- Festivalfeedback ná Draaimolen 2024 die nergens verwerkt is — dat blijft de snelste
+  manier om dit document scherper te maken.
+- Artiesten waarvan Bart weet dat de energie-score ernaast zit; één regel per naam is
+  genoeg (`docs/artist-energy-review.md`).
