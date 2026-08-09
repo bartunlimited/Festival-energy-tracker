@@ -1,46 +1,93 @@
 # Muziek-DNA — Bart
 
-> **Status:** samengesteld op 1 augustus 2026. De basis is de **originele formulering**
-> hieronder, teruggehaald uit het handover-document (`docs/handover-festival-tool.md`,
-> §Picks); de rest is gemeten uit de picks en kalibraties in alle vijf de apps.
-> **Bart: corrigeer wat niet klopt** — dit bestand is de bron voor alle toekomstige
-> aanbevelingen.
+> **Bronnen, in volgorde van gezag:**
+> 1. `docs/muziek-dna-2025-origineel.md` — Barts eigen profiel, laatst bijgewerkt
+>    okt 2025 na Draaimolen. **De structuur daarvan geldt nog steeds; sommige
+>    inhoud is achterhaald** (zie "Wat er sinds okt 2025 veranderde").
+> 2. `docs/handover-festival-tool.md` §Picks — de kortere, latere omschrijving.
+> 3. De gemeten picks in de vijf apps van zomer 2026.
+>
+> Laatst herzien: 1 aug 2026. **Bart: corrigeer wat niet klopt.**
 
 ---
 
-## De originele formulering (bron: handover-document)
+## 1. Het fundament: twee profielen, niet één
 
-> *"Gebruik Bart's Music DNA uit het geheugen. Kernpunten: heel breed spectrum
-> (hard techno t/m mainstage EDM/trance/pop-crossover), dislikes alleen
-> experimental/ambient, dubstep, en Dimitri Vegas & Like Mike. **Markeer ruim:**
-> alle goede DJs op alle stages — Bart kiest zelf op basis van
-> mood/weer/crowd/binnen-buiten. Verwacht iteratie: Bart corrigeert ratings per
-> artiest."*
+Dit is de belangrijkste structuur van Barts smaak en het makkelijkst om fout te doen:
 
-Drie dingen die hieruit volgen en die je makkelijk verkeerd doet:
+| | **Spotify Bart** (thuis, solo) | **Festival Bart** (dansvloer) |
+|---|---|---|
+| BPM | 122–128 | **130–140+** |
+| Melodie | veel | minimaal |
+| Vocalen | vaak | weinig |
+| Energie | moderate | high / relentless |
+| Sfeer | licht–medium | dark / industrial |
+| Kern | melodic techno, tech house, progressive trance | hard/industrial techno, straightforward dancefloor, classic house |
+| Namen | Armin van Buuren, CamelPhat, Above & Beyond, Cosmic Gate, Stephan Bodzin | Helena Hauff, Job Jobse, Freddy K, I Hate Models, Kobosil, SPFDJ, Dax J, 999999999, Carista, Benny Rodrigues |
 
-1. **De dislike-lijst is kort en gesloten**: experimental/ambient, dubstep, en
-   Dimitri Vegas & Like Mike. Verder niets. Zie de waarschuwing bij "trefkans".
-2. **Markeer ruim, niet streng.** Het doel is een brede selectie van goede DJ's op
-   álle stages; Bart maakt de uiteindelijke keuze ter plekke op mood, weer, crowd en
-   binnen/buiten. Te weinig markeren is een grotere fout dan te veel.
-3. **Iteratie is ingebouwd.** Hij corrigeert per artiest; verwerk die correcties en
-   werk dit document bij.
+**Dat is geen tegenstrijdigheid maar context.** Zijn eigen formulering: *"Thuis luister
+je Miles Davis, op feestjes wil je hard techno."*
+
+> ### 🚨 Voor deze apps geldt **altijd het festivalprofiel.**
+> Alle vijf de tools voorspellen dansvloeren. Gebruik het Spotify-profiel alleen als
+> Bart expliciet om thuisluister-muziek of een playlist vraagt.
+> Als hij zegt *"maar op Spotify luister ik nooit Helena Hauff"* — dat klopt, en het
+> is geen tegenspraak.
+
+**Bewezen fout uit het verleden** (staat in zijn eigen document): bij ADE 2025 werden
+Dave Clarke en Helena Hauff eerst aanbevolen, daarna geschrapt omdat zijn Spotify "te
+melodisch" leek. Dat was de fout — er had het festivalprofiel gebruikt moeten worden.
+Maak die fout niet opnieuw.
 
 ---
 
-## De kern in één alinea
+## 2. Wat er sinds okt 2025 veranderde
 
-Bart heeft een **heel breed** spectrum met een zwaartepunt in **techno**, maar hij is
-geen purist: grote mainstage-namen met een show staan even hard in zijn musts als
-Berghain-residents. De rode draad is niet één genre maar **de vloer**: muziek waar
-gedanst wordt.
+Het originele document tekent Festival Bart als **underground purist**. De data van
+2026 laat zien dat het spectrum sindsdien duidelijk breder is; de latere
+handover-omschrijving zegt het al: *"heel breed spectrum (hard techno t/m mainstage
+EDM/trance/pop-crossover)"*.
+
+**Bevestigd gebleven** — de Draaimolen-namen die in de 2026-lineups stonden, zijn
+allemaal gemarkeerd: Job Jobse, Carista, I Hate Models, 999999999. De harde kern klopt.
+
+**Verbreed:**
+- **Mainstage-EDM is nu een tweede kern**, niet een uitzondering. Eigen musts van Bart:
+  Martin Garrix, Calvin Harris, Alesso, Sebastian Ingrosso, The Chainsmokers,
+  Armin van Buuren, John Summit, Lost Frequencies, Ofenbach. Het originele document
+  noemt dit segment nergens.
+- **Vocalen op de dansvloer mogen.** Het oude profiel zegt "weinig vocalen" voor
+  festivals; The Chainsmokers en Lost Frequencies staan nu als must.
+- **Live acts zijn niet meer categorisch uit.** Het oude document zegt "DJ sets boven
+  live acts" en "te veel live laptop acts" als minpunt. Maar **Symphony Of Harmony**
+  (orkest) is een must en **Reinier Zonneveld (live)** is gemarkeerd. De juiste lezing:
+  niet *live* is het probleem, maar **cerebraal/laptop zonder dansvloer**.
+
+**Onveranderd hard:**
+- Experimenteel/ambient blijft uit (Draaimolen MOON-stage: *"saai en te experimenteel"*).
+- Dubstep blijft uit — 0 van de 17 bass-sets gemarkeerd in W1.
+- Dimitri Vegas & Like Mike blijft een expliciete persoonlijke dislike.
 
 ---
 
-## Trefkans per genre (gemeten, niet geraden)
+## 3. Twee losse assen: energie ≠ pick
 
-Uit de 391 sets van Tomorrowland W1, waarvan Bart er 127 markeerde:
+- **Energie** = waar de *crowd* danst → dat voorspelt de app.
+- **Pick** = wat *Bart* wil zien → dat is iets anders.
+
+Het ontwerpdocument zegt het letterlijk: *"Personal picks stay a separate overlay
+(his taste ≠ crowd energy)."*
+
+Bewijs: **Symphony Of Harmony** heeft energie **31** (*"orkest — kijken, niet dansen"*)
+en is tóch een must. **Dimitri Vegas & Like Mike** heeft energie 65 (*"crowd beweegt"*)
+en is bewust géén pick.
+
+→ Gebruik een lage score nooit als argument om iets niet aan te bevelen, en een hoge
+score nooit als argument om iets wél aan te bevelen.
+
+---
+
+## 4. Trefkans per genre (gemeten over W1: 391 sets, 127 gemarkeerd)
 
 | Genre-familie | Gemarkeerd | Sets | Trefkans |
 |---|---:|---:|---:|
@@ -51,119 +98,65 @@ Uit de 391 sets van Tomorrowland W1, waarvan Bart er 127 markeerde:
 | Trance | 2 | 4 | 50 % |
 | Mainstage EDM / pop | 19 | 49 | 39 % |
 | House / tech house | 37 | 140 | 26 % |
-| Hardstyle / raw | 1 | 29 | **3 %** |
+| Hardstyle / raw | 1 | 29 | 3 % |
 | Dubstep / bass / drum & bass | 0 | 17 | **0 %** |
-| Psytrance | 0 | 11 | **0 %** |
+| Psytrance | 0 | 11 | 0 % |
 
-**Lees dit zo:** techno in alle vormen is bijna altijd raak. House is zó ruim
-vertegenwoordigd dat de lage trefkans niets zegt over de smaak — daar selecteert hij
-op naam, niet op genre.
-
-> ⚠️ **Verwar een lage trefkans niet met een dislike.** Hardstyle (1/29) en psytrance
-> (0/11) staan hier laag, maar volgens Barts eigen DNA-omschrijving zijn ze **geen**
-> dislike — de dislike-lijst bevat alleen experimental/ambient, dubstep en DVLM. Dat
-> die twee genres nauwelijks gemarkeerd zijn, is waarschijnlijk een gevolg van hoe de
-> picks tot stand kwamen, niet van afkeer. Behandel ze als **neutraal**: aanbevelen
-> mag, maar noem erbij waaróm (bijv. een hardstyle-classicset of een grote naam).
-> Dat "rave-classics" wél scoren (Mark With A K & MC Chucky is een tip) ondersteunt
-> dat.
+> ⚠️ **Lage trefkans ≠ dislike.** Hardstyle en psytrance staan laag maar staan op
+> géén enkele dislike-lijst. Behandel ze als neutraal: aanbevelen mag, met een reden
+> erbij. Rave-classics scoren juist wél (Mark With A K & MC Chucky is een tip).
 
 ---
 
-## Twee losse assen: energie ≠ pick
+## 5. Dislikes — de volledige lijst
 
-Dit is de belangrijkste nuance en het makkelijkst verkeerd te begrijpen:
+Precies drie. Verder niets uitsluiten.
 
-- **Energie** = waar de *crowd* danst. Dat is de voorspelling van de app.
-- **Pick** = wat *Bart* wil zien. Dat is iets anders.
-
-Bewijs uit zijn eigen data: **Symphony Of Harmony** heeft energie **31** met de notitie
-*"orkest — kijken, niet dansen"* en staat toch als **must**. **John Newman** (energie 49,
-*"zang, geen dansvloer"*) staat als tip. Andersom scoort **Dimitri Vegas & Like Mike**
-energie 65 met de notitie *"crowd beweegt, Bart-dislike staat los van energie"* — hoge
-energie, bewust géén pick.
-
-→ **Nooit een lage energie-score gebruiken als argument om iets niet aan te bevelen,
-en nooit een hoge score als argument om iets wél aan te bevelen.** Het zijn twee vragen.
+1. **Experimenteel / ambient / cerebraal** — muziek om naar te luisteren in plaats van
+   op te dansen; trage opbouw met veel textuur. Bron: Draaimolen MOON-stage.
+2. **Dubstep / bass** — bevestigd door de data (0/17).
+3. **Dimitri Vegas & Like Mike** — persoonlijk, staat los van de energie-score.
 
 ---
 
-## Ankerpunten — zijn eigen musts
+## 6. Vuistregels voor aanbevelingen
 
-**Techno-kern:** Sara Landry · Amelie Lens · Nico Moreno · Anetha · Ben Klock ·
-Charlotte de Witte · Indira Paganotto · BIIA b2b Charlie Sparks
-
-**Mainstage/EDM-kern:** Martin Garrix · Calvin Harris · Alesso · Sebastian Ingrosso ·
-The Chainsmokers · Armin van Buuren · John Summit · Lost Frequencies · Afrojack (tip)
-
-**Buiten categorie:** Ofenbach · Olive Anguz · Symphony Of Harmony · de Mainstage-
-openingsshow (17:30, elke dag een tip)
-
-Die twee kernen naast elkaar zijn typerend: wie alleen de eerste rij ziet, beveelt
-te smal aan.
-
----
-
-## Dislikes — de volledige lijst
-
-Precies drie, uit Barts eigen omschrijving. Verder niets uitsluiten.
-
-1. **Experimental / ambient** — geen dansvloer, geen pick.
-2. **Dubstep** — bevestigd door de data: 0 van de 17 bass/dubstep/drum & bass-sets
-   gemarkeerd (Borgore, Sullivan King, Riot Ten, ALLEYCVT, Camo & Krooked, de hele
-   Rose Garden op W2-vrijdag).
-3. **Dimitri Vegas & Like Mike** — expliciete, persoonlijke dislike. Staat los van de
-   energie-score (65, *"crowd beweegt"*) en van de rest van zijn EDM-voorkeur.
-
-Alles daarbuiten mag je aanbevelen, mits met een reden erbij.
+1. **Festivalprofiel, altijd** — tenzij het expliciet over thuisluisteren gaat.
+2. **Markeer ruim.** Alle goede DJ's op alle stages; Bart kiest ter plekke op mood,
+   weer, crowd en binnen/buiten. Te weinig markeren is een grotere fout dan te veel.
+3. **Markeer nooit stilzwijgend.** Eigen suggesties benoem je als suggestie; Barts
+   eigen picks zijn heilig en gaan 1-op-1 mee naar een nieuwe timetable.
+4. **BPM als vuistregel bij onbekende namen:** 130–140+ en driving = waarschijnlijk
+   raak; 120-ish en melodisch-met-zang = eerder een Spotify-artiest dan een
+   dansvloer-pick.
+5. **Techno na 21:00 in een donkere zaal** en **het closing-slot van een grote
+   mainstage-naam** zijn allebei bijna altijd raak.
+6. **Live/orkest/show** mag je aanbevelen als kijkmoment — zeg er dan bij dat het geen
+   dansvloer is. Die eerlijkheid waardeert hij.
+7. **Bij twijfel: geef de aanbeveling mét de reden**, dan corrigeert hij zelf.
 
 ---
 
-## Wat hij zelf heeft gekalibreerd
+## 7. Wat Bart zelf heeft gekalibreerd (2026)
 
-Deze correcties komen rechtstreeks van Bart en zijn hard bewijs voor hoe hij denkt:
-
-- **Atmosphere is binnen**, geen tent (TML).
-- **Mainstage krijgt fit-override 0.8** — te groot om overal vol te dansen.
+- **Atmosphere is binnen**, geen tent · **The Gathering is buiten** ·
+  **Awakenings:** Y = tent, B en C = dak, rest buiten.
+- **Mainstage fit-override 0.8** — te groot om overal vol te dansen.
 - **Lichtshow-bonus +0.20** voor de closing op Mainstage ná donker.
 - **Regen telt op het slechtste kwartier** van een set, niet op het gemiddelde.
-- **Awakenings:** Area Y is tent, B en C hebben een dak, de rest is buiten.
-- **The Gathering** (TML donderdag) is buiten.
-- **Henri PFR** ging van must naar tip zodra hij twee sets bleek te hebben — een pick
+- **Henri PFR** ging van must naar tip toen hij twee sets bleek te hebben — een pick
   hoort bij een moment, niet bij een naam.
-- **Olive Anguz en Ofenbach** promoveerde hij zelf naar must; beide house/melodic op
-  vrijdagavond, beide op hetzelfde tijdslot.
-- **Illenium** staat als tip met het label *"eens kijken of het wat is"* — dat is
-  nieuwsgierigheid, **geen** bewijs dat melodic bass in zijn smaak zit.
+- **Olive Anguz en Ofenbach** promoveerde hij zelf naar must.
+- **Illenium** is een tip met het label *"eens kijken of het wat is"* — nieuwsgierigheid,
+  geen bewijs dat melodic bass in zijn smaak zit.
 
 ---
 
-## Scoring-heuristiek (energie-as)
+## 8. Open vragen voor Bart
 
-```
-energie = genre-intensiteit (0–40)
-        + settype (0–15)          b2b / live / closing
-        + bekendheid (0–20)
-        + reputatie (0–25)        default 12
-```
-
-De engine vermenigvuldigt dat vervolgens met stage-fit, tijdslot (dag- of nachtcurve),
-weer (regen/zon/hitte/kou) en concurrentie van gelijktijdige sets. Zie
-`docs/artist-energy-review.md` voor de volledige tabel van W1.
-
----
-
-## Vuistregels voor een volgende sessie
-
-1. **Markeer nooit stilzwijgend.** Picks die Claude bedenkt zijn *suggesties* en moeten
-   als zodanig benoemd worden; Barts eigen picks zijn heilig en worden 1-op-1
-   overgenomen bij nieuwe timetables.
-2. **Markeer ruim.** Alle goede DJ's op alle stages; Bart kiest ter plekke. Te weinig
-   markeren is een grotere fout dan te veel.
-3. **Techno na 21:00 in een donkere binnenzaal** is bijna altijd raak.
-4. **Closing-slot van een grote mainstage-naam** is bijna altijd raak.
-5. **Dubstep/bass, experimental/ambient en DVLM** overslaan — de rest niet.
-6. **Show/live/orkest** mag je aanbevelen als kijk-moment, maar zeg erbij dat het geen
-   dansvloer is — die eerlijkheid waardeert hij (zie Illenium).
-7. **Bij twijfel over een onbekende naam:** geef de aanbeveling mét de reden, dan
-   corrigeert hij zelf. Dat werkt aantoonbaar goed.
+1. **Klopt de verbreding naar mainstage-EDM?** Het profiel van okt 2025 kent die kant
+   niet, je 2026-musts staan er vol mee.
+2. **Honey Dijon / Joris Voorn / Floorplan-achtige crossover** stond in okt 2025 als
+   "ja" — Honey Dijon kwam voorbij bij Awakenings en is niet gemarkeerd. Bewuste keuze?
+3. **Zijn er festivals na Draaimolen 2024 waar je feedback op hebt** die nog nergens
+   verwerkt is? Dat is de snelste manier om dit document scherper te maken.

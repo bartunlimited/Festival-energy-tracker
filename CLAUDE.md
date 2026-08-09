@@ -7,13 +7,16 @@ staat te praten), live reagerend op het weer. Gebouwd voor en met Bart.
 
 **`docs/muziek-dna.md`** — Barts muzieksmaak, de drie dislikes en de regels voor
 aanbevelingen. Zonder dat document geef je verkeerde picks. Lees het voordat je
-ook maar één set markeert.
+ook maar één set markeert. **Kern: Bart heeft twee profielen — thuis (melodisch,
+122–128 BPM) en festival (hard, 130–140+). Deze apps gebruiken altijd het
+festivalprofiel.**
 
 Achtergrond, alleen nodig bij grotere wijzigingen:
 - `docs/DESIGN-tml-energy-tool.md` — het oorspronkelijke ontwerp: scoringsmodel,
   gewichten, weer-integratie, stage-metadata.
-- `docs/handover-festival-tool.md` — het recept van Barts eerdere tools (bevat de
-  originele DNA-omschrijving).
+- `docs/muziek-dna-2025-origineel.md` — Barts eigen profiel van okt 2025 (na
+  Draaimolen); structuur geldt nog, delen zijn achterhaald.
+- `docs/handover-festival-tool.md` — het recept van Barts eerdere tools.
 - `tools/` — de generatoren, met een waarschuwing in `tools/README.md`: draai ze niet
   blind opnieuw.
 
