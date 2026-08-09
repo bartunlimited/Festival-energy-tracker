@@ -13,7 +13,20 @@
 | Halfweg | ⚠️ = Sugarfactory. Trein rijdt ~05:00–01:00, dus heen om 22:30 en terug om 07:00 kan; shuttle niet nodig als je uitzit |
 | Tent/buiten | valt af — oktober in Amsterdam. Zie `muziek-dna.md` §I |
 
-🔴 = sterke match · 🟠 = goede optie · ⬜ = als er tijd over is
+🔴 = sterke match · 🟠 = goede optie · ⬜ = als er tijd over is · ❓ = overdekking onbekend
+
+### Locaties — overdekking
+
+**Binnen, door Bart bevestigd (9 aug 2026):** WestWeelde · Toekomstmuziek · IJland ·
+Levenslang.
+
+**Binnen, algemeen bekend:** Melkweg · Paradiso · Gashouder · AFAS Live · Ziggo Dome ·
+Shelter · RADION · Het Sieraad · De Kromhouthal · NDSM Warehouse · Theater Amsterdam ·
+Madam · Skatecafe · Mediahaven · Sugarfactory.
+
+**Onbekend (❓):** H7 Warehouse · G-Star RAW · De Wester · Lofi.
+
+**Afgevallen wegens tent/buiten:** Thuishaven · Havenpark.
 
 ---
 
@@ -22,7 +35,7 @@
 | | Tijd | Optie | Zaal | Genre |
 |---|---|---|---|---|
 | 🟠 | 23:00–06:00 | Gashouder: **Armin van Buuren** & Benwal | Gashouder | trance / big room |
-| 🟠 | 20:00–03:00 | **Hernan Cattaneo b2b Nick Warren** — 6 uur | WestWeelde ❓ | progressive |
+| 🟠 | 20:00–03:00 | **Hernan Cattaneo b2b Nick Warren** — 6 uur | WestWeelde | progressive |
 | 🟠 | 23:00–07:00 | Awakenings Opening Night — 999999999 ¹ | Sugarfactory ⚠️ | hard techno |
 | 🟠 | 15:00–21:30 | Overbruggen x **Hot Since 82** | The Loft | deep house |
 | ⬜ | 23:00–05:00 | Oliver Heldens | Melkweg | big room / deep house |
@@ -34,10 +47,10 @@
 |---|---|---|---|---|
 | 🔴 | 23:00–06:00 | Gashouder: **I Hate Models & Nico Moreno** | Gashouder | hard techno |
 | 🔴 | 16:00–23:00 | Audio Obscura — **Anetha**, SPFDJ, Patrick Mason | G-Star RAW ❓ | techno |
-| 🔴 | 20:00–04:00 | **Colorize: 15 Years** | Toekomstmuziek ❓ | melodic / deep house |
-| 🔴 | 23:00–05:00 | **Guy J all-night-long** | IJland ❓ | progressive |
+| 🔴 | 20:00–04:00 | **Colorize: 15 Years** | Toekomstmuziek | melodic / deep house |
+| 🔴 | 23:00–05:00 | **Guy J all-night-long** | IJland | progressive |
 | 🔴 | 17:00–23:59 | **10 Years of STMPD RCRDS** | AFAS Live | big room |
-| 🟠 | 22:00–06:00 | Worakls & friends (live) | WestWeelde ❓ | melodic / orkestraal |
+| 🟠 | 22:00–06:00 | Worakls & friends (live) | WestWeelde | melodic / orkestraal |
 | 🟠 | 17:00–22:30 | Miss Monique presents Siona | Het Sieraad | melodic / progressive |
 | 🟠 | 23:00–07:00 | Awakenings **Drumcode** — Adam Beyer, Sangiuliano b2b Alicante ¹ | Sugarfactory ⚠️ | techno |
 | 🟠 | 23:00–06:00 | Intercell x 999999999 Invites | H7 Warehouse ❓ | hard techno |
@@ -51,14 +64,14 @@
 | | Tijd | Optie | Zaal | Genre |
 |---|---|---|---|---|
 | 🔴 | 23:00–07:30 | **Dave Clarke: 30 Years of ADE**<br>Luke Slater b2b **Rene Wise** · DJ Stingray 313 b2b Mell G · Dasha Rush · DJ Hell · Daniel Avery b2b Richard Fearless · Egyptian Lover | Melkweg | hard / electro |
-| 🔴 | 22:00–07:00 | **Fabric x Loud Contact**<br>**Helena Hauff** · Marcel Dettmann · Jeff Mills · FJAAK (live) · Quelza · Binh | WestWeelde ❓ | hard / dark techno |
+| 🔴 | 22:00–07:00 | **Fabric x Loud Contact**<br>**Helena Hauff** · Marcel Dettmann · Jeff Mills · FJAAK (live) · Quelza · Binh | WestWeelde | hard / dark techno |
 | 🔴 | 23:00–07:00 | **Awakenings Friday Sessions**<br>**Rødhåd b2b JakoJako** · Ben Klock b2b Philippa Pacho · Funk Assault ¹ | Sugarfactory ⚠️ | hard techno |
 | 🟠 | 16:00–23:00 | Audio Obscura x EXHALE — Amelie Lens, **DAX J**, DJ Nobu | G-Star RAW ❓ | techno |
 | 🟠 | 17:30–22:00 | **Tinlicker** (live) + Helsloot | NDSM Warehouse | melodic |
 | 🟠 | 14:00–22:00 | **Kompakt ADE** | IJver NDSM | deep house / melodic |
 | 🟠 | 23:30–06:30 | DGTL Friday Night — Joris Voorn, Kevin de Vries, Miss Monique | NDSM Warehouse | house / techno |
 | 🟠 | 14:00–22:00 | Gashouder: **Job Jobse** | Gashouder | dancefloor techno |
-| 🟠 | 16:00–07:00 | Intercell x Oscar Mulero Invites | Levenslang ❓ | hard techno |
+| 🟠 | 16:00–07:00 | Intercell x Oscar Mulero Invites | Levenslang | hard techno |
 | ⬜ | 15:00–21:00 | We Are Lost (label van Guy J) | De Wester ❓ | progressive |
 | ⬜ | 22:00–05:00 | Madam invites: Kitty Amor | Madam | deep house |
 
@@ -118,10 +131,9 @@ staan ook op zaterdagavond en botsen frontaal met Outworld.
    Amerikaanse house als Horse Meat Disco, die je afkeurde met *"te Amerikaans"*.
    Blijft hij of gaat hij? Zonder hem wordt zondag: Speedy J als kop, met Josh Baker
    of Folamour ernaast.
-2. **❓-locaties** — de scrape kent alleen zaalnamen, geen overdekking. Onbekend voor
-   mij: WestWeelde, Toekomstmuziek, IJland, Levenslang, H7 Warehouse, G-Star RAW,
-   De Wester, Lofi. WestWeelde staat twee keer als 🔴 — als dat buiten of een tent is,
-   vervalt het volgens de oktoberregel.
+2. **❓-locaties** — de scrape kent alleen zaalnamen, geen overdekking. Nog onbekend:
+   **H7 Warehouse · G-Star RAW · De Wester · Lofi**. Alle vier staan 🟠 of lager, dus
+   de kop van de lijst hangt er niet meer aan.
 3. **Spoorwerkzaamheden** Halfweg-Zwanenburg in oktober 2026 — in 2025 was het station
    wo + do dicht. Voor 2026 nog niet bekend.
 
