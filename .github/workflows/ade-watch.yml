@@ -44,7 +44,7 @@ jobs:
         id: scrape
         run: |
           set +e
-          python3 tools/ade_watch.py --save --dump page.html \
+          python3 tools/ade_watch.py --save --split-days --dump page.html \
             ${{ inputs.render && '--render' || '' }} > diff.txt 2> log.txt
           echo "exit=$?" >> "$GITHUB_OUTPUT"
           set -e

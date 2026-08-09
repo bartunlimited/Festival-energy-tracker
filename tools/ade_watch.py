@@ -86,6 +86,61 @@ def title_from_slug(slug):
     return unescape(slug.replace("-", " ")).strip().title()
 
 
+def slugify(text):
+    return re.sub(r"-+", "-", re.sub(r"[^a-z0-9]+", "-", text.lower())).strip("-")
+
+
+# De kaarttekst is één blob: titel, genretags, zaal en tijden aan elkaar geplakt.
+# "… Acid / Techno / Trance Ziggo Dome · 23:00 - 06:00 Ziggo Dome"
+# De zaal staat er dus twee keer in. Die ná de tijden is de schone: daar loopt
+# geen genretag tegenaan. Die vóór de punt is de reserve, want tussen de laatste
+# tag en de zaalnaam staat geen scheidingsteken ("… / Trance Ziggo Dome").
+CARD_AFTER = re.compile(
+    r"(?P<start>\d{1,2}:\d{2})\s*-\s*(?P<end>\d{1,2}:\d{2})\s+(?P<venue>[^<]{2,60}?)\s*$"
+)
+CARD_BEFORE = re.compile(
+    r"(?P<venue>[^·]{2,80}?)\s*·\s*(?P<start>\d{1,2}:\d{2})\s*-\s*(?P<end>\d{1,2}:\d{2})"
+)
+
+
+def split_card(text, slug):
+    """Haal titel, zaal en tijden uit de kaarttekst.
+
+    De titel knippen we af met behulp van de slug uit de URL: we schuiven woord
+    voor woord op zolang de geslugificeerde tekst nog een begin van die slug is.
+    Zo weten we waar de titel ophoudt en de genretags beginnen, zonder te moeten
+    raden hoe die tags eruitzien.
+    """
+    out = {"title": "", "venue": "", "start": "", "end": ""}
+
+    before, after = CARD_BEFORE.search(text), CARD_AFTER.search(text)
+    if before or after:
+        m = before or after
+        out["start"], out["end"] = m.group("start"), m.group("end")
+
+        # Beide vindplaatsen combineren. Vóór de punt staat de zaalnaam compleet
+        # maar met de laatste genretag ertegenaan; ná de tijden staat hij schoon
+        # maar soms afgekapt. Het beste van beide: zoek in het volledige stuk
+        # waar het schone stuk begint, en neem alles vanaf daar.
+        head = before.group("venue").strip(" ·-") if before else ""
+        tail = after.group("venue").strip(" ·-") if after else ""
+        venue = head or tail
+        if head and tail:
+            at = head.rfind(tail)
+            venue = head[at:] if at > 0 else (head if len(head) < len(tail) else tail)
+        out["venue"] = venue.split(" / ")[-1].strip(" ·-")
+
+    words, acc, best = text.split(), [], ""
+    for w in words:
+        acc.append(w)
+        if slug.startswith(slugify(" ".join(acc))):
+            best = " ".join(acc)
+        else:
+            break
+    out["title"] = best or title_from_slug(slug)
+    return out
+
+
 def parse_jsonld(html):
     """Voorkeursroute: als de pagina Event-objecten meelevert, zijn die betrouwbaar."""
     found = {}
@@ -148,14 +203,16 @@ def parse_anchors(html):
         # in meelekt — anders meldt elke wijziging ook zijn buren als gewijzigd.
         ctx_from = open_tag_end + 1 if open_tag_end != -1 else m.end()
         nxt = EVENT_HREF.search(html, m.end())
-        stop = min(nxt.start() if nxt else len(html), ctx_from + 600)
+        stop = min(nxt.start() if nxt else len(html), ctx_from + 1200)
+        context = strip_tags(html[ctx_from:stop])[:500]
+        card = split_card(label or context, m.group("slug"))
         found[eid] = {
             "id": eid,
-            "title": label or title_from_slug(m.group("slug")),
             "url": abs_url(m.group("url")),
             "slug": m.group("slug"),
-            "context": strip_tags(html[ctx_from:stop])[:300],
+            "context": context,
             "source": "anchor",
+            **card,
         }
     return found
 
@@ -201,7 +258,33 @@ def scrape(url, render=False, max_pages=40, dump=None):
 
 # ---------------------------------------------------------------- diffen
 
-DIFF_FIELDS = ("title", "url", "start", "end", "venue")
+def day_urls(url):
+    """Splits een from/to-bereik in losse dagen.
+
+    De kaarten noemen wel een tijd maar geen datum; door per dag te filteren
+    weten we alsnog op welke dag elk event valt.
+    """
+    from urllib.parse import parse_qs, urlencode, urlparse, urlunparse
+    from datetime import date, timedelta
+
+    p = urlparse(url)
+    q = parse_qs(p.query)
+    first, last = q.get("from", [None])[0], q.get("to", [None])[0]
+    if not first or not last:
+        return [(None, url)]
+    try:
+        d, end = date.fromisoformat(first), date.fromisoformat(last)
+    except ValueError:
+        return [(None, url)]
+    out = []
+    while d <= end:
+        q2 = dict(q, **{"from": [d.isoformat()], "to": [d.isoformat()]})
+        out.append((d.isoformat(), urlunparse(p._replace(query=urlencode(q2, doseq=True)))))
+        d += timedelta(days=1)
+    return out
+
+
+DIFF_FIELDS = ("title", "date", "url", "start", "end", "venue")
 
 
 def fields_for(event):
@@ -256,23 +339,40 @@ def main():
     ap.add_argument("--dump", metavar="BESTAND", help="ruwe HTML wegschrijven")
     ap.add_argument("--snapshot", default=SNAPSHOT, help="pad naar de snapshot")
     ap.add_argument("--max-pages", type=int, default=40)
+    ap.add_argument("--split-days", action="store_true",
+                    help="per dag scrapen zodat elk event een datum krijgt")
     ap.add_argument("--json", action="store_true", help="diff als JSON naar stdout")
     args = ap.parse_args()
 
+    def scrape_all(url):
+        got, pages = scrape(url, args.render, args.max_pages, args.dump)
+        # De programmalijst laadt via JavaScript: statisch levert 0 events op.
+        # Val dan vanzelf terug op de browser in plaats van de gebruiker een
+        # vlag te laten opzoeken.
+        if not got and not args.render:
+            print("  statisch 0 events — opnieuw met een echte browser…", file=sys.stderr)
+            try:
+                got, pages = scrape(url, True, args.max_pages, args.dump)
+            except SystemExit as e:
+                print(f"  renderen lukte niet: {e}", file=sys.stderr)
+        return got
+
     print(f"Ophalen: {args.url}", file=sys.stderr)
-    events, pages = scrape(args.url, args.render, args.max_pages, args.dump)
+    events = {}
+    for day, day_url in (day_urls(args.url) if args.split_days else [(None, args.url)]):
+        if day:
+            print(f"— {day}", file=sys.stderr)
+        for eid, ev in scrape_all(day_url).items():
+            if eid in events:
+                # Meerdaags event: alle dagen bewaren, niet overschrijven.
+                seen = events[eid].get("date", "")
+                if day and day not in seen.split(","):
+                    events[eid]["date"] = f"{seen},{day}".strip(",")
+            else:
+                ev["date"] = day or ""
+                events[eid] = ev
 
-    # De programmalijst blijkt via JavaScript te laden: statisch levert 0 events op.
-    # Val dan vanzelf terug op de browser in plaats van de gebruiker een vlag te
-    # laten opzoeken.
-    if not events and not args.render:
-        print("Statisch 0 events — opnieuw met een echte browser…", file=sys.stderr)
-        try:
-            events, pages = scrape(args.url, True, args.max_pages, args.dump)
-        except SystemExit as e:
-            print(f"  renderen lukte niet: {e}", file=sys.stderr)
-
-    print(f"Totaal: {len(events)} events over {pages} pagina('s)", file=sys.stderr)
+    print(f"Totaal: {len(events)} events", file=sys.stderr)
 
     if not events:
         print(
