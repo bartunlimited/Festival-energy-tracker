@@ -260,3 +260,34 @@ vocal house**: grote naam, niet zijn vloer.
 - Het profiel noemt **Awakenings 9 juli 2026**; de app is gebouwd voor de **zondag
   12 juli**. Waarschijnlijk de festivalstart versus de dag die Bart bezocht — even
   bevestigen.
+
+## I. Correcties van Bart tijdens de ADE-planning (aug 2026)
+
+**Horse Meat Disco — afgekeurd.** *"Was niet goed, te Amerikaans."* Dit **overschrijft
+lijst E hierboven**, waar hij bij Milkshake stond als goedgekeurde suggestie. Die lijst
+was een vooraf-goedkeuring; dit is een oordeel achteraf en gaat dus voor.
+
+→ Samen met de Honey Dijon-dislike (*"te veel R&B"*) tekent zich een bredere lijn af:
+**Amerikaanse disco en soulful/vocal house vallen af**, ongeacht hoe groot de naam is.
+Gebruik dit niet als dislike voor house in het algemeen — Europese deep house en
+tech house staan nergens ter discussie.
+
+⚠️ **Openstaand:** *Todd Terry* staat óók nog in lijst E en is net zo goed Amerikaanse
+house. Niet stilzwijgend laten staan — expliciet aan Bart vragen voordat je hem opnieuw
+aanbeveelt.
+
+**Thuishaven — slechte locatie.** *"In een tent dus koud."* Niet meer aanbevelen,
+ongeacht de line-up.
+
+→ Dit **nuanceert de tentregel uit deel 1** (*"donkere tent met lage plafonds = beste
+kans op lock-in"*, en *"kou duwt richting indoor/tent"*). Die regel gaat over **warme,
+overdekte** ruimtes. Een tent die zelf koud is levert precies het tegenovergestelde op.
+Beoordeel een locatie dus op *verwarmd en overdekt*, niet op het label "tent".
+
+**Shuttlebussen — geen optie.** *"Helemaal kut."* Bereikbaarheid met eigen vervoer of
+regulier OV telt mee als selectiecriterium; een line-up die alleen per shuttle te
+bereiken is, weegt lager.
+
+**Indira Paganotto** staat niet in het ADE 2026-programma (0 hits in 275 gescrapete
+events, `tools/ade_watch.py`). Hij vroeg er expliciet naar, dus ze is interessant —
+markeer haar als ze op een toekomstige line-up verschijnt.
