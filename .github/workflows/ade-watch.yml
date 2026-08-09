@@ -1,0 +1,94 @@
+name: ADE-programma bewaken
+
+on:
+  schedule:
+    - cron: '17 6 * * *'   # elke dag 06:17 UTC
+  workflow_dispatch:
+    inputs:
+      render:
+        description: 'Via Playwright renderen (als de pagina JS nodig heeft)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: ade-watch
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Playwright installeren
+        if: inputs.render
+        run: |
+          npm install -g playwright
+          npx playwright install --with-deps chromium
+          echo "NODE_PATH=$(npm root -g)" >> "$GITHUB_ENV"
+
+      - name: Programma scrapen en diffen
+        id: scrape
+        run: |
+          set +e
+          python3 tools/ade_watch.py --save ${{ inputs.render && '--render' || '' }} > diff.txt 2> log.txt
+          echo "exit=$?" >> "$GITHUB_OUTPUT"
+          set -e
+          cat log.txt
+          cat diff.txt
+
+      - name: Samenvatting
+        run: |
+          {
+            echo "## ADE-programma — $(date -u '+%Y-%m-%d %H:%M UTC')"
+            echo
+            if [ "${{ steps.scrape.outputs.exit }}" = "1" ]; then
+              cat diff.txt
+            elif [ "${{ steps.scrape.outputs.exit }}" = "2" ]; then
+              echo "⚠️ Scrapen leverde 0 events op — zie de log; mogelijk is de markup veranderd."
+            else
+              echo "Niets veranderd."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Snapshot committen
+        if: steps.scrape.outputs.exit == '1' || steps.scrape.outputs.exit == '0'
+        run: |
+          # --porcelain, want de allereerste snapshot is untracked en die ziet
+          # `git diff` niet.
+          if [ -z "$(git status --porcelain -- data/)" ]; then
+            echo "geen bestandswijzigingen"
+            exit 0
+          fi
+          git config user.name  'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add data/
+          git commit -m "ADE-programma: snapshot bijgewerkt ($(date -u '+%Y-%m-%d'))"
+          git push
+
+      - name: Issue openen bij wijzigingen
+        if: steps.scrape.outputs.exit == '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          {
+            echo "Het ADE-programma is gewijzigd sinds de vorige check."
+            echo
+            cat diff.txt
+            echo
+            echo "Bron: <https://www.amsterdam-dance-event.nl/en/program/filter/?section=events&type=8262%2C8263&from=2026-10-21&to=2026-10-25>"
+          } > body.md
+          gh issue create \
+            --title "ADE-programma gewijzigd — $(date -u '+%Y-%m-%d')" \
+            --body-file body.md
+
+      - name: Falen als het scrapen stukliep
+        if: steps.scrape.outputs.exit == '2'
+        run: exit 1
