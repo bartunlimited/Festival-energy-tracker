@@ -276,13 +276,28 @@ tech house staan nergens ter discussie.
 house. Niet stilzwijgend laten staan — expliciet aan Bart vragen voordat je hem opnieuw
 aanbeveelt.
 
-**Thuishaven — slechte locatie.** *"In een tent dus koud."* Niet meer aanbevelen,
-ongeacht de line-up.
+**Tent = seizoensgebonden, geen vaste dislike.** Bart over Thuishaven op ADE: *"in een
+tent dus koud"*, en daarna de nuance: *"ADE is in Amsterdam in oktober = slecht weer
+voor een tent. Heel anders dan in de zomer."*
 
-→ Dit **nuanceert de tentregel uit deel 1** (*"donkere tent met lage plafonds = beste
-kans op lock-in"*, en *"kou duwt richting indoor/tent"*). Die regel gaat over **warme,
-overdekte** ruimtes. Een tent die zelf koud is levert precies het tegenovergestelde op.
-Beoordeel een locatie dus op *verwarmd en overdekt*, niet op het label "tent".
+Dus **niet** de tentregel uit deel 1 weggooien — die blijft staan waar hij vandaan komt:
+
+| Seizoen | Tent | Waarom |
+|---|---|---|
+| Zomerfestivals (TML, Awakenings juli, Milkshake) | **plus** | donkere tent, lage plafonds, schaduw = beste kans op lock-in |
+| Oktober t/m maart (ADE, winter) | **min** | een tent is dan feitelijk buiten; koud en nat |
+
+De regel *"kou of regen duwt richting indoor/tent"* gaat over **naar binnen gaan**. In
+oktober telt een tent niet als binnen. Vraag in dat seizoen dus: is het **verwarmd en
+echt binnen**? Een zomerse plus-locatie kan in oktober een min zijn — beoordeel de
+locatie samen met de datum, nooit los.
+
+→ Concreet: **Thuishaven valt af voor ADE**, maar blijft prima voor een zomerdatum.
+Hetzelfde geldt voor openluchtterreinen (Havenpark e.d.) in oktober.
+
+⚠️ De scrape in `data/ade-2026/` bevat **geen** veld voor overdekking — alleen zaalnaam.
+Bij twijfel over een onbekende locatie: niet gokken, aan Bart vragen. Zelfde regel als
+`verified:false` in de apps.
 
 **Shuttlebussen — geen optie.** *"Helemaal kut."* Bereikbaarheid met eigen vervoer of
 regulier OV telt mee als selectiecriterium; een line-up die alleen per shuttle te
