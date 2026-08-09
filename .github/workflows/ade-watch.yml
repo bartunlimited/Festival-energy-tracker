@@ -32,8 +32,9 @@ jobs:
         with:
           python-version: '3.11'
 
+      # Altijd installeren: de programmalijst laadt via JavaScript, dus het
+      # script valt sowieso terug op de browser.
       - name: Playwright installeren
-        if: inputs.render
         run: |
           npm install -g playwright
           npx playwright install --with-deps chromium
@@ -43,11 +44,20 @@ jobs:
         id: scrape
         run: |
           set +e
-          python3 tools/ade_watch.py --save ${{ inputs.render && '--render' || '' }} > diff.txt 2> log.txt
+          python3 tools/ade_watch.py --save --dump page.html \
+            ${{ inputs.render && '--render' || '' }} > diff.txt 2> log.txt
           echo "exit=$?" >> "$GITHUB_OUTPUT"
           set -e
           cat log.txt
           cat diff.txt
+
+      - name: HTML bewaren als het misging
+        if: steps.scrape.outputs.exit == '2'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ade-html
+          path: page.html
+          retention-days: 7
 
       - name: Samenvatting
         run: |

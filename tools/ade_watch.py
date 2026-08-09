@@ -261,6 +261,17 @@ def main():
 
     print(f"Ophalen: {args.url}", file=sys.stderr)
     events, pages = scrape(args.url, args.render, args.max_pages, args.dump)
+
+    # De programmalijst blijkt via JavaScript te laden: statisch levert 0 events op.
+    # Val dan vanzelf terug op de browser in plaats van de gebruiker een vlag te
+    # laten opzoeken.
+    if not events and not args.render:
+        print("Statisch 0 events — opnieuw met een echte browser…", file=sys.stderr)
+        try:
+            events, pages = scrape(args.url, True, args.max_pages, args.dump)
+        except SystemExit as e:
+            print(f"  renderen lukte niet: {e}", file=sys.stderr)
+
     print(f"Totaal: {len(events)} events over {pages} pagina('s)", file=sys.stderr)
 
     if not events:
