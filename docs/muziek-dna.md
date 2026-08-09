@@ -1,19 +1,40 @@
 # Muziek-DNA — Bart
 
-> **Status:** gereconstrueerd op 1 augustus 2026 uit de picks, energie-profielen en
-> kalibraties in alle vijf de apps. Het oorspronkelijke design-document is verloren
-> gegaan (nooit gecommit). **Bart: corrigeer wat niet klopt** — dit bestand is
-> vanaf nu de bron voor alle toekomstige aanbevelingen.
+> **Status:** samengesteld op 1 augustus 2026. De basis is de **originele formulering**
+> hieronder, teruggehaald uit het handover-document (`docs/handover-festival-tool.md`,
+> §Picks); de rest is gemeten uit de picks en kalibraties in alle vijf de apps.
+> **Bart: corrigeer wat niet klopt** — dit bestand is de bron voor alle toekomstige
+> aanbevelingen.
+
+---
+
+## De originele formulering (bron: handover-document)
+
+> *"Gebruik Bart's Music DNA uit het geheugen. Kernpunten: heel breed spectrum
+> (hard techno t/m mainstage EDM/trance/pop-crossover), dislikes alleen
+> experimental/ambient, dubstep, en Dimitri Vegas & Like Mike. **Markeer ruim:**
+> alle goede DJs op alle stages — Bart kiest zelf op basis van
+> mood/weer/crowd/binnen-buiten. Verwacht iteratie: Bart corrigeert ratings per
+> artiest."*
+
+Drie dingen die hieruit volgen en die je makkelijk verkeerd doet:
+
+1. **De dislike-lijst is kort en gesloten**: experimental/ambient, dubstep, en
+   Dimitri Vegas & Like Mike. Verder niets. Zie de waarschuwing bij "trefkans".
+2. **Markeer ruim, niet streng.** Het doel is een brede selectie van goede DJ's op
+   álle stages; Bart maakt de uiteindelijke keuze ter plekke op mood, weer, crowd en
+   binnen/buiten. Te weinig markeren is een grotere fout dan te veel.
+3. **Iteratie is ingebouwd.** Hij corrigeert per artiest; verwerk die correcties en
+   werk dit document bij.
 
 ---
 
 ## De kern in één alinea
 
-Bart heeft een **brede** smaak met een duidelijk zwaartepunt in **techno**, maar hij
-is geen purist: grote mainstage-namen met een show staan even hard in zijn musts als
+Bart heeft een **heel breed** spectrum met een zwaartepunt in **techno**, maar hij is
+geen purist: grote mainstage-namen met een show staan even hard in zijn musts als
 Berghain-residents. De rode draad is niet één genre maar **de vloer**: muziek waar
-gedanst wordt. Wat hij écht mijdt is een klein, scherp afgebakend hoekje —
-hardstyle, dubstep/bass en psytrance — en dat mijdt hij consequent.
+gedanst wordt.
 
 ---
 
@@ -36,8 +57,16 @@ Uit de 391 sets van Tomorrowland W1, waarvan Bart er 127 markeerde:
 
 **Lees dit zo:** techno in alle vormen is bijna altijd raak. House is zó ruim
 vertegenwoordigd dat de lage trefkans niets zegt over de smaak — daar selecteert hij
-op naam, niet op genre. Hardstyle, bass en psytrance zijn geen "minder vaak", maar
-**vrijwel nooit** — die drie zijn de echte uitsluiting.
+op naam, niet op genre.
+
+> ⚠️ **Verwar een lage trefkans niet met een dislike.** Hardstyle (1/29) en psytrance
+> (0/11) staan hier laag, maar volgens Barts eigen DNA-omschrijving zijn ze **geen**
+> dislike — de dislike-lijst bevat alleen experimental/ambient, dubstep en DVLM. Dat
+> die twee genres nauwelijks gemarkeerd zijn, is waarschijnlijk een gevolg van hoe de
+> picks tot stand kwamen, niet van afkeer. Behandel ze als **neutraal**: aanbevelen
+> mag, maar noem erbij waaróm (bijv. een hardstyle-classicset of een grote naam).
+> Dat "rave-classics" wél scoren (Mark With A K & MC Chucky is een tip) ondersteunt
+> dat.
 
 ---
 
@@ -75,18 +104,18 @@ te smal aan.
 
 ---
 
-## Uitsluitingen
+## Dislikes — de volledige lijst
 
-1. **Dubstep, bass en drum & bass** — 0 van de 17 sets gemarkeerd. Nooit aanbevelen.
-   (Borgore, Sullivan King, Riot Ten, ALLEYCVT, Camo & Krooked, de hele Rose Garden
-   op W2-vrijdag.)
-2. **Hardstyle / raw** — 1 van de 29. Behandel als uitgesloten, met één uitzondering:
-   **rave-classics met een nostalgie-lading** wél (Mark With A K & MC Chucky:
-   Classics Set is een tip).
-3. **Psytrance** — 0 van de 11, ondanks hoge energie-scores. Vini Vici, Blastoyz,
-   Neelix: niet markeren.
-4. **Dimitri Vegas & Like Mike** — expliciete, persoonlijke dislike. Staat los van de
-   energie-score en van de rest van zijn EDM-voorkeur.
+Precies drie, uit Barts eigen omschrijving. Verder niets uitsluiten.
+
+1. **Experimental / ambient** — geen dansvloer, geen pick.
+2. **Dubstep** — bevestigd door de data: 0 van de 17 bass/dubstep/drum & bass-sets
+   gemarkeerd (Borgore, Sullivan King, Riot Ten, ALLEYCVT, Camo & Krooked, de hele
+   Rose Garden op W2-vrijdag).
+3. **Dimitri Vegas & Like Mike** — expliciete, persoonlijke dislike. Staat los van de
+   energie-score (65, *"crowd beweegt"*) en van de rest van zijn EDM-voorkeur.
+
+Alles daarbuiten mag je aanbevelen, mits met een reden erbij.
 
 ---
 
@@ -129,10 +158,12 @@ weer (regen/zon/hitte/kou) en concurrentie van gelijktijdige sets. Zie
 1. **Markeer nooit stilzwijgend.** Picks die Claude bedenkt zijn *suggesties* en moeten
    als zodanig benoemd worden; Barts eigen picks zijn heilig en worden 1-op-1
    overgenomen bij nieuwe timetables.
-2. **Techno na 21:00 in een donkere binnenzaal** is bijna altijd raak.
-3. **Closing-slot van een grote mainstage-naam** is bijna altijd raak.
-4. **Dubstep, hardstyle, psytrance** overslaan.
-5. **Show/live/orkest** mag je aanbevelen als kijk-moment, maar zeg erbij dat het geen
+2. **Markeer ruim.** Alle goede DJ's op alle stages; Bart kiest ter plekke. Te weinig
+   markeren is een grotere fout dan te veel.
+3. **Techno na 21:00 in een donkere binnenzaal** is bijna altijd raak.
+4. **Closing-slot van een grote mainstage-naam** is bijna altijd raak.
+5. **Dubstep/bass, experimental/ambient en DVLM** overslaan — de rest niet.
+6. **Show/live/orkest** mag je aanbevelen als kijk-moment, maar zeg erbij dat het geen
    dansvloer is — die eerlijkheid waardeert hij (zie Illenium).
-6. **Bij twijfel over een onbekende naam:** geef de aanbeveling mét de reden, dan
+7. **Bij twijfel over een onbekende naam:** geef de aanbeveling mét de reden, dan
    corrigeert hij zelf. Dat werkt aantoonbaar goed.
