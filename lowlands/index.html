@@ -68,6 +68,11 @@ a.chip { text-decoration:none; display:inline-block; }
 .badge.must { background:#ff4d5a; color:#000; }
 .badge.rec  { background:#ffa940; color:#000; }
 .badge.checkout { background:#38bdf8; color:#000; }
+.fb { display:flex; gap:10px; margin-top:8px; }
+.fbb { font-size:20px; line-height:1; background:#181818; color:#fff; border:2px solid #2c2c2c;
+       border-radius:10px; padding:7px 14px; cursor:pointer; -webkit-appearance:none; }
+.fbb.up   { background:#0d3b1e; border-color:#22c55e; }
+.fbb.down { background:#3b0d0d; border-color:#ef4444; }
 .badge.cover { background:#123; color:#7dd3fc; }
 .badge.unverified { background:#333; color:#999; }
 
@@ -817,6 +822,44 @@ function nextRainEvent(t){
 
 /* ============================== render =============================== */
 let view = "nu";
+// ---- Feedback: 👍/👎 per set, lokaal opgeslagen zodat het offline werkt ----
+const FB_KEY = "lowlands-feedback-v1";
+let feedback = {};
+try { feedback = JSON.parse(localStorage.getItem(FB_KEY) || "{}"); } catch(e){}
+function fbKey(s){ return s.day+"|"+s.stage+"|"+s.start+"|"+s.artist; }
+function rate(i, v){
+  const set = TIMETABLE[i]; if(!set) return;
+  const k = fbKey(set);
+  if(feedback[k] === v) delete feedback[k]; else feedback[k] = v;   // nogmaals tikken = wissen
+  try { localStorage.setItem(FB_KEY, JSON.stringify(feedback)); } catch(e){}
+  render();
+}
+function fbButtons(set){
+  const i = TIMETABLE.indexOf(set), v = feedback[fbKey(set)];
+  return `<div class="fb">`+
+    `<button class="fbb${v===1?" up":""}" onclick="rate(${i},1)" aria-label="was leuk">👍</button>`+
+    `<button class="fbb${v===-1?" down":""}" onclick="rate(${i},-1)" aria-label="viel tegen">👎</button>`+
+  `</div>`;
+}
+function feedbackText(){
+  const rows = TIMETABLE.map(s=>({s, v:feedback[fbKey(s)]})).filter(r=>r.v)
+    .sort((a,b)=> setDate(a.s,"start") - setDate(b.s,"start"));
+  if(!rows.length) return "";
+  return "Lowlands 2026 — feedback\n" + rows.map(r =>
+    `${r.v===1?"👍":"👎"} ${r.s.artist} · ${DAY_LABELS[r.s.day]} ${r.s.start} · ${stageName(r.s.stage)} · ${r.s.genre}`
+  ).join("\n");
+}
+async function copyFeedback(){
+  const txt = feedbackText();
+  if(!txt){ alert("Nog niets beoordeeld."); return; }
+  try { await navigator.clipboard.writeText(txt); }
+  catch(e){
+    const ta=document.createElement("textarea"); ta.value=txt; document.body.appendChild(ta);
+    ta.select(); try{ document.execCommand("copy"); }catch(e2){} ta.remove();
+  }
+  alert("Feedback gekopieerd — plak het in de chat:\n\n"+txt.slice(0,400));
+}
+
 let filt = { day: festivalDay(now()) || 1, stage:"all", fromHour:11, picksOnly:false, minEnergy:false, showPast:false };
 
 function setView(v){ view=v; render(); }
@@ -918,7 +961,8 @@ function renderNu(){
     if(r.current){
       body = `<div class="art">${esc(r.current.artist)}${pickBadge(r.current.pick)}</div>
         <div class="meta">${r.current.start}–${r.current.end} · <i>${esc(r.current.genre)}</i></div>
-        <div class="score">${scoreBlocks(r.score)}<b>${r.score}</b></div>`;
+        <div class="score">${scoreBlocks(r.score)}<b>${r.score}</b></div>
+        ${fbButtons(r.current)}`;
     }else{
       body = `<div class="meta">— geen set bezig —</div>`;
     }
@@ -960,6 +1004,7 @@ function renderSchema(){
 
   const toggles =
     `<button class="chip toggle ${filt.picksOnly?"on":""}" onclick="filt.picksOnly=!filt.picksOnly;render()">★ picks</button>`+
+    (Object.keys(feedback).length ? `<button class="chip toggle" onclick="copyFeedback()">📋 feedback (${Object.keys(feedback).length})</button>` : "")+
     `<button class="chip toggle ${filt.minEnergy?"on":""}" onclick="filt.minEnergy=!filt.minEnergy;render()">⚡ ≥${CONFIG.energyChipMin}</button>`+
     (viewingToday && (pastHidden>0 || filt.showPast)
       ? `<button class="chip toggle ${filt.showPast?"on":""}" onclick="filt.showPast=!filt.showPast;render()">⏱ voorbij${filt.showPast?"":" ("+pastHidden+")"}</button>` : "");
@@ -971,6 +1016,7 @@ function renderSchema(){
       <div class="art">${set.pick==="must"?"🔴 ":set.pick==="rec"?"🟠 ":set.pick==="checkout"?"🔵 ":""}${esc(set.artist)}${pickBadge(set.pick)}</div>
       <div class="meta">${set.start}–${set.end} · ${esc(stageName(set.stage))}${coverBadge(st)} · <i>${esc(set.genre)}</i></div>
       <div class="score">${scoreBlocks(score)}<b>${score}</b></div>
+      ${fbButtons(set)}
     </div>`;
   };
   // on the current day: running sets get their own block on top, so you
