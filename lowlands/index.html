@@ -175,6 +175,7 @@ const TIMETABLE = [
   {day:1, stage:"adonis", artist:"Ayoub Kharkhach", start:"16:30", end:"17:30", pick:"", genre:"Comedy"},
   {day:1, stage:"adonis", artist:"Janneke de Bijl", start:"17:30", end:"18:30", pick:"rec", genre:"Comedy"},
   {day:1, stage:"adonis", artist:"Mark Waumans", start:"18:30", end:"19:30", pick:"", genre:"Comedy"},
+  {day:1, stage:"adonis", artist:"Adonis Queer Club", start:"22:00", end:"04:00", pick:"rec", genre:"Queer club / dance"},
   {day:1, stage:"adonis", artist:"Marie Koet", start:"19:30", end:"20:30", pick:"", genre:"Comedy"},
   {day:2, stage:"alpha", artist:"Kelis", start:"14:00", end:"15:30", pick:"", genre:"Pop / R&B"},
   {day:2, stage:"alpha", artist:"S10", start:"16:00", end:"17:30", pick:"", genre:"NL pop"},
@@ -238,6 +239,7 @@ const TIMETABLE = [
   {day:2, stage:"adonis", artist:"Alina Sharipova", start:"16:30", end:"17:30", pick:"", genre:"Comedy"},
   {day:2, stage:"adonis", artist:"Teun de Vries", start:"17:30", end:"18:30", pick:"", genre:"Comedy"},
   {day:2, stage:"adonis", artist:"Kees van Amstel", start:"18:30", end:"19:30", pick:"rec", genre:"Comedy"},
+  {day:2, stage:"adonis", artist:"Adonis Queer Club", start:"22:00", end:"04:00", pick:"rec", genre:"Queer club / dance"},
   {day:2, stage:"adonis", artist:"Chicks in Dialogue", start:"19:30", end:"20:30", pick:"", genre:"Comedy"},
   {day:3, stage:"alpha", artist:"Noord Nederlands Orkest", start:"13:30", end:"15:30", pick:"", genre:"Orkest"},
   {day:3, stage:"alpha", artist:"Hermanos Gutiérrez", start:"15:30", end:"17:30", pick:"", genre:"Instrumentaal"},
@@ -299,6 +301,7 @@ const TIMETABLE = [
   {day:3, stage:"adonis", artist:"David van Rosmalen", start:"16:30", end:"17:30", pick:"", genre:"Comedy"},
   {day:3, stage:"adonis", artist:"Martijn Crins", start:"17:30", end:"18:30", pick:"", genre:"Comedy"},
   {day:3, stage:"adonis", artist:"Davine Perik", start:"18:30", end:"19:30", pick:"", genre:"Comedy"},
+  {day:3, stage:"adonis", artist:"Adonis Queer Club", start:"22:00", end:"04:00", pick:"rec", genre:"Queer club / dance"},
   {day:3, stage:"adonis", artist:"Jasper van der Veen", start:"19:30", end:"20:30", pick:"", genre:"Comedy"},
 ];
 
@@ -313,7 +316,7 @@ const STAGES = {
   "x-ray":    { name:"X-Ray",         cover:"indoor", size:"M",  dark:true,  verified:true },
   "lima":     { name:"Lima",          cover:"indoor", size:"M",  dark:true,  verified:true },
   "hacienda": { name:"Hacienda",      cover:"indoor", size:"M",  dark:true,  verified:true },
-  "adonis":   { name:"Adonis",        cover:"indoor", size:"S",  dark:false, verified:true, fit:0.35 },  // zit-tent: literatuur + comedy, geen dansvloer
+  "adonis":   { name:"Adonis",        cover:"indoor", size:"M",  dark:true,  verified:true },  // overdag literatuur+comedy, vanaf 22:00 queer club
 };
 
 // Heuristische energie 0-100; Lowlands is deels een bandfestival, dus veel
@@ -321,6 +324,7 @@ const STAGES = {
 const ARTISTS = {
   "2hollis": { energy:70 },
   "Abiba": { energy:58 },
+  "Adonis Queer Club": { energy:76 },
   "Adéla": { energy:55 },
   "Afra": { energy:70 },
   "AK Soundsystem": { energy:68 },
@@ -1034,7 +1038,7 @@ function runTests(){
   const get=(a)=>TIMETABLE.find(s=>s.artist===a);
   const results=[];
   const ok=(name,cond)=>results.push((cond?"✅ ":"❌ ")+name);
-  ok(`188 sets geladen`, TIMETABLE.length===188);
+  ok(`191 sets geladen`, TIMETABLE.length===191);
   ok(`alle podia bekend`, TIMETABLE.every(s=>STAGES[s.stage]));
   ok(`alle acts hebben energie`, TIMETABLE.every(s=>ARTISTS[s.artist]));
   ok(`Alpha is het enige buitenpodium`,
@@ -1052,7 +1056,8 @@ function runTests(){
   const rainA = { minutely:[{t:tA, mm:1.0}], hourly:[], ts:new Date(), stale:false };
   const nw = get("New Wave");
   ok(`Alpha (buiten) stort in bij regen`, scoreSet(nw, tA, {minutely:[],hourly:[]}, true) > scoreSet(nw, tA, rainA, true));
-  ok(`comedy scoort laag (geen dansvloer)`, scoreSet(get("Janneke de Bijl"), null, wx, false) < 45);
+  ok(`comedy zit onder de clubnacht in dezelfde tent`,
+     scoreSet(get("Janneke de Bijl"), null, wx, false) < scoreSet(get("Adonis Queer Club"), null, wx, false));
   console.log("Lowlands engine tests:\n"+results.join("\n"));
   if(results.some(r=>r.startsWith("❌"))) alert("Engine tests FAILED — zie console");
 }
