@@ -1,6 +1,6 @@
 # Festival Energy Tracker — werkinstructies
 
-Vijf standalone web-apps die per stage voorspellen **waar de crowd danst** (niet
+Zes standalone web-apps die per stage voorspellen **waar de crowd danst** (niet
 staat te praten), live reagerend op het weer. Gebouwd voor en met Bart.
 
 ## ⚠️ Lees eerst
@@ -31,6 +31,7 @@ Achtergrond, alleen nodig bij grotere wijzigingen:
 | `/jesse/` | TML W2 vrijdag (voor Jesse, Barts smaak) | 24 juli 2026, Boom |
 | `/milkshake/` | Milkshake za + zo | 25–26 juli 2026, Westerpark |
 | `/tillatec/` | Tillatec × WorldPride (34-uurs marathon) | 1–3 aug 2026, Amsterdam |
+| `/lowlands/` | Lowlands (bandfestival + nachtclub) | 21–23 aug 2026, Biddinghuizen |
 
 Elke app is **één self-contained HTML-bestand**: engine, data en UI in één. Ze delen
 de engine door kopiëren, niet door importeren — een engine-fix moet je dus bewust in
