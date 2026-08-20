@@ -74,6 +74,7 @@ T = [
  (1,"adonis","16:30","17:30","Ayoub Kharkhach","Comedy",20,""),
  (1,"adonis","17:30","18:30","Janneke de Bijl","Comedy",24,"rec"),
  (1,"adonis","18:30","19:30","Mark Waumans","Comedy",20,""),
+ (1,"adonis","22:00","04:00","Adonis Queer Club","Queer club / dance",76,"rec"),
  (1,"adonis","19:30","20:30","Marie Koet","Comedy",20,""),
  # ---------------- ZATERDAG 22 ----------------
  (2,"alpha","14:00","15:30","Kelis","Pop / R&B",70,""),
@@ -138,6 +139,7 @@ T = [
  (2,"adonis","16:30","17:30","Alina Sharipova","Comedy",20,""),
  (2,"adonis","17:30","18:30","Teun de Vries","Comedy",20,""),
  (2,"adonis","18:30","19:30","Kees van Amstel","Comedy",24,"rec"),
+ (2,"adonis","22:00","04:00","Adonis Queer Club","Queer club / dance",76,"rec"),
  (2,"adonis","19:30","20:30","Chicks in Dialogue","Comedy",20,""),
  # ---------------- ZONDAG 23 ----------------
  (3,"alpha","13:30","15:30","Noord Nederlands Orkest","Orkest",35,""),
@@ -200,6 +202,7 @@ T = [
  (3,"adonis","16:30","17:30","David van Rosmalen","Comedy",20,""),
  (3,"adonis","17:30","18:30","Martijn Crins","Comedy",20,""),
  (3,"adonis","18:30","19:30","Davine Perik","Comedy",20,""),
+ (3,"adonis","22:00","04:00","Adonis Queer Club","Queer club / dance",76,"rec"),
  (3,"adonis","19:30","20:30","Jasper van der Veen","Comedy",20,""),
 ]
 
@@ -213,7 +216,7 @@ const STAGES = {
   "x-ray":    { name:"X-Ray",         cover:"indoor", size:"M",  dark:true,  verified:true },
   "lima":     { name:"Lima",          cover:"indoor", size:"M",  dark:true,  verified:true },
   "hacienda": { name:"Hacienda",      cover:"indoor", size:"M",  dark:true,  verified:true },
-  "adonis":   { name:"Adonis",        cover:"indoor", size:"S",  dark:false, verified:true, fit:0.35 },  // zit-tent: literatuur + comedy, geen dansvloer
+  "adonis":   { name:"Adonis",        cover:"indoor", size:"M",  dark:true,  verified:true },  // overdag literatuur+comedy, vanaf 22:00 queer club
 };'''
 
 def js(v): return '"' + v.replace('"','\\"') + '"'
@@ -298,7 +301,8 @@ NEW_TESTS = '''function runTests(){
   const rainA = { minutely:[{t:tA, mm:1.0}], hourly:[], ts:new Date(), stale:false };
   const nw = get("New Wave");
   ok(`Alpha (buiten) stort in bij regen`, scoreSet(nw, tA, {minutely:[],hourly:[]}, true) > scoreSet(nw, tA, rainA, true));
-  ok(`comedy scoort laag (geen dansvloer)`, scoreSet(get("Janneke de Bijl"), null, wx, false) < 45);
+  ok(`comedy zit onder de clubnacht in dezelfde tent`,
+     scoreSet(get("Janneke de Bijl"), null, wx, false) < scoreSet(get("Adonis Queer Club"), null, wx, false));
   console.log("Lowlands engine tests:\\n"+results.join("\\n"));
   if(results.some(r=>r.startsWith("❌"))) alert("Engine tests FAILED — zie console");
 }'''
