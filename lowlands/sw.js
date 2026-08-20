@@ -2,7 +2,8 @@
 // Same-origin: network-first (freshest tool after a push), cache fallback.
 // Cross-origin (Open-Meteo) passes through untouched — the app has its own
 // localStorage cache + stale indicator for weather.
-const CACHE = "lowlands-energy-v1";
+const CACHE = "lowlands-energy-v2";
+const PREFIX = CACHE.replace(/v\d+$/, "");
 const ASSETS = ["./", "./index.html", "./manifest.json", "./icon-180.png", "./icon-512.png"];
 
 self.addEventListener("install", (e) => {
@@ -12,7 +13,12 @@ self.addEventListener("install", (e) => {
 self.addEventListener("activate", (e) => {
   e.waitUntil(
     caches.keys()
-      .then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k))))
+      // Alleen oudere versies van DEZE app opruimen: alle apps staan op één
+      // origin en deelden dus één Cache Storage — voorheen wiste elke app de
+      // caches van de andere vijf, waardoor alleen de laatst geopende offline werkte.
+      .then((keys) => Promise.all(
+        keys.filter((k) => k.startsWith(PREFIX) && k !== CACHE).map((k) => caches.delete(k))
+      ))
       .then(() => self.clients.claim())
   );
 });
