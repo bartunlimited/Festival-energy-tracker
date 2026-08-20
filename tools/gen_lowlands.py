@@ -255,8 +255,8 @@ s = re.sub(r'  slotCurve: \[.*?\],\n',
   '               [24,27,0.95],[27,29,0.85],[29,31,0.70] ],\n', s, flags=re.S)
 
 # weer: Biddinghuizen
-rep('lat:51.087, lon:4.379, tz:"Europe/Brussels"', 'lat:52.451, lon:5.700, tz:"Europe/Amsterdam"')
-rep("latitude=51.087&longitude=4.379", "latitude=52.451&longitude=5.700")
+rep('lat:51.087, lon:4.379, tz:"Europe/Brussels"', 'lat:52.441, lon:5.719, tz:"Europe/Amsterdam"')
+rep("latitude=51.087&longitude=4.379", "latitude=52.441&longitude=5.719")
 rep("timezone=Europe%2FBrussels", "timezone=Europe%2FAmsterdam")
 rep('patroon van vandaag (Boom)', 'patroon van vandaag (Biddinghuizen)')
 

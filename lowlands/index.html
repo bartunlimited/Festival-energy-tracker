@@ -522,9 +522,11 @@ const CONFIG = {
   heat: { tempC:28, openPenalty:0.85, shadeBonus:1.08 },  // te warm: schaduw onder afdak (bv. Crystal Garden) wint van open weide (Bart)
   lightshow: { fromHour:22.5, bonus:0.15, closingBonus:0.05 }, // na donker: lichtshow-stages aantrekkelijker, closing extra (Bart)
   weather: {
-    lat:52.451, lon:5.700, tz:"Europe/Amsterdam",
+    // Walibi Holland, Spijkweg Biddinghuizen — het festivalterrein zelf,
+    // niet de dorpskern (~2 km noordwest)
+    lat:52.441, lon:5.719, tz:"Europe/Amsterdam",
     pollMs: 10*60*1000,
-    url: "https://api.open-meteo.com/v1/forecast?latitude=52.451&longitude=5.700&minutely_15=precipitation&hourly=temperature_2m,precipitation_probability,precipitation,cloud_cover&forecast_days=2&timezone=Europe%2FAmsterdam",
+    url: "https://api.open-meteo.com/v1/forecast?latitude=52.441&longitude=5.719&minutely_15=precipitation&hourly=temperature_2m,precipitation_probability,precipitation,cloud_cover&forecast_days=2&timezone=Europe%2FAmsterdam",
   },
   energyChipMin: 70,
 };
