@@ -30,7 +30,7 @@ T = [
  (1,"heineken","17:15","19:30","JPEGMAFIA","Experimental hiphop",70,""),
  (1,"heineken","19:30","21:30","Blood Orange","R&B / indie",58,""),
  (1,"heineken","21:30","00:00","Richie Hawtin: DEX EFX X0X","Minimal techno",80,"rec"),
- (1,"heineken","00:00","03:00","Basshall: Kybba, Tribal Kush & Nems","Global bass",66,""),
+ (1,"heineken","00:00","03:00","Basshall: Kybba, Tribal Kush, Nems & Ryan Castro","Global bass",66,""),
  (1,"lima","12:15","13:15","Romy","Dance pop",64,""),
  (1,"lima","13:15","14:15","Liz Rose","Pop",55,""),
  (1,"lima","14:15","16:15","Susobrino","Global club",62,""),
@@ -142,7 +142,7 @@ T = [
  (2,"adonis","22:00","04:00","Adonis Queer Club","Queer club / dance",76,"rec"),
  (2,"adonis","19:30","20:30","Chicks in Dialogue","Comedy",20,""),
  # ---------------- ZONDAG 23 ----------------
- (3,"alpha","13:30","15:30","Noord Nederlands Orkest","Orkest",35,""),
+ (3,"alpha","13:30","15:30","Noord Nederlands Orkest","Orkest — Stravinsky?",35,"must"),
  (3,"alpha","15:30","17:30","Hermanos Gutiérrez","Instrumentaal",45,""),
  (3,"alpha","17:30","19:30","Maribou State","Electronic live",70,"rec"),
  (3,"alpha","19:30","21:30","Turnstile","Hardcore",82,""),
