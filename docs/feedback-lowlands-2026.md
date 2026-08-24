@@ -3,6 +3,16 @@
 Barts eigen oordelen, ter plekke gegeven via de duimpjes in `/lowlands/`.
 Eerste festivalfeedback sinds Draaimolen 2025. **16 sets beoordeeld: 12 👍, 4 👎.**
 
+> ## Leesregel — door Bart zelf gegeven
+>
+> *"Ik heb alleen feedback gegeven als het echt duidelijk was. Alles wat ik niet heb
+> beoordeeld mag je dus ook zien als dat je er niets mee hoeft te doen."*
+>
+> - **Elk duimpje telt zwaar.** Hij duimt alleen bij een uitgesproken oordeel. Zwak
+>   een 👎 dus niet af met "misschien lag het aan de set".
+> - **De ~175 niet-beoordeelde sets zijn geen data.** Geen zwak signaal, geen stille
+>   goedkeuring van een markering. Er valt niets uit af te leiden.
+
 ## Ruwe lijst
 
 | | Act | Wanneer | Podium | Genre | Mijn markering |
@@ -24,25 +34,29 @@ Eerste festivalfeedback sinds Draaimolen 2025. **16 sets beoordeeld: 12 👍, 4 
 | 👎 | Floating Points (live) | zo 20:45 | Heineken Hall | Electronic live | 🔵 checkout |
 | 👍 | Adonis Queer Club | zo 22:00 | Adonis | Queer club | 🟠 tip |
 
-**Trefzekerheid van de markeringen:** wat gemarkeerd was scoorde 8 👍 tegen 3 👎.
-Wat *niet* gemarkeerd was en toch beoordeeld werd: 3 👍 tegen 1 👎 — daar zat de
-grootste fout.
+**Trefzekerheid, binnen deze 16 sets:** wat gemarkeerd was scoorde 8 👍 tegen 3 👎.
+Wat *niet* gemarkeerd was en toch beoordeeld werd: 3 👍 tegen 1 👎 — vier sets die ik
+had moeten zien. Dit is geen hitrate over de hele line-up: over alles wat hij niet
+beoordeelde is per zijn eigen leesregel niets te zeggen.
 
 ---
 
 ## Wat dit leert
 
-### 1. Helena Hauff viel tegen — en dat raakt de kern van het profiel
+### 1. Helena Hauff is herroepen
 
 Zij staat in Barts eigen profiel bovenaan het sterkste segment, was daarom een must,
 en kreeg een 👎. Boys Noize drie uur later in dezelfde zaal kreeg wél een 👍, dus het
 lag niet aan de ruimte, het tijdstip of de nacht.
 
-**Niet overhaast generaliseren.** Eén set is geen oordeel over een artiest: het kan
-de set zelf zijn geweest, of de verwachting die te hoog stond omdat ik haar als must
-had gezet. Wat wél vaststaat: de aanname *"Helena Hauff = zekerheid"* is niet langer
-vanzelfsprekend. Bij een volgende gelegenheid tip in plaats van must, en vraag Bart
-wat er misging.
+Bart heeft dit daarna zelf beslecht: *"Helena Hauff was dus slecht en overwrite wat ik
+eerder van haar zei."* Dat is geen nuance maar een intrekking. **Haar niet meer
+markeren — ook niet als tip.** Haar naam is in `docs/muziek-dna.md` deel 1
+doorgehaald.
+
+Wat dit *niet* is: een oordeel over het genre. Het segment hard/industrial techno
+eromheen (Rødhåd, Ben Klock, Anetha, Freddy K, Bassiani…) staat ongewijzigd en blijft
+het sterkste deel van het profiel.
 
 ### 2. Live soul met zang werkt — dat ontbrak volledig in het profiel
 
