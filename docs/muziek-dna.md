@@ -53,9 +53,14 @@ Waar ze botsen wint festivalfeedback voor lineup-picks.
 ## Deel 1 — Uit festivalfeedback
 
 ### Hard / industrial / dark techno
-Rødhåd · Anetha · Ben Klock · Len Faki · Spekki Webu · Helena Hauff · DAX J · Freddy K · Abstract Division · Rene Wise · Jakojako · Marrøn · Takaaki Itoh · Juliana Huxtable · Bassiani (For Resistance)
+Rødhåd · Anetha · Ben Klock · Len Faki · Spekki Webu · ~~Helena Hauff~~ · DAX J · Freddy K · Abstract Division · Rene Wise · Jakojako · Marrøn · Takaaki Itoh · Juliana Huxtable · Bassiani (For Resistance)
 
 Het sterkste segment. Werkt vooral binnen, in het donker, bij kou, laat op de avond.
+
+> **Correctie van Bart (aug 2026): Helena Hauff eruit.** Op Lowlands kreeg ze een 👎 en
+> hij zei erbij: *"Helena Hauff was dus slecht en overwrite wat ik eerder van haar
+> zei."* Dat is een directe correctie en die wint van deze lijst — niet markeren, ook
+> niet als tip. De rest van het segment blijft ongewijzigd staan.
 
 ### Straightforward dancefloor-techno
 Job Jobse
@@ -126,7 +131,7 @@ Terugkerende namen over meerdere jaren:
 
 | Festival | Wanneer | Notities |
 |---|---|---|
-| Draaimolen | sept 2025 | THE TUNNEL was top, vooral de laatste drie sets: Helena Hauff b2b Juliana Huxtable, Bassiani For Resistance, Spekki Webu b2b Takaaki Itoh. STROBE goed (Job Jobse, Benny Rodrigues b2b CARISTA). MOON saai en te experimenteel. |
+| Draaimolen | sept 2025 | THE TUNNEL was top, vooral de laatste drie sets: Helena Hauff b2b Juliana Huxtable *(zie correctie hierboven: Hauff is in aug 2026 herroepen — de b2b-partner Juliana Huxtable blijft wél staan)*, Bassiani For Resistance, Spekki Webu b2b Takaaki Itoh. STROBE goed (Job Jobse, Benny Rodrigues b2b CARISTA). MOON saai en te experimenteel. |
 | DGTL Amsterdam | apr 2026 | |
 | ADE | okt 2025 | |
 | UPCLOSE | 16–17 mei 2026 | Area 01-run zondag = referentiepunt voor lock-in |
@@ -167,7 +172,7 @@ de Honey Dijon-dislike, het onderscheid energie ≠ pick, de trefkans per genre,
 lijsten met goedgekeurde suggesties.
 **Wat het profiel heeft en dit niet:** de vier contextfactoren (mood/weer/crowd/
 binnen-buiten), zijn festivalgedrag en lock-in-patroon, de Spotify-laag, en artiesten
-die in 2026 nergens op een lineup stonden (Rødhåd, Len Faki, Helena Hauff, Spekki Webu,
+die in 2026 nergens op een lineup stonden (Rødhåd, Len Faki, Spekki Webu,
 Jakojako, Marrøn, Mees Salomé, Eric Prydz, Ben Böhmer, Joris Voorn…).
 
 ## A. Toetsing: profiel en picks komen overeen
@@ -267,11 +272,33 @@ vocal house**: grote naam, niet zijn vloer.
 16 sets beoordeeld met de duimpjes in de app: **12 👍, 4 👎**. Volledige lijst en
 onderbouwing in `docs/feedback-lowlands-2026.md`. Vier dingen die het profiel raken:
 
-**Helena Hauff kreeg een 👎.** Zij staat in deel 1 bovenaan het sterkste segment en
-was daarom een must. Boys Noize drie uur later in dezelfde zaal kreeg wél een 👍, dus
-het lag niet aan de ruimte of het tijdstip. Eén set is geen oordeel over een artiest,
-maar behandel haar voorlopig als **tip, niet als automatische must**, en vraag Bart
-wat er misging.
+### Hoe je deze duimpjes moet lezen (Bart, aug 2026)
+
+Bart heeft dit zelf vastgelegd en het geldt voor alle toekomstige feedback:
+
+> *"Ik heb alleen feedback gegeven als het echt duidelijk was. Alles wat ik niet heb
+> beoordeeld mag je dus ook zien als dat je er niets mee hoeft te doen."*
+
+Twee gevolgen, allebei bindend:
+
+1. **Een duimpje is hoogwaardig bewijs, geen ruis.** Hij duimt niet impulsief; hij
+   duimt als het uitgesproken goed of uitgesproken slecht was. Relativeer een 👎 dus
+   niet met "misschien lag het aan de set" — zo is hij niet bedoeld.
+2. **Wat niet beoordeeld is, zegt níéts.** Geen zwak signaal, geen "kennelijk
+   middelmatig", geen stille bevestiging van een pick. Trek er geen enkele conclusie
+   uit — ook niet dat een gemarkeerde set zonder duimpje raak was.
+
+Dat overschrijft mijn eerdere voorzichtigheid ("één set is geen oordeel over een
+artiest") en mijn eerdere rekensom over ongemarkeerde-maar-beoordeelde sets: die
+telling klopt alleen voor de 16 sets die hij daadwerkelijk beoordeelde.
+
+**Helena Hauff kreeg een 👎 — herroepen, niet afgezwakt.** Zij stond in deel 1
+bovenaan het sterkste segment en was daarom een must. Boys Noize drie uur later in
+dezelfde zaal kreeg wél een 👍, dus het lag niet aan de ruimte of het tijdstip. Bart
+was expliciet: *"Helena Hauff was dus slecht en overwrite wat ik eerder van haar
+zei."* Dus **niet markeren** — ook niet als tip. Haar naam is in deel 1 doorgehaald.
+Dit raakt alléén haar: het segment hard/industrial techno eromheen blijft het sterkste
+deel van het profiel.
 
 **Live soul met zang werkt — een blinde vlek in het profiel.** Pale Jay, Celeste en
 Naomi Sharon kregen alle drie een 👍, terwijl geen van drieën gemarkeerd was en ik ze

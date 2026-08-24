@@ -12,6 +12,9 @@ ook maar één set markeert. Twee dingen om te onthouden:
   130–140+). Deze apps gebruiken **altijd** het festivalprofiel.
 - **De bijlage onderaan dat bestand is nieuwer dan het profiel erboven.** Bij
   tegenspraak wint de bijlage; Barts eigen correcties in gesprek winnen altijd.
+- **Duimpjes-feedback lees je zwaar, stilte lees je niet.** Bart duimt alleen als het
+  echt duidelijk was — een 👎 zwak je niet af. Uit sets die hij *niet* beoordeelde
+  volgt niets. Zie `docs/feedback-lowlands-2026.md`.
 
 Achtergrond, alleen nodig bij grotere wijzigingen:
 - `docs/DESIGN-tml-energy-tool.md` — het oorspronkelijke ontwerp: scoringsmodel,
