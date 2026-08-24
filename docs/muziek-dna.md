@@ -133,6 +133,7 @@ Terugkerende namen over meerdere jaren:
 | 909 Festival | 6–7 juni 2026 | |
 | Awakenings | 9 juli 2026 | |
 | Tomorrowland W1 | 17–19 juli 2026 | *Feedback nog niet verwerkt* |
+| Lowlands | 21–23 aug 2026 | **Feedback verwerkt** — zie `docs/feedback-lowlands-2026.md` en bijlage §I |
 
 ---
 
@@ -238,6 +239,37 @@ The Chainsmokers · Armin van Buuren · John Summit · Lost Frequencies
 **Honey Dijon** — *"vind ik niet leuk, te veel R&B."* Het profiel van okt 2025 noemde
 haar nog als crossover-ja; dat is achterhaald. Generaliseer naar **R&B-/soul-doordrenkte
 vocal house**: grote naam, niet zijn vloer.
+
+## I. Lowlands 2026 — eerste festivalfeedback sinds Draaimolen
+
+16 sets beoordeeld met de duimpjes in de app: **12 👍, 4 👎**. Volledige lijst en
+onderbouwing in `docs/feedback-lowlands-2026.md`. Vier dingen die het profiel raken:
+
+**Helena Hauff kreeg een 👎.** Zij staat in deel 1 bovenaan het sterkste segment en
+was daarom een must. Boys Noize drie uur later in dezelfde zaal kreeg wél een 👍, dus
+het lag niet aan de ruimte of het tijdstip. Eén set is geen oordeel over een artiest,
+maar behandel haar voorlopig als **tip, niet als automatische must**, en vraag Bart
+wat er misging.
+
+**Live soul met zang werkt — een blinde vlek in het profiel.** Pale Jay, Celeste en
+Naomi Sharon kregen alle drie een 👍, terwijl geen van drieën gemarkeerd was en ik ze
+alle drie rond energie 50 had gezet. Het profiel kent alleen dansgenres. Let op de
+grens: **Dijon** (soul/indie, ingetogen) kreeg juist een 👎, en **Floating Points
+live** (instrumentale elektronica) ook. Het onderscheid lijkt *liedjes met een stem,
+live gebracht* versus *ingetogen of instrumentaal*.
+
+**Het bandprogramma is geen bijzaak.** S10, Sombr, Parcels, Maribou State en Eefje de
+Visser: vijf keer 👍, nul tegenvallers, allemaal overdag of vroeg op de avond op een
+bandpodium. Samen met de gemeten markeringsdichtheid (Alpha 60 %, het hoogste van het
+terrein) betekent dat: op een bandfestival ligt zijn zwaartepunt niet in de nacht.
+
+**Adonis Queer Club: twee nachten, twee keer 👍.** Past in de lijn Milkshake →
+Tillatec × WorldPride. Voortaan standaard meenemen als een festival zoiets heeft.
+
+Kleinere signalen: **Ninajirachi 👍** op X-Ray — dat podium is dus geen totale
+afschrijving, de waarschuwing gold de abstract-experimentele techno-hoek. En
+**Ana Frango Elétrico 👎** was een tip van mij op basis van alleen een genre-gok:
+bij onbekende namen liever niet markeren dan gokken.
 
 ## G. Kalibraties die Bart aan de app zelf heeft gegeven
 
