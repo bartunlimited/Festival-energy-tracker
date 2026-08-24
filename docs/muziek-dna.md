@@ -240,6 +240,28 @@ The Chainsmokers · Armin van Buuren · John Summit · Lost Frequencies
 haar nog als crossover-ja; dat is achterhaald. Generaliseer naar **R&B-/soul-doordrenkte
 vocal house**: grote naam, niet zijn vloer.
 
+## G. Kalibraties die Bart aan de app zelf heeft gegeven
+
+- **Atmosphere is binnen**, geen tent · **The Gathering is buiten** ·
+  **Awakenings:** Y = tent, B en C = dak, rest buiten.
+- **Mainstage fit-override 0.8** — te groot om overal vol te dansen.
+- **Lichtshow-bonus +0.20** voor de closing op Mainstage ná donker.
+- **Regen telt op het slechtste kwartier** van een set, niet op het gemiddelde.
+- **Henri PFR** ging van must naar tip toen hij twee sets bleek te hebben — een pick
+  hoort bij een moment, niet bij een naam.
+- **Olive Anguz en Ofenbach** promoveerde hij zelf naar must.
+- De **openingsshow op Mainstage om 17:30** is elke dag een tip.
+
+## H. Openstaande punten voor de app
+
+- De weerregel uit het profiel (*"warm en zonnig → melodic buiten, koud of regen →
+  hard en binnen"*) zit **half** in de engine: er is een zon-bonus voor melodic op
+  open stages en een regen-bonus voor binnen, maar de regen-kant is niet
+  genre-bewust. Hard techno binnen zou bij regen/kou extra mogen stijgen.
+- Het profiel noemt **Awakenings 9 juli 2026**; de app is gebouwd voor de **zondag
+  12 juli**. Waarschijnlijk de festivalstart versus de dag die Bart bezocht — even
+  bevestigen.
+
 ## I. Lowlands 2026 — eerste festivalfeedback sinds Draaimolen
 
 16 sets beoordeeld met de duimpjes in de app: **12 👍, 4 👎**. Volledige lijst en
@@ -270,25 +292,3 @@ Kleinere signalen: **Ninajirachi 👍** op X-Ray — dat podium is dus geen tota
 afschrijving, de waarschuwing gold de abstract-experimentele techno-hoek. En
 **Ana Frango Elétrico 👎** was een tip van mij op basis van alleen een genre-gok:
 bij onbekende namen liever niet markeren dan gokken.
-
-## G. Kalibraties die Bart aan de app zelf heeft gegeven
-
-- **Atmosphere is binnen**, geen tent · **The Gathering is buiten** ·
-  **Awakenings:** Y = tent, B en C = dak, rest buiten.
-- **Mainstage fit-override 0.8** — te groot om overal vol te dansen.
-- **Lichtshow-bonus +0.20** voor de closing op Mainstage ná donker.
-- **Regen telt op het slechtste kwartier** van een set, niet op het gemiddelde.
-- **Henri PFR** ging van must naar tip toen hij twee sets bleek te hebben — een pick
-  hoort bij een moment, niet bij een naam.
-- **Olive Anguz en Ofenbach** promoveerde hij zelf naar must.
-- De **openingsshow op Mainstage om 17:30** is elke dag een tip.
-
-## H. Openstaande punten voor de app
-
-- De weerregel uit het profiel (*"warm en zonnig → melodic buiten, koud of regen →
-  hard en binnen"*) zit **half** in de engine: er is een zon-bonus voor melodic op
-  open stages en een regen-bonus voor binnen, maar de regen-kant is niet
-  genre-bewust. Hard techno binnen zou bij regen/kou extra mogen stijgen.
-- Het profiel noemt **Awakenings 9 juli 2026**; de app is gebouwd voor de **zondag
-  12 juli**. Waarschijnlijk de festivalstart versus de dag die Bart bezocht — even
-  bevestigen.
