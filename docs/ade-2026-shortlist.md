@@ -18,11 +18,12 @@
 
 ### Locaties — overdekking
 
-**Binnen, door Bart bevestigd:** WestWeelde · Toekomstmuziek · IJland · Levenslang.
+**Binnen, door Bart bevestigd:** WestWeelde · Toekomstmuziek · IJland · Levenslang ·
+TILLATEC · BRET.
 **Binnen, algemeen bekend:** Melkweg · Paradiso · Gashouder · AFAS Live · Ziggo Dome ·
 Shelter · RADION · Het Sieraad · De Kromhouthal · NDSM Warehouse · Mediahaven ·
 Theater Amsterdam · Madam · Rijksmuseum · Sugarfactory.
-**Onbekend (❓):** TILLATEC · BRET · H7 Warehouse · G-Star RAW · The Loft · De Wester.
+**Onbekend (❓):** H7 Warehouse · G-Star RAW · The Loft · De Wester.
 **Afgevallen wegens tent/buiten:** Thuishaven · Havenpark · De Fik Garden.
 
 ---
@@ -46,7 +47,7 @@ Nog steeds **geen Indira Paganotto** en **geen Above & Beyond** in het programma
 
 | | Tijd | Optie | Zaal | Line-up / genre |
 |---|---|---|---|---|
-| 🔴 | 23:00–08:00 | **LASTER presents KLOCKWORKS 20 YEARS** | TILLATEC ❓ | **Ben Klock** · **DVS1** · Roll Dann · The Lady Machine · Setaoc Mass · Laia — hard / industrial |
+| 🔴 | 23:00–08:00 | **LASTER presents KLOCKWORKS 20 YEARS** | TILLATEC | **Ben Klock** · **DVS1** · Roll Dann · The Lady Machine · Setaoc Mass · Laia — hard / industrial |
 | 🟠 | 20:00–03:00 | Hernan Cattaneo b2b Nick Warren — 6 uur | WestWeelde | progressive |
 | 🟠 | 23:00–06:00 | Gashouder: Armin van Buuren & Benwal | Gashouder | trance / big room |
 | 🟠 | 15:00–21:30 | Overbruggen x Hot Since 82 | The Loft ❓ | deep house |
@@ -59,7 +60,7 @@ Nog steeds **geen Indira Paganotto** en **geen Above & Beyond** in het programma
 | 🔴 | 23:00–06:00 | Gashouder: **I Hate Models & Nico Moreno** | Gashouder | hard techno |
 | 🔴 | 16:00–23:00 | Audio Obscura — **Anetha**, SPFDJ, Patrick Mason | G-Star RAW ❓ | techno |
 | 🔴 | 23:00–06:00 | **Anjunadeep** | Paradiso | **James Grant** · **Jody Wisternoff** · Ezequiel Arias · Nicky Elisabeth · Martin Roth — melodic / trance |
-| 🟠 | 08:30–13:30 | **Ogazón invites Freddy K & Rene Wise** | BRET ❓ | techno, intieme zaal — ochtend |
+| 🟠 | 08:30–13:30 | **Ogazón invites Freddy K & Rene Wise** | BRET | techno, intieme zaal — ochtend |
 | 🟠 | 23:00–06:00 | Intercell x 999999999 Invites | H7 Warehouse ❓ | hard techno |
 | 🟠 | 23:00–07:00 | Awakenings **Drumcode** | Sugarfactory ⚠️ | techno |
 | ⬜ | 20:00–04:00 | Colorize: 15 Years | Toekomstmuziek | melodic / deep house |
@@ -101,7 +102,7 @@ Hardsok, Trym. Hardstyle/raw heeft bij jou 3% trefkans.
 | 🟠 | 15:00–22:00 | DGTL: Folamour All Day Long | De Kromhouthal | house |
 | 🟠 | 23:00–09:00 | Apollonia curates VBX | Shelter | deep house / techno |
 | ⬜ | 15:00–18:00 | Sunday Selectors — met Dave Clarke | Concerto | platenzaak |
-| ❓ | 14:00–23:00 | Todd Terry & Friends — *zie open vraag 1* | Het Sieraad | deep house |
+| 🟠 | 14:00–23:00 | **Todd Terry & Friends** — ⚠️ oud publiek, zie onder | Het Sieraad | deep house |
 
 ---
 
@@ -128,16 +129,23 @@ Len Faki en Marrøn pas 's avonds, dan is optie 3 beter dan drie uur opwarmen.
 De Kromhouthal) met **Mees Salomé & Yotto** — jouw favoriet. En AMF in de ArenA.
 Alle drie botsen met Outworld.
 
+## Todd Terry — goedgekeurd, met één voorbehoud
+
+Bart: *"Todd Terry is ok, maar de crowd zal wel erg oud zijn."* Hij blijft dus staan,
+maar het voorbehoud raakt precies je eigen kernvraag: **dansen ze, of staan ze te
+praten?** Bij een house-legende van die generatie is een ouder en rustiger publiek
+waarschijnlijk. Zonneveld (vanaf 14:00, Mediahaven) en Speedy J (16:00, Paradiso)
+staan dezelfde dag en zijn op dansenergie de veiligere keuze.
+
+Dit geldt níét voor elk jubileum: *Klockworks 20 Years* en *Dave Clarke 30 Years of
+ADE* zijn harde underground-line-ups met een heel ander publiek.
+
 ## Open vragen
 
-1. **Todd Terry** — staat nog op je goedgekeurde Milkshake-lijst, maar is net zo
-   Amerikaanse house als Horse Meat Disco, dat je afkeurde met *"te Amerikaans"*.
-   Blijft hij of gaat hij?
-2. **❓-locaties** — TILLATEC en BRET zijn nieuw in de lijst en hun overdekking is
-   onbekend. TILLATEC staat als 🔴 (Klockworks); is dat buiten of een tent, dan
-   vervalt het volgens de oktoberregel.
-3. **Spoorwerkzaamheden** Halfweg-Zwanenburg — in 2025 was het station wo + do dicht.
-4. **Awakenings Friday Sessions** ¹ — de ADE-kaart noemt nog steeds geen namen. De
+1. **❓-locaties** — H7 Warehouse · G-Star RAW · The Loft · De Wester. Allemaal 🟠 of
+   lager, dus de kop van de lijst hangt er niet aan.
+2. **Spoorwerkzaamheden** Halfweg-Zwanenburg — in 2025 was het station wo + do dicht.
+3. **Awakenings Friday Sessions** ¹ — de ADE-kaart noemt nog steeds geen namen. De
    line-up hieronder komt van Awakenings' eigen pagina in **augustus** en is sindsdien
    niet opnieuw gecontroleerd.
 

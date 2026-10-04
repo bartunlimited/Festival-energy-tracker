@@ -267,14 +267,27 @@ vocal house**: grote naam, niet zijn vloer.
 lijst E hierboven**, waar hij bij Milkshake stond als goedgekeurde suggestie. Die lijst
 was een vooraf-goedkeuring; dit is een oordeel achteraf en gaat dus voor.
 
-→ Samen met de Honey Dijon-dislike (*"te veel R&B"*) tekent zich een bredere lijn af:
-**Amerikaanse disco en soulful/vocal house vallen af**, ongeacht hoe groot de naam is.
-Gebruik dit niet als dislike voor house in het algemeen — Europese deep house en
-tech house staan nergens ter discussie.
+**Maar "Amerikaans" is níét de regel.** Op de vervolgvraag of Todd Terry — net zo goed
+Amerikaanse house, en ook uit lijst E — dan ook afvalt: *"Todd Terry is ok."* Generaliseer
+dus **niet** naar nationaliteit of naar disco als genre. Wat overblijft zijn twee
+concrete namen (**Honey Dijon**, **Horse Meat Disco**) plus de richting uit de Honey
+Dijon-dislike: **R&B-doordrenkte vocal house**. House, disco en Amerikaanse house als
+categorie staan nergens ter discussie.
 
-⚠️ **Openstaand:** *Todd Terry* staat óók nog in lijst E en is net zo goed Amerikaanse
-house. Niet stilzwijgend laten staan — expliciet aan Bart vragen voordat je hem opnieuw
-aanbeveelt.
+*Twee keer eerder te breed gegeneraliseerd: eerst van Honey Dijon naar alle disco
+(waardoor Glitterbox onterecht wegviel), daarna van Horse Meat Disco naar alles
+Amerikaans. Houd het bij de namen die hij noemt.*
+
+**Crowdleeftijd is een dansenergie-signaal.** Bij zijn goedkeuring van Todd Terry:
+*"maar de crowd zal wel erg oud zijn."* Dat is geen bezwaar tegen de artiest maar tegen
+de vloer — en dat is precies zijn kernvraag (*dansen ze, of staan ze te praten?*).
+
+→ Dit **scherpt de factor Crowd uit deel 1 aan**: bij **heritage- en jubileumboekingen**
+(legacy-namen, "30 years of", tributes, labelverjaardagen met oudgedienden) is een
+ouder en meer pratend publiek te verwachten. Noem dat risico erbij in plaats van de
+naam af te raden — hij wil zelf kunnen kiezen. Let op: dit geldt níét automatisch voor
+elk jubileum; *Klockworks 20 Years* en *Dave Clarke 30 Years of ADE* zijn harde,
+underground line-ups met een heel ander publiek dan een house-tribute.
 
 **Tent = seizoensgebonden, geen vaste dislike.** Bart over Thuishaven op ADE: *"in een
 tent dus koud"*, en daarna de nuance: *"ADE is in Amsterdam in oktober = slecht weer
