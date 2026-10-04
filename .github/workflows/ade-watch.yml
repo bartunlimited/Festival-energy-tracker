@@ -67,7 +67,8 @@ jobs:
             echo "## ADE-programma — $(date -u '+%Y-%m-%d %H:%M UTC')"
             echo
             if [ "${{ steps.scrape.outputs.exit }}" = "1" ]; then
-              cat diff.txt
+              # De step-samenvatting kapt zelf af op 1 MB; blijf daaronder.
+              head -c 900000 diff.txt
             elif [ "${{ steps.scrape.outputs.exit }}" = "2" ]; then
               echo "⚠️ Scrapen leverde 0 events op — zie de log; mogelijk is de markup veranderd."
             else
@@ -95,12 +96,21 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          SRC='https://www.amsterdam-dance-event.nl/en/program/filter/?section=events&type=8262%2C8263&from=2026-10-21&to=2026-10-25'
           {
             echo "Het ADE-programma is gewijzigd sinds de vorige check."
             echo
-            cat diff.txt
+            # GitHub weigert een body boven 65536 tekens; een grote line-up-drop
+            # haalt dat ruim. Afkappen op 60k en naar de run-samenvatting wijzen
+            # voor de rest.
+            head -c 60000 diff.txt
+            if [ "$(wc -c < diff.txt)" -gt 60000 ]; then
+              echo
+              echo "_…afgekapt. Volledige diff staat in de_ "
+              echo "[run-samenvatting](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})."
+            fi
             echo
-            echo "Bron: <https://www.amsterdam-dance-event.nl/en/program/filter/?section=events&type=8262%2C8263&from=2026-10-21&to=2026-10-25>"
+            echo "Bron: <$SRC>"
           } > body.md
           gh issue create \
             --title "ADE-programma gewijzigd — $(date -u '+%Y-%m-%d')" \
