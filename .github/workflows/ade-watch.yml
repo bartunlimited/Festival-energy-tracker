@@ -6,8 +6,10 @@ on:
   push:
     # Tijdelijk: zo draait de watcher op een runner (die wél bij ADE kan) zonder
     # dat hij eerst naar main hoeft. Weghalen zodra hij vanaf main draait.
+    # Geen paths-filter: workflow_dispatch werkt alleen vanaf de default branch
+    # en is hier geblokkeerd, dus een push is de enige manier om hem op verzoek
+    # te starten.
     branches: [claude/ade-party-recommendations-853lpe]
-    paths: ['tools/ade_watch.py', 'tools/ade_render.mjs', '.github/workflows/ade-watch.yml']
   workflow_dispatch:
     inputs:
       render:
