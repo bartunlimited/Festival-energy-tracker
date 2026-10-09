@@ -9,7 +9,7 @@
 Exit codes: 0 = niets veranderd · 1 = wijzigingen gevonden · 2 = fout of 0 events.
 Zo kun je hem in cron of GitHub Actions hangen en op exit 1 laten alarmeren.
 """
-import argparse, json, os, re, subprocess, sys, time, unicodedata, urllib.error, urllib.request
+import argparse, json, os, re, subprocess, sys, time, traceback, unicodedata, urllib.error, urllib.parse, urllib.request
 from datetime import datetime, timezone
 from html import unescape
 
@@ -36,8 +36,19 @@ LD_JSON = re.compile(
 
 # ---------------------------------------------------------------- ophalen
 
+def safe_url(url):
+    """Niet-ASCII in een URL percent-coderen.
+
+    Slugs kunnen emoji en andere tekens bevatten ("…batter-my-️-3-personed-g0d",
+    "cosmic-navigation-๑-…"); urllib weigert die in de request-regel en gooit
+    een UnicodeEncodeError in plaats van de pagina op te halen.
+    """
+    return urllib.parse.quote(url, safe=":/?&=%#+@,;~")
+
+
 def fetch(url, tries=4):
     """GET met retry-backoff. Geen Accept-Encoding, dan komt het onverpakt binnen."""
+    url = safe_url(url)
     last = None
     for attempt in range(tries):
         try:
@@ -373,7 +384,10 @@ def fetch_quiet(url, tries=3):
     één onbereikbare eventpagina mag de hele run niet slopen."""
     try:
         return fetch(url, tries=tries)
-    except SystemExit:
+    except (SystemExit, Exception) as e:  # noqa: BLE001 — bewust breed
+        # Breed afvangen: één rare URL nam eerder de hele run mee, omdat hier
+        # alleen SystemExit werd gevangen en een UnicodeEncodeError doorschoot.
+        print(f"  eventpagina mislukt: {url} — {type(e).__name__}: {e}", file=sys.stderr)
         return None
 
 
@@ -639,4 +653,19 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    # Exitcodes: 0 = niets veranderd, 1 = wijzigingen, 2 = fout. Een Python-
+    # crash geeft standaard óók 1, en dan opent de workflow een leeg
+    # "gewijzigd"-issue en slaat niets op. Een crash moet dus 2 zijn.
+    try:
+        code = main()
+    except SystemExit as e:
+        # fetch() stopt met SystemExit("FOUT: …"); een tekst als exitcode
+        # wordt door Python óók 1. Alleen een expliciete int laten staan.
+        if isinstance(e.code, int):
+            raise
+        print(e.code, file=sys.stderr)
+        sys.exit(2)
+    except Exception:  # noqa: BLE001
+        traceback.print_exc()
+        sys.exit(2)
+    sys.exit(code)
