@@ -307,6 +307,8 @@ def day_urls(url):
 #   <div class="ade-info-bar__item"><h2 …>Interests</h2> … category=<id>…">Techno</a> / …
 
 A_TAG = re.compile(r"<a\b([^>]*)>(.*?)</a>", re.S | re.I)
+LINEUP_BLOCK = re.compile(
+    r"<h3[^>]*>\s*Line-up\s*</h3>\s*<p[^>]*>(.*?)</p>", re.S | re.I)
 HREF = re.compile(r'href="([^"]+)"')
 ARTIST_URL = re.compile(r"/artists-speakers/([^/]+)/(\d+)/?")
 VENUE_URL = re.compile(r"/venues/([^/]+)/(\d+)/?")
@@ -325,16 +327,25 @@ def parse_detail(html):
     """Haal line-up, datum, tijd, zaal, adres en tags uit een eventpagina."""
     out = {"lineup": [], "tags": []}
 
-    for attrs, inner in A_TAG.findall(html):
+    # Het line-upblok is één alinea na de kop "Line-up", met namen gescheiden
+    # door " / ". Niet alleen de links lezen: een artiest zonder ADE-pagina
+    # staat er als platte tekst tussen en zou anders onzichtbaar zijn.
+    block = LINEUP_BLOCK.search(html)
+    out["lineup_heading"] = bool(block)
+    linked = {}
+    for attrs, inner in A_TAG.findall(block.group(1) if block else html):
         if "link__line-up" not in attrs:
             continue
         href = (HREF.search(attrs) or [None, ""])[1]
-        label = _text(inner)
+        am = ARTIST_URL.search(href)
+        linked[_text(inner)] = am.group(2) if am else ""
+    labels = ([x.strip() for x in _text(block.group(1)).split(" / ") if x.strip()]
+              if block else list(linked))
+    for label in labels:
         m = NAME_COUNTRY.match(label)
         name, country = (m.group(1), m.group(2)) if m else (label, "")
-        am = ARTIST_URL.search(href)
         out["lineup"].append({"name": name, "country": country,
-                              "artist_id": am.group(2) if am else ""})
+                              "artist_id": linked.get(label, "")})
 
     # De info-balk bestaat uit blokken met een kop; op de kop splitsen is
     # robuuster dan op volgorde vertrouwen.
