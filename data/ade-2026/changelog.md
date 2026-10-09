@@ -3669,3 +3669,35 @@
 ### ✏️ Gewijzigd (1)
 - **SUSPENDED - Music Hammocks** — https://www.amsterdam-dance-event.nl/en/program/2026/suspended-music-hammocks-immersive-sound/2835282/
     - `end`: '15:00' → '12:00'
+
+## 2026-10-09T18:39:46Z
+
+### ✏️ Gewijzigd (11)
+- **20 years of The Warehouse Project** — https://www.amsterdam-dance-event.nl/en/program/2026/20-years-of-the-warehouse-project/2816564/
+    - `start`: '' → '14:00'
+    - `end`: '' → '21:00'
+    - `venue`: '' → 'Shelter'
+- **Ade Opening Concert Kybba Metropole Orkest Special Guests** — https://www.amsterdam-dance-event.nl/en/program/2026/ade-opening-concert-kybba-metropole-orkest-special-guests/2807164/
+    - `venue`: '' → 'Melkweg'
+- **Amsterdam Vinyl Club x Wanakam-** — https://www.amsterdam-dance-event.nl/en/program/2026/amsterdam-vinyl-club-x-wanakam-ade-opening-night/2929032/
+    - `venue`: '' → 'Wanakam'
+- **Kolt Invites Syntharax** — https://www.amsterdam-dance-event.nl/en/program/2026/kolt-invites-syntharax/2856829/
+    - `venue`: '' → 'De Fik Garden'
+- **LNR:** — https://www.amsterdam-dance-event.nl/en/program/2026/lnr-ade-edition/2816823/
+    - `start`: '' → '23:00'
+    - `end`: '' → '07:00'
+    - `venue`: '' → 'RADION'
+- **Lola x Rinse FM** — https://www.amsterdam-dance-event.nl/en/program/2026/lola-x-rinse-fm/2816452/
+    - `venue`: 'Progressive Koninklijk Instituut voor de Tropen (Royal Tropical Institute)' → 'Koninklijk Instituut voor de Tropen (Royal Tropical Institute)'
+- **Soju Sessions** — https://www.amsterdam-dance-event.nl/en/program/2026/soju-sessions/2862529/
+    - `venue`: '' → 'Sojubar Amsterdam Leidseplein'
+- **Solo errori - KIKKO INVITA** — https://www.amsterdam-dance-event.nl/en/program/2026/solo-errori-kikko-invita/2861020/
+    - `venue`: '' → 'Toekomstmuziek'
+- **The M & Friends** — https://www.amsterdam-dance-event.nl/en/program/2026/the-m-friends/2927848/
+    - `venue`: '' → 'Escape Club'
+- **Toman pres. High Ceilings** — https://www.amsterdam-dance-event.nl/en/program/2026/toman-pres-high-ceilings/2886155/
+    - `start`: '' → '23:00'
+    - `end`: '' → '06:00'
+    - `venue`: '' → 'Camarat'
+- **WHATSNEW X Rinse FM** — https://www.amsterdam-dance-event.nl/en/program/2026/whatsnew-x-rinse-fm/2816422/
+    - `venue`: 'Tech-house Koninklijk Instituut voor de Tropen (Royal Tropical Institute)' → 'Koninklijk Instituut voor de Tropen (Royal Tropical Institute)'
