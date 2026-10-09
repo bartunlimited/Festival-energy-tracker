@@ -89,7 +89,14 @@ jobs:
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           git add data/
           git commit -m "ADE-programma: snapshot bijgewerkt ($(date -u '+%Y-%m-%d'))"
-          git push
+          # Iemand kan tijdens de run naar deze branch hebben gepusht; dan wordt
+          # een kale push geweigerd en gaat de snapshot verloren. De runner
+          # raakt alleen data/ aan, dus rebasen botst niet met andere commits.
+          for i in 1 2 3; do
+            git pull --rebase origin "${GITHUB_REF_NAME}" && git push && exit 0
+            sleep $((i * 5))
+          done
+          exit 1
 
       - name: Issue openen bij wijzigingen
         if: steps.scrape.outputs.exit == '1'
