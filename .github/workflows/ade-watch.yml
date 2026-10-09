@@ -53,6 +53,21 @@ jobs:
           cat log.txt
           cat diff.txt
 
+      # TIJDELIJK: een paar eventpagina's bewaren om de detailparser op te
+      # bouwen. Weghalen zodra tools/ade_watch.py de detailpagina's leest.
+      - name: Probe eventpagina's
+        run: |
+          mkdir -p data/ade-2026/_probe
+          for u in \
+            https://www.amsterdam-dance-event.nl/en/program/2026/ferry-corsten-friends-x-free-your-mind/2842743/ \
+            https://www.amsterdam-dance-event.nl/en/program/2026/fabric-x-loud-contact/2805830/ \
+            https://www.amsterdam-dance-event.nl/en/program/2026/speedy-j-presents-stoor-live/2812566/ ; do
+            id=$(basename "$u")
+            python3 -c "import sys; sys.path.insert(0,'tools'); import ade_watch as w; open('data/ade-2026/_probe/'+sys.argv[2]+'.static.html','w').write(w.fetch(sys.argv[1]))" "$u" "$id" || echo "static $id mislukt"
+            node tools/ade_render.mjs "$u" > "data/ade-2026/_probe/$id.rendered.html" || echo "render $id mislukt"
+          done
+          ls -la data/ade-2026/_probe
+
       - name: HTML bewaren als het misging
         if: steps.scrape.outputs.exit == '2'
         uses: actions/upload-artifact@v4
