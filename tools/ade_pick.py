@@ -11,9 +11,9 @@ zelfgeschreven namenlijst. Dat ging twee keer mis op dezelfde manier:
    en Awakenings Friday Sessions werd alleen gevonden omdat we er toevallig naar
    zochten.
 
-Daarom: namen komen uit het profiel zelf, en een kaart zonder namen wordt op
-zijn genretags beoordeeld en apart gemarkeerd, zodat hij opgezocht wordt in
-plaats van stil te verdwijnen.
+Daarom: namen en gewichten komen uit het blok `artiesten` in bijlage §J van
+het profiel, en een event zonder line-up wordt op zijn genretags beoordeeld en
+apart gemarkeerd, zodat het opgezocht wordt in plaats van stil te verdwijnen.
 
     python3 tools/ade_pick.py --window 8
     python3 tools/ade_pick.py --date 2026-10-23 --top 15
@@ -57,30 +57,16 @@ NON_DANCEFLOOR = {
     "Music Culture", "Masterclasses", "Networking events", "Conference",
     "Panel", "Workshop", "Talks", "Film", "Visual Arts", "Expo", "Exhibition",
     "Art", "Awards", "Markets", "Food", "Wellness", "Sports",
+    # Pop-ups en winkels; LA ROCHE BOUTIQUE verkoopt merch van Indira Paganotto
+    # en scoorde daardoor als haar optreden.
+    "Lifestyle",
 }
-
-# Namen die het profiel expliciet afkeurt.
-REJECTED = ("honey dijon", "horse meat disco", "angerfist")
 
 ORGANISATIONAL = {
     "Nighttime events", "Daytime events", "Evening starters", "Morning events",
     "Large venues", "Intimate venues", "Unique venues", "Warehouses",
     "Club nights", "All night long", "Events", "Free Events", "Live",
     "Live Performances", "DJ", "Producer", "Labels & Publishing",
-}
-
-# Woorden die in het profiel vetgedrukt of in lijstjes staan maar geen artiest
-# zijn. Zonder deze filter scoort elk event met de tag "Techno" als een match.
-NOT_A_NAME = {
-    "ade", "festival", "festivals", "mood", "bart", "claude", "crowd", "weer",
-    "tent", "binnen", "buiten", "plus", "min", "techno", "house", "trance",
-    "melodic", "melodic techno", "deep house", "tech house", "tech-house",
-    "hard techno", "industrial techno", "acid techno", "progressive", "disco",
-    "elektro", "minimal", "psytrance", "hardstyle", "dubstep", "bass", "ambient",
-    "big room", "big room house", "edm", "mainstage", "vinyl", "live", "show",
-    "energie", "factor", "effect", "pick", "picks", "must", "tip", "tips", "zomer", "oktober",
-    "openstaand", "dislikes", "spotify", "halfweg", "awakenings", "milkshake",
-    "tomorrowland", "drumcode", "intercell", "verknipt", "outworld", "tillatec",
 }
 
 TAGS_RE = re.compile(r"((?:[A-Za-z&\- ]+ / )+[A-Za-z&\- ]+)\s+[^·]{2,40}·")
@@ -97,47 +83,35 @@ def nfc(text):
     return unicodedata.normalize("NFC", text)
 
 
-def load_artists(path=PROFILE):
-    """Haal artiestennamen uit het profiel.
+ARTIST_BLOCK = re.compile(r"```artiesten\n(.*?)```", re.S)
 
-    Namen staan daar in `·`-lijstjes, in tabelkolommen en vetgedrukt. We pakken
-    die drie vormen en gooien alles weg wat op lopende tekst lijkt, zodat de
-    lijst meegroeit met het profiel in plaats van hier te verstenen.
+
+def load_artists(path=PROFILE):
+    """Lees namen en gewichten uit het blok `artiesten` in muziek-dna.md §J.
+
+    Geeft (gewichten, afgewezen): {naam: 1|2|3} en een set namen die een event
+    op nul zetten. Bewust een expliciete lijst: namen uit lopende tekst halen
+    pakte "2025" en "Trefkans" als artiest en miste Charlotte de Witte.
     """
     text = nfc(path.read_text(encoding="utf-8"))
-    cand = set()
-    for m in re.finditer(r"\*\*(.+?)\*\*", text):
-        cand.add(m.group(1))
-    for line in text.splitlines():
-        if line.startswith(("#", ">", "*Afgeleid")):
+    m = ARTIST_BLOCK.search(text)
+    if not m:
+        raise SystemExit(f"FOUT: geen ```artiesten-blok in {path}")
+    weights, rejected = {}, set()
+    for n, line in enumerate(m.group(1).splitlines(), 1):
+        line = line.strip()
+        if not line:
             continue
-        line = re.sub(r"^[\s\-*+]+", "", line)
-        # Ook op ":" splitsen, anders blijft een lijstkop aan de eerste naam
-        # plakken ("Milkshake: Todd Terry").
-        for part in re.split(r"·|\||,|:", line):
-            cand.add(part)
-
-    out = {}
-    for c in cand:
-        c = re.sub(r"[*_`]", "", c).strip(" .:—-")
-        c = re.sub(r"\s*\(.*?\)\s*", " ", c).strip()
-        if not (2 < len(c) <= 32) or " / " in c:
-            continue
-        if c in ORGANISATIONAL or c.lower() in REJECTED:
-            continue
-        if c.lower() in NOT_A_NAME or c.lower() in {g.lower() for g in GENRE_WEIGHTS}:
-            continue
-        # Lopende tekst eruit: te veel woorden, of woorden die geen naam zijn.
-        words = c.split()
-        if not 1 <= len(words) <= 4:
-            continue
-        if not re.match(r"^[A-ZÀ-ÿ0-9]", c):
-            continue
-        if re.search(r"\b(de|het|een|en|dat|die|niet|voor|zijn|wordt|is|van"
-                     r"|bij|als|aan|met|uit|naar|maar|ook|per|geen)\b", c.lower()):
-            continue
-        out.setdefault(c.lower(), c)
-    return sorted(out.values())
+        w, _, name = (x.strip() for x in line.partition("|"))
+        if not name:
+            raise SystemExit(f"FOUT: artiestenlijst regel {n} onleesbaar: {line!r}")
+        if w.lower() == "x":
+            rejected.add(name)
+        elif w in ("1", "2", "3"):
+            weights[name] = int(w)
+        else:
+            raise SystemExit(f"FOUT: onbekend gewicht {w!r} bij {name!r}")
+    return weights, rejected
 
 
 def tags_of(event):
@@ -179,17 +153,33 @@ def usable(start, end, block):
     return None, None
 
 
+def _found(names, text):
+    # (?<!\w) / (?!\w) in plaats van \b: werkt ook voor namen die met een
+    # niet-woordteken eindigen of beginnen, en "Ben Klock" matcht niet in
+    # "Ben Klockworks".
+    return {a for a in names
+            if re.search(r"(?<!\w)" + re.escape(a) + r"(?!\w)", text, re.I)}
+
+
 def score(event, artists):
-    # Namen staan op drie plekken: de gelinkte line-up op de eventpagina, de
-    # kaarttekst op de lijst, en de beschrijving. Geen van drieën is volledig.
+    # Namen staan op drie plekken: de line-up op de eventpagina, de kaarttekst
+    # op de lijst, en de beschrijving. Geen van drieën is volledig (Marcel
+    # Dettmann staat bij Fabric alleen op de kaart en in de tekst), maar de
+    # beschrijving noemt ook wie er níét speelt: "founded by Above & Beyond",
+    # "we sell merchandise for … Indira Paganotto". Daarom telt een naam die
+    # alléén in de beschrijving staat zwak mee, en wordt hij gemarkeerd.
+    weights, rejected = artists
     lineup = " · ".join(a["name"] for a in event.get("lineup", []))
-    blob = nfc(f"{event['title']} {lineup} {event.get('context', '')} "
-               f"{event.get('description', '')}")
-    low = blob.lower()
-    if any(r in low for r in REJECTED):
+    strong = nfc(f"{event['title']} {lineup} {event.get('context', '')}")
+    weak = nfc(event.get("description", ""))
+    # Afwijzing alleen op line-up, titel en kaart: een beschrijving die "in de
+    # traditie van Dimitri Vegas" zegt is geen optreden van Dimitri Vegas.
+    if _found(rejected, strong):
         return 0, [], [], False
-    names = sorted({a for a in artists
-                    if re.search(r"\b" + re.escape(a), blob, re.I)})
+
+    hard = _found(weights, strong)
+    soft = _found(weights, weak) - hard
+    names = sorted(hard) + sorted(f"{a}*" for a in soft)
     tags = tags_of(event)
     genre = sum(GENRE_WEIGHTS.get(t, 0) for t in tags)
 
@@ -200,10 +190,10 @@ def score(event, artists):
         # noemt, niet dat we ze niet hebben opgehaald.
         nameless = not event["lineup"]
     else:
-        head = blob.split(tags[0])[0] if tags and tags[0] in blob else blob
+        head = strong.split(tags[0])[0] if tags and tags[0] in strong else strong
         head = head.replace(event["title"], "").strip(" -·")
         nameless = len(head) < 12
-    return 3 * len(names) + genre, names, tags, nameless
+    return sum(weights[a] for a in hard) + len(soft) + genre, names, tags, nameless
 
 
 def main():
@@ -222,7 +212,7 @@ def main():
     artists = load_artists()
     block = (OUTWORLD[0] - timedelta(hours=args.window),
              OUTWORLD[1] + timedelta(hours=args.window))
-    print(f"{len(artists)} namen uit het profiel · snapshot {data['fetched_at']} "
+    print(f"{len(artists[0])} namen uit het profiel · snapshot {data['fetched_at']} "
           f"· {data['count']} events", file=sys.stderr)
     print(f"geblokkeerd: {block[0]:%a %d %b %H:%M} → {block[1]:%a %d %b %H:%M}\n",
           file=sys.stderr)

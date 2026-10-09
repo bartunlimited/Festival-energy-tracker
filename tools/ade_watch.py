@@ -423,7 +423,8 @@ def enrich(events, old, workers=6):
             if det is None:
                 failed += 1
                 prev = old.get(eid, {})
-                for k in ("lineup", "lineup_names", "tags", "address", "venue_id", "description"):
+                for k in ("lineup", "lineup_names", "lineup_heading", "tags", "address",
+                          "venue_id", "description"):
                     if k in prev:
                         ev[k] = prev[k]
                 ev["detail_stale"] = True
@@ -431,6 +432,7 @@ def enrich(events, old, workers=6):
             ok += 1
             ev.pop("detail_stale", None)
             ev["lineup"] = det["lineup"]
+            ev["lineup_heading"] = det.get("lineup_heading", False)
             ev["lineup_names"] = " · ".join(sorted(a["name"] for a in det["lineup"]))
             ev["tags"] = det["tags"]
             for k in ("address", "venue_id", "description"):

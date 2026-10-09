@@ -316,6 +316,125 @@ Bij twijfel over een onbekende locatie: niet gokken, aan Bart vragen. Zelfde reg
 regulier OV telt mee als selectiecriterium; een line-up die alleen per shuttle te
 bereiken is, weegt lager.
 
-**Indira Paganotto** staat niet in het ADE 2026-programma (0 hits in 275 gescrapete
-events, `tools/ade_watch.py`). Hij vroeg er expliciet naar, dus ze is interessant —
-markeer haar als ze op een toekomstige line-up verschijnt.
+**Indira Paganotto** staat niet in het ADE 2026-programma. Gecontroleerd op 9 okt 2026
+over alle 1379 eventpagina's (line-up, kaarttekst én beschrijving): de enige vermelding
+is een merchandise-pop-up die haar merch verkoopt. Hij vroeg er expliciet naar, dus ze
+is interessant — markeer haar als ze op een toekomstige line-up verschijnt.
+
+*(Eerdere "0 hits" in augustus waren geen bewijs: de scraper las toen alleen de
+programmalijst, en 37% van die kaarten noemt geen artiesten.)*
+
+## J. Artiestenlijst voor de tools
+
+`tools/ade_pick.py` leest **alleen dit blok** — niet de lopende tekst hierboven. Namen
+automatisch uit proza halen ging mis: het pakte "2025", "Trefkans" en "UPCLOSE" als
+artiest en gooide juist *Charlotte de Witte*, *Armin van Buuren* en *Kevin de Vries*
+weg (het stopwoordfilter zag "de" en "van").
+
+**Bij een nieuwe naam in het profiel: hier ook toevoegen.** Formaat: `gewicht | naam`.
+
+- **3** — eigen musts (§D), het hard/dark-techno-segment en de lock-in-namen
+- **2** — overige namen uit deel 1 en 2, en goedgekeurde suggesties (§E)
+- **1** — *goed, maar geen must*
+- **x** — afgewezen; een event met deze naam scoort nul
+
+Losse namen, geen b2b-combinaties: een kaart noemt "Charlie Sparks" ook zonder BIIA.
+
+```artiesten
+3 | Rødhåd
+3 | JakoJako
+3 | Marrøn
+3 | Freddy K
+3 | Abstract Division
+3 | Anetha
+3 | Ben Klock
+3 | Len Faki
+3 | Spekki Webu
+3 | Helena Hauff
+3 | DAX J
+3 | Rene Wise
+3 | Takaaki Itoh
+3 | Juliana Huxtable
+3 | Bassiani
+3 | Sara Landry
+3 | Amelie Lens
+3 | Nico Moreno
+3 | Charlotte de Witte
+3 | Indira Paganotto
+3 | BIIA
+3 | Charlie Sparks
+3 | Mees Salomé
+3 | Martin Garrix
+3 | Calvin Harris
+3 | Alesso
+3 | Sebastian Ingrosso
+3 | The Chainsmokers
+3 | Armin van Buuren
+3 | John Summit
+3 | Lost Frequencies
+3 | Ofenbach
+3 | Olive Anguz
+3 | Symphony Of Harmony
+3 | Oscar and the Wolf
+2 | Job Jobse
+2 | Benny Rodrigues
+2 | Carista
+2 | Eric Prydz
+2 | Ben Böhmer
+2 | Paul Kalkbrenner
+2 | Kölsch
+2 | Jan Blomqvist
+2 | Joris Voorn
+2 | David Guetta
+2 | Henri PFR
+2 | Adriatique
+2 | Stephan Bodzin
+2 | Kevin de Vries
+2 | CamelPhat
+2 | Hannah Wants
+2 | Above & Beyond
+2 | Tinlicker
+2 | Black Coffee
+2 | Nina Kraviz
+2 | Richie Hawtin
+2 | Boris Brejcha
+2 | Pan-Pot
+2 | Marco Carola
+2 | Mau P
+2 | 999999999
+2 | Eli Brown
+2 | HI-LO
+2 | MCR-T
+2 | Partiboi69
+2 | Azyr
+2 | Enrico Sangiuliano
+2 | Hardwell
+2 | Steve Angello
+2 | Fisher
+2 | James Hype
+2 | Mall Grab
+2 | Miss Monique
+2 | Hannah Laing
+2 | Blastoyz
+2 | Todd Terry
+2 | Chuckie
+2 | Volvox
+2 | Byron Yeates
+2 | Chris Bekker
+2 | Dee Diggs
+2 | Ultra Naté
+2 | Fafi Abdel Nour
+2 | Jennifer Loveless
+2 | Mark With A K
+2 | MC Chucky
+1 | Mind Against
+1 | I Hate Models
+1 | Franky Rizardo
+1 | Sub Zero Project
+1 | Amber Broos
+1 | MANDY
+x | Dimitri Vegas
+x | Like Mike
+x | Honey Dijon
+x | Horse Meat Disco
+```
