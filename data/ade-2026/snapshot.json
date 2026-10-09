@@ -5066,9 +5066,9 @@
       "venue": "The Stargate"
     },
     "2835282": {
-      "context": "SUSPENDED - Music Hammocks A full-body listening experience Live Performances / Bass & UK / Ambient & Listening / Beyond the Dancefloor / Ambient / Bass / Live / South / New Arts & Culture Venues / Deep Listening & Spatial Sound The Stargate · 11:00 - 15:00 The Stargate + - <svg width=\"1em\" height=\"1em\" vi",
+      "context": "SUSPENDED - Music Hammocks A full-body listening experience Live Performances / Bass & UK / Ambient & Listening / Beyond the Dancefloor / Ambient / Bass / Live / South / New Arts & Culture Venues / Deep Listening & Spatial Sound The Stargate · 11:00 - 12:00 The Stargate + - <svg width=\"1em\" height=\"1em\" vi",
       "date": "2026-10-22",
-      "end": "15:00",
+      "end": "12:00",
       "id": "2835282",
       "slug": "suspended-music-hammocks-immersive-sound",
       "source": "anchor",
@@ -16550,6 +16550,6 @@
       "venue": "Aiche Store"
     }
   },
-  "fetched_at": "2026-10-09T18:00:08Z",
+  "fetched_at": "2026-10-09T18:20:42Z",
   "source_url": "https://www.amsterdam-dance-event.nl/en/program/filter/?section=events&type=8262%2C8263&from=2026-10-21&to=2026-10-25"
 }

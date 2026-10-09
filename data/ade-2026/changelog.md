@@ -3663,3 +3663,9 @@
 - **WAX 100H LIVE RADIO @ STUDIO ZEEDIJK** — https://www.amsterdam-dance-event.nl/en/program/2026/wax-100h-live-radio-studio-zeedijk-thu-1200-1800/2910771/
 - **WHYNOT** — https://www.amsterdam-dance-event.nl/en/program/2026/whynot/2860579/
 - **Zines on Display - HOTHEAD** — https://www.amsterdam-dance-event.nl/en/program/2026/zines-on-display-hothead/2861749/
+
+## 2026-10-09T18:20:42Z
+
+### ✏️ Gewijzigd (1)
+- **SUSPENDED - Music Hammocks** — https://www.amsterdam-dance-event.nl/en/program/2026/suspended-music-hammocks-immersive-sound/2835282/
+    - `end`: '15:00' → '12:00'
