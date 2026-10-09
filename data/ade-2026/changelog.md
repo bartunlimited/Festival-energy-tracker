@@ -2772,3 +2772,504 @@
     - `title`: 'ZeeZout ADE - Saturday' → 'ZeeZout -'
 - **bitbird presents: San Holo & DROELOE** — https://www.amsterdam-dance-event.nl/en/program/2026/bitbird-presents-san-holo-droeloe/2807234/
     - `title`: 'Bitbird presents: San Holo & DROELOE' → 'bitbird presents: San Holo & DROELOE'
+
+## 2026-10-09T17:33:27Z
+
+### ➕ Nieuw (110)
+- **50Hertz Club Train Saturday Sunrise Trip 0530 0930** — https://www.amsterdam-dance-event.nl/en/program/2026/50hertz-club-train-saturday-sunrise-trip-0530-0930/2807669/
+- **50Hertz Club Train Thursday Sunrise Trip 0530 0930** — https://www.amsterdam-dance-event.nl/en/program/2026/50hertz-club-train-thursday-sunrise-trip-0530-0930/2807661/
+- **50Hertz House Techno Cafe Rembrandt Square Sunday Afternoon 1600 2130** — https://www.amsterdam-dance-event.nl/en/program/2026/50hertz-house-techno-cafe-rembrandt-square-sunday-afternoon-1600-2130/2803859/
+- **50Hertz House Techno Cafe Rembrandt Square Sunday Evening 2130 0300** — https://www.amsterdam-dance-event.nl/en/program/2026/50hertz-house-techno-cafe-rembrandt-square-sunday-evening-2130-0300/2803860/
+- **50Hertz House Techno Club Rembrandt Square Friday Evening 1900 0000** — https://www.amsterdam-dance-event.nl/en/program/2026/50hertz-house-techno-club-rembrandt-square-friday-evening-1900-0000/2806961/
+- **ADE Checks In | Resident** — https://www.amsterdam-dance-event.nl/en/program/2026/ade-checks-in-resident-djs-by-white-flow/2937617/
+- **ADE Checks In | Resident** — https://www.amsterdam-dance-event.nl/en/program/2026/ade-checks-in-resident-djs-by-white-flow/2937671/
+- **Ampere Presents Franc Fala Ade** — https://www.amsterdam-dance-event.nl/en/program/2026/ampere-presents-franc-fala-ade/2936455/
+- **Amsterdam Vinyl Club x Wanakam-** — https://www.amsterdam-dance-event.nl/en/program/2026/amsterdam-vinyl-club-x-wanakam-ade-opening-night/2929032/
+- **Analog Kitchen presents: HOW WE PLAY LIVE.** — https://www.amsterdam-dance-event.nl/en/program/2026/analog-kitchen-presents-how-we-play-live/2927420/
+- **Art Bar SEXYLAND** — https://www.amsterdam-dance-event.nl/en/program/2026/art-bar-sexyland-de-engelbewaarder/2921870/
+- **Audio Obscura x LAMMER INVITES** — https://www.amsterdam-dance-event.nl/en/program/2026/audio-obscura-x-lammer-invites/2940534/
+- **BOOGEYMAN x ZIRCLE @ AICHE Pop-Up** — https://www.amsterdam-dance-event.nl/en/program/2026/boogeyman-x-zircle-aiche-pop-up/2940668/
+- **Bar Theo Instores** — https://www.amsterdam-dance-event.nl/en/program/2026/bar-theo-instores/2937993/
+- **Bar Theo Instores** — https://www.amsterdam-dance-event.nl/en/program/2026/bar-theo-instores/2938002/
+- **Beyond The Dance Floor: ADE Edition** — https://www.amsterdam-dance-event.nl/en/program/2026/beyond-the-dance-floor-ade-edition/2938666/
+- **Brunch Table Sessions Mushroom Pulses** — https://www.amsterdam-dance-event.nl/en/program/2026/brunch-table-sessions-mushroom-pulses/2899798/
+- **CACAO** — https://www.amsterdam-dance-event.nl/en/program/2026/cacao/2933386/
+- **CHRIS STASSY b2b Job Jobse** — https://www.amsterdam-dance-event.nl/en/program/2026/chris-stassy-b2b-job-jobse/2927992/
+- **COLLIDE X RITMO FUTURO SHOWCASE** — https://www.amsterdam-dance-event.nl/en/program/2026/collide-x-ritmo-futuro-showcase-workshop-discussions/2918146/
+- **CUE X ADE w/ General K and Katayoun** — https://www.amsterdam-dance-event.nl/en/program/2026/cue-x-ade-w-general-k-and-katayoun/2927735/
+- **CUE X ADE w/ Tienson and Edgar Ramiro** — https://www.amsterdam-dance-event.nl/en/program/2026/cue-x-ade-w-tienson-and-edgar-ramiro/2927734/
+- **Circuits and Ceremonies** — https://www.amsterdam-dance-event.nl/en/program/2026/circuits-and-ceremonies/2935623/
+- **Club Hacienda × STRAAL** — https://www.amsterdam-dance-event.nl/en/program/2026/club-hacienda-straal/2939289/
+- **Club Smile celebrates 30 years** — https://www.amsterdam-dance-event.nl/en/program/2026/club-smile-celebrates-30-years-of-ade/2931183/
+- **Club Splendore** — https://www.amsterdam-dance-event.nl/en/program/2026/club-splendore/2935787/
+- **Clubcult - Video Installation** — https://www.amsterdam-dance-event.nl/en/program/2026/clubcult-video-installation/2933198/
+- **Clubcult - Video Installation** — https://www.amsterdam-dance-event.nl/en/program/2026/clubcult-video-installation/2933153/
+- **Clubcult - Video Installation** — https://www.amsterdam-dance-event.nl/en/program/2026/clubcult-video-installation/2933210/
+- **Clubcult - Video Installation** — https://www.amsterdam-dance-event.nl/en/program/2026/clubcult-video-installation/2933212/
+- **Clubcult - Video Installation** — https://www.amsterdam-dance-event.nl/en/program/2026/clubcult-video-installation/2933215/
+- **Customer Service Presents** — https://www.amsterdam-dance-event.nl/en/program/2026/customer-service-presents/2934162/
+- **DISCO** — https://www.amsterdam-dance-event.nl/en/program/2026/disco-remixed-x-the-hoxton/2936977/
+- **DJ AMPEIR presents REMEMBER THE FUTURE** — https://www.amsterdam-dance-event.nl/en/program/2026/dj-ampeir-presents-remember-the-future/2929299/
+- **Disco Saves The Day presents: MiNNA & Laura Meester** — https://www.amsterdam-dance-event.nl/en/program/2026/disco-saves-the-day-presents-minna-laura-meester/2934038/
+- **Dreaming Babies: illi** — https://www.amsterdam-dance-event.nl/en/program/2026/dreaming-babies-illi/2931339/
+- **Dreaming Babies: illi** — https://www.amsterdam-dance-event.nl/en/program/2026/dreaming-babies-illi/2932488/
+- **Dreaming Babies: illi** — https://www.amsterdam-dance-event.nl/en/program/2026/dreaming-babies-illi/2932490/
+- **Dreaming Babies: illi** — https://www.amsterdam-dance-event.nl/en/program/2026/dreaming-babies-illi/2932492/
+- **Dreaming Babies: illi** — https://www.amsterdam-dance-event.nl/en/program/2026/dreaming-babies-illi/2932494/
+- **EDEN |** — https://www.amsterdam-dance-event.nl/en/program/2026/eden-massh-shamiso-kuku-b2b-edann/2918174/
+- **Flagship ADE Pre-Party Cruise** — https://www.amsterdam-dance-event.nl/en/program/2026/flagship-ade-pre-party-cruise/2933126/
+- **Fruta Fresco| Ade Edition** — https://www.amsterdam-dance-event.nl/en/program/2026/fruta-fresco-ade-edition/2890240/
+- **Get Physical!** — https://www.amsterdam-dance-event.nl/en/program/2026/get-physical/2928597/
+- **Heineken** — https://www.amsterdam-dance-event.nl/en/program/2026/heineken-official-opening/2887284/
+- **Hors Sol x Sentaku** — https://www.amsterdam-dance-event.nl/en/program/2026/hors-sol-x-sentaku/2938578/
+- **House is Calling** — https://www.amsterdam-dance-event.nl/en/program/2026/house-is-calling/2928389/
+- **Hyper Dreams x Annie** — https://www.amsterdam-dance-event.nl/en/program/2026/hyper-dreams-x-annie/2916985/
+- **Indiskret Berlin x The Hoxton** — https://www.amsterdam-dance-event.nl/en/program/2026/indiskret-berlin-x-the-hoxton/2936963/
+- **Introducing VYU** — https://www.amsterdam-dance-event.nl/en/program/2026/introducing-vyu/2912515/
+- **Jangal Recess Ade Sunday** — https://www.amsterdam-dance-event.nl/en/program/2026/jangal-recess-ade-sunday/2936899/
+- **Jangal Recess Ade Sunday** — https://www.amsterdam-dance-event.nl/en/program/2026/jangal-recess-ade-sunday/2939526/
+- **KOOKOO Records ADE** — https://www.amsterdam-dance-event.nl/en/program/2026/kookoo-records-ade-special/2909829/
+- **Killacutz X Further** — https://www.amsterdam-dance-event.nl/en/program/2026/killacutz-x-further/2929460/
+- **Kitchen Table Sessions The Last Frequency** — https://www.amsterdam-dance-event.nl/en/program/2026/kitchen-table-sessions-the-last-frequency/2899800/
+- **LA ZIC SHOWCASE** — https://www.amsterdam-dance-event.nl/en/program/2026/la-zic-showcase/2935276/
+- **LYVIA** — https://www.amsterdam-dance-event.nl/en/program/2026/lyvia/2885926/
+- **La** — https://www.amsterdam-dance-event.nl/en/program/2026/la-discotheque-x-the-hoxton/2937157/
+- **Late night sessions with Smash & Aries** — https://www.amsterdam-dance-event.nl/en/program/2026/late-night-sessions-with-smash-aries/2935425/
+- **MINDGAME x MULTINOTES present: Birds of Mind, Lehar, Amine K, Collé** — https://www.amsterdam-dance-event.nl/en/program/2026/mindgame-x-multinotes-present-birds-of-mind-lehar-amine-k-colle-at-the-crane/2934912/
+- **MINDGAME x Techno & Chill present: Birds of Mind,** — https://www.amsterdam-dance-event.nl/en/program/2026/mindgame-x-techno-chill-present-birds-of-mind-ameme-moojo-mont-rouge-more-cruise/2938957/
+- **MITA Special** — https://www.amsterdam-dance-event.nl/en/program/2026/mita-special/2928031/
+- **Made in ADE** — https://www.amsterdam-dance-event.nl/en/program/2026/made-in-ade/2939376/
+- **Mathame & Friends** — https://www.amsterdam-dance-event.nl/en/program/2026/mathame-friends/2934713/
+- **Megan Cornet & Sudo Grace (Live)** — https://www.amsterdam-dance-event.nl/en/program/2026/megan-cornet-sudo-grace-live/2921727/
+- **Mixx Sound Network presents its Industry Mixer & Showcase** — https://www.amsterdam-dance-event.nl/en/program/2026/mixx-sound-network-presents-its-industry-mixer-showcase/2938963/
+- **NEVULA** — https://www.amsterdam-dance-event.nl/en/program/2026/nevula/2927997/
+- **NUNA In Amsterdam** — https://www.amsterdam-dance-event.nl/en/program/2026/nuna-in-amsterdam/2933524/
+- **Nightowls Amsterdam** — https://www.amsterdam-dance-event.nl/en/program/2026/nightowls-amsterdam/2933853/
+- **No Art Festival After by Night** — https://www.amsterdam-dance-event.nl/en/program/2026/no-art-festival-after-by-night/2936429/
+- **OPPA In Amsterdam** — https://www.amsterdam-dance-event.nl/en/program/2026/oppa-in-amsterdam/2933506/
+- **PAROOKAVILLE ADE '26 Special** — https://www.amsterdam-dance-event.nl/en/program/2026/parookaville-ade-26-special/2928015/
+- **PISTA -** — https://www.amsterdam-dance-event.nl/en/program/2026/pista-beginners-class/2927600/
+- **PISTA -** — https://www.amsterdam-dance-event.nl/en/program/2026/pista-experienced-dance-class/2927602/
+- **PISTA -** — https://www.amsterdam-dance-event.nl/en/program/2026/pista-beginners-class/2927609/
+- **POP UP ADE/ MATHAME & FRIENDS** — https://www.amsterdam-dance-event.nl/en/program/2026/pop-up-ade-mathame-friends/2938445/
+- **PURAxVIDA HOUSE x OUT TO SEA** — https://www.amsterdam-dance-event.nl/en/program/2026/puraxvida-house-x-out-to-sea/2918080/
+- **PURAxVIDA HOUSE x OUT TO SEA** — https://www.amsterdam-dance-event.nl/en/program/2026/puraxvida-house-x-out-to-sea/2918702/
+- **Performance: Eloy Cruz del Prado -** — https://www.amsterdam-dance-event.nl/en/program/2026/performance-eloy-cruz-del-prado/2916710/
+- **Performance: Erik Tlaseca -** — https://www.amsterdam-dance-event.nl/en/program/2026/performance-erik-tlaseca/2929145/
+- **Producer Coaching by Mark Otten presents: Alex Vasi** — https://www.amsterdam-dance-event.nl/en/program/2026/producer-coaching-by-mark-otten-presents-alex-vasi/2930790/
+- **RAW DISCO** — https://www.amsterdam-dance-event.nl/en/program/2026/raw-disco/2933786/
+- **RISE MUSIC PROJECT SHOWCASE** — https://www.amsterdam-dance-event.nl/en/program/2026/rise-music-project-showcase/2930989/
+- **RUMBLE ADE SHOWCASE** — https://www.amsterdam-dance-event.nl/en/program/2026/rumble-ade-showcase/2938577/
+- **Rapsodia** — https://www.amsterdam-dance-event.nl/en/program/2026/rapsodia/2938446/
+- **Redbox Presents Gjorgi** — https://www.amsterdam-dance-event.nl/en/program/2026/redbox-presents-gjorgi/2902292/
+- **Redken** — https://www.amsterdam-dance-event.nl/en/program/2026/redken/2923656/
+- **S!RENE Presents: 'Respect The Groove'** — https://www.amsterdam-dance-event.nl/en/program/2026/s-rene-presents-respect-the-groove/2933806/
+- **SLAPPED X CraneSessions** — https://www.amsterdam-dance-event.nl/en/program/2026/slapped-x-cranesessions/2935066/
+- **STMPD RCRDS Documentary Premiere** — https://www.amsterdam-dance-event.nl/en/program/2026/stmpd-rcrds-documentary-premiere/2934631/
+- **She Knows Why Showcase** — https://www.amsterdam-dance-event.nl/en/program/2026/she-knows-why-showcase/2935283/
+- **Studio Strip ADE Special** — https://www.amsterdam-dance-event.nl/en/program/2026/studio-strip-ade-special/2924685/
+- **THOMAS AZIER** — https://www.amsterdam-dance-event.nl/en/program/2026/thomas-azier/2927070/
+- **TILLATEC invites IsBurning, Cruise, Mala Junta, tINI AND THE GAYNG** — https://www.amsterdam-dance-event.nl/en/program/2026/tillatec-invites-isburning-cruise-mala-junta-tini-and-the-gayng/2933972/
+- **TRNSCND** — https://www.amsterdam-dance-event.nl/en/program/2026/trnscnd/2932331/
+- **Techno Yogo with High Society: ADE Edition** — https://www.amsterdam-dance-event.nl/en/program/2026/techno-yogo-with-high-society-ade-edition/2910390/
+- **The Business of Building a DJ Brand Online-** — https://www.amsterdam-dance-event.nl/en/program/2026/the-business-of-building-a-dj-brand-online/2927598/
+- **The Gardens of Babylon presents: The Seekers of Light - Saturday by Night** — https://www.amsterdam-dance-event.nl/en/program/2026/the-gardens-of-babylon-presents-the-seekers-of-light-saturday-by-night/2899134/
+- **The Independent Producer-** — https://www.amsterdam-dance-event.nl/en/program/2026/the-independent-producer/2927604/
+- **The Phatty Factory presents, Fresh Phatty Records showcase / CODE** — https://www.amsterdam-dance-event.nl/en/program/2026/the-phatty-factory-presents-fresh-phatty-records-showcase-code/2922063/
+- **The house of southern fried Amsterdam** — https://www.amsterdam-dance-event.nl/en/program/2026/the-house-of-southern-fried-amsterdam/2939227/
+- **Tones Presents: Juls - ADE** — https://www.amsterdam-dance-event.nl/en/program/2026/tones-presents-juls-ade/2931289/
+- **Tuftuf: Michael Gray presents Sultra x BigloveRec** — https://www.amsterdam-dance-event.nl/en/program/2026/tuftuf-michael-gray-presents-sultra-x-bigloverec/2936581/
+- **Unnamed presents: ¿Guess Who?** — https://www.amsterdam-dance-event.nl/en/program/2026/unnamed-presents-guess-who/2935463/
+- **Vinylism x ADE** — https://www.amsterdam-dance-event.nl/en/program/2026/vinylism-x-ade/2933936/
+- **WAVY At The Church** — https://www.amsterdam-dance-event.nl/en/program/2026/wavy-at-the-church/2936460/
+- **WHYNOT** — https://www.amsterdam-dance-event.nl/en/program/2026/whynot/2860579/
+- **Who Book Women-** — https://www.amsterdam-dance-event.nl/en/program/2026/who-book-women/2927606/
+- **Yellow House Resident Night w/ Andrew Azara, Kim April, Mike The Connector & more** — https://www.amsterdam-dance-event.nl/en/program/2026/yellow-house-resident-night-w-andrew-azara-kim-april-mike-the-connector-more/2938514/
+- **ZWART GOUD - Vinyl DJ Workshop** — https://www.amsterdam-dance-event.nl/en/program/2026/zwart-goud-vinyl-dj-workshop/2929327/
+### ➖ Verdwenen (159)
+- **20 Years Of The WHP - The Loft** — https://www.amsterdam-dance-event.nl/en/program/2026/20-years-of-the-whp-the-loft/2860955/
+- **50Hertz Club Train Friday Daytime Trip 1200 1600** — https://www.amsterdam-dance-event.nl/en/program/2026/50hertz-club-train-friday-daytime-trip-1200-1600/2807666/
+- **50Hertz Club Train Friday Night Trip 2359 0400** — https://www.amsterdam-dance-event.nl/en/program/2026/50hertz-club-train-friday-night-trip-2359-0400/2807668/
+- **50Hertz Club Train Thursday Night Trip 2359 0400** — https://www.amsterdam-dance-event.nl/en/program/2026/50hertz-club-train-thursday-night-trip-2359-0400/2807664/
+- **50Hertz House Techno Cafe Rembrandt Square Friday Afternoon 1400 2200** — https://www.amsterdam-dance-event.nl/en/program/2026/50hertz-house-techno-cafe-rembrandt-square-friday-afternoon-1400-2200/2803853/
+- **50Hertz House Techno Club Rembrandt Square Friday Afternoon 1400 1900** — https://www.amsterdam-dance-event.nl/en/program/2026/50hertz-house-techno-club-rembrandt-square-friday-afternoon-1400-1900/2806960/
+- **50Hertz House Techno Club Rembrandt Square Friday Night 0000 0500** — https://www.amsterdam-dance-event.nl/en/program/2026/50hertz-house-techno-club-rembrandt-square-friday-night-0000-0500/2806966/
+- **50Hertz Invites Pan Pot Presents Human** — https://www.amsterdam-dance-event.nl/en/program/2026/50hertz-invites-pan-pot-presents-human/2833524/
+- **909** — https://www.amsterdam-dance-event.nl/en/program/2026/909-loveland/2808599/
+- **A** — https://www.amsterdam-dance-event.nl/en/program/2026/art-of-arte-a-nutrition-masterclass/2908033/
+- **ADE & Dine at the Braise Brothers** — https://www.amsterdam-dance-event.nl/en/program/2026/ade-dine-at-the-braise-brothers/2847514/
+- **ADE & Dine at the Braise Brothers** — https://www.amsterdam-dance-event.nl/en/program/2026/ade-dine-at-the-braise-brothers/2858870/
+- **ADE X YELLOW CLAW & FRIENDS** — https://www.amsterdam-dance-event.nl/en/program/2026/ade-x-yellow-claw-friends/2892960/
+- **About US ADE Showcase** — https://www.amsterdam-dance-event.nl/en/program/2026/about-us-ade-showcase/2815840/
+- **Adam Ten b2b Mita Gami | Yamagucci | Tom Zeta** — https://www.amsterdam-dance-event.nl/en/program/2026/adam-ten-b2b-mita-gami-yamagucci-tom-zeta/2804793/
+- **Ade Daytime At Van De Werf** — https://www.amsterdam-dance-event.nl/en/program/2026/ade-daytime-at-van-de-werf/2816626/
+- **Ade Daytime At Van De Werf** — https://www.amsterdam-dance-event.nl/en/program/2026/ade-daytime-at-van-de-werf/2816659/
+- **Ade X Space** — https://www.amsterdam-dance-event.nl/en/program/2026/ade-x-space/2844881/
+- **Amajoyo presents Afroholic** — https://www.amsterdam-dance-event.nl/en/program/2026/amajoyo-presents-afroholic/2834532/
+- **Amsterdam Rave** — https://www.amsterdam-dance-event.nl/en/program/2026/amsterdam-rave/2825043/
+- **Anjunadeep** — https://www.amsterdam-dance-event.nl/en/program/2026/anjunadeep/2832602/
+- **Another Room x ﻿East African Community, Ethereal Africans** — https://www.amsterdam-dance-event.nl/en/program/2026/another-room-x-east-african-community-ethereal-africans/2904735/
+- **Archiving the Night:** — https://www.amsterdam-dance-event.nl/en/program/2026/archiving-the-night-opening-expo-by-state-off-mrlyn/2892338/
+- **Armada Invites Dion** — https://www.amsterdam-dance-event.nl/en/program/2026/armada-invites-dion/2917411/
+- **Audio Obscura** — https://www.amsterdam-dance-event.nl/en/program/2026/audio-obscura-ade-thursday-house-night/2820956/
+- **Audio Obscura ADE x Bad Boombox Invites** — https://www.amsterdam-dance-event.nl/en/program/2026/audio-obscura-ade-x-bad-boombox-invites/2820974/
+- **Audio Obscura X Jeff Mills Present Jeff Mills Interpretation Of Rembrandts De Nachtwacht** — https://www.amsterdam-dance-event.nl/en/program/2026/audio-obscura-x-jeff-mills-present-jeff-mills-interpretation-of-rembrandts-de-nachtwacht/2926899/
+- **Audio Obscura X Jeff Mills Present Jeff Mills Interpretation Of Rembrandts De Nachtwacht** — https://www.amsterdam-dance-event.nl/en/program/2026/audio-obscura-x-jeff-mills-present-jeff-mills-interpretation-of-rembrandts-de-nachtwacht/2926901/
+- **Audio Obscura X Jeff Mills Present Jeff Mills Interpretation Of Rembrandts De Nachtwacht** — https://www.amsterdam-dance-event.nl/en/program/2026/audio-obscura-x-jeff-mills-present-jeff-mills-interpretation-of-rembrandts-de-nachtwacht/2926904/
+- **Avant Garden & When Nature Calls: THE CALM DOWN** — https://www.amsterdam-dance-event.nl/en/program/2026/avant-garden-when-nature-calls-the-calm-down/2862101/
+- **BURST presents TLM** — https://www.amsterdam-dance-event.nl/en/program/2026/burst-presents-tlm/2808649/
+- **Baile da Galecta Conference** — https://www.amsterdam-dance-event.nl/en/program/2026/baile-da-galecta-conference/2838340/
+- **Basic-Fit presents Feel Good Club featuring CARISTA** — https://www.amsterdam-dance-event.nl/en/program/2026/basic-fit-presents-feel-good-club-featuring-carista/2904110/
+- **Breath + Beat:** — https://www.amsterdam-dance-event.nl/en/program/2026/breath-beat/2835258/
+- **CITRIC x Dak Coffee Roasters** — https://www.amsterdam-dance-event.nl/en/program/2026/citric-x-dak-coffee-roasters/2892902/
+- **Caiiro presents: AKHET (ADE) powered by PURE** — https://www.amsterdam-dance-event.nl/en/program/2026/caiiro-presents-akhet-ade-powered-by-pure/2910235/
+- **Circuits and Ceremonies** — https://www.amsterdam-dance-event.nl/en/program/2026/circuits-and-ceremonies/2839916/
+- **Circuits and Ceremonies** — https://www.amsterdam-dance-event.nl/en/program/2026/circuits-and-ceremonies/2845040/
+- **Coffee Rave** — https://www.amsterdam-dance-event.nl/en/program/2026/coffee-rave/2895018/
+- **Cosmic Navigation ๑** — https://www.amsterdam-dance-event.nl/en/program/2026/cosmic-navigation-๑-new-album-release-from-the-conscious-club/2892858/
+- **Cuckoos Nest W Mr Belt Wezol All Night Long** — https://www.amsterdam-dance-event.nl/en/program/2026/cuckoos-nest-w-mr-belt-wezol-all-night-long/2823998/
+- **Currents Gathering Sounds Spatial Sound Meetup** — https://www.amsterdam-dance-event.nl/en/program/2026/currents-gathering-sounds-spatial-sound-meetup/2848981/
+- **DEEP LISTENING** — https://www.amsterdam-dance-event.nl/en/program/2026/deep-listening/2847686/
+- **DGTL |** — https://www.amsterdam-dance-event.nl/en/program/2026/dgtl-ade-friday-night/2804031/
+- **DJ Bone presents: FURTHER x Homeless Homies ADE 2026** — https://www.amsterdam-dance-event.nl/en/program/2026/dj-bone-presents-further-x-homeless-homies-ade-2026/2818224/
+- **De Binnenstad X Southern Fried Records** — https://www.amsterdam-dance-event.nl/en/program/2026/de-binnenstad-x-southern-fried-records/2818159/
+- **De Binnenstad x TNT Records** — https://www.amsterdam-dance-event.nl/en/program/2026/de-binnenstad-x-tnt-records/2818064/
+- **Defected** — https://www.amsterdam-dance-event.nl/en/program/2026/defected/2816252/
+- **Dirty Sound Boys: House Music Lunch Break** — https://www.amsterdam-dance-event.nl/en/program/2026/dirty-sound-boys-house-music-lunch-break/2854937/
+- **Dockyard Festival ADE** — https://www.amsterdam-dance-event.nl/en/program/2026/dockyard-festival-ade/2804988/
+- **Doka Studio x Cooking With Palms Trax** — https://www.amsterdam-dance-event.nl/en/program/2026/doka-studio-x-cooking-with-palms-trax/2840322/
+- **Doka Studio x United Identities** — https://www.amsterdam-dance-event.nl/en/program/2026/doka-studio-x-united-identities/2829240/
+- **Dreams of Films – Films of Dreams** — https://www.amsterdam-dance-event.nl/en/program/2026/dreams-of-films-films-of-dreams/2829369/
+- **Dreams of Films – Films of Dreams** — https://www.amsterdam-dance-event.nl/en/program/2026/dreams-of-films-films-of-dreams/2829371/
+- **Dreams of Films – Films of Dreams** — https://www.amsterdam-dance-event.nl/en/program/2026/dreams-of-films-films-of-dreams/2829373/
+- **Dutch Candy: Faces of Ecstasy** — https://www.amsterdam-dance-event.nl/en/program/2026/dutch-candy-faces-of-ecstasy/2860975/
+- **Eastenderz** — https://www.amsterdam-dance-event.nl/en/program/2026/eastenderz-loveland/2808645/
+- **Expo How Can There Be Day Without Night** — https://www.amsterdam-dance-event.nl/en/program/2026/expo-how-can-there-be-day-without-night/2896003/
+- **FACE 2 FACE** — https://www.amsterdam-dance-event.nl/en/program/2026/face-2-face/2804518/
+- **FSTM ADE TAKE OVER AT SKATECAFE** — https://www.amsterdam-dance-event.nl/en/program/2026/fstm-ade-take-over-at-skatecafe/2826764/
+- **Faces Of Afro House X Les Gout Int** — https://www.amsterdam-dance-event.nl/en/program/2026/faces-of-afro-house-x-les-gout-int/2890167/
+- **Filter Phaser** — https://www.amsterdam-dance-event.nl/en/program/2026/filter-phaser/2849988/
+- **FuLi presents: Infusing Hi-Fidelity Coffee Sessions** — https://www.amsterdam-dance-event.nl/en/program/2026/fuli-presents-infusing-hi-fidelity-coffee-sessions/2911557/
+- **GROOVE FREQ.** — https://www.amsterdam-dance-event.nl/en/program/2026/groove-freq/2847283/
+- **Gashouder Presents: Job Jobse** — https://www.amsterdam-dance-event.nl/en/program/2026/gashouder-presents-job-jobse/2804807/
+- **HALŌ** — https://www.amsterdam-dance-event.nl/en/program/2026/halo-pop-up-store/2908789/
+- **HEXAGON** — https://www.amsterdam-dance-event.nl/en/program/2026/hexagon/2864727/
+- **HOUSEYOUNITE PRESENTS DROP & CONNECT** — https://www.amsterdam-dance-event.nl/en/program/2026/houseyounite-presents-drop-connect/2856656/
+- **HUBS -** — https://www.amsterdam-dance-event.nl/en/program/2026/hubs/2865524/
+- **Heart&Seoul Ep.2: HAEJANG** — https://www.amsterdam-dance-event.nl/en/program/2026/heart-seoul-ep-2-haejang/2866435/
+- **House Dance Beginners Battle — 2nd edition** — https://www.amsterdam-dance-event.nl/en/program/2026/house-dance-beginners-battle-2nd-edition/2829202/
+- **House Legends x Future Icons presented by DJ Talent Room** — https://www.amsterdam-dance-event.nl/en/program/2026/house-legends-x-future-icons-presented-by-dj-talent-room/2823893/
+- **IPSO by** — https://www.amsterdam-dance-event.nl/en/program/2026/ipso-by-kolsch/2844102/
+- **Indeepndance Record Store Crate Digging Meet Greet** — https://www.amsterdam-dance-event.nl/en/program/2026/indeepndance-record-store-crate-digging-meet-greet/2825470/
+- **Indeepndance Record Store Crate Digging Meet Greet** — https://www.amsterdam-dance-event.nl/en/program/2026/indeepndance-record-store-crate-digging-meet-greet/2825478/
+- **Indeepndance Record Store Crate Digging Meet Greet** — https://www.amsterdam-dance-event.nl/en/program/2026/indeepndance-record-store-crate-digging-meet-greet/2825480/
+- **Intercell x 999999999 Invites** — https://www.amsterdam-dance-event.nl/en/program/2026/intercell-x-999999999-invites/2822774/
+- **Intercell x Silva Bumpa pres. Sterling** — https://www.amsterdam-dance-event.nl/en/program/2026/intercell-x-silva-bumpa-pres-sterling/2902850/
+- **Into the Woods** — https://www.amsterdam-dance-event.nl/en/program/2026/into-the-woods-ade-festival/2802398/
+- **Into the Woods** — https://www.amsterdam-dance-event.nl/en/program/2026/into-the-woods-ade-festival-saturday/2826667/
+- **Jinja x Hunkering** — https://www.amsterdam-dance-event.nl/en/program/2026/jinja-x-hunkering/2888221/
+- **Kids Rave** — https://www.amsterdam-dance-event.nl/en/program/2026/kids-rave/2885408/
+- **Kids Rave - Daytime Event** — https://www.amsterdam-dance-event.nl/en/program/2026/kids-rave-daytime-event/2820360/
+- **Killacutz X RIOT** — https://www.amsterdam-dance-event.nl/en/program/2026/killacutz-x-riot/2904414/
+- **LA ROCHE BOUTIQUE** — https://www.amsterdam-dance-event.nl/en/program/2026/la-roche-boutique/2908786/
+- **LA ROCHE BOUTIQUE** — https://www.amsterdam-dance-event.nl/en/program/2026/la-roche-boutique/2908788/
+- **LEHAR &** — https://www.amsterdam-dance-event.nl/en/program/2026/lehar-x-friends/2861085/
+- **LYUBLYU Sunday Coffee Session w/ Alexcel** — https://www.amsterdam-dance-event.nl/en/program/2026/lyublyu-sunday-coffee-session-w-alexcel/2892616/
+- **Lost Miracle** — https://www.amsterdam-dance-event.nl/en/program/2026/lost-miracle/2805836/
+- **Lowfriends Showcase ADE REcharge** — https://www.amsterdam-dance-event.nl/en/program/2026/lowfriends-showcase-ade-recharge/2832785/
+- **Luciano ALIVE concert x Loveland** — https://www.amsterdam-dance-event.nl/en/program/2026/luciano-alive-concert-x-loveland-ade-2026/2814557/
+- **Luminosity - Daytime Event** — https://www.amsterdam-dance-event.nl/en/program/2026/luminosity-daytime-event/2815737/
+- **MI AMOR MEETS CAFE DEL MAR** — https://www.amsterdam-dance-event.nl/en/program/2026/mi-amor-meets-cafe-del-mar/2839260/
+- **MO PRODUCTIONS X CRANE SESSIONS** — https://www.amsterdam-dance-event.nl/en/program/2026/mo-productions-x-crane-sessions/2861551/
+- **Mau P** — https://www.amsterdam-dance-event.nl/en/program/2026/mau-p-baddest-behaviour-loveland/2808588/
+- **Meet & Greet** — https://www.amsterdam-dance-event.nl/en/program/2026/meet-greet-djs-dyro-and-dannic/2827753/
+- **Meet the Makers | Eve Audio** — https://www.amsterdam-dance-event.nl/en/program/2026/meet-the-makers-eve-audio/2888213/
+- **Mo Black X La Nouba Present** — https://www.amsterdam-dance-event.nl/en/program/2026/mo-black-x-la-nouba-present/2890120/
+- **Modus** — https://www.amsterdam-dance-event.nl/en/program/2026/modus/2819357/
+- **Monstercat x Ophelia** — https://www.amsterdam-dance-event.nl/en/program/2026/monstercat-x-ophelia/2814034/
+- **Mudcell Composition IV by Niels** — https://www.amsterdam-dance-event.nl/en/program/2026/mudcell-composition-iv-by-niels-graber-and-isaac-van-den-aker/2844647/
+- **Mystic Garden Festival ADE** — https://www.amsterdam-dance-event.nl/en/program/2026/mystic-garden-festival-ade/2804883/
+- **No Art Festival** — https://www.amsterdam-dance-event.nl/en/program/2026/no-art-festival/2828102/
+- **OG Records x nachbar** — https://www.amsterdam-dance-event.nl/en/program/2026/og-records-x-nachbar/2902895/
+- **Obskur Presents The System** — https://www.amsterdam-dance-event.nl/en/program/2026/obskur-presents-the-system/2816565/
+- **Offweek X Loud Contact** — https://www.amsterdam-dance-event.nl/en/program/2026/offweek-x-loud-contact-ade/2906170/
+- **PIV** — https://www.amsterdam-dance-event.nl/en/program/2026/piv-ade-tower-takeover-shelter/2837212/
+- **PODD x Omen Wapta x Ute** — https://www.amsterdam-dance-event.nl/en/program/2026/podd-x-omen-wapta-x-ute/2916968/
+- **PORTAL | Melodic Techno Journey** — https://www.amsterdam-dance-event.nl/en/program/2026/portal-melodic-techno-journey/2814700/
+- **PRISMA X BEEST** — https://www.amsterdam-dance-event.nl/en/program/2026/prisma-x-beest/2848322/
+- **PURE PRESENTS: GENESIS** — https://www.amsterdam-dance-event.nl/en/program/2026/pure-presents-genesis/2910160/
+- **People On Music** — https://www.amsterdam-dance-event.nl/en/program/2026/people-on-music/2888084/
+- **RAUM invites Clone Records** — https://www.amsterdam-dance-event.nl/en/program/2026/raum-invites-clone-records/2850438/
+- **Rampage** — https://www.amsterdam-dance-event.nl/en/program/2026/rampage/2814581/
+- **Reinier Zonneveld 8HRS Live x Loveland** — https://www.amsterdam-dance-event.nl/en/program/2026/reinier-zonneveld-8hrs-live-x-loveland/2852425/
+- **SLPFNK - THE OTHERSIDE** — https://www.amsterdam-dance-event.nl/en/program/2026/slpfnk-the-otherside/2842934/
+- **SONA Presents: GOLFOS** — https://www.amsterdam-dance-event.nl/en/program/2026/sona-presents-golfos/2828182/
+- **SONA Presents: ROSSI.HOME//GRXWN** — https://www.amsterdam-dance-event.nl/en/program/2026/sona-presents-rossi-home-grxwn/2866283/
+- **SUNDAY SILENT DISCO** — https://www.amsterdam-dance-event.nl/en/program/2026/sunday-silent-disco/2907008/
+- **Samba Sunday x Samba Roots Amsterdam** — https://www.amsterdam-dance-event.nl/en/program/2026/samba-sunday-x-samba-roots-amsterdam/2830277/
+- **Saturo Sounds presents: Amsterdam Pre-Party** — https://www.amsterdam-dance-event.nl/en/program/2026/saturo-sounds-presents-amsterdam-pre-party/2858171/
+- **Selectors Sunday - Orbit Wax invites** — https://www.amsterdam-dance-event.nl/en/program/2026/selectors-sunday-orbit-wax-invites/2908830/
+- **Semi Delicious w/ Demi** — https://www.amsterdam-dance-event.nl/en/program/2026/semi-delicious-w-demi-riquisimo-kamma-retromigration-b2b-lulah-francs/2883736/
+- **Sense Eclipse** — https://www.amsterdam-dance-event.nl/en/program/2026/sense-eclipse/2842517/
+- **Silva Bumpa** — https://www.amsterdam-dance-event.nl/en/program/2026/silva-bumpa-ade/2892415/
+- **Siren Calls** — https://www.amsterdam-dance-event.nl/en/program/2026/siren-calls/2847590/
+- **Slam Bam! Must Click!** — https://www.amsterdam-dance-event.nl/en/program/2026/slam-bam-must-click/2907188/
+- **Snatch! Records** — https://www.amsterdam-dance-event.nl/en/program/2026/snatch-records-ade-showcase-basement-amsterdam-22-10-2026/2916967/
+- **Spad present** — https://www.amsterdam-dance-event.nl/en/program/2026/spad-present-vinyl-marathon-x-ilairo/2829530/
+- **Suru ×** — https://www.amsterdam-dance-event.nl/en/program/2026/suru-music-meets-trackstack/2904842/
+- **THE ROOM ®** — https://www.amsterdam-dance-event.nl/en/program/2026/the-room/2912523/
+- **TIDE A** — https://www.amsterdam-dance-event.nl/en/program/2026/tide-ade/2906986/
+- **The Gardens of Babylon: The Seekers of Light - Sunday** — https://www.amsterdam-dance-event.nl/en/program/2026/the-gardens-of-babylon-the-seekers-of-light-sunday/2899191/
+- **The Homeless Trovador by Not Demure & Friends** — https://www.amsterdam-dance-event.nl/en/program/2026/the-homeless-trovador-by-not-demure-friends/2906098/
+- **The Nature of Remembering** — https://www.amsterdam-dance-event.nl/en/program/2026/the-nature-of-remembering/2828291/
+- **The Nature of Remembering** — https://www.amsterdam-dance-event.nl/en/program/2026/the-nature-of-remembering/2828293/
+- **The Nature of Remembering** — https://www.amsterdam-dance-event.nl/en/program/2026/the-nature-of-remembering/2828295/
+- **The Social Hub Presents: Background Radio Live Sessions** — https://www.amsterdam-dance-event.nl/en/program/2026/the-social-hub-presents-background-radio-live-sessions/2911221/
+- **Thuishaven** — https://www.amsterdam-dance-event.nl/en/program/2026/thuishaven-ade-sunday-polyamor-presents-davyboi-invites/2802133/
+- **Tsepo invites Nathalie Seres & Twiena** — https://www.amsterdam-dance-event.nl/en/program/2026/tsepo-invites-nathalie-seres-twiena/2902919/
+- **UK Sounds Influencing House Culture** — https://www.amsterdam-dance-event.nl/en/program/2026/uk-sounds-influencing-house-culture/2829148/
+- **UNREAL - All Night Long x KUKO** — https://www.amsterdam-dance-event.nl/en/program/2026/unreal-all-night-long-x-kuko/2802129/
+- **VBX - Lofi - ADE 23.10** — https://www.amsterdam-dance-event.nl/en/program/2026/vbx-lofi-ade-23-10/2823084/
+- **VIERVIERTEL** — https://www.amsterdam-dance-event.nl/en/program/2026/vierviertel-x-ade/2821054/
+- **Vato Gonzalez presents Dirty House** — https://www.amsterdam-dance-event.nl/en/program/2026/vato-gonzalez-presents-dirty-house/2912617/
+- **Vault Sessions & Friends ADE | De Fik Garden** — https://www.amsterdam-dance-event.nl/en/program/2026/vault-sessions-friends-ade-de-fik-garden/2812670/
+- **Vault Sessions |** — https://www.amsterdam-dance-event.nl/en/program/2026/vault-sessions-ade-tillatec/2810101/
+- **WAX 100H LIVE RADIO @ STUDIO ZEEDIJK** — https://www.amsterdam-dance-event.nl/en/program/2026/wax-100h-live-radio-studio-zeedijk-fri-1200-1800/2910860/
+- **WAX 100H LIVE RADIO @ STUDIO ZEEDIJK** — https://www.amsterdam-dance-event.nl/en/program/2026/wax-100h-live-radio-studio-zeedijk-sat-1200-1800/2910872/
+- **WAX 100H LIVE RADIO @ STUDIO ZEEDIJK** — https://www.amsterdam-dance-event.nl/en/program/2026/wax-100h-live-radio-studio-zeedijk-sun-1200-1800/2910888/
+- **WHO LOVES THE SUN** — https://www.amsterdam-dance-event.nl/en/program/2026/who-loves-the-sun/2837203/
+- **We Love 45´s X Killacutz** — https://www.amsterdam-dance-event.nl/en/program/2026/we-love-45-s-x-killacutz/2900494/
+- **YOTECHA. Techno Yoga** — https://www.amsterdam-dance-event.nl/en/program/2026/yotecha-techno-yoga/2839012/
+- **YOTECHA. Techno Yoga** — https://www.amsterdam-dance-event.nl/en/program/2026/yotecha-techno-yoga/2839048/
+- **YOTECHA. Techno Yoga -** — https://www.amsterdam-dance-event.nl/en/program/2026/yotecha-techno-yoga/2839130/
+- **Yomo Records 10 Yrs Celebration** — https://www.amsterdam-dance-event.nl/en/program/2026/yomo-records-10-yrs-celebration/2887114/
+- **ZWART GOUD -** — https://www.amsterdam-dance-event.nl/en/program/2026/zwart-goud-ade-day-5-beatport-live-w-fabric-records/2889202/
+- **elrow Amsterdam** — https://www.amsterdam-dance-event.nl/en/program/2026/elrow-amsterdam/2891658/
+- **got.drip** — https://www.amsterdam-dance-event.nl/en/program/2026/got-drip-invites-leitmotiv-records/2839754/
+### ✏️ Gewijzigd (108)
+- **'STILL DANCING' exhibition by Justine Ellul** — https://www.amsterdam-dance-event.nl/en/program/2026/still-dancing-exhibition-by-justine-ellul/2892959/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **'STILL DANCING' exhibition by Justine Ellul** — https://www.amsterdam-dance-event.nl/en/program/2026/still-dancing-exhibition-by-justine-ellul/2898560/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **1001Tracklists x DJ Lovers Club pres. Open Channel** — https://www.amsterdam-dance-event.nl/en/program/2026/1001tracklists-x-dj-lovers-club-pres-open-channel-ade/2863656/
+    - `title`: '1001Tracklists x DJ Lovers Club pres. Open Channel ADE' → '1001Tracklists x DJ Lovers Club pres. Open Channel'
+- **30 years Bassculture** — https://www.amsterdam-dance-event.nl/en/program/2026/30-years-bassculture-soundsystem/2842926/
+    - `title`: '30 years Bassculture Soundsystem' → '30 years Bassculture'
+- **50Hertz Club Train Friday Sunrise Trip 0530 0930** — https://www.amsterdam-dance-event.nl/en/program/2026/50hertz-club-train-friday-sunrise-trip-0530-0930/2807665/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **50Hertz House Techno Cafe Rembrandt Square Thursday Night After 0400 0800** — https://www.amsterdam-dance-event.nl/en/program/2026/50hertz-house-techno-cafe-rembrandt-square-thursday-night-after-0400-0800/2803852/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **50Hertz House Techno Cafe Rembrandt Square Thursday Night After 0400 0800** — https://www.amsterdam-dance-event.nl/en/program/2026/50hertz-house-techno-cafe-rembrandt-square-thursday-night-after-0400-0800/2657030/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **A/CAFÉ** — https://www.amsterdam-dance-event.nl/en/program/2026/a-cafe-friday/2904743/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **A/CAFÉ** — https://www.amsterdam-dance-event.nl/en/program/2026/a-cafe-saturday/2904747/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **ACS Avondwinkel Sessions** — https://www.amsterdam-dance-event.nl/en/program/2026/acs-avondwinkel-sessions/2904857/
+    - `end`: '02:00' → '00:00'
+- **ADE & Dine at the Braise Brothers** — https://www.amsterdam-dance-event.nl/en/program/2026/ade-dine-at-the-braise-brothers/2858838/
+    - `start`: '17:00' → '19:00'
+- **ADE & Dine at the Braise Brothers** — https://www.amsterdam-dance-event.nl/en/program/2026/ade-dine-at-the-braise-brothers/2858856/
+    - `start`: '17:00' → '20:00'
+- **ADE EAST Techno Collective - THE AFTER** — https://www.amsterdam-dance-event.nl/en/program/2026/ade-east-techno-collective-the-after/2899444/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **AMW** — https://www.amsterdam-dance-event.nl/en/program/2026/amw-ade-24-5-dj-marathon-2026-day-3/2908524/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **AMW** — https://www.amsterdam-dance-event.nl/en/program/2026/amw-ade-24-5-dj-marathon-2026-day-4/2908529/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **AVA** — https://www.amsterdam-dance-event.nl/en/program/2026/ava-records-20-years-ade-special/2829556/
+    - `title`: 'AVA Records 20 Years ADE Special' → 'AVA'
+- **Ade Kickstart Friday** — https://www.amsterdam-dance-event.nl/en/program/2026/ade-kickstart-friday/2910388/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **Ade Random Vinyl Marathon Friday 23 10 26** — https://www.amsterdam-dance-event.nl/en/program/2026/ade-random-vinyl-marathon-friday-23-10-26/2900532/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **Ade Random Vinyl Marathon Saturday 24 10 26** — https://www.amsterdam-dance-event.nl/en/program/2026/ade-random-vinyl-marathon-saturday-24-10-26/2900534/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **Afterparty by Techno Agency × AH Promotions** — https://www.amsterdam-dance-event.nl/en/program/2026/afterparty-by-techno-agency-ah-promotions/2918156/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **Breakfast Club:** — https://www.amsterdam-dance-event.nl/en/program/2026/breakfast-club-runners-high/2824971/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **Bubble House** — https://www.amsterdam-dance-event.nl/en/program/2026/bubble-house-ade/2834308/
+    - `title`: 'Bubble House - ADE' → 'Bubble House'
+- **CLUB.RECORD - The Loft** — https://www.amsterdam-dance-event.nl/en/program/2026/club-record-the-loft/2861039/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **Charged by Jaco Schilp** — https://www.amsterdam-dance-event.nl/en/program/2026/charged-by-jaco-schilp/2861592/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **Charged by Jaco Schilp** — https://www.amsterdam-dance-event.nl/en/program/2026/charged-by-jaco-schilp/2861590/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **Christian** — https://www.amsterdam-dance-event.nl/en/program/2026/christian-loffler-adna-live/2802823/
+    - `end`: '22:15' → '22:40'
+- **Cocktails & Connections by HMWL &** — https://www.amsterdam-dance-event.nl/en/program/2026/cocktails-connections-by-hmwl/2908219/
+    - `title`: 'Cocktails & Connections by HMWL' → 'Cocktails & Connections by HMWL &'
+- **CrunchyHouse** — https://www.amsterdam-dance-event.nl/en/program/2026/crunchyhouse-ade-gathering/2922593/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **DJ -Kicks** — https://www.amsterdam-dance-event.nl/en/program/2026/dj-kicks/2805821/
+    - `venue`: 'De Wester' → 'WestWeelde'
+- **Deep Seeing Currents** — https://www.amsterdam-dance-event.nl/en/program/2026/deep-seeing-currents/2813712/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **Deep Seeing Currents** — https://www.amsterdam-dance-event.nl/en/program/2026/deep-seeing-currents/2813714/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **Dutch Candy: Faces of Ecstasy** — https://www.amsterdam-dance-event.nl/en/program/2026/dutch-candy-faces-of-ecstasy/2860978/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **EINDER by Boris Acket** — https://www.amsterdam-dance-event.nl/en/program/2026/einder-by-boris-acket/2853704/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **EINDER by Boris Acket** — https://www.amsterdam-dance-event.nl/en/program/2026/einder-by-boris-acket/2853706/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **Ely Oaks & Friends** — https://www.amsterdam-dance-event.nl/en/program/2026/ely-oaks-friends-ade/2805042/
+    - `title`: 'Ely Oaks & Friends - ADE' → 'Ely Oaks & Friends'
+- **Expo How Can There Be Day Without Night** — https://www.amsterdam-dance-event.nl/en/program/2026/expo-how-can-there-be-day-without-night/2896001/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **Feestgedruis** — https://www.amsterdam-dance-event.nl/en/program/2026/feestgedruis-enters-ade/2836066/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **Festifest** — https://www.amsterdam-dance-event.nl/en/program/2026/festifest-ade/2833465/
+    - `end`: '03:00' → '04:00'
+- **Funk (2026) -** — https://www.amsterdam-dance-event.nl/en/program/2026/funk-2026/2824588/
+    - `title`: 'Funk (2026)' → 'Funk (2026) -'
+- **Funk You -** — https://www.amsterdam-dance-event.nl/en/program/2026/funk-you-x-weplay-label-showcase/2904766/
+    - `title`: 'Funk You x Weplay | Label Showcase' → 'Funk You -'
+- **GUERRILLA** — https://www.amsterdam-dance-event.nl/en/program/2026/guerrilla/2884522/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **Head Studios x** — https://www.amsterdam-dance-event.nl/en/program/2026/head-studios-x-meritocracy-ade-showcase-prime-amsterdam/2917433/
+    - `title`: 'Head Studios X Meritocracy Ade Showcase Prime Amsterdam' → 'Head Studios x'
+- **Heart&Seoul Ep.2:** — https://www.amsterdam-dance-event.nl/en/program/2026/heart-seoul-ep-2-ade-haejang-x-concept-404/2857603/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **Heliotrope by Heleen Blanken & Daniel de Bruin** — https://www.amsterdam-dance-event.nl/en/program/2026/heliotrope-by-heleen-blanken-daniel-de-bruin/2861650/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **Heliotrope by Heleen Blanken & Daniel de Bruin** — https://www.amsterdam-dance-event.nl/en/program/2026/heliotrope-by-heleen-blanken-daniel-de-bruin/2861647/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **Het Ei By Touki Delphine** — https://www.amsterdam-dance-event.nl/en/program/2026/het-ei-by-touki-delphine/2861459/
+    - `title`: 'Het Ei by Touki Delphine' → 'Het Ei By Touki Delphine'
+- **Het Ei By Touki Delphine** — https://www.amsterdam-dance-event.nl/en/program/2026/het-ei-by-touki-delphine/2861525/
+    - `title`: 'Het Ei by Touki Delphine' → 'Het Ei By Touki Delphine'
+- **Het Ei By Touki Delphine** — https://www.amsterdam-dance-event.nl/en/program/2026/het-ei-by-touki-delphine/2861528/
+    - `title`: 'Het Ei by Touki Delphine' → 'Het Ei By Touki Delphine'
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **Het Ei By Touki Delphine** — https://www.amsterdam-dance-event.nl/en/program/2026/het-ei-by-touki-delphine/2861533/
+    - `title`: 'Het Ei by Touki Delphine' → 'Het Ei By Touki Delphine'
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **Het Ei By Touki Delphine** — https://www.amsterdam-dance-event.nl/en/program/2026/het-ei-by-touki-delphine/2861535/
+    - `title`: 'Het Ei by Touki Delphine' → 'Het Ei By Touki Delphine'
+- **Home Turf Ade Edition Levitate X Wanakam** — https://www.amsterdam-dance-event.nl/en/program/2026/home-turf-ade-edition-levitate-x-wanakam/2895970/
+    - `end`: '00:00' → '23:59'
+- **Killacutz X Armada Music** — https://www.amsterdam-dance-event.nl/en/program/2026/killacutz-x-armada-music/2907721/
+    - `end`: '19:00' → '16:00'
+- **Lab54 x Overbruggen** — https://www.amsterdam-dance-event.nl/en/program/2026/lab54-x-overbruggen/2866388/
+    - `end`: '21:00' → '22:00'
+- **MAAP x PUBLIC POSSESSION | ADE SPECIAL | RIDE** — https://www.amsterdam-dance-event.nl/en/program/2026/maap-x-public-possession-ade-special-ride/2910239/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **Melting Image** — https://www.amsterdam-dance-event.nl/en/program/2026/melting-image/2917391/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **Melting Image** — https://www.amsterdam-dance-event.nl/en/program/2026/melting-image/2917393/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **Meritocracy** — https://www.amsterdam-dance-event.nl/en/program/2026/meritocracy-present-luca-testa-blend-xl-amsterdam/2917587/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **Minimal Collective x Oude Kerk: Post-Space - Audiovisual Installation** — https://www.amsterdam-dance-event.nl/en/program/2026/minimal-collective-x-oude-kerk-post-space-audiovisual-installation/2860774/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **Minimal Collective x Oude Kerk: Post-Space - Audiovisual Installation** — https://www.amsterdam-dance-event.nl/en/program/2026/minimal-collective-x-oude-kerk-post-space-audiovisual-installation/2860778/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **NUM** — https://www.amsterdam-dance-event.nl/en/program/2026/num-ade-showcase/2896191/
+    - `title`: 'NUM ADE SHOWCASE' → 'NUM'
+- **Ogazon Invites Freddy K And Rene Wise** — https://www.amsterdam-dance-event.nl/en/program/2026/ogazon-invites-freddy-k-and-rene-wise/2836638/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **Orchestra of Soul Soundsystem** — https://www.amsterdam-dance-event.nl/en/program/2026/orchestra-of-soul-soundsystem/2852156/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **PRODUCHERTZ** — https://www.amsterdam-dance-event.nl/en/program/2026/produchertz-ade-pop-up-showcase/2889192/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **Pantheon Amsterdam** — https://www.amsterdam-dance-event.nl/en/program/2026/pantheon-amsterdam/2853666/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **Pantheon Amsterdam** — https://www.amsterdam-dance-event.nl/en/program/2026/pantheon-amsterdam/2853669/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **Performance:** — https://www.amsterdam-dance-event.nl/en/program/2026/performance-erik-tlaseca/2918617/
+    - `title`: 'Performance' → 'Performance:'
+- **Perspectives x Melodic Room x VVISSIONN** — https://www.amsterdam-dance-event.nl/en/program/2026/perspectives-x-melodic-room-x-vvissionn-ade-showcase/2821061/
+    - `title`: 'Perspectives x Melodic Room x VVISSIONN ADE Showcase' → 'Perspectives x Melodic Room x VVISSIONN'
+- **Pop Pilates + Breakfast & Matcha** — https://www.amsterdam-dance-event.nl/en/program/2026/pop-pilates-breakfast-matcha/2908016/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **Primal Instinct w/** — https://www.amsterdam-dance-event.nl/en/program/2026/primal-instinct-w-chlar-friends/2823655/
+    - `date`: '2026-10-23' → '2026-10-24'
+- **SLPFNK x YOYAKU - KLAPROOS** — https://www.amsterdam-dance-event.nl/en/program/2026/slpfnk-x-yoyaku-klaproos/2842951/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **Sbn X Ade 8 Hours Of Vinyl With Koperblond** — https://www.amsterdam-dance-event.nl/en/program/2026/sbn-x-ade-8-hours-of-vinyl-with-koperblond/2904586/
+    - `start`: '13:00' → '18:00'
+    - `end`: '18:00' → '01:00'
+- **Sbn X Ade Schout Bij Nacht Presents Lunchbreaks** — https://www.amsterdam-dance-event.nl/en/program/2026/sbn-x-ade-schout-bij-nacht-presents-lunchbreaks/2904618/
+    - `start`: '18:00' → '01:00'
+    - `end`: '01:00' → '06:00'
+- **Sense Eclipse -** — https://www.amsterdam-dance-event.nl/en/program/2026/sense-eclipse/2842428/
+    - `title`: 'Sense Eclipse' → 'Sense Eclipse -'
+- **Sense Eclipse -** — https://www.amsterdam-dance-event.nl/en/program/2026/sense-eclipse/2842545/
+    - `title`: 'Sense Eclipse' → 'Sense Eclipse -'
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **Slam Bam! Must Click!** — https://www.amsterdam-dance-event.nl/en/program/2026/slam-bam-must-click/2907181/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **Soju Sessions** — https://www.amsterdam-dance-event.nl/en/program/2026/soju-sessions/2862529/
+    - `context`: 'Soju Sessions ASTER, DJ JIM, FLORENT!A, GUSTAVO B2B KIM SANE, ORANGE JUICE ASIA, SNEAKOUT, VALENTINA GALANTUCCI Daytime events / Music Culture / Networking events / Networking / Marketing & Media / Artists / Entertainment / House Sojubar Amsterdam Leidseplein · 12:00 - Sojubar Amsterdam Leidseplein + - <svg width="1e' → 'Soju Sessions BAHASA, DJ JIM, FLORENT!A, GUSTAVO b2b KIM SANE, JAE ROXX, JOHN MASAKI, 212 OMARA, VALENTINA GALANTUCCI Daytime events / Music Culture / Networking events / Networking / Marketing & Media / Artists / Entertainment / House Sojubar Amsterdam Leidseplein · 12:00 - Sojubar Amsterdam Leidseplein + - <svg wid'
+- **Sparekey** — https://www.amsterdam-dance-event.nl/en/program/2026/sparekey-ade-coffee-party/2842687/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **TAKE THE DECKS @ S-BAHN** — https://www.amsterdam-dance-event.nl/en/program/2026/take-the-decks-s-bahn/2839234/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **TAKE THE DECKS @ S-BAHN** — https://www.amsterdam-dance-event.nl/en/program/2026/take-the-decks-s-bahn/2839236/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **THE LOFT Presents: HUNEE B2B Stella Zekri B2B Suze Ijó** — https://www.amsterdam-dance-event.nl/en/program/2026/the-loft-presents-hunee-b2b-stella-zekri-b2b-suze-ijo/2834457/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **THE VIEW x CRANE SESSIONS** — https://www.amsterdam-dance-event.nl/en/program/2026/the-view-x-crane-sessions/2861356/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **TMPL MUSIC x CRANE** — https://www.amsterdam-dance-event.nl/en/program/2026/tmpl-music-x-cranesessions-8/2860683/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **The** — https://www.amsterdam-dance-event.nl/en/program/2026/the-worlds-longest-back-to-back-dj-set-hosted-by-fosbury-music-studio/2847407/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **The** — https://www.amsterdam-dance-event.nl/en/program/2026/the-worlds-longest-back-to-back-dj-set-hosted-by-fosbury-music-studio/2847405/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **The Bookshop Invites Ade** — https://www.amsterdam-dance-event.nl/en/program/2026/the-bookshop-invites-ade/2912827/
+    - `title`: 'The Bookshop Invites' → 'The Bookshop Invites Ade'
+- **The Night Sessions** — https://www.amsterdam-dance-event.nl/en/program/2026/the-night-sessions-day-2/2891706/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **The Night Sessions** — https://www.amsterdam-dance-event.nl/en/program/2026/the-night-sessions-day-3/2891725/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **The Workout Lab x** — https://www.amsterdam-dance-event.nl/en/program/2026/the-workout-lab-x-ade-sponsored-by-iciw/2899974/
+    - `title`: 'The Workout Lab x ADE sponsored by ICIW' → 'The Workout Lab x'
+- **The Workout Lab x** — https://www.amsterdam-dance-event.nl/en/program/2026/the-workout-lab-x-ade-sponsored-by-iciw/2903390/
+    - `title`: 'The Workout Lab x ADE sponsored by ICIW' → 'The Workout Lab x'
+- **The Workout Lab x** — https://www.amsterdam-dance-event.nl/en/program/2026/the-workout-lab-x-ade-sponsored-by-iciw/2903338/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **The Workout Lab x** — https://www.amsterdam-dance-event.nl/en/program/2026/the-workout-lab-x-ade-sponsored-by-iciw/2903395/
+    - `title`: 'The Workout Lab x ADE sponsored by ICIW' → 'The Workout Lab x'
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **The Workout Lab x** — https://www.amsterdam-dance-event.nl/en/program/2026/the-workout-lab-x-ade-sponsored-by-iciw/2903340/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **The Workout Lab x ADE sponsored by ICIW** — https://www.amsterdam-dance-event.nl/en/program/2026/the-workout-lab-x-ade-sponsored-by-iciw/2903399/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **Tomorrowland Expo** — https://www.amsterdam-dance-event.nl/en/program/2026/tomorrowland-expo/2835893/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **Tomorrowland Expo** — https://www.amsterdam-dance-event.nl/en/program/2026/tomorrowland-expo/2835944/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **UNWASTED** — https://www.amsterdam-dance-event.nl/en/program/2026/unwasted/2901283/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **VBX - BRET - ADE 24.10** — https://www.amsterdam-dance-event.nl/en/program/2026/vbx-bret-ade-24-10/2823094/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **VONCKELEND & BACARDI PRESENT:** — https://www.amsterdam-dance-event.nl/en/program/2026/vonckelend-bacardi-present/2907488/
+    - `start`: '13:00' → '14:00'
+    - `end`: '19:00' → '18:00'
+- **WAX 100H LIVE RADIO @ STUDIO ZEEDIJK** — https://www.amsterdam-dance-event.nl/en/program/2026/wax-100h-live-radio-studio-zeedijk-fri-0000-0600/2910803/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **WAX 100H LIVE RADIO @ STUDIO ZEEDIJK** — https://www.amsterdam-dance-event.nl/en/program/2026/wax-100h-live-radio-studio-zeedijk-fri-0600-1200/2910858/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **WAX 100H LIVE RADIO @ STUDIO ZEEDIJK** — https://www.amsterdam-dance-event.nl/en/program/2026/wax-100h-live-radio-studio-zeedijk-sat-0000-0600/2910867/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **WAX 100H LIVE RADIO @ STUDIO ZEEDIJK** — https://www.amsterdam-dance-event.nl/en/program/2026/wax-100h-live-radio-studio-zeedijk-sat-0600-1200/2910870/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **WORKROOM – STMPD STUDIOS** — https://www.amsterdam-dance-event.nl/en/program/2026/workroom-stmpd-studios/2847335/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **We Are Lost** — https://www.amsterdam-dance-event.nl/en/program/2026/we-are-lost/2805827/
+    - `venue`: 'De Wester' → 'WestWeelde'
+- **Whats Up With Vintage Samplers** — https://www.amsterdam-dance-event.nl/en/program/2026/whats-up-with-vintage-samplers/2853225/
+    - `date`: '2026-10-24' → '2026-10-23'
+    - `start`: '20:30' → '18:00'
+    - `end`: '22:00' → '00:00'
+- **Zerobpm Ade 3 Day Ambient Meditation Ritual** — https://www.amsterdam-dance-event.nl/en/program/2026/zerobpm-ade-3-day-ambient-meditation-ritual/2829332/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+- **Zerobpm Ade 3 Day Ambient Meditation Ritual** — https://www.amsterdam-dance-event.nl/en/program/2026/zerobpm-ade-3-day-ambient-meditation-ritual/2829832/
+    - `date`: '2026-10-23,2026-10-24' → '2026-10-24'
+- **a Sense of Place presents: Soft Signals** — https://www.amsterdam-dance-event.nl/en/program/2026/a-sense-of-place-presents-soft-signals/2909839/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-23'
+    - `end`: '18:00' → '18:30'
