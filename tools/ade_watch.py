@@ -339,6 +339,9 @@ def main():
     ap.add_argument("--dump", metavar="BESTAND", help="ruwe HTML wegschrijven")
     ap.add_argument("--snapshot", default=SNAPSHOT, help="pad naar de snapshot")
     ap.add_argument("--max-pages", type=int, default=40)
+    ap.add_argument("--max-shrink", type=float, default=0.10,
+                    help="krimp t.o.v. de vorige snapshot die nog acceptabel is "
+                         "(0.10 = 10%%); daarboven wordt niet weggeschreven")
     ap.add_argument("--split-days", action="store_true",
                     help="per dag scrapen zodat elk event een datum krijgt")
     ap.add_argument("--json", action="store_true", help="diff als JSON naar stdout")
@@ -389,6 +392,22 @@ def main():
         with open(args.snapshot, encoding="utf-8") as f:
             old = json.load(f).get("events", {})
     first_run = not old
+
+    # Vangnet tegen een stil afgekapte scrape. De programmalijst laadt lazy; als
+    # het laden halverwege stilvalt krijg je een kleinere lijst die er in de diff
+    # uitziet als massaal geannuleerde events. Dat is één keer gebeurd (1246 →
+    # 1197, met 159 "verdwenen" events die gewoon niet geladen waren), dus een
+    # forse krimp is reden om níét weg te schrijven.
+    if old and len(events) < len(old) * (1 - args.max_shrink):
+        print(
+            f"\nFOUT: {len(events)} events tegen {len(old)} in de vorige snapshot "
+            f"({(1 - len(events) / len(old)) * 100:.0f}% minder).\n"
+            "Dat is vrijwel zeker een afgekapte scrape, geen afgelaste events.\n"
+            "Snapshot NIET bijgewerkt. Draai opnieuw, of forceer met "
+            "--max-shrink 1.0 als de krimp echt klopt.",
+            file=sys.stderr,
+        )
+        return 2
 
     added, removed, changed = diff(old, events)
     text = report(added, removed, changed)
