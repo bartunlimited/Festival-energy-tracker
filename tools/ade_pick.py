@@ -23,6 +23,7 @@ import argparse
 import json
 import re
 import sys
+import unicodedata
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -46,6 +47,17 @@ GENRE_WEIGHTS = {
 
 # Locaties die in oktober afvallen: tent of buitenterrein. Zie muziek-dna.md §I.
 OUTDOOR = ("thuishaven", "havenpark", "fik garden", "garden")
+
+# ADE tagt buitenevents zelf; betrouwbaarder dan zaalnamen raden.
+OUTDOOR_TAGS = {"Outdoor events", "Rooftop venues", "Boat venues"}
+
+# Geen dansvloer: conferentie, expo, borrel. Die scoren anders mee op hun
+# genretags en dringen de lijst binnen.
+NON_DANCEFLOOR = {
+    "Music Culture", "Masterclasses", "Networking events", "Conference",
+    "Panel", "Workshop", "Talks", "Film", "Visual Arts", "Expo", "Exhibition",
+    "Art", "Awards", "Markets", "Food", "Wellness", "Sports",
+}
 
 # Namen die het profiel expliciet afkeurt.
 REJECTED = ("honey dijon", "horse meat disco", "angerfist")
@@ -74,6 +86,17 @@ NOT_A_NAME = {
 TAGS_RE = re.compile(r"((?:[A-Za-z&\- ]+ / )+[A-Za-z&\- ]+)\s+[^·]{2,40}·")
 
 
+def nfc(text):
+    """Unicode gelijktrekken.
+
+    De ADE-pagina levert gedecomponeerde tekens (o + los streepje) waar het
+    profiel de samengestelde vorm heeft. Zonder normaliseren matcht "Rødhåd"
+    op de ene kaart wel en op de andere niet — stil, en juist bij de namen die
+    er het meest toe doen.
+    """
+    return unicodedata.normalize("NFC", text)
+
+
 def load_artists(path=PROFILE):
     """Haal artiestennamen uit het profiel.
 
@@ -81,7 +104,7 @@ def load_artists(path=PROFILE):
     die drie vormen en gooien alles weg wat op lopende tekst lijkt, zodat de
     lijst meegroeit met het profiel in plaats van hier te verstenen.
     """
-    text = path.read_text(encoding="utf-8")
+    text = nfc(path.read_text(encoding="utf-8"))
     cand = set()
     for m in re.finditer(r"\*\*(.+?)\*\*", text):
         cand.add(m.group(1))
@@ -153,7 +176,7 @@ def usable(start, end, block):
 
 
 def score(event, artists):
-    blob = f"{event['title']} {event.get('context', '')}"
+    blob = nfc(f"{event['title']} {event.get('context', '')}")
     low = blob.lower()
     if any(r in low for r in REJECTED):
         return 0, [], [], False
@@ -196,6 +219,9 @@ def main():
         if not ev.get("start") or not ev.get("venue"):
             continue
         if any(o in ev["venue"].lower() for o in OUTDOOR):
+            continue
+        ev_tags = tags_of(ev)
+        if OUTDOOR_TAGS & set(ev_tags) or NON_DANCEFLOOR & set(ev_tags):
             continue
         try:
             start, end = span(ev)
