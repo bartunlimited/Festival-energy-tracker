@@ -9,7 +9,7 @@
 Exit codes: 0 = niets veranderd · 1 = wijzigingen gevonden · 2 = fout of 0 events.
 Zo kun je hem in cron of GitHub Actions hangen en op exit 1 laten alarmeren.
 """
-import argparse, json, os, re, subprocess, sys, time, urllib.error, urllib.request
+import argparse, json, os, re, subprocess, sys, time, unicodedata, urllib.error, urllib.request
 from datetime import datetime, timezone
 from html import unescape
 
@@ -284,7 +284,142 @@ def day_urls(url):
     return out
 
 
-DIFF_FIELDS = ("title", "date", "url", "start", "end", "venue")
+# ---------------------------------------------------------------- eventpagina's
+#
+# De programmalijst toont per event alleen een kaart: titel, tags, zaal, tijd —
+# en bij 37% van de kaarten geen enkele artiest. De line-up staat op de eigen
+# eventpagina, en die wordt server-side gerenderd, dus gewone requests volstaan.
+# Opmaak (okt 2026):
+#   <a href=".../artists-speakers/<slug>/<id>/" class="link link__line-up …">Naam (NL)</a>
+#   <div class="ade-info-bar__item"><h2 …>Date</h2> … data-date">Fri, Oct 23, 2026</span><br/> 16:00 - 22:30
+#   <div class="ade-info-bar__item"><h2 …>Location</h2> … /venues/<slug>/<id>/">Zaal</a> | <a …>Adres</a>
+#   <div class="ade-info-bar__item"><h2 …>Interests</h2> … category=<id>…">Techno</a> / …
+
+A_TAG = re.compile(r"<a\b([^>]*)>(.*?)</a>", re.S | re.I)
+HREF = re.compile(r'href="([^"]+)"')
+ARTIST_URL = re.compile(r"/artists-speakers/([^/]+)/(\d+)/?")
+VENUE_URL = re.compile(r"/venues/([^/]+)/(\d+)/?")
+NAME_COUNTRY = re.compile(r"^(.*?)\s*\(([A-Z]{2,3})\)\s*$")
+TIME_RANGE = re.compile(r"(\d{1,2}:\d{2})\s*-\s*(\d{1,2}:\d{2})")
+DESCRIPTION = re.compile(
+    r'<h2 class="ade-h2 ade-mbottom\s*">.*?</h2>\s*<div class="ade-text">(.*?)</div>', re.S
+)
+
+
+def _text(fragment):
+    return unicodedata.normalize("NFC", strip_tags(fragment))
+
+
+def parse_detail(html):
+    """Haal line-up, datum, tijd, zaal, adres en tags uit een eventpagina."""
+    out = {"lineup": [], "tags": []}
+
+    for attrs, inner in A_TAG.findall(html):
+        if "link__line-up" not in attrs:
+            continue
+        href = (HREF.search(attrs) or [None, ""])[1]
+        label = _text(inner)
+        m = NAME_COUNTRY.match(label)
+        name, country = (m.group(1), m.group(2)) if m else (label, "")
+        am = ARTIST_URL.search(href)
+        out["lineup"].append({"name": name, "country": country,
+                              "artist_id": am.group(2) if am else ""})
+
+    # De info-balk bestaat uit blokken met een kop; op de kop splitsen is
+    # robuuster dan op volgorde vertrouwen.
+    for block in html.split('class="ade-info-bar__item"')[1:]:
+        head = re.search(r"<h2[^>]*>(.*?)</h2>", block, re.S)
+        if not head:
+            continue
+        key = _text(head.group(1)).lower()
+        body = block[head.end():]
+        if key == "date":
+            d = re.search(r'data-date">([^<]+)<', body)
+            if d:
+                out["date_label"] = d.group(1).strip()
+                try:
+                    out["date_iso"] = datetime.strptime(
+                        out["date_label"], "%a, %b %d, %Y").date().isoformat()
+                except ValueError:
+                    pass
+            t = TIME_RANGE.search(_text(body[:600]))
+            if t:
+                out["start"], out["end"] = t.group(1), t.group(2)
+        elif key == "location":
+            links = A_TAG.findall(body[:1500])
+            for attrs, inner in links:
+                href = (HREF.search(attrs) or [None, ""])[1]
+                vm = VENUE_URL.search(href)
+                if vm and "venue" not in out:
+                    out["venue"] = _text(inner)
+                    out["venue_id"] = vm.group(2)
+                elif "google.com/maps" in href:
+                    out["address"] = _text(inner)
+        elif key == "interests":
+            for attrs, inner in A_TAG.findall(body[:4000]):
+                if "category=" in attrs:
+                    out["tags"].append(_text(inner))
+
+    d = DESCRIPTION.search(html)
+    if d:
+        # Ruim bewaren: namen staan soms alleen hier. Marcel Dettmann wordt bij
+        # Fabric x Loud Contact wel in de tekst genoemd, maar niet gelinkt.
+        out["description"] = _text(d.group(1))[:2000]
+    return out
+
+
+def fetch_quiet(url, tries=3):
+    """Zoals fetch(), maar geeft None in plaats van het proces te stoppen:
+    één onbereikbare eventpagina mag de hele run niet slopen."""
+    try:
+        return fetch(url, tries=tries)
+    except SystemExit:
+        return None
+
+
+def enrich(events, old, workers=6):
+    """Haal van elk event de eventpagina op en voeg de details toe.
+
+    Lukt een pagina niet, dan nemen we de details van de vorige snapshot over
+    en markeren ze als verouderd. Anders verschijnt een tijdelijke netwerkfout
+    in de diff als een line-up die is leeggehaald.
+    """
+    from concurrent.futures import ThreadPoolExecutor
+
+    def one(item):
+        eid, ev = item
+        html = fetch_quiet(ev["url"])
+        return eid, (parse_detail(html) if html else None)
+
+    ok = failed = 0
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        for eid, det in pool.map(one, list(events.items())):
+            ev = events[eid]
+            if det is None:
+                failed += 1
+                prev = old.get(eid, {})
+                for k in ("lineup", "lineup_names", "tags", "address", "venue_id", "description"):
+                    if k in prev:
+                        ev[k] = prev[k]
+                ev["detail_stale"] = True
+                continue
+            ok += 1
+            ev.pop("detail_stale", None)
+            ev["lineup"] = det["lineup"]
+            ev["lineup_names"] = " · ".join(sorted(a["name"] for a in det["lineup"]))
+            ev["tags"] = det["tags"]
+            for k in ("address", "venue_id", "description"):
+                if det.get(k):
+                    ev[k] = det[k]
+            # De eventpagina is de bron; de kaart op de lijst was een benadering.
+            for k in ("venue", "start", "end"):
+                if det.get(k):
+                    ev[k] = det[k]
+    print(f"Eventpagina's: {ok} gelezen, {failed} mislukt", file=sys.stderr)
+    return ok, failed
+
+
+DIFF_FIELDS = ("title", "date", "url", "start", "end", "venue", "lineup_names")
 
 
 def fields_for(event):
@@ -306,6 +441,9 @@ def diff(old, new):
             f: (old[k].get(f, ""), new[k].get(f, ""))
             for f in fields_for(new[k])
             if old[k].get(f, "") != new[k].get(f, "")
+            # De eerste keer dat we eventpagina's lezen is geen wijziging van
+            # de line-up; zonder deze uitzondering zou elk event "gewijzigd" zijn.
+            and not (f == "lineup_names" and "lineup_names" not in old[k])
         }
         if deltas:
             changed.append((new[k], deltas))
@@ -325,6 +463,14 @@ def report(added, removed, changed):
         for ev, deltas in sorted(changed, key=lambda c: c[0]["title"]):
             lines.append(f"- **{ev['title']}** — {ev['url']}")
             for field, (was, now) in deltas.items():
+                if field == "lineup_names":
+                    a = set(filter(None, was.split(" · ")))
+                    b = set(filter(None, now.split(" · ")))
+                    if b - a:
+                        lines.append(f"    - line-up **+** {', '.join(sorted(b - a))}")
+                    if a - b:
+                        lines.append(f"    - line-up **−** {', '.join(sorted(a - b))}")
+                    continue
                 lines.append(f"    - `{field}`: {was!r} → {now!r}")
     return "\n".join(lines)
 
@@ -342,6 +488,10 @@ def main():
     ap.add_argument("--max-shrink", type=float, default=0.10,
                     help="krimp t.o.v. de vorige snapshot die nog acceptabel is "
                          "(0.10 = 10%%); daarboven wordt niet weggeschreven")
+    ap.add_argument("--details", action="store_true",
+                    help="ook elke eventpagina ophalen (line-up, adres, tags)")
+    ap.add_argument("--workers", type=int, default=6,
+                    help="gelijktijdige requests voor --details")
     ap.add_argument("--split-days", action="store_true",
                     help="per dag scrapen zodat elk event een datum krijgt")
     ap.add_argument("--json", action="store_true", help="diff als JSON naar stdout")
@@ -440,6 +590,15 @@ def main():
             file=sys.stderr,
         )
         return 2
+
+    if args.details:
+        ok, failed = enrich(events, old, workers=args.workers)
+        # Lukt een flink deel niet, dan is de site of het netwerk de oorzaak,
+        # niet ADE. Niet wegschrijven: anders zijn alle line-ups "verouderd".
+        if failed > max(20, 0.05 * len(events)):
+            print(f"\nFOUT: {failed} van {len(events)} eventpagina's mislukt. "
+                  "Snapshot NIET bijgewerkt.", file=sys.stderr)
+            return 2
 
     added, removed, changed = diff(old, events)
     text = report(added, removed, changed)

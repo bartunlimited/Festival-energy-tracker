@@ -141,6 +141,10 @@ def load_artists(path=PROFILE):
 
 
 def tags_of(event):
+    # Van de eventpagina: schoon en volledig. Alleen als die er (nog) niet is,
+    # terugvallen op het raden uit de kaarttekst.
+    if event.get("tags"):
+        return [t for t in event["tags"] if t not in ORGANISATIONAL]
     m = TAGS_RE.search(event.get("context", ""))
     if not m:
         return []
@@ -176,7 +180,11 @@ def usable(start, end, block):
 
 
 def score(event, artists):
-    blob = nfc(f"{event['title']} {event.get('context', '')}")
+    # Namen staan op drie plekken: de gelinkte line-up op de eventpagina, de
+    # kaarttekst op de lijst, en de beschrijving. Geen van drieën is volledig.
+    lineup = " · ".join(a["name"] for a in event.get("lineup", []))
+    blob = nfc(f"{event['title']} {lineup} {event.get('context', '')} "
+               f"{event.get('description', '')}")
     low = blob.lower()
     if any(r in low for r in REJECTED):
         return 0, [], [], False
@@ -187,9 +195,14 @@ def score(event, artists):
 
     # Heeft de kaart überhaupt een line-up? ADE laat die vaak weg; dan is de
     # tekst vóór de tags niet veel meer dan de titel zelf.
-    head = blob.split(tags[0])[0] if tags and tags[0] in blob else blob
-    head = head.replace(event["title"], "").strip(" -·")
-    nameless = len(head) < 12
+    if "lineup" in event and not event.get("detail_stale"):
+        # Eventpagina gelezen: naamloos betekent nu echt dat ADE geen artiesten
+        # noemt, niet dat we ze niet hebben opgehaald.
+        nameless = not event["lineup"]
+    else:
+        head = blob.split(tags[0])[0] if tags and tags[0] in blob else blob
+        head = head.replace(event["title"], "").strip(" -·")
+        nameless = len(head) < 12
     return 3 * len(names) + genre, names, tags, nameless
 
 
