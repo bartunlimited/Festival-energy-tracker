@@ -55,7 +55,7 @@ De enige vermeldingen waren een merchwinkel (Indira) en *"founded by Above & Bey
 | 🔴 | 18:00–22:00 | **Gashouder: Eric Prydz** | Gashouder | uit je profiel |
 | 🔴 | 23:00–06:00 | **Gashouder: I Hate Models & Nico Moreno** | Gashouder | **Nico Moreno** (must) · I Hate Models |
 | 🔴 | 23:00–07:00 | **Awakenings Drumcode** | Sugarfactory ⚠️ | **Kevin de Vries** · **Enrico Sangiuliano** · Adam Beyer · Ilario Alicante |
-| 🟠 | 16:00–23:00 | Audio Obscura Thursday | G-Star RAW ❓ | **Anetha** · SPFDJ · Patrick Mason |
+| 🟠 | 16:00–23:00 | Audio Obscura Thursday | G-Star RAW | **Anetha** · SPFDJ · Patrick Mason |
 | 🟠 | 17:00–23:59 | 10 Years of STMPD RCRDS | AFAS Live | **Martin Garrix** · R3hab · Julian Jordan |
 | 🟠 | 19:00–22:30 | Paul Kalkbrenner LIVE x Loveland | Theater Amsterdam | uit je profiel |
 | 🟠 | 23:00–06:00 | Anjunadeep | Paradiso | James Grant · Jody Wisternoff — je vroeg ernaar |
@@ -69,9 +69,9 @@ De enige vermeldingen waren een merchwinkel (Indira) en *"founded by Above & Bey
 | | Tijd | Event | Zaal | Waarom |
 |---|---|---|---|---|
 | 🔴 | 23:00–07:00 | **Awakenings Friday Sessions** | Sugarfactory ⚠️ | **Rødhåd** · **JakoJako** · **Ben Klock** · Philippa Pacho · Funk Assault — **hoogste score van de week** |
-| 🔴 | vanaf 23:00 | **SPIELRAUM 55hrs** ¹ | club RAUM ❓ | **Rødhåd** · **JakoJako** · **Fafi Abdel Nour** · *DVS1 · Luke Slater · Dasha Rush · Tommy Four Seven · Quelza* |
-| 🔴 | 14:00–22:00 | **Komm Schon Alter — Daytime** | THE OTHER SIDE ❓ | **Mees Salomé** (favoriet) · Gui Boratto |
-| 🔴 | 16:00–23:00 | **Audio Obscura x EXHALE** | G-Star RAW ❓ | **Amelie Lens** · **DAX J** · DJ Nobu · HAAi |
+| 🔴 | vanaf 23:00 | **SPIELRAUM 55hrs** ¹ | club RAUM | **Rødhåd** · **JakoJako** · **Fafi Abdel Nour** · *DVS1 · Luke Slater · Dasha Rush · Tommy Four Seven · Quelza* |
+| 🔴 | 14:00–22:00 | **Komm Schon Alter — Daytime** | THE OTHER SIDE | **Mees Salomé** (favoriet) · Gui Boratto |
+| 🔴 | 16:00–23:00 | **Audio Obscura x EXHALE** | G-Star RAW | **Amelie Lens** · **DAX J** · DJ Nobu · HAAi |
 | 🔴 | 23:30–06:30 | **DGTL Friday Night** | NDSM Warehouse | **Joris Voorn** · **Kevin de Vries** · **Miss Monique** |
 | 🟠 | 22:00–07:00 | Fabric x Loud Contact | WestWeelde | **Helena Hauff** · *Jeff Mills · Marcel Dettmann · FJAAK* |
 | 🟠 | 11:00–22:00 | DJ Bone presents FURTHER | RADION | **Helena Hauff** · Dubfire · Eats Everything · FJAAK |
@@ -101,7 +101,7 @@ bruikbaar **vr 23:00–za 15:00** én **zo 14:00–ma 06:00**.
 | 🟠 | 13:00–22:30 | *Reinier Zonneveld — 8 uur live* (vanaf 14:00) | Mediahaven | hard/acid, live |
 | 🟠 | 16:00–23:59 | *Speedy J presents STOOR* | Paradiso | Donato Dozzy · The Fear Ratio · Speedy J |
 | 🟠 | 23:00–07:00 | Intercell Bajes Closing | Bajes Amsterdam | **Fafi Abdel Nour** · Chloé Caillet |
-| 🟠 | — | SPIELRAUM 55hrs, tweede helft | club RAUM ❓ | zie vrijdag |
+| 🟠 | — | SPIELRAUM 55hrs, tweede helft | club RAUM | zie vrijdag |
 | ⬜ | 14:00–23:00 | Todd Terry & Friends | Het Sieraad | ² |
 
 ² **Todd Terry staat zelf niet in de line-up op de pagina.** Wel Barbara Tucker en
@@ -135,8 +135,7 @@ gepubliceerd: of Len Faki en Marrøn vóór 15:00 spelen, weet niemand nog.
 
 ## Open
 
-1. **❓-locaties:** G-Star RAW · THE OTHER SIDE · club RAUM · Warehouse Elementenstraat ·
-   The Loft · Pllek. De eerste drie dragen 🔴's.
+1. **❓-locaties:** Warehouse Elementenstraat · The Loft · Pllek — alle drie 🟠 of lager.
 2. **SPIELRAUM** — echte openingstijden en settijden.
 3. **909** — settijden.
 4. **Spoorwerk** Halfweg-Zwanenburg in de ADE-week.
@@ -146,4 +145,4 @@ gepubliceerd: of Len Faki en Marrøn vóór 15:00 spelen, weet niemand nog.
 - `data/ade-2026/snapshot.json` — `tools/ade_watch.py --split-days --details`, 9 okt 2026.
 - Rangschikking — `tools/ade_pick.py`, met namen en gewichten uit `muziek-dna.md` §J.
 - Bevestigd binnen door Bart: WestWeelde · Toekomstmuziek · IJland · Levenslang ·
-  TILLATEC · BRET.
+  TILLATEC · BRET · G-Star RAW · THE OTHER SIDE · club RAUM.
