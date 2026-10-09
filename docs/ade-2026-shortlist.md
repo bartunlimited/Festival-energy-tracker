@@ -1,149 +1,149 @@
 # ADE 2026 — shortlist voor Bart
 
-*21–25 oktober 2026. Bijgewerkt **9 oktober 2026** uit
-`data/ade-2026/snapshot.json` (**1379 events**) en `docs/muziek-dna.md`.
-Selectie gemaakt met `tools/ade_pick.py`, niet met de hand.*
+*21–25 oktober 2026. Bijgewerkt **9 oktober 2026** uit `data/ade-2026/snapshot.json`
+en `docs/muziek-dna.md`. Gerangschikt met `tools/ade_pick.py`; elke regel hieronder
+is daarna nog eens letterlijk tegen de snapshot gecontroleerd.*
 
-## Betrouwbaarheid van deze lijst
+## Hoe betrouwbaar is dit
 
 | | |
 |---|---|
-| Scrape geverifieerd | **twee runs, 13 minuten uit elkaar, identieke eventsets** (1379, gelijk per dag) |
-| Eerdere snapshots | **onbetrouwbaar** — de lazy-load kapte stil af (1246 op 4 okt, 1197 op 9 okt 's middags) |
-| Blinde vlek | **509 van de 1379 kaarten (37%) noemen géén artiest**, alleen genretags |
+| Programma | **1379 events**, twee runs met identieke eventsets |
+| Eventpagina's | **alle 1379 gelezen**, 0 mislukt — line-up, tijden, zaal, adres, tags |
+| Line-ups | **975** events noemen artiesten; **404** hebben geen line-upblok op de pagina |
+| Parsercontrole | pagina's mét line-upkop maar zonder namen: **0** |
 
-⚠️ **"Niet gevonden" is daarom geen bewijs.** Met 37% naamloze kaarten kan een
-artiest spelen zonder ergens in de tekst voor te komen. Dat geldt nu voor
-**Indira Paganotto**, **Cosmic Gate** en **Above & Beyond**: 0 hits, maar niet
-uitgesloten.
+**Nergens aangekondigd** (line-up, kaart én beschrijving, alle 1379 pagina's):
+Indira Paganotto · Charlotte de Witte · Above & Beyond · Dimitri Vegas & Like Mike.
+De enige vermeldingen waren een merchwinkel (Indira) en *"founded by Above & Beyond"*
+(Anjunadeep). Restonzekerheid: geheime gasten en line-ups die nog moeten komen.
 
 ## Vaste punten
 
 | | |
 |---|---|
-| **OUTWORLD — Klangkuenstler All Night Long** | za 24 okt, **23:00–06:00**, Ziggo Dome |
-| Rustregel | **8 uur**: geblokkeerd van **za 15:00 tot zo 14:00** |
-| Late instap | event telt mee als ≥2 uur buiten dat venster valt |
-| Halfweg ⚠️ | Sugarfactory. Trein ~05:00–01:00: heen 22:30, terug 07:00 — geen shuttle nodig |
-| Tent/buiten | valt af in oktober; ADE's eigen tag `Outdoor events` wordt nu gebruikt |
+| **OUTWORLD — Klangkuenstler All Night Long** | za 24 okt **23:00–06:00**, Ziggo Dome |
+| Rustregel | **8 uur**: niets van **za 15:00 tot zo 14:00**; later instappen mag |
+| Halfweg ⚠️ | Sugarfactory. Trein ~05:00–01:00 → heen 22:30, terug 07:00. Geen shuttle. |
+| Oktober | tent/buiten valt af (Thuishaven, Havenpark, De Fik Garden, ADE-tag *Outdoor*) |
 
-**Binnen (bevestigd door Bart):** WestWeelde · Toekomstmuziek · IJland · Levenslang ·
-TILLATEC · BRET. **Nog onbekend:** H7 Warehouse · G-Star RAW · The Loft · De Wester.
+🔴 sterke match · 🟠 goede optie · ⬜ als er tijd over is · **❓** overdekking onbekend ·
+*schuin* = mijn suggestie, staat niet in je profiel
 
 ---
 
-## Woensdag 21 oktober
+## Woensdag 21
 
-| | Tijd | Optie | Zaal | Line-up / genre |
+| | Tijd | Event | Zaal | Waarom |
 |---|---|---|---|---|
-| 🔴 | 23:00–08:00 | **LASTER presents KLOCKWORKS 20 YEARS** | TILLATEC | **Ben Klock** · **DVS1** · Roll Dann · The Lady Machine · Setaoc Mass — hard / industrial, negen uur |
-| 🟠 | 20:00–03:00 | Hernan Cattaneo b2b Nick Warren — 6 uur | WestWeelde | progressive |
-| 🟠 | 18:00–00:00 | **Black Coffee** | Ziggo Dome | afro house — staat in je Spotify-laag |
-| 🟠 | 23:00–06:00 | Gashouder: Armin van Buuren & Benwal | Gashouder | trance / big room |
+| 🔴 | 23:00–06:00 | **Gashouder: Armin van Buuren & Benwal** | Gashouder | **Armin van Buuren** · **Olive Anguz** — twee eigen musts |
+| 🔴 | 23:00–08:00 | **LASTER presents KLOCKWORKS 20 YEARS** | TILLATEC | **Ben Klock** · *DVS1* · The Lady Machine · Roll Dann · Setaoc Mass |
+| 🟠 | 23:00–06:00 | MIXMAG x ELEKTRA | Warehouse Elementenstraat ❓ | **Charlie Sparks** (+ Bassjackers, A.N.I) |
 | 🟠 | 23:30–05:00 | Dangello Francis presents Blade | Levenslang | Amber Broos · Hannah Laing |
-| ⬜ | 15:00–21:30 | Overbruggen x Hot Since 82 | The Loft ❓ | deep house |
-| ⬜ | 23:00–05:00 | Oliver Heldens | Melkweg | big room / deep house |
+| 🟠 | 23:00–07:00 | Awakenings Opening Night | Sugarfactory ⚠️ | 999999999 · Novah · Serafina |
+| ⬜ | 17:00–23:00 | Chris Stassy b2b **Job Jobse** | Bajes Amsterdam | vroeg, combineerbaar |
+| ⬜ | 18:00–00:00 | Black Coffee | Ziggo Dome | Spotify-laag |
+| ⬜ | 20:00–03:00 | *Hernan Cattaneo b2b Nick Warren — 6 uur* | WestWeelde | progressive |
 
-## Donderdag 22 oktober — de rijkste dag
+**Armin en Klockworks overlappen.** Trance/mainstage of hard/industrial — kiezen.
 
-Twee sets in dezelfde zaal, achter elkaar:
+## Donderdag 22
 
-| | Tijd | Optie | Zaal | Line-up / genre |
+| | Tijd | Event | Zaal | Waarom |
 |---|---|---|---|---|
-| 🔴 | 18:00–22:00 | **Gashouder: ERIC PRYDZ** | Gashouder | melodic / progressive — staat in je profiel |
-| 🔴 | 23:00–06:00 | **Gashouder: I Hate Models & Nico Moreno** | Gashouder | hard techno |
+| 🔴 | 08:30–13:30 | **Ogazón invites Freddy K & Rene Wise** | BRET | **Freddy K** · **Rene Wise** — ochtend, intieme zaal |
+| 🔴 | 18:00–22:00 | **Gashouder: Eric Prydz** | Gashouder | uit je profiel |
+| 🔴 | 23:00–06:00 | **Gashouder: I Hate Models & Nico Moreno** | Gashouder | **Nico Moreno** (must) · I Hate Models |
+| 🔴 | 23:00–07:00 | **Awakenings Drumcode** | Sugarfactory ⚠️ | **Kevin de Vries** · **Enrico Sangiuliano** · Adam Beyer · Ilario Alicante |
+| 🟠 | 16:00–23:00 | Audio Obscura Thursday | G-Star RAW ❓ | **Anetha** · SPFDJ · Patrick Mason |
+| 🟠 | 17:00–23:59 | 10 Years of STMPD RCRDS | AFAS Live | **Martin Garrix** · R3hab · Julian Jordan |
+| 🟠 | 19:00–22:30 | Paul Kalkbrenner LIVE x Loveland | Theater Amsterdam | uit je profiel |
+| 🟠 | 23:00–06:00 | Anjunadeep | Paradiso | James Grant · Jody Wisternoff — je vroeg ernaar |
+| ⬜ | 17:00–23:00 | DGTL Thursday | NDSM Warehouse | **Olive Anguz** |
 
-En daarnaast:
+**De Gashouder-dubbel:** Prydz 18:00–22:00, daarna I Hate Models & Nico Moreno
+23:00–06:00 — zelfde zaal, één uur pauze. Prydz overlapt met Kalkbrenner (19:00).
 
-| | Tijd | Optie | Zaal | Line-up / genre |
+## Vrijdag 23 — de avond van de week
+
+| | Tijd | Event | Zaal | Waarom |
 |---|---|---|---|---|
-| 🔴 | 23:00–06:00 | **Anjunadeep** | Paradiso | **James Grant** · **Jody Wisternoff** · Ezequiel Arias · Nicky Elisabeth — melodic / trance |
-| 🔴 | 19:00–22:30 | **Paul Kalkbrenner LIVE x Loveland** | Theater Amsterdam | staat in je profiel |
-| 🔴 | 16:00–23:00 | Audio Obscura — **Anetha** · SPFDJ · Patrick Mason | G-Star RAW ❓ | techno |
-| 🟠 | 08:30–13:30 | Ogazón invites **Freddy K & Rene Wise** | BRET | techno, intieme zaal — ochtend |
-| 🟠 | 23:30–06:00 | FACE 2 FACE / HUMAN ERROR | Melkweg | techno / elektro / hard |
-| 🟠 | 23:00–06:00 | Intercell x 999999999 Invites | H7 Warehouse ❓ | hard techno |
-| 🟠 | 23:00–07:00 | Awakenings **Drumcode** ¹ | Sugarfactory ⚠️ | techno |
-| ⬜ | 20:00–04:00 | Colorize: 15 Years · Guy J (IJland, 23:00) · Worakls (WestWeelde, 22:00) | | melodic / progressive |
+| 🔴 | 23:00–07:00 | **Awakenings Friday Sessions** | Sugarfactory ⚠️ | **Rødhåd** · **JakoJako** · **Ben Klock** · Philippa Pacho · Funk Assault — **hoogste score van de week** |
+| 🔴 | vanaf 23:00 | **SPIELRAUM 55hrs** ¹ | club RAUM ❓ | **Rødhåd** · **JakoJako** · **Fafi Abdel Nour** · *DVS1 · Luke Slater · Dasha Rush · Tommy Four Seven · Quelza* |
+| 🔴 | 14:00–22:00 | **Komm Schon Alter — Daytime** | THE OTHER SIDE ❓ | **Mees Salomé** (favoriet) · Gui Boratto |
+| 🔴 | 16:00–23:00 | **Audio Obscura x EXHALE** | G-Star RAW ❓ | **Amelie Lens** · **DAX J** · DJ Nobu · HAAi |
+| 🔴 | 23:30–06:30 | **DGTL Friday Night** | NDSM Warehouse | **Joris Voorn** · **Kevin de Vries** · **Miss Monique** |
+| 🟠 | 22:00–07:00 | Fabric x Loud Contact | WestWeelde | **Helena Hauff** · *Jeff Mills · Marcel Dettmann · FJAAK* |
+| 🟠 | 11:00–22:00 | DJ Bone presents FURTHER | RADION | **Helena Hauff** · Dubfire · Eats Everything · FJAAK |
+| 🟠 | 16:00–22:30 | Ferry Corsten & Friends | Free Your Mind Club | Ferry Corsten · **Cosmic Gate** · Estiva — je stuurde de poster |
+| 🟠 | 23:59–07:00 | IPSO by **Kölsch** | Het Sieraad | uit je profiel |
+| ⬜ | 23:00–07:30 | *Dave Clarke: 30 Years of ADE* | Melkweg | **Rene Wise** · Luke Slater · DJ Stingray 313 |
+| ⬜ | 18:00–04:00 | Breakfast Club w/ Kiosk Radio | Pllek ❓ | **Carista** · Fafi Abdel Nour · CJ Bolland |
 
-**Prydz 18:00–22:00 en Kalkbrenner 19:00–22:30 overlappen.** Kies er één; daarna is
-de Gashouder om 23:00 of Paradiso om 23:00 de vervolgstap.
+¹ ADE geeft alleen "23:00–00:00" op; de titel zegt **55 uur**, dus vr 23:00 t/m
+ma 06:00. Settijden onbekend — check RAUM zelf. Valt over je rustvenster heen:
+bruikbaar **vr 23:00–za 15:00** én **zo 14:00–ma 06:00**.
 
-## Vrijdag 23 oktober
+## Zaterdag 24
 
-| | Tijd | Optie | Zaal | Line-up / genre |
+| | Tijd | Event | Zaal | Waarom |
 |---|---|---|---|---|
-| 🔴 | 23:00–07:30 | **Dave Clarke: 30 Years of ADE** | Melkweg | Luke Slater b2b **Rene Wise** · DJ Stingray 313 · Dasha Rush · DJ Hell · Veronica Vasicka |
-| 🔴 | 22:00–07:00 | **Fabric x Loud Contact** | WestWeelde | **Helena Hauff** · Marcel Dettmann · Jeff Mills · FJAAK (live) · Quelza |
-| 🔴 | 23:59–07:00 | **IPSO by KÖLSCH** | Het Sieraad | staat in je profiel |
-| 🔴 | 16:00–23:00 | Audio Obscura x EXHALE | G-Star RAW ❓ | Amelie Lens · **DAX J** · Adiel · DJ Nobu |
-| 🟠 | 16:00–22:30 | **Ferry Corsten & Friends x Free Your Mind** | Free Your Mind Club | trance ² |
-| 🟠 | 23:30–06:30 | DGTL Friday Night | NDSM Warehouse | Joris Voorn · Kevin de Vries · Miss Monique |
-| 🟠 | 14:00–22:00 | Mano Le Tough presents Maeve | BRET | melodic house |
-| 🟠 | 17:00–22:00 | **Benny Rodrigues** (Baskets x Salomon) | Radio Radio | classic house |
-| 🟠 | 23:00–07:00 | Awakenings **Friday Sessions** ¹ | Sugarfactory ⚠️ | Rødhåd b2b JakoJako · Ben Klock |
-| ⬜ | 14:00–22:00 | Gashouder: Job Jobse · Kompakt ADE (IJver) · Tinlicker (NDSM 17:30) | | |
+| 🔴 | **12:00–15:00** van 12:00–22:00 | **909 x Loveland** | Mediahaven | **Len Faki** · **MARRØN** · Chris Liebing · DVS1 · Kerri Chandler · KiNK |
+| 🟠 | 07:00–13:00 | Adriatique b2b Cloonee | The Loft ❓ | **Adriatique** — mag binnen de regel, maar 07:00 op Outworld-dag |
+| 🔴 | **23:00–06:00** | **OUTWORLD** | Ziggo Dome | |
 
-## Zaterdag 24 oktober
+## Zondag 25 (vanaf 14:00)
 
-| | Tijd | Optie | Zaal | Line-up |
+| | Tijd | Event | Zaal | Waarom |
 |---|---|---|---|---|
-| 🔴 | 12:00–22:00<br>**bruikbaar 12:00–15:00** | **909 x Loveland** | Mediahaven | Chris Liebing x **Len Faki** · **MARRØN** · DVS1 · FJAAK · Kerri Chandler · KiNK · DJ Deep · Ryan Elliott |
-| 🟠 | 11:45–15:00 | 50Hertz invites Pan-Pot | 50:HERTZ ❓ | Pan-Pot |
-| ⬜ | 13:00–15:00 | Awakenings — Joris Voorn presents Trip To Galaxy | Sugarfactory ⚠️ | Joris Voorn |
-| 🔴 | **23:00–06:00** | **OUTWORLD — Klangkuenstler All Night Long** | Ziggo Dome | hard techno |
+| 🔴 | 23:00–15:00 | **Vault Sessions x KEY VINYL** | RADION | **Freddy K** · Alarico · Grace Dahl — vinyl, 16 uur |
+| 🔴 | 13:00–01:00 | **FSTM takeover** (vanaf 14:00) | Skatecafe | **Helena Hauff** · Eris Drew · Call Super · Ryan Elliott |
+| 🟠 | 13:00–22:30 | *Reinier Zonneveld — 8 uur live* (vanaf 14:00) | Mediahaven | hard/acid, live |
+| 🟠 | 16:00–23:59 | *Speedy J presents STOOR* | Paradiso | Donato Dozzy · The Fear Ratio · Speedy J |
+| 🟠 | 23:00–07:00 | Intercell Bajes Closing | Bajes Amsterdam | **Fafi Abdel Nour** · Chloé Caillet |
+| 🟠 | — | SPIELRAUM 55hrs, tweede helft | club RAUM ❓ | zie vrijdag |
+| ⬜ | 14:00–23:00 | Todd Terry & Friends | Het Sieraad | ² |
 
-## Zondag 25 oktober
-
-| | Tijd | Optie | Zaal | Line-up / genre |
-|---|---|---|---|---|
-| 🔴 | 13:00–22:30<br>**vanaf 14:00** | **Reinier Zonneveld — 8 uur live x Loveland** | Mediahaven | hard / acid techno, live |
-| 🟠 | 16:00–23:59 | Speedy J presents STOOR | Paradiso | Donato Dozzy · The Fear Ratio · Wallis · Speedy J |
-| 🟠 | 14:00–23:00 | **Todd Terry & Friends** — ⚠️ oud publiek | Het Sieraad | deep house |
-| 🟠 | 23:00–09:00 | Apollonia curates VBX | Shelter | deep house / techno |
-| 🟠 | 23:00–15:00 | Vault Sessions x KEY VINYL | RADION | vinyl techno |
-| ⬜ | 14:00–16:00 | 50Hertz x **Ferry Corsten** — Sunday Daytime Trip | 50:HERTZ ❓ | trance, 2 uur bruikbaar |
-| ⬜ | 14:30–23:00 | Gashouder: Josh Baker · Folamour (Kromhouthal 15:00) | | house |
+² **Todd Terry staat zelf niet in de line-up op de pagina.** Wel Barbara Tucker en
+Terry Hunter: soulful, vocal Chicago house — de richting van je Honey Dijon-dislike,
+en je verwachtte al een oud publiek.
 
 ---
 
-## De zaterdagknoop — vier botsingen, niet één
+## De zaterdag is minder erg dan gedacht
 
-Alle drie de namen hieronder komen uit je profiel, en alle drie spelen ze zaterdag:
+Drie profielnamen botsen zaterdag met Outworld. Twee ervan kun je vrijdag al zien:
 
-| Tijd | Event | Zaal | Uit je profiel |
-|---|---|---|---|
-| 12:00–22:00 | 909 x Loveland | Mediahaven | **MARRØN**, Len Faki |
-| 15:00–21:30 | DGTL: Lane 8 presents This Never Happened | De Kromhouthal | **Mees Salomé**, Yotto |
-| 16:00–23:59 | Speedy J presents STOOR | Paradiso | **Rødhåd**, **JakoJako** |
+| Zaterdag (geblokkeerd) | Ook te zien op |
+|---|---|
+| **Rødhåd · JakoJako** — STOOR, Paradiso 16:00 | **vrijdag**: Awakenings Friday Sessions én SPIELRAUM |
+| **Mees Salomé** — Lane 8 TNH, Kromhouthal 15:00 | **vrijdag**: Komm Schon Alter, 14:00–22:00 |
+| **Len Faki · Marrøn** — 909, Mediahaven | **nergens anders** (Marrøn zondag alleen in De Fik *Garden* — buiten) |
 
-Die laatste is een andere avond dan de STOOR van zondag: **zaterdag speelt Rødhåd
-b2b-gewijs met JakoJako, zondag is het Donato Dozzy.** Dat is het duo uit je
-UPCLOSE-lock-in, op de enige dag die je hebt dichtgezet.
+Alleen 909 is echt zaterdag-only, en daarvan heb je 12:00–15:00. Settijden zijn niet
+gepubliceerd: of Len Faki en Marrøn vóór 15:00 spelen, weet niemand nog.
 
-Daarbovenop zaterdagavond: Mind Against (Mediahaven 23:00), Boris Brejcha (Theater
-Amsterdam), CamelPhat, Pan-Pot presents HUMAN, Adriatique (Awakenings), Paul van Dyk
-en AMF in de ArenA.
+## Als je niet wil kiezen
 
-**Binnen de 8-uursregel is alleen 909 van 12:00–15:00 te doen.** De andere twee
-beginnen ná 15:00. Settijden zijn nergens gepubliceerd, dus je weet niet of Len Faki
-en Marrøn vóór 15:00 spelen.
+| Dag | |
+|---|---|
+| Wo | Gashouder: Armin van Buuren — of Klockworks als je hard wil |
+| Do | Gashouder: Eric Prydz → I Hate Models & Nico Moreno, zelfde zaal |
+| Vr | Komm Schon Alter (Mees Salomé) overdag → **Awakenings Friday Sessions** |
+| Za | 909 tot 15:00 → slapen → **Outworld** |
+| Zo | FSTM (Helena Hauff) vanaf 14:00 → **Vault Sessions (Freddy K)** vanaf 23:00 |
 
-## Open vragen
+## Open
 
-1. **Settijden 909** — bepaalt of die drie uur iets waard zijn.
-2. **❓-locaties** — H7 Warehouse, G-Star RAW, The Loft, De Wester: overdekking onbekend.
-3. **Spoorwerkzaamheden** Halfweg-Zwanenburg in de ADE-week.
-4. **Cosmic Gate** staat op de Instagram-poster van Free Your Mind maar niet op ADE's
-   kaart; die noemt bij Ferry Corsten helemaal geen namen.
+1. **❓-locaties:** G-Star RAW · THE OTHER SIDE · club RAUM · Warehouse Elementenstraat ·
+   The Loft · Pllek. De eerste drie dragen 🔴's.
+2. **SPIELRAUM** — echte openingstijden en settijden.
+3. **909** — settijden.
+4. **Spoorwerk** Halfweg-Zwanenburg in de ADE-week.
 
 ## Herkomst
 
-- `data/ade-2026/snapshot.json`, gescrapet 9 okt 2026 met `tools/ade_watch.py`.
-  Historie in `data/ade-2026/changelog.md`.
-- Selectie: `tools/ade_pick.py`, dat de namen uit `docs/muziek-dna.md` leest en
-  genretags weegt volgens de trefkans-tabel in bijlage §C.
-- ¹ Line-ups van Awakenings en Drumcode komen van Awakenings' eigen pagina's; hun
-  ADE-kaarten noemen geen namen. Niet opnieuw gecontroleerd sinds augustus.
-- ² De ADE-kaart van Ferry Corsten noemt geen namen; de poster voegt Estiva,
-  Hel:sløwed, Superstrings en Cosmic Gate toe.
+- `data/ade-2026/snapshot.json` — `tools/ade_watch.py --split-days --details`, 9 okt 2026.
+- Rangschikking — `tools/ade_pick.py`, met namen en gewichten uit `muziek-dna.md` §J.
+- Bevestigd binnen door Bart: WestWeelde · Toekomstmuziek · IJland · Levenslang ·
+  TILLATEC · BRET.
