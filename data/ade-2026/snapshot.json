@@ -5511,9 +5511,14 @@
           "name": "Jah Works"
         },
         {
-          "artist_id": "2788197",
+          "artist_id": "",
           "country": "",
-          "name": "Jan Glas / Krackfree Soundsystem"
+          "name": "Jan Glas"
+        },
+        {
+          "artist_id": "",
+          "country": "",
+          "name": "Krackfree Soundsystem"
         },
         {
           "artist_id": "1491329",
@@ -5556,7 +5561,7 @@
           "name": "Slimmah Sound"
         }
       ],
-      "lineup_names": "Jah Works · Jan Glas / Krackfree Soundsystem · Kingsway · Lyrical Benjie · Mikołaj Janowski · Moritz von Oswald · Paulisme · Radikal Guru · Rub-A-Dub Ramses · Slimmah Sound",
+      "lineup_names": "Jah Works · Jan Glas · Kingsway · Krackfree Soundsystem · Lyrical Benjie · Mikołaj Janowski · Moritz von Oswald · Paulisme · Radikal Guru · Rub-A-Dub Ramses · Slimmah Sound",
       "slug": "amsterdam-dub-event-moritz-von-oswald-radikal-guru-e-a",
       "source": "anchor",
       "start": "18:00",
@@ -54015,7 +54020,7 @@
           "name": "NOISE MAFIA"
         },
         {
-          "artist_id": "2659955",
+          "artist_id": "2911127",
           "country": "DE",
           "name": "PRADA2000"
         },
@@ -62306,6 +62311,6 @@
       "venue_id": "2940675"
     }
   },
-  "fetched_at": "2026-10-09T18:39:46Z",
+  "fetched_at": "2026-10-09T18:45:58Z",
   "source_url": "https://www.amsterdam-dance-event.nl/en/program/filter/?section=events&type=8262%2C8263&from=2026-10-21&to=2026-10-25"
 }

@@ -3701,3 +3701,10 @@
     - `venue`: '' → 'Camarat'
 - **WHATSNEW X Rinse FM** — https://www.amsterdam-dance-event.nl/en/program/2026/whatsnew-x-rinse-fm/2816422/
     - `venue`: 'Tech-house Koninklijk Instituut voor de Tropen (Royal Tropical Institute)' → 'Koninklijk Instituut voor de Tropen (Royal Tropical Institute)'
+
+## 2026-10-09T18:45:58Z
+
+### ✏️ Gewijzigd (1)
+- **Amsterdam Dub Event: Moritz von Oswald / Radikal Guru e.a.** — https://www.amsterdam-dance-event.nl/en/program/2026/amsterdam-dub-event-moritz-von-oswald-radikal-guru-e-a/2807330/
+    - line-up **+** Jan Glas, Krackfree Soundsystem
+    - line-up **−** Jan Glas / Krackfree Soundsystem
