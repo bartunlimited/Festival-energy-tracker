@@ -382,6 +382,12 @@ def parse_detail(html):
                 if "category=" in attrs:
                     out["tags"].append(_text(inner))
 
+    # De volledige titel. Op de lijst wordt hij uit de kaart geraden en raakt
+    # hij soms afgekapt ("DGTL |", "IPSO by", "Dave").
+    t = re.search(r'<h1 class="[^"]*ade-events-entry__title[^"]*">(.*?)</h1>', html, re.S)
+    if t:
+        out["title_full"] = _text(t.group(1))
+
     d = DESCRIPTION.search(html)
     if d:
         # Ruim bewaren: namen staan soms alleen hier. Marcel Dettmann wordt bij
@@ -424,7 +430,7 @@ def enrich(events, old, workers=6):
                 failed += 1
                 prev = old.get(eid, {})
                 for k in ("lineup", "lineup_names", "lineup_heading", "tags", "address",
-                          "venue_id", "description"):
+                          "venue_id", "description", "title_full"):
                     if k in prev:
                         ev[k] = prev[k]
                 ev["detail_stale"] = True
@@ -435,7 +441,7 @@ def enrich(events, old, workers=6):
             ev["lineup_heading"] = det.get("lineup_heading", False)
             ev["lineup_names"] = " · ".join(sorted(a["name"] for a in det["lineup"]))
             ev["tags"] = det["tags"]
-            for k in ("address", "venue_id", "description"):
+            for k in ("address", "venue_id", "description", "title_full"):
                 if det.get(k):
                     ev[k] = det[k]
             # De eventpagina is de bron; de kaart op de lijst was een benadering.

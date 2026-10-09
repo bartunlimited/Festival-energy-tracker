@@ -34,33 +34,59 @@ PROFILE = ROOT / "docs" / "muziek-dna.md"
 # Outworld is het vaste punt waar de rustregel omheen gerekend wordt.
 OUTWORLD = (datetime(2026, 10, 24, 23, 0), datetime(2026, 10, 25, 6, 0))
 
-# Genregewichten volgen de trefkans-tabel in het profiel (bijlage §C).
+# Genregewichten volgen de trefkans-tabel (§C) en de dislikes (deel 1, §F) in
+# het profiel. Alleen de beste en de slechtste tag van een event tellen: als
+# alle tags werden opgeteld, won een event met vijf brede tags en geen enkele
+# naam van Eric Prydz in de Gashouder.
 GENRE_WEIGHTS = {
-    "Hard Techno": 3, "Industrial Techno": 3, "Techno": 3,
-    "Acid Techno": 2, "Melodic Techno": 2, "Melodic": 2,
-    "Trance": 2, "Progressive": 2, "Minimal-Techno": 2, "Elektro": 2,
-    "Big Room House": 1, "Deep House": 1, "House": 1, "Tech-house": 1,
-    # Genres die hij niet danst; negatief zodat ze niet via de tags omhoog komen.
-    "Hard Dance": -3, "Hardstyle": -3, "Bass": -2, "Drum & Bass": -2,
-    "Dubstep": -3, "Psytrance": -2, "Ambient": -3, "Disco": 0,
+    # techno: 79–81% trefkans
+    "Techno": 3, "Hard Techno": 3, "Industrial Techno": 3, "Raw Techno": 3,
+    "Peak Time Techno": 3, "Hypnotic Techno": 3, "Acid Techno": 3,
+    "Detroit Techno": 3, "Hard Groove": 3,
+    # melodic, trance, progressive: 50–58%
+    "Melodic Techno": 2, "Melodic": 2, "Melodic House": 2, "Trance": 2,
+    "Progressive": 2, "Progressive House": 2, "Progressive Trance": 2,
+    "Uplifting Trance": 2, "Tech Trance": 2, "Hard Trance": 2,
+    "Big Room House": 2, "Minimal-Techno": 2, "Elektro": 2, "Electro & Wave": 2,
+    "Acid": 2, "Acid House": 2,
+    # house: 26%
+    "House": 1, "Deep House": 1, "Tech-house": 1, "Afro House": 1,
+    "Chicago House": 1, "Disco House": 1, "Organic House": 1, "Minimal": 1,
+    "Dub Techno": 1, "Ambient Techno": 1,
+    # dislikes: experimenteel/ambient en dubstep
+    "Ambient": -3, "Ambient & Listening": -3, "Deep Listening & Spatial Sound": -3,
+    "Drone": -3, "IDM": -3, "Chillout": -3, "Downtempo": -3, "Dubstep": -3,
+    # 0% trefkans: drum & bass / bass
+    "Drum & Bass": -2, "Jungle": -2, "Neurofunk": -2, "Bass": -2, "Bass & UK": -2,
+    # 3% trefkans: hardstyle / hard dance
+    "Hard Dance": -2, "Hardstyle": -2, "Hardcore": -2, "Happy Hardcore": -2,
+    # richting van de Honey Dijon-dislike: R&B-doordrenkte vocal house
+    "Soulful House": -2, "R&B": -2,
 }
 
 # Locaties die in oktober afvallen: tent of buitenterrein. Zie muziek-dna.md §I.
 OUTDOOR = ("thuishaven", "havenpark", "fik garden", "garden")
 
 # ADE tagt buitenevents zelf; betrouwbaarder dan zaalnamen raden.
-OUTDOOR_TAGS = {"Outdoor events", "Rooftop venues", "Boat venues"}
+OUTDOOR_TAGS = {"Outdoor events", "Rooftop venues"}
 
-# Geen dansvloer: conferentie, expo, borrel. Die scoren anders mee op hun
-# genretags en dringen de lijst binnen.
+# Geen dansvloer: conferentie, expo, winkel, borrel. Die scoren anders mee op
+# hun genretags en dringen de lijst binnen.
 NON_DANCEFLOOR = {
-    "Music Culture", "Masterclasses", "Networking events", "Conference",
-    "Panel", "Workshop", "Talks", "Film", "Visual Arts", "Expo", "Exhibition",
-    "Art", "Awards", "Markets", "Food", "Wellness", "Sports",
+    "Music Culture", "Masterclasses", "Networking events", "Networking",
+    "Workshops, Talks & Networking", "Keynotes, Talks & Panels", "Exhibitions",
+    "Showcases & Expo's", "Instore Session", "Record Store Events",
+    "Film & Documentaries", "Wellbeing", "Brunch, Bites & Beats", "Sports",
+    "Sports & other activities", "Gear", "Labels, Publishing & Sync",
+    "Meet the... Sessions", "Marketing & Media", "Business", "Brand demo",
+    "ADE Startups", "ADE Pro", "Radio & Livestreams",
     # Pop-ups en winkels; LA ROCHE BOUTIQUE verkoopt merch van Indira Paganotto
     # en scoorde daardoor als haar optreden.
     "Lifestyle",
 }
+
+# Kinderraves hebben geen eigen tag; de titel zegt het wel.
+NOT_FOR_HIM = re.compile(r"\b(kids?|family|familie)\b|\(\d+\+\)", re.I)
 
 ORGANISATIONAL = {
     "Nighttime events", "Daytime events", "Evening starters", "Morning events",
@@ -125,6 +151,10 @@ def tags_of(event):
     return [t.strip() for t in m.group(1).split(" / ") if t.strip() not in ORGANISATIONAL]
 
 
+# "SPIELRAUM 55hrs", "The Final Stretch 30h", "8HRS Live": de duur in de titel.
+TITLE_HOURS = re.compile(r"(?<![\w.])(\d{1,3})\s*(?:hrs?|hours?|h|uur)(?!\w)", re.I)
+
+
 def span(event):
     day = event["date"].split(",")[0]
     base = datetime.fromisoformat(day)
@@ -134,6 +164,16 @@ def span(event):
     end = base.replace(hour=h2, minute=m2)
     if end <= start:
         end += timedelta(days=1)
+    # Marathons: ADE geeft soms alleen een startslot op. SPIELRAUM 55hrs stond
+    # als "23:00 - 00:00" en viel als event van één uur weg, met Rødhåd, JakoJako
+    # en DVS1 in de line-up. Alleen corrigeren als het opgegeven tijdvak
+    # onwaarschijnlijk kort is: "WAX 100H LIVE RADIO" staat als losse slots van
+    # zes uur, en "The Final Stretch 30h" is het laatste deel van een reeks —
+    # daar klopt het opgegeven slot en zou de titelduur het juist verpesten.
+    m = TITLE_HOURS.search(event.get("title_full") or event["title"])
+    if m and end - start < timedelta(hours=2) and int(m.group(1)) >= 2:
+        end = start + timedelta(hours=int(m.group(1)))
+        event["_duration_from_title"] = True
     return start, end
 
 
@@ -170,7 +210,8 @@ def score(event, artists):
     # alléén in de beschrijving staat zwak mee, en wordt hij gemarkeerd.
     weights, rejected = artists
     lineup = " · ".join(a["name"] for a in event.get("lineup", []))
-    strong = nfc(f"{event['title']} {lineup} {event.get('context', '')}")
+    strong = nfc(f"{event.get('title_full') or event['title']} {lineup} "
+                 f"{event.get('context', '')}")
     weak = nfc(event.get("description", ""))
     # Afwijzing alleen op line-up, titel en kaart: een beschrijving die "in de
     # traditie van Dimitri Vegas" zegt is geen optreden van Dimitri Vegas.
@@ -181,7 +222,8 @@ def score(event, artists):
     soft = _found(weights, weak) - hard
     names = sorted(hard) + sorted(f"{a}*" for a in soft)
     tags = tags_of(event)
-    genre = sum(GENRE_WEIGHTS.get(t, 0) for t in tags)
+    ws = [GENRE_WEIGHTS[t] for t in tags if t in GENRE_WEIGHTS]
+    genre = max([w for w in ws if w > 0], default=0) + min([w for w in ws if w < 0], default=0)
 
     # Heeft de kaart überhaupt een line-up? ADE laat die vaak weg; dan is de
     # tekst vóór de tags niet veel meer dan de titel zelf.
@@ -193,7 +235,9 @@ def score(event, artists):
         head = strong.split(tags[0])[0] if tags and tags[0] in strong else strong
         head = head.replace(event["title"], "").strip(" -·")
         nameless = len(head) < 12
-    return sum(weights[a] for a in hard) + len(soft) + genre, names, tags, nameless
+    # Namen wegen zwaar (must = 9), tags hooguit +3: zijn smaak gaat voor het
+    # genre-etiket van de organisator.
+    return 3 * sum(weights[a] for a in hard) + len(soft) + genre, names, tags, nameless
 
 
 def main():
@@ -226,6 +270,8 @@ def main():
         ev_tags = tags_of(ev)
         if OUTDOOR_TAGS & set(ev_tags) or NON_DANCEFLOOR & set(ev_tags):
             continue
+        if NOT_FOR_HIM.search(ev["title"]):
+            continue
         try:
             start, end = span(ev)
         except ValueError:
@@ -245,8 +291,10 @@ def main():
         print(f"===== {datetime.fromisoformat(day):%A %d oktober} =====")
         rows = sorted(by_day[day], key=lambda r: -r[0])
         for sc, s, e, a, b, ev, names, tags, nameless in rows[:args.top]:
-            slice_ = "" if (a == s and b == e) else f" →[{a:%H:%M}-{b:%H:%M}]"
-            print(f" [{sc:3}] {s:%H:%M}-{e:%H:%M}{slice_} {ev['title'][:34]:34}"
+            slice_ = "" if (a == s and b == e) else f" →[{a:%a %H:%M}-{b:%a %H:%M}]"
+            if ev.get("_duration_from_title"):
+                slice_ += " ⚠duur uit titel"
+            print(f" [{sc:3}] {s:%H:%M}-{e:%H:%M}{slice_} {(ev.get('title_full') or ev['title'])[:34]:34}"
                   f"| {ev['venue'][:20]:20}")
             if names:
                 print(f"       {', '.join(names)[:100]}")
@@ -260,7 +308,7 @@ def main():
         if blind:
             print(" ── geen line-up op de kaart; zelf opzoeken ──")
             for sc, s, e, a, b, ev, names, tags, nameless in blind:
-                print(f" [{sc:3}] {s:%H:%M}-{e:%H:%M} {ev['title'][:34]:34}"
+                print(f" [{sc:3}] {s:%H:%M}-{e:%H:%M} {(ev.get('title_full') or ev['title'])[:34]:34}"
                       f"| {ev['venue'][:20]:20} {' / '.join(tags[:4])[:44]}")
         print()
 

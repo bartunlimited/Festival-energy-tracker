@@ -340,6 +340,11 @@ weg (het stopwoordfilter zag "de" en "van").
 
 Losse namen, geen b2b-combinaties: een kaart noemt "Charlie Sparks" ook zonder BIIA.
 
+**Uit gesprek (okt 2026), niet uit het profiel:** *Anjunadeep* (hij vroeg "geen
+Anjunadeep, A&B of iets dergelijks?"), *909* ("vorig jaar was 909 erg leuk") en
+*Ferry Corsten* (hij stuurde zelf de Free Your Mind-poster). Labels en merknamen
+mogen in de lijst als ze in titels staan. Schrappen als ze niet kloppen.
+
 ```artiesten
 3 | Rødhåd
 3 | JakoJako
@@ -427,6 +432,9 @@ Losse namen, geen b2b-combinaties: een kaart noemt "Charlie Sparks" ook zonder B
 2 | Jennifer Loveless
 2 | Mark With A K
 2 | MC Chucky
+2 | Anjunadeep
+2 | 909
+2 | Ferry Corsten
 1 | Mind Against
 1 | I Hate Models
 1 | Franky Rizardo
