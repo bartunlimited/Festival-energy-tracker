@@ -1,5 +1,5 @@
 {
-  "count": 1340,
+  "count": 1379,
   "events": {
     "2479321": {
       "context": "OBSCUUR x TRANCECORE Saturday by night · with TRANCECORE Berlin · 12 artists across 2 rooms Nighttime events / Club nights / Intimate venues / House / Techno / Trance Toekomstmuziek · 23:00 - 07:00 Toekomstmuziek + - <path d=\"",
@@ -973,6 +973,18 @@
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/awakenings-ade/2806895/",
       "venue": "Sugarfactory"
     },
+    "2806956": {
+      "context": "B’fast2night & Explore - ADE Showcase TBA Daytime events / Intimate venues / Trance / House / Melodic / Techno 50:HERTZ House & Techno Club Rembrandt Square · 14:00 - 19:00 50:HERTZ House & Techno Club Rembrandt Square + - <svg width=\"1em\" height=\"1em\" viewBox=\"0 0 25 21\" fill=\"none\" xmlns=\"http://www.w3.org/2",
+      "date": "2026-10-22",
+      "end": "19:00",
+      "id": "2806956",
+      "slug": "50hertz-house-techno-club-rembrandt-square-thursday-afternoon-1400-1900",
+      "source": "anchor",
+      "start": "14:00",
+      "title": "50Hertz House Techno Club Rembrandt Square Thursday Afternoon 1400 1900",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/50hertz-house-techno-club-rembrandt-square-thursday-afternoon-1400-1900/2806956/",
+      "venue": "50:HERTZ House & Techno Club Rembrandt Square"
+    },
     "2806957": {
       "context": "Animarum Showcase at ADE 2026 | Techno for Your Soul PATRICK SCURO, RELINQUO, SAMDMA B2B THE ENVELOPER, MARÍ KOZLOVSKA B2B ENDICA, ALENA NOCTIS B2B PATRIK PAGAN Daytime events / Nighttime events / Intimate venues / Hard Dance / Techno / Trance 50:HERTZ House & Techno Club Rembrandt Square · 19:00 - 00:00 50:HERTZ House & Techno Club Rembrandt Square + - <div class=\"ade-favourites-button__i",
       "date": "2026-10-22",
@@ -1367,6 +1379,18 @@
       "start": "05:30",
       "title": "50Hertz Club Train Thursday Sunrise Trip 0530 0930",
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/50hertz-club-train-thursday-sunrise-trip-0530-0930/2807661/",
+      "venue": "50:HERTZ CLUB TRAIN 2026"
+    },
+    "2807662": {
+      "context": "50:HERTZ X EATS EVERYTHING & FRIENDS - Thursday Daytime Trip (12:00 - 16:00) Daytime events / Unique venues / House / Tech-house / Disco House 50:HERTZ CLUB TRAIN 2026 · 12:00 - 16:00 50:HERTZ CLUB TRAIN 2026 + - <path d=",
+      "date": "2026-10-22",
+      "end": "16:00",
+      "id": "2807662",
+      "slug": "50hertz-club-train-thursday-daytime-trip-1200-1600",
+      "source": "anchor",
+      "start": "12:00",
+      "title": "50Hertz Club Train Thursday Daytime Trip 1200 1600",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/50hertz-club-train-thursday-daytime-trip-1200-1600/2807662/",
       "venue": "50:HERTZ CLUB TRAIN 2026"
     },
     "2807663": {
@@ -2593,6 +2617,18 @@
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/obskur-presents-the-system/2816565/",
       "venue": "Shelter"
     },
+    "2816590": {
+      "context": "Drinks, bites and DJ's Straight of the ferry Daytime events / Music Culture / Beyond the Dancefloor / Other Bar - Restaurant Van de Werf · 12:00 - 18:00 Bar - Restaurant Van de Werf + - <path d=\"M22.4652 1.46589C21.157 0.40341",
+      "date": "2026-10-22",
+      "end": "18:00",
+      "id": "2816590",
+      "slug": "ade-daytime",
+      "source": "anchor",
+      "start": "12:00",
+      "title": "Ade Daytime",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/ade-daytime/2816590/",
+      "venue": "Bar - Restaurant Van de Werf"
+    },
     "2816626": {
       "context": "Drinks, bites and DJ's Straight off the ferry Daytime events / Music Culture / Live / NDSM / Brunch, Bites & Beats Bar - Restaurant Van de Werf · 12:00 - 18:00 Bar - Restaurant Van de Werf + - <path d=\"M22.4652 1.46589C21.",
       "date": "2026-10-23",
@@ -3745,6 +3781,18 @@
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/indeepndance-record-store-crate-digging-meet-greet/2825464/",
       "venue": "InDeep'n'Dance Records"
     },
+    "2825467": {
+      "context": "InDeep’n’Dance Record Store – Crate Digging – Meet & Greet Daytime events / Free Festival Events / Techno / Record Store Events InDeep'n'Dance Records · 12:00 - 20:00 InDeep'n'Dance Records + - <path d=\"M22.4652 1.46589C2",
+      "date": "2026-10-22",
+      "end": "20:00",
+      "id": "2825467",
+      "slug": "indeepndance-record-store-crate-digging-meet-greet",
+      "source": "anchor",
+      "start": "12:00",
+      "title": "Indeepndance Record Store Crate Digging Meet Greet",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/indeepndance-record-store-crate-digging-meet-greet/2825467/",
+      "venue": "InDeep'n'Dance Records"
+    },
     "2825470": {
       "context": "InDeep’n’Dance Record Store – Crate Digging – Meet & Greet Daytime events / Labels, Publishing & Sync / Techno / Instore Session InDeep'n'Dance Records · 12:00 - 20:00 InDeep'n'Dance Records + - <path d=\"M22.4652 1.46",
       "date": "2026-10-23",
@@ -3913,6 +3961,18 @@
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/kaap-presents-jackmode/2827552/",
       "venue": "Kaap Amsterdam"
     },
+    "2827636": {
+      "context": "Meet & Greet DJ Julian Jordan Daytime events / Unique venues / Lifestyle / Progressive House / Elektro / House Amsterdam Barber Company · 12:00 - 18:00 Amsterdam Barber Company + - <path d=\"M22.4652 1.46589C21.157 0.40341",
+      "date": "2026-10-22",
+      "end": "18:00",
+      "id": "2827636",
+      "slug": "meet-greet-dj-julian-jordan",
+      "source": "anchor",
+      "start": "12:00",
+      "title": "Meet & Greet DJ Julian Jordan",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/meet-greet-dj-julian-jordan/2827636/",
+      "venue": "Amsterdam Barber Company"
+    },
     "2827744": {
       "context": "Elias Mazian (live) x EINDER by Boris Acket EINDER will set the scene for Elias Mazian and his band. Live Performances / Audiovisual & Immersive Arts / Trance / Beyond the Dancefloor / Live / Melodic / West / New Arts & Culture Venues / Recommended Arts & Culture Events Centrale Markthal · 20:00 - 21:30 Centrale Markthal + - <div class=\"ade-favourites-button__icon ade-favourites-button",
       "date": "2026-10-22",
@@ -4056,6 +4116,18 @@
       "title": "WAVY & Max Dean Presents: NEXUP",
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/wavy-max-dean-presents-nexup/2828256/",
       "venue": "Taets Art and Event Park"
+    },
+    "2828289": {
+      "context": "The Nature of Remembering Group exhibition initiated by Lawil Karama, in conversation with Megan Hoetger Exhibitions / Beyond the Dancefloor / Other / Centre W139 · 12:00 - 18:00 W139 + - <path d=\"M22.4652 1.46589C21.157 0.403",
+      "date": "2026-10-22",
+      "end": "18:00",
+      "id": "2828289",
+      "slug": "the-nature-of-remembering",
+      "source": "anchor",
+      "start": "12:00",
+      "title": "The Nature of Remembering",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/the-nature-of-remembering/2828289/",
+      "venue": "W139"
     },
     "2828291": {
       "context": "The Nature of Remembering Group exhibition initiated by Lawil Karama, in conversation with Megan Hoetger Exhibitions / Beyond the Dancefloor / Other / Centre W139 · 12:00 - 18:00 W139 + - <path d=\"M22.4652 1.46589C21.157 0.403",
@@ -4201,6 +4273,18 @@
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/zerobpm-ade-3-day-ambient-meditation-ritual/2829332/",
       "venue": "de Thomaskerk"
     },
+    "2829367": {
+      "context": "Dreams of Films – Films of Dreams An exhibition by Disco Arabesquo about the visual world of Egyptian cinema Exhibitions / Beyond the Dancefloor / Other / New West / New Arts & Culture Venues Van Eesteren Museum · 12:00 - 17:00 Van Eesteren Museum + - <svg width=\"1em\" height=\"1em\" viewBox=\"0 0 25 21\" fill=\"none\" xmlns",
+      "date": "2026-10-22",
+      "end": "17:00",
+      "id": "2829367",
+      "slug": "dreams-of-films-films-of-dreams",
+      "source": "anchor",
+      "start": "12:00",
+      "title": "Dreams of Films – Films of Dreams",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/dreams-of-films-films-of-dreams/2829367/",
+      "venue": "Van Eesteren Museum"
+    },
     "2829369": {
       "context": "Dreams of Films – Films of Dreams An exhibition by Disco Arabesquo about the visual world of Egyptian cinema Exhibitions / Beyond the Dancefloor / Other / New West / New Arts & Culture Venues Van Eesteren Museum · 12:00 - 17:00 Van Eesteren Museum + - <svg width=\"1em\" height=\"1em\" viewBox=\"0 0 25 21\" fill=\"none\" xmlns",
       "date": "2026-10-23",
@@ -4236,6 +4320,30 @@
       "title": "Dreams of Films – Films of Dreams",
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/dreams-of-films-films-of-dreams/2829373/",
       "venue": "Van Eesteren Museum"
+    },
+    "2829389": {
+      "context": "Bottleshop X Paperclip Musique Satin Jackets - More TBA Daytime events / Free Festival Events / Disco, Funk & Soul / Disco / House / Bars Bottleshop · 14:00 - 18:00 Bottleshop + - <path d=\"M22.4652 1.46589C21.157 0.403411",
+      "date": "2026-10-22",
+      "end": "18:00",
+      "id": "2829389",
+      "slug": "bottleshop-x-paperclip-musique",
+      "source": "anchor",
+      "start": "14:00",
+      "title": "Bottleshop X Paperclip Musique",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/bottleshop-x-paperclip-musique/2829389/",
+      "venue": "Bottleshop"
+    },
+    "2829434": {
+      "context": "Rollator 'Rave' De Makroon Jong en oud verbinden met de kracht van muziek! Intimate venues / Music Culture / Classic De Makroon · 14:00 - 15:30 De Makroon + - <path d=\"M22.4652 1.46589C21.157 0.403411 19.4499 -0.108609 17.6581",
+      "date": "2026-10-22",
+      "end": "15:30",
+      "id": "2829434",
+      "slug": "rollator-rave",
+      "source": "anchor",
+      "start": "14:00",
+      "title": "Rollator 'Rave'",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/rollator-rave/2829434/",
+      "venue": "De Makroon"
     },
     "2829438": {
       "context": "'Rave' Bingo De Rietvinck Jong en oud verbinden met de kracht van muziek! Intimate venues / Social impact / Classic De Rietvinck · 14:00 - 16:00 De Rietvinck + - <path d=\"M22.4652 1.46589C21.157 0.403411 19.4499 -0.108609 17.6",
@@ -4536,6 +4644,18 @@
       "title": "MI AMOR MEETS",
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/mi-amor-meets-wescale-music/2830734/",
       "venue": "Comedy Cafe Amsterdam"
+    },
+    "2830741": {
+      "context": "Afro House Summit Presented by My Other Side of The Moon & Vibora Daytime events / Intimate venues / Unique venues / Free Festival Events / Live Performances / Music Culture / Beyond the Dancefloor / Other LuminAir · 14:00 - 19:00 LuminAir + - <svg width=\"1em\" height=\"1em\" viewBox=\"0 0 25 21\" fill=\"none\" xmlns=\"http:/",
+      "date": "2026-10-22",
+      "end": "19:00",
+      "id": "2830741",
+      "slug": "afro-house-summit",
+      "source": "anchor",
+      "start": "14:00",
+      "title": "Afro House Summit",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/afro-house-summit/2830741/",
+      "venue": "LuminAir"
     },
     "2830747": {
       "context": "My Other Side of The Moon x RISE Label Show Case Nighttime events / Intimate venues / Unique venues / Beyond the Dancefloor / Other / Rooftop venues LuminAir · 19:00 - 02:00 LuminAir + - <path d=\"M22.4652 1.46589C21.157 0.403",
@@ -4969,6 +5089,18 @@
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/tomorrowland-expo/2835292/",
       "venue": "De Rode Hoed"
     },
+    "2835295": {
+      "context": "VOYA Presents The Bookstore Pop-Up Music Culture / House Le Flaneur · 14:00 - 22:00 Le Flaneur + - <path d=\"M22.4652 1.46589C21.157 0.403411 19.4499 -0.108609 17.6581 0.0224758C15.8642 0.154054 14.1749 0.916908 12.9005 2.1701",
+      "date": "2026-10-22",
+      "end": "22:00",
+      "id": "2835295",
+      "slug": "voya-thursday",
+      "source": "anchor",
+      "start": "14:00",
+      "title": "VOYA",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/voya-thursday/2835295/",
+      "venue": "Le Flaneur"
+    },
     "2835481": {
       "context": "VOYA Presents The Bookstore Pop-Up Daytime events / Music Culture / House Le Flaneur · 14:00 - 22:00 Le Flaneur + - <path d=\"M22.4652 1.46589C21.157 0.403411 19.4499 -0.108609 17.6581 0.0224758C15.8642 0.154054 14.1749 0.9169",
       "date": "2026-10-23",
@@ -5377,6 +5509,18 @@
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/dioscuri-label-night-nighttime-event-studio-room/2837251/",
       "venue": "Panama"
     },
+    "2837268": {
+      "context": "NETWORK & SHOWCASE HUB by Beskar Bookings, Decks & Stories and Loud Ladies Day 2/3 Music Culture / Networking events / Organic House / Afro House / Tech-house / House Nicholas Groente & Fruit · 14:00 - 20:00 Nicholas Groente & Fruit + - <svg width=\"1em\" height=\"1em\" viewBox=\"0 0 25 21\" fill=\"none\" xmlns=\"h",
+      "date": "2026-10-22",
+      "end": "20:00",
+      "id": "2837268",
+      "slug": "network-hub-by-beskar-bookings-decks-stories-and-loud-ladies",
+      "source": "anchor",
+      "start": "14:00",
+      "title": "NETWORK &",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/network-hub-by-beskar-bookings-decks-stories-and-loud-ladies/2837268/",
+      "venue": "Nicholas Groente & Fruit"
+    },
     "2837271": {
       "context": "NETWORK & SHOWCASE HUB by Beskar Bookings, Decks & Stories and Loud Ladies Day (3/3) Daytime events / Networking Nicholas Groente & Fruit · 14:00 - 20:00 Nicholas Groente & Fruit + - <path d=\"M22.4652 1.46589C2",
       "date": "2026-10-23",
@@ -5641,6 +5785,18 @@
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/take-the-decks-s-bahn/2839238/",
       "venue": "S-Bahn"
     },
+    "2839255": {
+      "context": "MI AMOR MEETS FAVELA CERVEJA Where Exclusive Brazilian cerveza is greeting you! Daytime events / Free Festival Events / Networking events / House / Disco, Funk & Soul / Afro, Latin & Global / Afrobeats / Deep House / Disco / Bars / Brunch, Bites & Beats / Workshops, Talks & Networking Comedy Cafe Amsterdam · 12:00 - 17:00 Comedy Cafe Amsterdam + - <div class=\"ade-favourites-button_",
+      "date": "2026-10-22",
+      "end": "17:00",
+      "id": "2839255",
+      "slug": "mi-amor-meets-favela-cerveza",
+      "source": "anchor",
+      "start": "12:00",
+      "title": "MI AMOR MEETS FAVELA",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/mi-amor-meets-favela-cerveza/2839255/",
+      "venue": "Comedy Cafe Amsterdam"
+    },
     "2839260": {
       "context": "MI AMOR MEETS CAFE DEL MAR SPIRITS Café del Mar Spirits – Taste the sunset. Feel the music. Daytime events / Free Festival Events / Networking events / House / Big Room House / Deep House Comedy Cafe Amsterdam · 12:00 - 17:00 Comedy Cafe Amsterdam + - <svg width=\"1em\" height=\"1em\" viewBox=\"0 0 25 21\" fill=\"none\" xmlns=\"ht",
       "date": "2026-10-23",
@@ -5725,6 +5881,18 @@
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/janey/2839658/",
       "venue": "Club NYX"
     },
+    "2839689": {
+      "context": "GOT.DRIP invites Bass Archipelago Spad - LA Kena - Mr. Lando - Ryuichi - we.amps Daytime events / Music Culture / House got.drip · 14:00 - 19:00 got.drip + - <path d=\"M22.4652 1.46589C21.157 0.403411 19.4499 -0.108609 17.6581",
+      "date": "2026-10-22",
+      "end": "19:00",
+      "id": "2839689",
+      "slug": "got-drip-x-bass-archipelago-takeover",
+      "source": "anchor",
+      "start": "14:00",
+      "title": "GOT.DRIP",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/got-drip-x-bass-archipelago-takeover/2839689/",
+      "venue": "got.drip"
+    },
     "2839732": {
       "context": "ESTRELLA invites friends at GOT.DRIP Tariq b2b DJ Delivero - Sima K b2b Estrella - DJ Bert b2b Crinkhoff - Lylo b2b Stefan Daniels Daytime events / Intimate venues / Music Culture / Techno / House / Minimal / Tech-house got.drip · 16:00 - 22:00 got.drip + - <svg width=\"1em\" height=\"1em\" viewBox=\"0 0 25 21\" fill=\"none\" xml",
       "date": "2026-10-23",
@@ -5772,6 +5940,18 @@
       "title": "Circuits and Ceremonies",
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/circuits-and-ceremonies/2839916/",
       "venue": "Zone2Source"
+    },
+    "2840083": {
+      "context": "Around Us & Callecat Invites Daytime events / Intimate venues / (Live) Events / Trance / Progressive Kadinsky Cafe · 13:00 - 01:00 Kadinsky Cafe + - <path d=\"M22.4652 1.46589C21.157 0.403411 19.4499 -0.108609 17.6581 0.02",
+      "date": "2026-10-22",
+      "end": "01:00",
+      "id": "2840083",
+      "slug": "around-us-callecat-invites",
+      "source": "anchor",
+      "start": "13:00",
+      "title": "Around Us & Callecat Invites",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/around-us-callecat-invites/2840083/",
+      "venue": "Kadinsky Cafe"
     },
     "2840091": {
       "context": "Hausplant Our second ADE edition at the NDSM Theater Nighttime events / Club nights / House / Techno / NDSM NDSM Theater · 23:00 - 05:00 NDSM Theater + - <path d=\"M22.4652 1.46589C21.157 0.403411 19.4499 -0.108609 17.6581 0.02",
@@ -5856,6 +6036,18 @@
       "title": "GROOVE ODYSSEY",
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/groove-odyssey/2841186/",
       "venue": "Café De Kroon"
+    },
+    "2841855": {
+      "context": "VAULT SESSIONS X MUTUAL RYTM Starting off ADE right with Mutual Rytm! Daytime events / Mid-size venues / Techno TILLATEC · 14:00 - 22:00 TILLATEC + - <path d=\"M22.4652 1.46589C21.157 0.403411 19.4499 -0.108609 17.6581 0.022475",
+      "date": "2026-10-22",
+      "end": "22:00",
+      "id": "2841855",
+      "slug": "vault-sessions-x-mutual-rytm-ade",
+      "source": "anchor",
+      "start": "14:00",
+      "title": "VAULT SESSIONS X MUTUAL RYTM",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/vault-sessions-x-mutual-rytm-ade/2841855/",
+      "venue": "TILLATEC"
     },
     "2842428": {
       "context": "Sense Eclipse - Show 2 A musical-theater experience by ArtEZ students Dance & Theatre / Free A&C Events / Beyond the Dancefloor / Contemporary / Other / Centre / New Arts & Culture Venues Theater de Richel · 22:30 - 23:00 Theater de Richel + - <svg width=\"1em\" height=\"1em\" viewBox=\"0 0 25 21\" fill=\"none\" xmlns",
@@ -6276,6 +6468,18 @@
       "title": "Mudcell Composition IV by Niels",
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/mudcell-composition-iv-by-niels-graber-and-isaac-van-den-aker/2844647/",
       "venue": "Zone2Source"
+    },
+    "2844716": {
+      "context": "Maddix All Day Rave H7 Warehouse · 14:00 - 21:00 H7 Warehouse + - <path d=\"M22.4652 1.46589C21.157 0.403411 19.4499 -0.108609 17.6581 0.0224758C15.8642 0.154054 14.1749 0.916908 12.9005 2.1701L12.5 2.56385L12.0995 2.1701C10.",
+      "date": "2026-10-22",
+      "end": "21:00",
+      "id": "2844716",
+      "slug": "maddix-all-day-rave",
+      "source": "anchor",
+      "start": "14:00",
+      "title": "Maddix All Day Rave",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/maddix-all-day-rave/2844716/",
+      "venue": "H7 Warehouse"
     },
     "2844764": {
       "context": "Verknipt Special Sunday ALYCIA BEZGO B2B IOSIO / BØĘRY / KLOFAMA / RAXELLER / SAMUEL MORIERO / SLVL / TITI B2B TOXIC MACHINERY / USH / WINSON / AIDEN / JENO / TESS Daytime events / Large venues / Techno / Hard Techno / Industrial Techno AFAS Live · 14:00 - 00:00 AFAS Live + - <svg width=\"1em\" height=\"1em\" viewBox=\"0 0 25",
@@ -6829,6 +7033,18 @@
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/bordello-a-parigi/2847703/",
       "venue": "Noorderlicht"
     },
+    "2847805": {
+      "context": "APULIART DJ SCHOOL SHOWCASE Daytime events / Free Festival Events / Disco, Funk & Soul / Deep House / Disco / House Heineken Hoek · 14:00 - 20:00 Heineken Hoek + - <path d=\"M22.4652 1.46589C21.157 0.403411 19.4499 -0.1086",
+      "date": "2026-10-22",
+      "end": "20:00",
+      "id": "2847805",
+      "slug": "apuliart-dj-school-showcase",
+      "source": "anchor",
+      "start": "14:00",
+      "title": "APULIART DJ SCHOOL SHOWCASE",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/apuliart-dj-school-showcase/2847805/",
+      "venue": "Heineken Hoek"
+    },
     "2847915": {
       "context": "JØASE ALL NIGHT LONG x BOOGIE HOUSE FREE TECHNO & HOUSE ADE EVENT Nighttime events / Club nights / Mid-size venues / Free Festival Events / House / Techno Panama · 22:00 - 04:00 Panama + - <path d=\"M22.4652 1.46589C21.157",
       "date": "2026-10-25",
@@ -7225,6 +7441,18 @@
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/breath-of-freedom-peace-from-within/2852060/",
       "venue": "Vrijburg"
     },
+    "2852077": {
+      "context": "KIllacutz invites SWAG RECORDS, Grant Dell, Adam Collins, Boris Werner, Herra Daytime events / Music Culture / Artists / Culture / House / Tech-house / Centre BASEMENT · 13:00 - 21:00 BASEMENT + - <path d=\"M22.4652 1.46589C21",
+      "date": "2026-10-22",
+      "end": "21:00",
+      "id": "2852077",
+      "slug": "killacutz-invites-swag-records",
+      "source": "anchor",
+      "start": "13:00",
+      "title": "KIllacutz invites SWAG RECORDS,",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/killacutz-invites-swag-records/2852077/",
+      "venue": "BASEMENT"
+    },
     "2852078": {
       "context": "Nocturnes - Van Gogh Museum x ADE Coby Sey, Devon Rexi, uncloud Live Performances / Exhibitions / Hip-hop & Rap / Dub / Grime / Other / South Van Gogh Museum · 20:00 - 23:00 Van Gogh Museum + - <path d=\"M22.4652 1.46589C21",
       "date": "2026-10-23",
@@ -7536,6 +7764,18 @@
       "title": "EINDER by Boris Acket",
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/einder-by-boris-acket/2853708/",
       "venue": "Centrale Markthal"
+    },
+    "2853845": {
+      "context": "House of A in partnership with Bridges for Music Daytime events / Club nights / Intimate venues / Lifestyle / Music Culture / Meet the... Sessions / Networking / Social Impact / Focus Regions / House / Afro, Latin & Global / Afrobeats / Amapiano / Afro House ARCA Bar @ art'otel Amsterdam · 12:00 - 00:00 ARCA Bar @ art'otel Amsterdam + - <div class=\"ade-favourites-button__icon ade-favourites-b",
+      "date": "2026-10-22",
+      "end": "00:00",
+      "id": "2853845",
+      "slug": "house-of-a-in-partnership-with-bridges-for-music",
+      "source": "anchor",
+      "start": "12:00",
+      "title": "House of A in partnership with Bridges for Music",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/house-of-a-in-partnership-with-bridges-for-music/2853845/",
+      "venue": "ARCA Bar @ art'otel Amsterdam"
     },
     "2853936": {
       "context": "Purrfection & LuchiSveta Label Showcase Daytime events / (Live) Events / House / Progressive House / Bars / Centre Kadinsky Cafe · 13:00 - 19:00 Kadinsky Cafe + - <path d=\"M22.4652 1.46589C21.157 0.403411 19.4499 -0.10860",
@@ -8437,6 +8677,18 @@
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/radio-chenin/2860565/",
       "venue": "CHENIN CHENIN"
     },
+    "2860579": {
+      "context": "WHYNOT Music Culture / Hard Techno / Techno / Industrial Techno / Hypnotic Techno / Raw Techno / Hard Groove / Hard Dance / Hardcore Eagle Head Studios · 14:00 - 00:00 Eagle Head Studios + - <path d=\"M22.4652 1.46589C21.157 0",
+      "date": "2026-10-22",
+      "end": "00:00",
+      "id": "2860579",
+      "slug": "whynot",
+      "source": "anchor",
+      "start": "14:00",
+      "title": "WHYNOT",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/whynot/2860579/",
+      "venue": "Eagle Head Studios"
+    },
     "2860581": {
       "context": "Black Coffee Black Coffee Daytime events / Large venues / House / Afro House / Soulful House Ziggo Dome · 18:00 - 00:00 Ziggo Dome + - <path d=\"M22.4652 1.46589C21.157 0.403411 19.4499 -0.108609 17.6581 0.0224758C15.8642 0.154",
       "date": "2026-10-21",
@@ -8965,6 +9217,18 @@
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/atomiser-dokzaal/2861735/",
       "venue": "Plantage Dokzaal"
     },
+    "2861749": {
+      "context": "Zines on Display - HOTHEAD Bookshop presented by Hothead Radio Indepth / Free A&C Events / Other / South Hothead Bookshop · 14:00 - 20:00 Hothead Bookshop + - <path d=\"M22.4652 1.46589C21.157 0.403411 19.4499 -0.108609 17.",
+      "date": "2026-10-22",
+      "end": "20:00",
+      "id": "2861749",
+      "slug": "zines-on-display-hothead",
+      "source": "anchor",
+      "start": "14:00",
+      "title": "Zines on Display - HOTHEAD",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/zines-on-display-hothead/2861749/",
+      "venue": "Hothead Bookshop"
+    },
     "2861755": {
       "context": "The Early Shift Boyos Soundsystem, La Kena B2B Mr. Lando, SPAD Daytime events / Intimate venues / Disco / House / Indie Dance / Italo Disco Toekomstmuziek · 18:00 - 00:00 Toekomstmuziek + - <path d=\"M22.4652 1.46589C21.157 0.4",
       "date": "2026-10-21",
@@ -9072,6 +9336,18 @@
       "title": "Kiosk Radio x The Lot Radio x Doka Studio",
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/kiosk-radio-x-the-lot-radio-x-doka-studio-ade/2862332/",
       "venue": "Doka"
+    },
+    "2862529": {
+      "context": "Soju Sessions BAHASA, DJ JIM, FLORENT!A, GUSTAVO b2b KIM SANE, JAE ROXX, JOHN MASAKI, 212 OMARA, VALENTINA GALANTUCCI Daytime events / Music Culture / Networking events / Networking / Marketing & Media / Artists / Entertainment / House Sojubar Amsterdam Leidseplein · 12:00 - Sojubar Amsterdam Leidseplein + - <svg wid",
+      "date": "2026-10-22",
+      "end": "",
+      "id": "2862529",
+      "slug": "soju-sessions",
+      "source": "anchor",
+      "start": "",
+      "title": "Soju Sessions",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/soju-sessions/2862529/",
+      "venue": ""
     },
     "2862573": {
       "context": "A Soft Landing Tea, Touch & Sound for the Final Day of ADE Ambient & Listening / Ambient / South / New Arts & Culture Venues / Deep Listening & Spatial Sound The Stargate · 14:30 - 16:30 The Stargate + - <path",
@@ -9217,6 +9493,18 @@
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/yuzu-by-night-ade-special/2863592/",
       "venue": "Yuzu Dining Bar"
     },
+    "2863604": {
+      "context": "Discovery Sessions Ben Kim, Danny Snowden, DXNBY, Goosey, Semmi Amdouni, Shek, VLTRA Daytime events / Intimate venues / House The Bulldog Palace · 13:00 - 20:45 The Bulldog Palace + - <path d=\"M22.4652 1.46589C21.157 0.403411",
+      "date": "2026-10-22",
+      "end": "20:45",
+      "id": "2863604",
+      "slug": "discovery-sessions",
+      "source": "anchor",
+      "start": "13:00",
+      "title": "Discovery Sessions",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/discovery-sessions/2863604/",
+      "venue": "The Bulldog Palace"
+    },
     "2863621": {
       "context": "Panteros666 & Friends Daytime events / Intimate venues / Trance / Eurodance Chicago Social Club · 17:00 - 22:00 Chicago Social Club + - <path d=\"M22.4652 1.46589C21.157 0.403411 19.4499 -0.108609 17.6581 0.0224758C15.8642",
       "date": "2026-10-23",
@@ -9348,6 +9636,18 @@
       "title": "HEXAGON",
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/hexagon/2864727/",
       "venue": "Soulkitchen Amsterdam"
+    },
+    "2864748": {
+      "context": "Silent Disco @elderly home Nieuw Vredenburgh Daytime events / Free Festival Events / Social impact / Other Elderly home Nieuw Vredenburgh · 14:00 - 16:00 Elderly home Nieuw Vredenburgh + - <path d=\"M22.4652 1.46589C21.157 0.4",
+      "date": "2026-10-22",
+      "end": "16:00",
+      "id": "2864748",
+      "slug": "silent-disco-elderly-home-nieuw-vredenburgh",
+      "source": "anchor",
+      "start": "14:00",
+      "title": "Silent Disco @elderly home Nieuw Vredenburgh",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/silent-disco-elderly-home-nieuw-vredenburgh/2864748/",
+      "venue": "Elderly home Nieuw Vredenburgh"
     },
     "2864763": {
       "context": "NUA invites KM (Live) Nighttime events / Intimate venues / Hip-hop & Rap / R&B / Afrobeats Soulkitchen Amsterdam · 23:00 - 03:00 Soulkitchen Amsterdam + - <path d=\"M22.4652 1.46589C21.157 0.403411 19.4499 -0.108609 17",
@@ -10645,6 +10945,18 @@
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/unboxed/2890202/",
       "venue": "Jekkah"
     },
+    "2890203": {
+      "context": "Electronic Music Producer Meetup & Demo Feedback Session Find Your Own Sound Electronic Music Producer Meet Up and DEMO FEEDBACK SESSION... Intimate venues / Music Culture / Masterclasses / Networking events / Deep House / House / Tech-house / Techno / Minimal-Techno / Melodic Techno / Detroit Techno / Chicago House / Dub Techno / Bars / New Festival Venues Duke of Tokyo · 13:00 - 21:00 Duke of Tokyo + <div class=\"ade-favourites-button__info ade-favourites-button__info--rem",
+      "date": "2026-10-22",
+      "end": "21:00",
+      "id": "2890203",
+      "slug": "electronic-music-producer-meetup-demo-feedback-session",
+      "source": "anchor",
+      "start": "13:00",
+      "title": "Electronic Music Producer Meetup & Demo Feedback Session",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/electronic-music-producer-meetup-demo-feedback-session/2890203/",
+      "venue": "Duke of Tokyo"
+    },
     "2890204": {
       "context": "Chudix (DJ/Producer) & Ties Deelen Live set Daytime events / Music Culture / Jazz / Soulful House / Funk Overtone Bistro · 19:00 - 22:00 Overtone Bistro + - <path d=\"M22.4652 1.46589C21.157 0.403411 19.4499 -0.108609 17.6",
       "date": "2026-10-23",
@@ -10775,6 +11087,18 @@
       "start": "14:00",
       "title": "Amsterdam With Love Amsterdam Ade30",
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/amsterdam-with-love-amsterdam-ade30/2891354/",
+      "venue": "Black Gold Amsterdam Coffee & Vinyl"
+    },
+    "2891420": {
+      "context": "CQTD presents In Store Session with Kid Sublime & Ruggero (The Playground) Music Culture / Artists / Jazz / Disco, Funk & Soul / Instore Session Black Gold Amsterdam Coffee & Vinyl · 14:00 - 18:00 Black Gold Amsterdam Coffee & Vinyl + - <svg width=\"1em\" height=\"1em\" viewBox=\"0 0 25 21\" fill=\"none\" xmlns=\"",
+      "date": "2026-10-22",
+      "end": "18:00",
+      "id": "2891420",
+      "slug": "cqtd-presents-in-store-session-with-kid-sublime-ruggero-the-playground",
+      "source": "anchor",
+      "start": "14:00",
+      "title": "CQTD presents In Store Session with Kid Sublime & Ruggero (The Playground)",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/cqtd-presents-in-store-session-with-kid-sublime-ruggero-the-playground/2891420/",
       "venue": "Black Gold Amsterdam Coffee & Vinyl"
     },
     "2891499": {
@@ -11569,6 +11893,18 @@
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/aladag-presents-mmaattcchh-ade-2026/2898985/",
       "venue": "Club Baggerbeest"
     },
+    "2899021": {
+      "context": "PWCC TAKEOVER Canapa-X - ADE Marathon - DAY 1 Daytime events / Intimate venues / Deep House / Micro House Meet Berlage · 14:00 - 21:00 Meet Berlage + - <path d=\"M22.4652 1.46589C21.157 0.403411 19.4499 -0.108609 17.6581 0.0224",
+      "date": "2026-10-22",
+      "end": "21:00",
+      "id": "2899021",
+      "slug": "canapa-x",
+      "source": "anchor",
+      "start": "14:00",
+      "title": "Canapa X",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/canapa-x/2899021/",
+      "venue": "Meet Berlage"
+    },
     "2899074": {
       "context": "The Gardens of Babylon presents: The Seekers of Light - Saturday by Day Daytime events / Large venues / Organic House / Deep House / Progressive House / Melodic House / Acid House WestWeelde · 14:00 - 22:00 WestWeelde + - <pa",
       "date": "2026-10-24",
@@ -11760,6 +12096,18 @@
       "title": "Sbn X Ade Negroni Night",
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/sbn-x-ade-negroni-night/2900162/",
       "venue": "Schout-bij-nacht"
+    },
+    "2900197": {
+      "context": "Reason II Rise Special ADE take Over AFTERUS, Arctic Barbers, Bixx, Bryn Whiting, Danni Gibbs, Darren Porter, Metta & Glyde, R∑BOOT, Resolve, Sean Tyas, Vivacity Daytime events / Intimate venues / Free Festival Events / Networking events / Uplifting Trance / Melodic / Tech Trance / Rembrandtplein / Showcases & Expo's / Radio & Livestreams / Centre Coco’s Outback · 12:00 - 18:00 Coco’s Outback + <div class=\"ade-favourites-button__info ade-favourites-button__info--rem",
+      "date": "2026-10-22",
+      "end": "18:00",
+      "id": "2900197",
+      "slug": "reason-ii-rise-special-ade-take-over",
+      "source": "anchor",
+      "start": "12:00",
+      "title": "Reason II Rise Special ADE take Over",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/reason-ii-rise-special-ade-take-over/2900197/",
+      "venue": "Coco’s Outback"
     },
     "2900494": {
       "context": "We Love 45´s X Killacutz 7`vinyl community summit Daytime events / Music Culture / (Live) Events / Disco / Nu Disco / Italo Disco / Italo / Boogie / Funk / Electro Funk / Soul / Nu Jazz / Jazz KILLACUTZ · 12:00 - 19:00 KILLACUTZ + - <svg width=\"1em\" height=\"1em\" viewBox=\"0 0 25 21\" fill=\"none\" xmlns=\"http://www.w3.org/200",
@@ -12913,6 +13261,18 @@
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/vonckelend-bacardi-present/2907488/",
       "venue": "Vonckelend"
     },
+    "2907721": {
+      "context": "Killacutz X Armada Music Daytime events / Intimate venues / Music Culture / Deep House / Progressive House KILLACUTZ · 13:00 - 16:00 KILLACUTZ + - <path d=\"M22.4652 1.46589C21.157 0.403411 19.4499 -0.108609 17.6581 0.0224758C",
+      "date": "2026-10-22",
+      "end": "16:00",
+      "id": "2907721",
+      "slug": "killacutz-x-armada-music",
+      "source": "anchor",
+      "start": "13:00",
+      "title": "Killacutz X Armada Music",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/killacutz-x-armada-music/2907721/",
+      "venue": "KILLACUTZ"
+    },
     "2907733": {
       "context": "ANOTHER ROOM x UNRELEASED COMMUNITY - NETWORK SESSIONS Meet & greet, networking , demo drop -offs, Another Room Daytime events / Intimate venues / Unique venues / Networking events / Networking / Labels, Publishing & Sync / Artists / Minimal-Techno / Tech-house / Instore Session / Centre ANOTHER ROOM · 15:00 - 18:30 ANOTHER ROOM + - <div class=\"ade-favourites-button__icon ade-favourites-bu",
       "date": "2026-10-23",
@@ -13285,6 +13645,18 @@
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/mixmag-x-elektra/2910089/",
       "venue": "Warehouse Elementenstraat"
     },
+    "2910148": {
+      "context": "MIXMAG X SESH 2HOT2PLAY, Alignment, Ciara Cuvé, DJ CRINGEY, MCR-T, NOISE MAFIA, PETERBLUE, PRADA2000, Sumia, Ueberrest Daytime events / Large venues / Hard Techno / Hard Dance / Trance Warehouse Elementenstraat · 13:00 - 22:00 Warehouse Elementenstraat + - <svg width=\"1em\" height=\"1em\" viewBox=\"0 0 25 21\" fill=\"none\" xmln",
+      "date": "2026-10-22",
+      "end": "22:00",
+      "id": "2910148",
+      "slug": "mixmag-x-sesh",
+      "source": "anchor",
+      "start": "13:00",
+      "title": "MIXMAG X SESH",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/mixmag-x-sesh/2910148/",
+      "venue": "Warehouse Elementenstraat"
+    },
     "2910152": {
       "context": "Nanda La Rose X Sounds of After Hours NANDA WE WANNA PARTY! Nighttime events / Amapiano / Afrobeats / Hip-hop & Rap / Rembrandtplein NYX Hotel · 19:00 - 01:00 NYX Hotel + - <path d=\"M22.4652 1.46589C21.157 0.403411 19.4499",
       "date": "2026-10-23",
@@ -13451,6 +13823,18 @@
       "start": "06:00",
       "title": "WAX 100H LIVE RADIO @ STUDIO ZEEDIJK",
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/wax-100h-live-radio-studio-zeedijk-thu-0600-1200/2910763/",
+      "venue": "Studio Zeedijk"
+    },
+    "2910771": {
+      "context": "WAX 100H LIVE RADIO @ STUDIO ZEEDIJK HOUR 017-022 of 100 Music Culture Studio Zeedijk · 12:00 - 18:00 Studio Zeedijk + - <path d=\"M22.4652 1.46589C21.157 0.403411 19.4499 -0.108609 17.6581 0.0224758C15.8642 0.154054 14.1749 0.",
+      "date": "2026-10-22",
+      "end": "18:00",
+      "id": "2910771",
+      "slug": "wax-100h-live-radio-studio-zeedijk-thu-1200-1800",
+      "source": "anchor",
+      "start": "12:00",
+      "title": "WAX 100H LIVE RADIO @ STUDIO ZEEDIJK",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/wax-100h-live-radio-studio-zeedijk-thu-1200-1800/2910771/",
       "venue": "Studio Zeedijk"
     },
     "2910783": {
@@ -13992,6 +14376,18 @@
       "title": "Noera Ade Showcase",
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/noera-ade-showcase/2915888/",
       "venue": "Panama"
+    },
+    "2916509": {
+      "context": "Killa Cutz x Armada Music Daytime events / Intimate venues / Trance KILLACUTZ · 13:00 - 16:00 KILLACUTZ + - <path d=\"M22.4652 1.46589C21.157 0.403411 19.4499 -0.108609 17.6581 0.0224758C15.8642 0.154054 14.1749 0.916908 12.90",
+      "date": "2026-10-22",
+      "end": "16:00",
+      "id": "2916509",
+      "slug": "killa-cutz-x-armada-music",
+      "source": "anchor",
+      "start": "13:00",
+      "title": "Killa Cutz x Armada Music",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/killa-cutz-x-armada-music/2916509/",
+      "venue": "KILLACUTZ"
     },
     "2916590": {
       "context": "Merow presents: BASS RELATED Nighttime events / Intimate venues / Tech-house / Bass House / Garage House / House Chin Chin Club · 23:00 - 04:00 Chin Chin Club + - <path d=\"M22.4652 1.46589C21.157 0.403411 19.4499 -0.108609 17",
@@ -14701,6 +15097,30 @@
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/sandbox-selects/2923575/",
       "venue": "Garage Noord"
     },
+    "2923656": {
+      "context": "Redken Join the Ultimate ADE Salon Rave Free Festival Events Kinki Kappers van Bearlestraat · 12:00 - 20:00 Kinki Kappers van Bearlestraat + - <path d=\"M22.4652 1.46589C21.157 0.403411 19.4499 -0.108609 17.6581 0.0224758C15.86",
+      "date": "2026-10-22",
+      "end": "20:00",
+      "id": "2923656",
+      "slug": "redken",
+      "source": "anchor",
+      "start": "12:00",
+      "title": "Redken",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/redken/2923656/",
+      "venue": "Kinki Kappers van Bearlestraat"
+    },
+    "2923771": {
+      "context": "Jeff Mills' Interpretation of Rembrandt's 'De Nachtwacht' Audio Obscura x Jeff Mills Film & Documentaries / Free A&C Events / Other / South Rijksmuseum · 12:00 - 16:00 Rijksmuseum + - <path d=\"M22.4652 1.46589C21.157 0",
+      "date": "2026-10-22",
+      "end": "16:00",
+      "id": "2923771",
+      "slug": "audio-obscura-x-jeff-mills-present-jeff-mills-interpretation-of-rembrandts-de-nachtwacht",
+      "source": "anchor",
+      "start": "12:00",
+      "title": "Audio Obscura X Jeff Mills Present Jeff Mills Interpretation Of Rembrandts De Nachtwacht",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/audio-obscura-x-jeff-mills-present-jeff-mills-interpretation-of-rembrandts-de-nachtwacht/2923771/",
+      "venue": "Rijksmuseum"
+    },
     "2923869": {
       "context": "Annie's ADE Weekender 30hr Opening Weekender Morning events / Daytime events / Nighttime events / Club nights / Mid-size venues / Hard Groove / House / Live Annie · 23:59 - 06:00 Annie + - <path d=\"M22.4652 1.46589C21.157 0.40",
       "date": "2026-10-23",
@@ -15086,7 +15506,7 @@
       "venue": ""
     },
     "2929145": {
-      "context": "Performance: Erik Tlaseca - Eclipse A child and a vampire: loss and desire Dance & Theatre / Beyond the Dancefloor / Centre / New Arts & Culture Venues ROZENSTRAAT – a rose is a rose is a rose · 19:00 - 20:00 ROZENSTRAAT – a rose is a rose is a rose + - <svg width=\"1em\" height=\"1em\" viewBox=\"0 0 25 21\" fill=\"none\"",
+      "context": "Performance: Erik Tlaseca - Eclipse Eclipse Dance & Theatre / Beyond the Dancefloor / Centre / New Arts & Culture Venues ROZENSTRAAT – a rose is a rose is a rose · 19:00 - 20:00 ROZENSTRAAT – a rose is a rose is a rose + - <svg width=\"1em\" height=\"1em\" viewBox=\"0 0 25 21\" fill=\"none\" xmlns=\"http://www.w3.org/2000/",
       "date": "2026-10-24",
       "end": "20:00",
       "id": "2929145",
@@ -15156,6 +15576,18 @@
       "title": "RnB Singalong Brunch",
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/rnb-singalong-brunch/2930250/",
       "venue": "Chin Chin Club"
+    },
+    "2930790": {
+      "context": "Producer Coaching by Mark Otten presents: Alex Vasi A hangout with one of Holland's most in demand mix/master engineers Daytime events / Music Culture / Live / East STMPD Recording Studios · 12:30 - 14:00 STMPD Recording Studios + - <svg width=\"1em\" height=\"1em\" viewBox=\"0 0 25 21\" fill=\"none\" xmlns=\"http://www.w3.org/200",
+      "date": "2026-10-22",
+      "end": "14:00",
+      "id": "2930790",
+      "slug": "producer-coaching-by-mark-otten-presents-alex-vasi",
+      "source": "anchor",
+      "start": "12:30",
+      "title": "Producer Coaching by Mark Otten presents: Alex Vasi",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/producer-coaching-by-mark-otten-presents-alex-vasi/2930790/",
+      "venue": "STMPD Recording Studios"
     },
     "2930989": {
       "context": "RISE MUSIC PROJECT SHOWCASE Nighttime events / Intimate venues / Melodic Techno The Bulldog Palace · 22:00 - 04:00 The Bulldog Palace + - <path d=\"M22.4652 1.46589C21.157 0.403411 19.4499 -0.108609 17.6581 0.0224758C15.8642 0",
@@ -15613,6 +16045,18 @@
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/unnamed-presents-guess-who/2935463/",
       "venue": "The Tequila Club"
     },
+    "2935623": {
+      "context": "Circuits and Ceremonies Exhibition by Sunjoo Lee, Claire Williams and Ryan Jordan Exhibitions / Free A&C Events / Other / South / New Arts & Culture Venues Zone2Source · 13:00 - 17:00 Zone2Source + - <path d=\"M22.4652",
+      "date": "2026-10-22",
+      "end": "17:00",
+      "id": "2935623",
+      "slug": "circuits-and-ceremonies",
+      "source": "anchor",
+      "start": "13:00",
+      "title": "Circuits and Ceremonies",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/circuits-and-ceremonies/2935623/",
+      "venue": "Zone2Source"
+    },
     "2935787": {
       "context": "Club Splendore Sparkling Attitude Daytime events / Intimate venues / Free Festival Events / Centre Bordello Aperitivo · 21:00 - 22:00 Bordello Aperitivo + - <path d=\"M22.4652 1.46589C21.157 0.403411 19.4499 -0.108609 17.6581 0",
       "date": "2026-10-23",
@@ -15769,6 +16213,18 @@
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/ade-checks-in-resident-djs-by-white-flow/2937617/",
       "venue": "Lotti's Bar @ The Hoxton"
     },
+    "2937671": {
+      "context": "ADE Checks In | Resident DJ's by White Flow From noon onwards, our Hoxton resident DJs, curated by White Flow, take over the booth at Lotti’s Bar, bringing a mix of sounds from afternoon grooves to evening beats. Daytime events / Intimate venues Lotti's Bar @ The Hoxton · 12:00 - 17:00 Lotti's Bar @ The Hoxton + - <svg wi",
+      "date": "2026-10-22",
+      "end": "17:00",
+      "id": "2937671",
+      "slug": "ade-checks-in-resident-djs-by-white-flow",
+      "source": "anchor",
+      "start": "12:00",
+      "title": "ADE Checks In | Resident",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/ade-checks-in-resident-djs-by-white-flow/2937671/",
+      "venue": "Lotti's Bar @ The Hoxton"
+    },
     "2937694": {
       "context": "ADE Checks In | Resident DJ's by White Flow From noon onwards, our Hoxton resident DJs, curated by White Flow, take over the booth at Lotti’s Bar, bringing a mix of sounds from afternoon grooves to evening beats. Daytime events / Intimate venues Lotti's Bar @ The Hoxton · 12:00 - 17:00 Lotti's Bar @ The Hoxton + - <svg wi",
       "date": "2026-10-23",
@@ -15827,6 +16283,18 @@
       "start": "12:00",
       "title": "Bar Theo Instores",
       "url": "https://www.amsterdam-dance-event.nl/en/program/2026/bar-theo-instores/2937993/",
+      "venue": "Bar Theo"
+    },
+    "2938002": {
+      "context": "Bar Theo Instores Music Culture / Techno Bar Theo · 12:00 - 01:00 Bar Theo + - <path d=\"M22.4652 1.46589C21.157 0.403411 19.4499 -0.108609 17.6581 0.0224758C15.8642 0.154054 14.1749 0.916908 12.9005 2.1701L12.5 2.56385L12.099",
+      "date": "2026-10-22",
+      "end": "01:00",
+      "id": "2938002",
+      "slug": "bar-theo-instores",
+      "source": "anchor",
+      "start": "12:00",
+      "title": "Bar Theo Instores",
+      "url": "https://www.amsterdam-dance-event.nl/en/program/2026/bar-theo-instores/2938002/",
       "venue": "Bar Theo"
     },
     "2938004": {
@@ -16082,6 +16550,6 @@
       "venue": "Aiche Store"
     }
   },
-  "fetched_at": "2026-10-09T17:48:39Z",
+  "fetched_at": "2026-10-09T17:40:06Z",
   "source_url": "https://www.amsterdam-dance-event.nl/en/program/filter/?section=events&type=8262%2C8263&from=2026-10-21&to=2026-10-25"
 }

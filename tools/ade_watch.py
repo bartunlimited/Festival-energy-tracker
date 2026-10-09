@@ -361,11 +361,41 @@ def main():
         return got
 
     print(f"Ophalen: {args.url}", file=sys.stderr)
+
+    # Hoeveel events had de vorige snapshot per dag? Daarmee kunnen we zien of
+    # een dagpagina deze keer te weinig opleverde.
+    prev_per_day = {}
+    if os.path.exists(args.snapshot):
+        with open(args.snapshot, encoding="utf-8") as f:
+            for ev in json.load(f).get("events", {}).values():
+                for day in (ev.get("date") or "").split(","):
+                    if day:
+                        prev_per_day[day] = prev_per_day.get(day, 0) + 1
+
     events = {}
     for day, day_url in (day_urls(args.url) if args.split_days else [(None, args.url)]):
         if day:
             print(f"— {day}", file=sys.stderr)
-        for eid, ev in scrape_all(day_url).items():
+
+        # Lazy loading valt soms op één dagpagina te vroeg stil. Dat is puur
+        # verlies: twee runs verschilden 39 events, allemaal op dezelfde dag, en
+        # de kleinere was een strikte deelverzameling van de grotere. Dus: nog
+        # eens proberen zolang de dag minder oplevert dan de vorige snapshot, en
+        # de pogingen samenvoegen in plaats van de laatste te geloven.
+        got = {}
+        for attempt in range(1, 4):
+            batch = scrape_all(day_url)
+            got.update(batch)
+            target = prev_per_day.get(day or "", 0)
+            if len(got) >= target or attempt == 3:
+                if target and len(got) < target:
+                    print(f"  let op: {len(got)} events, vorige keer {target}",
+                          file=sys.stderr)
+                break
+            print(f"  {len(got)} events, vorige keer {target} — poging "
+                  f"{attempt + 1}", file=sys.stderr)
+
+        for eid, ev in got.items():
             if eid in events:
                 # Meerdaags event: alle dagen bewaren, niet overschrijven.
                 seen = events[eid].get("date", "")
@@ -374,6 +404,8 @@ def main():
             else:
                 ev["date"] = day or ""
                 events[eid] = ev
+        if day:
+            print(f"  {len(got)} events", file=sys.stderr)
 
     print(f"Totaal: {len(events)} events", file=sys.stderr)
 
