@@ -2,7 +2,7 @@
 // Same-origin: network-first (freshest tool after a push), cache fallback.
 // Cross-origin (Open-Meteo) passes through untouched — the app has its own
 // localStorage cache + stale indicator for weather.
-const CACHE = "milkshake-energy-v2";
+const CACHE = "lowlands-energy-v2";
 const PREFIX = CACHE.replace(/v\d+$/, "");
 const ASSETS = ["./", "./index.html", "./manifest.json", "./icon-180.png", "./icon-512.png"];
 

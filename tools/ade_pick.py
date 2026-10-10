@@ -11,7 +11,7 @@ zelfgeschreven namenlijst. Dat ging twee keer mis op dezelfde manier:
    en Awakenings Friday Sessions werd alleen gevonden omdat we er toevallig naar
    zochten.
 
-Daarom: namen en gewichten komen uit het blok `artiesten` in bijlage §J van
+Daarom: namen en gewichten komen uit het blok `artiesten` in bijlage §K van
 het profiel, en een event zonder line-up wordt op zijn genretags beoordeeld en
 apart gemarkeerd, zodat het opgezocht wordt in plaats van stil te verdwijnen.
 
@@ -60,11 +60,30 @@ GENRE_WEIGHTS = {
     "Drum & Bass": -2, "Jungle": -2, "Neurofunk": -2, "Bass": -2, "Bass & UK": -2,
     # 3% trefkans: hardstyle / hard dance
     "Hard Dance": -2, "Hardstyle": -2, "Hardcore": -2, "Happy Hardcore": -2,
-    # richting van de Honey Dijon-dislike: R&B-doordrenkte vocal house
-    "Soulful House": -2, "R&B": -2,
+    # richting van de Honey Dijon-dislike: R&B-doordrenkte vocal house van een DJ.
+    # "R&B" zelf níét negatief: na Lowlands (§I) werkt live soul met zang juist wel
+    # (Pale Jay, Celeste, Naomi Sharon 👍).
+    "Soulful House": -2,
 }
 
-# Locaties die in oktober afvallen: tent of buitenterrein. Zie muziek-dna.md §I.
+# Queer clubnachten: "Adonis Queer Club: twee nachten, twee keer 👍 … Voortaan
+# standaard meenemen" (§I). Alleen op "queer"/"LGBTQ" — "drag", "trans" en
+# "milkshake" gaven ruis (een DJ heet Milkshake, "trans" zit in "transforms").
+QUEER = re.compile(r"\b(queer|lgbtq\+?|lgbt)\b", re.I)
+QUEER_BONUS = 6
+
+
+def queer_night(event, tags):
+    """Een queer clubnacht, geen kunstavond of talk met het woord erin."""
+    text = f"{event.get('title_full') or event['title']} {event.get('description', '')}"
+    if not QUEER.search(text):
+        return False
+    if "Club nights" in tags:
+        return True
+    music = any(t in GENRE_WEIGHTS for t in tags) or bool(event.get("lineup"))
+    return "Nighttime events" in tags and music
+
+# Locaties die in oktober afvallen: tent of buitenterrein. Zie muziek-dna.md §J.
 OUTDOOR = ("thuishaven", "havenpark", "fik garden", "garden")
 
 # ADE tagt buitenevents zelf; betrouwbaarder dan zaalnamen raden.
@@ -113,7 +132,7 @@ ARTIST_BLOCK = re.compile(r"```artiesten\n(.*?)```", re.S)
 
 
 def load_artists(path=PROFILE):
-    """Lees namen en gewichten uit het blok `artiesten` in muziek-dna.md §J.
+    """Lees namen en gewichten uit het blok `artiesten` in muziek-dna.md §K.
 
     Geeft (gewichten, afgewezen): {naam: 1|2|3} en een set namen die een event
     op nul zetten. Bewust een expliciete lijst: namen uit lopende tekst halen
@@ -237,7 +256,12 @@ def score(event, artists):
         nameless = len(head) < 12
     # Namen wegen zwaar (must = 9), tags hooguit +3: zijn smaak gaat voor het
     # genre-etiket van de organisator.
-    return 3 * sum(weights[a] for a in hard) + len(soft) + genre, names, tags, nameless
+    raw_tags = event.get("tags") or tags
+    queer = queer_night(event, raw_tags)
+    if queer:
+        names = names + ["(queer clubnacht)"]
+    total = 3 * sum(weights[a] for a in hard) + len(soft) + genre
+    return total + (QUEER_BONUS if queer else 0), names, tags, nameless
 
 
 def main():

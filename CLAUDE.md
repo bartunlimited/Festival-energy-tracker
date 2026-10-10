@@ -1,6 +1,6 @@
 # Festival Energy Tracker — werkinstructies
 
-Vijf standalone web-apps die per stage voorspellen **waar de crowd danst** (niet
+Zes standalone web-apps die per stage voorspellen **waar de crowd danst** (niet
 staat te praten), live reagerend op het weer. Gebouwd voor en met Bart.
 
 ## ⚠️ Lees eerst
@@ -12,6 +12,9 @@ ook maar één set markeert. Twee dingen om te onthouden:
   130–140+). Deze apps gebruiken **altijd** het festivalprofiel.
 - **De bijlage onderaan dat bestand is nieuwer dan het profiel erboven.** Bij
   tegenspraak wint de bijlage; Barts eigen correcties in gesprek winnen altijd.
+- **Duimpjes-feedback lees je zwaar, stilte lees je niet.** Bart duimt alleen als het
+  echt duidelijk was — een 👎 zwak je niet af. Uit sets die hij *niet* beoordeelde
+  volgt niets. Zie `docs/feedback-lowlands-2026.md`.
 
 Achtergrond, alleen nodig bij grotere wijzigingen:
 - `docs/DESIGN-tml-energy-tool.md` — het oorspronkelijke ontwerp: scoringsmodel,
@@ -21,7 +24,10 @@ Achtergrond, alleen nodig bij grotere wijzigingen:
 - `docs/handover-festival-tool.md` — het recept van Barts eerdere tools.
 - `tools/` — de generatoren, met een waarschuwing in `tools/README.md`: draai ze niet
   blind opnieuw. Uitzondering: `tools/ade_watch.py` bewaakt het ADE-programma en mag
-  wél herhaald draaien; snapshot en historie staan in `data/ade-2026/`.
+  wél herhaald draaien; snapshot en historie staan in `data/ade-2026/`. Draait alleen
+  handmatig (Actions → "ADE-programma bewaken"), niet automatisch — Barts keuze.
+  `tools/ade_pick.py` rangschikt die snapshot tegen de artiestenlijst in
+  `docs/muziek-dna.md` §K; uitkomst in `docs/ade-2026-shortlist.md`.
 
 ## Apps
 
@@ -32,6 +38,7 @@ Achtergrond, alleen nodig bij grotere wijzigingen:
 | `/jesse/` | TML W2 vrijdag (voor Jesse, Barts smaak) | 24 juli 2026, Boom |
 | `/milkshake/` | Milkshake za + zo | 25–26 juli 2026, Westerpark |
 | `/tillatec/` | Tillatec × WorldPride (34-uurs marathon) | 1–3 aug 2026, Amsterdam |
+| `/lowlands/` | Lowlands (bandfestival + nachtclub) | 21–23 aug 2026, Biddinghuizen |
 
 Elke app is **één self-contained HTML-bestand**: engine, data en UI in één. Ze delen
 de engine door kopiëren, niet door importeren — een engine-fix moet je dus bewust in
