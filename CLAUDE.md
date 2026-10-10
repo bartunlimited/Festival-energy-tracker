@@ -23,7 +23,11 @@ Achtergrond, alleen nodig bij grotere wijzigingen:
   Draaimolen); structuur geldt nog, delen zijn achterhaald.
 - `docs/handover-festival-tool.md` — het recept van Barts eerdere tools.
 - `tools/` — de generatoren, met een waarschuwing in `tools/README.md`: draai ze niet
-  blind opnieuw.
+  blind opnieuw. Uitzondering: `tools/ade_watch.py` bewaakt het ADE-programma en mag
+  wél herhaald draaien; snapshot en historie staan in `data/ade-2026/`. Draait alleen
+  handmatig (Actions → "ADE-programma bewaken"), niet automatisch — Barts keuze.
+  `tools/ade_pick.py` rangschikt die snapshot tegen de artiestenlijst in
+  `docs/muziek-dna.md` §K; uitkomst in `docs/ade-2026-shortlist.md`.
 
 ## Apps
 

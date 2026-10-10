@@ -319,3 +319,192 @@ Kleinere signalen: **Ninajirachi 👍** op X-Ray — dat podium is dus geen tota
 afschrijving, de waarschuwing gold de abstract-experimentele techno-hoek. En
 **Ana Frango Elétrico 👎** was een tip van mij op basis van alleen een genre-gok:
 bij onbekende namen liever niet markeren dan gokken.
+
+## J. Correcties van Bart tijdens de ADE-planning (aug 2026)
+
+**Horse Meat Disco — afgekeurd.** *"Was niet goed, te Amerikaans."* Dit **overschrijft
+lijst E hierboven**, waar hij bij Milkshake stond als goedgekeurde suggestie. Die lijst
+was een vooraf-goedkeuring; dit is een oordeel achteraf en gaat dus voor.
+
+**Maar "Amerikaans" is níét de regel.** Op de vervolgvraag of Todd Terry — net zo goed
+Amerikaanse house, en ook uit lijst E — dan ook afvalt: *"Todd Terry is ok."* Generaliseer
+dus **niet** naar nationaliteit of naar disco als genre. Wat overblijft zijn twee
+concrete namen (**Honey Dijon**, **Horse Meat Disco**) plus de richting uit de Honey
+Dijon-dislike: **R&B-doordrenkte vocal house**. House, disco en Amerikaanse house als
+categorie staan nergens ter discussie.
+
+*Twee keer eerder te breed gegeneraliseerd: eerst van Honey Dijon naar alle disco
+(waardoor Glitterbox onterecht wegviel), daarna van Horse Meat Disco naar alles
+Amerikaans. Houd het bij de namen die hij noemt.*
+
+**Crowdleeftijd is een dansenergie-signaal.** Bij zijn goedkeuring van Todd Terry:
+*"maar de crowd zal wel erg oud zijn."* Dat is geen bezwaar tegen de artiest maar tegen
+de vloer — en dat is precies zijn kernvraag (*dansen ze, of staan ze te praten?*).
+
+→ Dit **scherpt de factor Crowd uit deel 1 aan**: bij **heritage- en jubileumboekingen**
+(legacy-namen, "30 years of", tributes, labelverjaardagen met oudgedienden) is een
+ouder en meer pratend publiek te verwachten. Noem dat risico erbij in plaats van de
+naam af te raden — hij wil zelf kunnen kiezen. Let op: dit geldt níét automatisch voor
+elk jubileum; *Klockworks 20 Years* en *Dave Clarke 30 Years of ADE* zijn harde,
+underground line-ups met een heel ander publiek dan een house-tribute.
+
+**Tent = seizoensgebonden, geen vaste dislike.** Bart over Thuishaven op ADE: *"in een
+tent dus koud"*, en daarna de nuance: *"ADE is in Amsterdam in oktober = slecht weer
+voor een tent. Heel anders dan in de zomer."*
+
+Dus **niet** de tentregel uit deel 1 weggooien — die blijft staan waar hij vandaan komt:
+
+| Seizoen | Tent | Waarom |
+|---|---|---|
+| Zomerfestivals (TML, Awakenings juli, Milkshake) | **plus** | donkere tent, lage plafonds, schaduw = beste kans op lock-in |
+| Oktober t/m maart (ADE, winter) | **min** | een tent is dan feitelijk buiten; koud en nat |
+
+De regel *"kou of regen duwt richting indoor/tent"* gaat over **naar binnen gaan**. In
+oktober telt een tent niet als binnen. Vraag in dat seizoen dus: is het **verwarmd en
+echt binnen**? Een zomerse plus-locatie kan in oktober een min zijn — beoordeel de
+locatie samen met de datum, nooit los.
+
+→ Concreet: **Thuishaven valt af voor ADE**, maar blijft prima voor een zomerdatum.
+Hetzelfde geldt voor openluchtterreinen (Havenpark e.d.) in oktober.
+
+⚠️ De scrape in `data/ade-2026/` bevat **geen** veld voor overdekking — alleen zaalnaam.
+Bij twijfel over een onbekende locatie: niet gokken, aan Bart vragen. Zelfde regel als
+`verified:false` in de apps.
+
+**Shuttlebussen — geen optie.** *"Helemaal kut."* Bereikbaarheid met eigen vervoer of
+regulier OV telt mee als selectiecriterium; een line-up die alleen per shuttle te
+bereiken is, weegt lager.
+
+**Indira Paganotto** staat niet in het ADE 2026-programma. Gecontroleerd op 9 okt 2026
+over alle 1379 eventpagina's (line-up, kaarttekst én beschrijving): de enige vermelding
+is een merchandise-pop-up die haar merch verkoopt. Hij vroeg er expliciet naar, dus ze
+is interessant — markeer haar als ze op een toekomstige line-up verschijnt.
+
+*(Eerdere "0 hits" in augustus waren geen bewijs: de scraper las toen alleen de
+programmalijst, en 37% van die kaarten noemt geen artiesten.)*
+
+## K. Artiestenlijst voor de tools
+
+`tools/ade_pick.py` leest **alleen dit blok** — niet de lopende tekst hierboven. Namen
+automatisch uit proza halen ging mis: het pakte "2025", "Trefkans" en "UPCLOSE" als
+artiest en gooide juist *Charlotte de Witte*, *Armin van Buuren* en *Kevin de Vries*
+weg (het stopwoordfilter zag "de" en "van").
+
+**Helena Hauff staat er bewust niet in:** herroepen na Lowlands (§I, *"overwrite wat ik
+eerder van haar zei"*). Niet als `x`, want dat zou elk event met haar op nul zetten,
+ook als de rest van de line-up klopt — ze telt gewoon niet meer mee.
+
+**Bij een nieuwe naam in het profiel: hier ook toevoegen.** Formaat: `gewicht | naam`.
+
+- **3** — eigen musts (§D), het hard/dark-techno-segment en de lock-in-namen
+- **2** — overige namen uit deel 1 en 2, en goedgekeurde suggesties (§E)
+- **1** — *goed, maar geen must*
+- **x** — afgewezen; een event met deze naam scoort nul
+
+Losse namen, geen b2b-combinaties: een kaart noemt "Charlie Sparks" ook zonder BIIA.
+
+**Uit gesprek (okt 2026), niet uit het profiel:** *Anjunadeep* (hij vroeg "geen
+Anjunadeep, A&B of iets dergelijks?"), *909* ("vorig jaar was 909 erg leuk") en
+*Ferry Corsten* (hij stuurde zelf de Free Your Mind-poster). Labels en merknamen
+mogen in de lijst als ze in titels staan. Schrappen als ze niet kloppen.
+
+```artiesten
+3 | Rødhåd
+3 | JakoJako
+3 | Marrøn
+3 | Freddy K
+3 | Abstract Division
+3 | Anetha
+3 | Ben Klock
+3 | Len Faki
+3 | Spekki Webu
+3 | DAX J
+3 | Rene Wise
+3 | Takaaki Itoh
+3 | Juliana Huxtable
+3 | Bassiani
+3 | Sara Landry
+3 | Amelie Lens
+3 | Nico Moreno
+3 | Charlotte de Witte
+3 | Indira Paganotto
+3 | BIIA
+3 | Charlie Sparks
+3 | Mees Salomé
+3 | Martin Garrix
+3 | Calvin Harris
+3 | Alesso
+3 | Sebastian Ingrosso
+3 | The Chainsmokers
+3 | Armin van Buuren
+3 | John Summit
+3 | Lost Frequencies
+3 | Ofenbach
+3 | Olive Anguz
+3 | Symphony Of Harmony
+3 | Oscar and the Wolf
+2 | Job Jobse
+2 | Benny Rodrigues
+2 | Carista
+2 | Eric Prydz
+2 | Ben Böhmer
+2 | Paul Kalkbrenner
+2 | Kölsch
+2 | Jan Blomqvist
+2 | Joris Voorn
+2 | David Guetta
+2 | Henri PFR
+2 | Adriatique
+2 | Stephan Bodzin
+2 | Kevin de Vries
+2 | CamelPhat
+2 | Hannah Wants
+2 | Above & Beyond
+2 | Tinlicker
+2 | Black Coffee
+2 | Nina Kraviz
+2 | Richie Hawtin
+2 | Boris Brejcha
+2 | Pan-Pot
+2 | Marco Carola
+2 | Mau P
+2 | 999999999
+2 | Eli Brown
+2 | HI-LO
+2 | MCR-T
+2 | Partiboi69
+2 | Azyr
+2 | Enrico Sangiuliano
+2 | Hardwell
+2 | Steve Angello
+2 | Fisher
+2 | James Hype
+2 | Mall Grab
+2 | Miss Monique
+2 | Hannah Laing
+2 | Blastoyz
+2 | Todd Terry
+2 | Chuckie
+2 | Volvox
+2 | Byron Yeates
+2 | Chris Bekker
+2 | Dee Diggs
+2 | Ultra Naté
+2 | Fafi Abdel Nour
+2 | Jennifer Loveless
+2 | Mark With A K
+2 | MC Chucky
+2 | Anjunadeep
+2 | 909
+2 | Ferry Corsten
+1 | Mind Against
+1 | I Hate Models
+1 | Franky Rizardo
+1 | Sub Zero Project
+1 | Amber Broos
+1 | MANDY
+x | Dimitri Vegas
+x | Like Mike
+x | Honey Dijon
+x | Horse Meat Disco
+```

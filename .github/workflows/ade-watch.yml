@@ -1,0 +1,121 @@
+name: ADE-programma bewaken
+
+on:
+  # Alleen handmatig (Actions → "ADE-programma bewaken" → Run workflow). Bart wil
+  # geen automatische runs: geen dagelijkse cron, niet bij elke push.
+  workflow_dispatch:
+    inputs:
+      render:
+        description: 'Via Playwright renderen (als de pagina JS nodig heeft)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: ade-watch
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # Altijd installeren: de programmalijst laadt via JavaScript, dus het
+      # script valt sowieso terug op de browser.
+      - name: Playwright installeren
+        run: |
+          npm install -g playwright
+          npx playwright install --with-deps chromium
+          echo "NODE_PATH=$(npm root -g)" >> "$GITHUB_ENV"
+
+      - name: Programma scrapen en diffen
+        id: scrape
+        run: |
+          set +e
+          python3 tools/ade_watch.py --save --split-days --details --dump page.html \
+            ${{ inputs.render && '--render' || '' }} > diff.txt 2> log.txt
+          echo "exit=$?" >> "$GITHUB_OUTPUT"
+          set -e
+          cat log.txt
+          cat diff.txt
+
+      - name: HTML bewaren als het misging
+        if: steps.scrape.outputs.exit == '2'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ade-html
+          path: page.html
+          retention-days: 7
+
+      - name: Samenvatting
+        run: |
+          {
+            echo "## ADE-programma — $(date -u '+%Y-%m-%d %H:%M UTC')"
+            echo
+            if [ "${{ steps.scrape.outputs.exit }}" = "1" ]; then
+              # De step-samenvatting kapt zelf af op 1 MB; blijf daaronder.
+              head -c 900000 diff.txt
+            elif [ "${{ steps.scrape.outputs.exit }}" = "2" ]; then
+              echo "⚠️ Scrapen leverde 0 events op — zie de log; mogelijk is de markup veranderd."
+            else
+              echo "Niets veranderd."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Snapshot committen
+        if: steps.scrape.outputs.exit == '1' || steps.scrape.outputs.exit == '0'
+        run: |
+          # --porcelain, want de allereerste snapshot is untracked en die ziet
+          # `git diff` niet.
+          if [ -z "$(git status --porcelain -- data/)" ]; then
+            echo "geen bestandswijzigingen"
+            exit 0
+          fi
+          git config user.name  'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add data/
+          git commit -m "ADE-programma: snapshot bijgewerkt ($(date -u '+%Y-%m-%d'))"
+          # Iemand kan tijdens de run naar deze branch hebben gepusht; dan wordt
+          # een kale push geweigerd en gaat de snapshot verloren. De runner
+          # raakt alleen data/ aan, dus rebasen botst niet met andere commits.
+          for i in 1 2 3; do
+            git pull --rebase origin "${GITHUB_REF_NAME}" && git push && exit 0
+            sleep $((i * 5))
+          done
+          exit 1
+
+      - name: Issue openen bij wijzigingen
+        if: steps.scrape.outputs.exit == '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          SRC='https://www.amsterdam-dance-event.nl/en/program/filter/?section=events&type=8262%2C8263&from=2026-10-21&to=2026-10-25'
+          {
+            echo "Het ADE-programma is gewijzigd sinds de vorige check."
+            echo
+            # GitHub weigert een body boven 65536 tekens; een grote line-up-drop
+            # haalt dat ruim. Afkappen op 60k en naar de run-samenvatting wijzen
+            # voor de rest.
+            head -c 60000 diff.txt
+            if [ "$(wc -c < diff.txt)" -gt 60000 ]; then
+              echo
+              echo "_…afgekapt. Volledige diff staat in de_ "
+              echo "[run-samenvatting](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})."
+            fi
+            echo
+            echo "Bron: <$SRC>"
+          } > body.md
+          gh issue create \
+            --title "ADE-programma gewijzigd — $(date -u '+%Y-%m-%d')" \
+            --body-file body.md
+
+      - name: Falen als het scrapen stukliep
+        if: steps.scrape.outputs.exit == '2'
+        run: exit 1
