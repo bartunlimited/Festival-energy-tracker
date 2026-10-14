@@ -25,8 +25,32 @@ jobs:
       - uses: actions/configure-pages@v5
         with:
           enablement: true
+      # Alleen de apps publiceren, niet de hele repo. Met "path: ." stonden
+      # docs/ (Barts profiel), data/, tools/ en source/ ook op de website.
+      # Een map telt als app als hij index.html + manifest.json + sw.js heeft;
+      # daarvan gaan alleen die bestanden en de icons mee. Een nieuwe app komt
+      # zo vanzelf online, al het andere nooit.
+      - name: Site samenstellen
+        run: |
+          set -euo pipefail
+          mkdir _site
+          [ -f .nojekyll ] && cp .nojekyll _site/
+          for d in . */; do
+            d=${d%/}
+            [ "$d" = "_site" ] && continue
+            [ -f "$d/index.html" ] && [ -f "$d/manifest.json" ] && [ -f "$d/sw.js" ] || continue
+            mkdir -p "_site/$d"
+            for f in index.html manifest.json sw.js icon-180.png icon-512.png; do
+              [ -f "$d/$f" ] && cp "$d/$f" "_site/$d/$f"
+            done
+          done
+          if find _site -type f ! -name index.html ! -name manifest.json ! -name sw.js \
+               ! -name icon-180.png ! -name icon-512.png ! -name .nojekyll | grep -q .; then
+            echo "FOUT: onverwachte bestanden in _site"; find _site -type f; exit 1
+          fi
+          find _site -type f | sort
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
       - id: deployment
         uses: actions/deploy-pages@v4
