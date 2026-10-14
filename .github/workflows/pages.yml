@@ -25,20 +25,36 @@ jobs:
       - uses: actions/configure-pages@v5
         with:
           enablement: true
-      # Alleen de apps publiceren, niet de hele repo. Met "path: ." stonden
-      # docs/ (Barts profiel), data/, tools/ en source/ ook op de website.
-      # Een map telt als app als hij index.html + manifest.json + sw.js heeft;
-      # daarvan gaan alleen die bestanden en de icons mee. Een nieuwe app komt
-      # zo vanzelf online, al het andere nooit.
+      # Alleen wat in PUBLISH_APPS staat gaat online, verder niets: geen docs/
+      # (Barts profiel), data/, tools/ of source/. Met "path: ." stond dat er
+      # allemaal op. Van elke genoemde app gaan alleen index.html, manifest.json,
+      # sw.js en de icons mee. Op de root staat altijd een neutrale pagina,
+      # tenzij "." zelf in de lijst staat.
       - name: Site samenstellen
+        env:
+          # Leeg sinds okt 2026 (Barts keuze): de festivals zijn voorbij en de
+          # apps bevatten zijn picks. Weer online zetten: mapnamen met spaties,
+          # bv. "lowlands" of ". awakenings" — "." is de Tomorrowland-app.
+          PUBLISH_APPS: ""
         run: |
           set -euo pipefail
           mkdir _site
           [ -f .nojekyll ] && cp .nojekyll _site/
-          for d in . */; do
-            d=${d%/}
-            [ "$d" = "_site" ] && continue
-            [ -f "$d/index.html" ] && [ -f "$d/manifest.json" ] && [ -f "$d/sw.js" ] || continue
+          cat > _site/index.html <<'HTML'
+          <!doctype html><html lang="nl"><head><meta charset="utf-8">
+          <meta name="viewport" content="width=device-width,initial-scale=1">
+          <meta name="robots" content="noindex"><title>Festival Energy Tracker</title>
+          <style>body{font:16px/1.5 system-ui,sans-serif;margin:0;padding:24px 16px;
+          background:#fff;color:#1a1a1a}@media(prefers-color-scheme:dark){body{
+          background:#151515;color:#eaeaea}}</style></head><body>
+          <h1>Festival Energy Tracker</h1><p>Er staan op dit moment geen apps online.</p>
+          </body></html>
+          HTML
+          sed -i 's/^          //' _site/index.html
+          for d in $PUBLISH_APPS; do
+            if ! { [ -f "$d/index.html" ] && [ -f "$d/manifest.json" ] && [ -f "$d/sw.js" ]; }; then
+              echo "FOUT: '$d' in PUBLISH_APPS is geen app"; exit 1
+            fi
             mkdir -p "_site/$d"
             for f in index.html manifest.json sw.js icon-180.png icon-512.png; do
               [ -f "$d/$f" ] && cp "$d/$f" "_site/$d/$f"

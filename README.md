@@ -1,13 +1,17 @@
 # Festival Energy Tracker
 
-Zes apps, één engine:
+Zes apps, één engine. **Geen ervan staat op dit moment online** (okt 2026): de
+festivals zijn voorbij en de apps bevatten Barts picks. Welke apps GitHub Pages
+publiceert, staat in `PUBLISH_APPS` in `.github/workflows/pages.yml`.
 
-- **Tomorrowland W1** (17–19 juli 2026, Boom): `/` — https://bartunlimited.github.io/Festival-energy-tracker/
-- **Awakenings Sunday** (12 juli 2026, Hilvarenbeek): `/awakenings/` — https://bartunlimited.github.io/Festival-energy-tracker/awakenings/
-- **TML W2 vrijdag — Jesse** (24 juli 2026, Boom): `/jesse/` — https://bartunlimited.github.io/Festival-energy-tracker/jesse/
-- **Milkshake** (25–26 juli 2026, Westerpark A'dam): `/milkshake/` — https://bartunlimited.github.io/Festival-energy-tracker/milkshake/
-- **Tillatec × WorldPride** (1–3 aug 2026, Amsterdam): `/tillatec/` — https://bartunlimited.github.io/Festival-energy-tracker/tillatec/
-- **Lowlands** (21–23 aug 2026, Biddinghuizen): `/lowlands/` — https://bartunlimited.github.io/Festival-energy-tracker/lowlands/
+| Map | Festival |
+|---|---|
+| `/` | Tomorrowland W1 (17–19 juli 2026, Boom) |
+| `/awakenings/` | Awakenings Sunday (12 juli 2026, Hilvarenbeek) |
+| `/jesse/` | TML W2 vrijdag — Jesse (24 juli 2026, Boom) |
+| `/milkshake/` | Milkshake (25–26 juli 2026, Westerpark A'dam) |
+| `/tillatec/` | Tillatec × WorldPride (1–3 aug 2026, Amsterdam) |
+| `/lowlands/` | Lowlands (21–23 aug 2026, Biddinghuizen) |
 
 ## Tomorrowland W1 2026
 

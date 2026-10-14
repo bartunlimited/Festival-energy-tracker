@@ -76,7 +76,10 @@ de avond. Kopieer die engine niet terug naar de dag-festivals.
    eigen testset; werk de verwachte aantallen bij als je data toevoegt.
 3. **Deployen** = mergen naar `main` (`git merge --no-ff`) en pushen; GitHub Pages
    pakt het automatisch op. Bart herlaadt de PWA soms twee keer wegens de
-   service worker.
+   service worker. **Let op:** Pages publiceert alleen de apps in `PUBLISH_APPS`
+   (`.github/workflows/pages.yml`), en die lijst is **leeg** — Barts keuze in okt
+   2026, de apps bevatten zijn picks. Een app pas weer online zetten als Bart daar
+   expliciet om vraagt. Nooit terug naar `path: .`: dan staat zijn profiel online.
 4. **Simuleren** kan altijd met `?now=…`, plus `&rain=demo` voor het regenscenario.
 
 ## Omgang met Bart
