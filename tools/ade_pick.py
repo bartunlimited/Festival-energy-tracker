@@ -108,6 +108,20 @@ NON_DANCEFLOOR = {
     "Lifestyle",
 }
 
+def not_a_dancefloor(tags):
+    """Talk, expo, borrel of winkel — geen feest.
+
+    "Music Culture" staat ook op echte feesten (M0RN1NG 4FT3R: techno met
+    MARRØN), dus die tag sluit alleen uit als er geen enkel dansgenre bij staat.
+    """
+    tags = set(tags)
+    if (NON_DANCEFLOOR - {"Music Culture"}) & tags:
+        return True
+    if "Music Culture" in tags:
+        return not any(GENRE_WEIGHTS.get(t, 0) > 0 for t in tags)
+    return False
+
+
 # Kinderraves hebben geen eigen tag; de titel zegt het wel.
 NOT_FOR_HIM = re.compile(r"\b(kids?|family|familie)\b|\(\d+\+\)", re.I)
 
@@ -320,7 +334,7 @@ def main():
             continue
         ev_tags = tags_of(ev)
         always = any(v in ev["venue"].lower() for v in ALWAYS_VENUES)
-        if (OUTDOOR_TAGS & set(ev_tags) and not always) or NON_DANCEFLOOR & set(ev_tags):
+        if (OUTDOOR_TAGS & set(ev_tags) and not always) or not_a_dancefloor(ev_tags):
             continue
         if NOT_FOR_HIM.search(ev["title"]):
             continue
