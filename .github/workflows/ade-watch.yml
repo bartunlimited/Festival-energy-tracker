@@ -3,6 +3,10 @@ name: ADE-programma bewaken
 on:
   # Alleen handmatig (Actions → "ADE-programma bewaken" → Run workflow). Bart wil
   # geen automatische runs: geen dagelijkse cron, niet bij elke push.
+  # TIJDELIJK, voor één scan op Barts verzoek (18 okt): workflow_dispatch is
+  # voor deze integratie geblokkeerd (403). Direct na de run weer weghalen.
+  push:
+    branches: [claude/ade-party-recommendations-853lpe]
   workflow_dispatch:
     inputs:
       render:

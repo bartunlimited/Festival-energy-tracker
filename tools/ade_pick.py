@@ -84,7 +84,11 @@ def queer_night(event, tags):
     return "Nighttime events" in tags and music
 
 # Locaties die in oktober afvallen: tent of buitenterrein. Zie muziek-dna.md §J.
-OUTDOOR = ("thuishaven", "havenpark", "fik garden", "garden")
+# Thuishaven telt wél mee, ook al is het een tent: expliciet verzoek (okt 2026).
+# Ook als ADE het event als "Outdoor events" tagt — anders vallen er vijf van de
+# acht Thuishaven-events alsnog weg.
+OUTDOOR = ("havenpark", "fik garden", "garden")
+ALWAYS_VENUES = ("thuishaven",)
 
 # ADE tagt buitenevents zelf; betrouwbaarder dan zaalnamen raden.
 OUTDOOR_TAGS = {"Outdoor events", "Rooftop venues"}
@@ -232,10 +236,16 @@ def score(event, artists):
     strong = nfc(f"{event.get('title_full') or event['title']} {lineup} "
                  f"{event.get('context', '')}")
     weak = nfc(event.get("description", ""))
-    # Afwijzing alleen op line-up, titel en kaart: een beschrijving die "in de
-    # traditie van Dimitri Vegas" zegt is geen optreden van Dimitri Vegas.
-    if _found(rejected, strong):
+    # Een afgewezen naam zet het event alleen op nul als het zijn eigen show is
+    # (naam in de titel). Staat hij ergens in een line-up, dan blijft het event
+    # staan met een waarschuwing: Glitterbox heeft Horse Meat Disco, maar ook
+    # Carl Craig en The Shapeshifters. Zelfde redenering als bij Helena Hauff
+    # (§K). Beschrijvingen tellen niet: "in de traditie van Dimitri Vegas" is
+    # geen optreden van Dimitri Vegas.
+    title = nfc(event.get("title_full") or event["title"])
+    if _found(rejected, title):
         return 0, [], [], False
+    warn = sorted(_found(rejected, strong))
 
     hard = _found(weights, strong)
     soft = _found(weights, weak) - hard
@@ -260,8 +270,23 @@ def score(event, artists):
     queer = queer_night(event, raw_tags)
     if queer:
         names = names + ["(queer clubnacht)"]
+    if warn:
+        names = names + [f"(⚠ afgekeurd: {', '.join(warn)})"]
     total = 3 * sum(weights[a] for a in hard) + len(soft) + genre
     return total + (QUEER_BONUS if queer else 0), names, tags, nameless
+
+
+def lineup_text(event, names):
+    """De volledige line-up, met de namen uit het profiel gemarkeerd (★).
+
+    Niet alleen "uit je profiel" melden: wie een event aanraadt, moet laten zien
+    wie er speelt. Zonder gelinkte line-up op de eventpagina: dat zeggen.
+    """
+    mine = {nfc(n).lower() for n in names if not n.endswith("*") and not n.startswith("(")}
+    lineup = [a["name"] for a in event.get("lineup", [])]
+    if not lineup:
+        return "— geen line-up op de eventpagina"
+    return " · ".join(f"★{n}" if nfc(n).lower() in mine else n for n in lineup)
 
 
 def main():
@@ -274,6 +299,8 @@ def main():
     ap.add_argument("--top", type=int, default=10, help="per dag tonen")
     ap.add_argument("--date", help="alleen deze dag (YYYY-MM-DD)")
     ap.add_argument("--snapshot", type=Path, default=SNAPSHOT)
+    ap.add_argument("--lineup", action="store_true",
+                    help="volledige line-up per event tonen, profielnamen met ★")
     args = ap.parse_args()
 
     data = json.loads(args.snapshot.read_text(encoding="utf-8"))
@@ -292,7 +319,8 @@ def main():
         if any(o in ev["venue"].lower() for o in OUTDOOR):
             continue
         ev_tags = tags_of(ev)
-        if OUTDOOR_TAGS & set(ev_tags) or NON_DANCEFLOOR & set(ev_tags):
+        always = any(v in ev["venue"].lower() for v in ALWAYS_VENUES)
+        if (OUTDOOR_TAGS & set(ev_tags) and not always) or NON_DANCEFLOOR & set(ev_tags):
             continue
         if NOT_FOR_HIM.search(ev["title"]):
             continue
@@ -324,6 +352,8 @@ def main():
                 print(f"       {', '.join(names)[:100]}")
             elif tags:
                 print(f"       tags: {' / '.join(tags[:5])[:70]}")
+            if args.lineup:
+                print(f"       line-up: {lineup_text(ev, names)}")
 
         # Kaarten zonder line-up kunnen nooit op namen scoren, dus ze zakken
         # altijd onder de afkapgrens. Apart tonen: dit is precies hoe Ferry
