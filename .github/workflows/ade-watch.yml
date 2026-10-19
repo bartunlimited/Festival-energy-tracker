@@ -3,10 +3,6 @@ name: ADE-programma bewaken
 on:
   # Alleen handmatig (Actions → "ADE-programma bewaken" → Run workflow). Bart wil
   # geen automatische runs: geen dagelijkse cron, niet bij elke push.
-  # TIJDELIJK, één scan om de echte datum van ochtendevents op te halen (19 okt);
-  # workflow_dispatch is voor deze integratie geblokkeerd. Direct weer weg.
-  push:
-    branches: [claude/ade-party-recommendations-853lpe]
   workflow_dispatch:
     inputs:
       render:
