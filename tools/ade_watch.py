@@ -430,7 +430,7 @@ def enrich(events, old, workers=6):
                 failed += 1
                 prev = old.get(eid, {})
                 for k in ("lineup", "lineup_names", "lineup_heading", "tags", "address",
-                          "venue_id", "description", "title_full"):
+                          "venue_id", "description", "title_full", "date_page"):
                     if k in prev:
                         ev[k] = prev[k]
                 ev["detail_stale"] = True
@@ -444,6 +444,11 @@ def enrich(events, old, workers=6):
             for k in ("address", "venue_id", "description", "title_full"):
                 if det.get(k):
                     ev[k] = det[k]
+            # De echte kalenderdatum. Op de lijst staat een ochtendfeest onder
+            # twee dagen ("2026-10-24,2026-10-25" voor zondag 07:00), omdat ADE
+            # de nacht ervoor laat doorlopen; alleen de eventpagina is eenduidig.
+            if det.get("date_iso"):
+                ev["date_page"] = det["date_iso"]
             # De eventpagina is de bron; de kaart op de lijst was een benadering.
             for k in ("venue", "start", "end"):
                 if det.get(k):

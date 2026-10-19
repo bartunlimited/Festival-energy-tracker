@@ -193,7 +193,12 @@ TITLE_HOURS = re.compile(r"(?<![\w.])(\d{1,3})\s*(?:hrs?|hours?|h|uur)(?!\w)", r
 
 
 def span(event):
-    day = event["date"].split(",")[0]
+    # De datum van de eventpagina gaat voor: de lijst zet ochtendfeesten onder
+    # twee dagen, en de eerste daarvan is dan de vórige dag. Zonder paginadatum
+    # bij twee data de láátste nemen — 185 van de 188 zulke events beginnen
+    # vóór 12:00, dus de tweede datum is de ochtend zelf.
+    dates = [x for x in event["date"].split(",") if x]
+    day = event.get("date_page") or dates[-1]
     base = datetime.fromisoformat(day)
     h, m = map(int, event["start"].split(":"))
     start = base.replace(hour=h, minute=m)
@@ -348,7 +353,7 @@ def main():
         sc, names, tags, nameless = score(ev, artists)
         if sc <= 0:
             continue
-        by_day.setdefault(ev["date"].split(",")[0], []).append(
+        by_day.setdefault(start.date().isoformat(), []).append(
             (sc, start, end, a, b, ev, names, tags, nameless))
 
     for day in sorted(by_day):
