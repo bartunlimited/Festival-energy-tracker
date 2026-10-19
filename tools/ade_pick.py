@@ -83,14 +83,10 @@ def queer_night(event, tags):
     music = any(t in GENRE_WEIGHTS for t in tags) or bool(event.get("lineup"))
     return "Nighttime events" in tags and music
 
-# Locaties die in oktober afvallen: tent of buitenterrein. Zie muziek-dna.md §J.
-# Thuishaven telt wél mee, ook al is het een tent: expliciet verzoek (okt 2026).
-# Ook als ADE het event als "Outdoor events" tagt — anders vallen er vijf van de
-# acht Thuishaven-events alsnog weg.
-OUTDOOR = ("havenpark", "fik garden", "garden")
-ALWAYS_VENUES = ("thuishaven",)
-
-# ADE tagt buitenevents zelf; betrouwbaarder dan zaalnamen raden.
+# Geen locatie valt af op binnen/buiten: alles telt als binnen tenzij Bart zelf
+# anders zegt (okt 2026). Eerder filterden zaalnamen ("garden", "havenpark") en
+# ADE's eigen tags hieronder events weg — zo misten The Loft, Madam en Marrøn
+# all night in De Fik Garden. De tag tonen we nog wel, als informatie.
 OUTDOOR_TAGS = {"Outdoor events", "Rooftop venues"}
 
 # Geen dansvloer: conferentie, expo, winkel, borrel. Die scoren anders mee op
@@ -335,11 +331,8 @@ def main():
     for ev in data["events"].values():
         if not ev.get("start") or not ev.get("venue"):
             continue
-        if any(o in ev["venue"].lower() for o in OUTDOOR):
-            continue
         ev_tags = tags_of(ev)
-        always = any(v in ev["venue"].lower() for v in ALWAYS_VENUES)
-        if (OUTDOOR_TAGS & set(ev_tags) and not always) or not_a_dancefloor(ev_tags):
+        if not_a_dancefloor(ev_tags):
             continue
         if NOT_FOR_HIM.search(ev["title"]):
             continue
@@ -365,6 +358,9 @@ def main():
             slice_ = "" if (a == s and b == e) else f" →[{a:%a %H:%M}-{b:%a %H:%M}]"
             if ev.get("_duration_from_title"):
                 slice_ += " ⚠duur uit titel"
+            outdoor = OUTDOOR_TAGS & set(tags_of(ev))
+            if outdoor:
+                slice_ += f" (ADE-tag: {', '.join(sorted(outdoor))})"
             print(f" [{sc:3}] {s:%H:%M}-{e:%H:%M}{slice_} {(ev.get('title_full') or ev['title'])[:34]:34}"
                   f"| {ev['venue'][:20]:20}")
             if names:
