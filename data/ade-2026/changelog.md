@@ -4300,3 +4300,165 @@
     - `start`: '00:00' → '23:59'
 - **﻿﻿SSC | HOUSE YOUR MIND | SECRET.LABELS** — https://www.amsterdam-dance-event.nl/en/program/2026/ssc-house-your-mind-secret-labels/2830548/
     - line-up **+** DanielDG
+
+## 2026-10-19T18:26:26Z
+
+### ➕ Nieuw (22)
+- **30 Years Atjazz** — https://www.amsterdam-dance-event.nl/en/program/2026/30-years-atjazz/2959932/
+- **ABC** — https://www.amsterdam-dance-event.nl/en/program/2026/abc-sessions/2955247/
+- **ABC** — https://www.amsterdam-dance-event.nl/en/program/2026/abc-sessions/2955509/
+- **ABC** — https://www.amsterdam-dance-event.nl/en/program/2026/abc-sessions/2957635/
+- **ADE SUNDAY CLOSING -** — https://www.amsterdam-dance-event.nl/en/program/2026/ade-sunday-closing-the-last-dance-w-tony-junior/2956905/
+- **Controlled** — https://www.amsterdam-dance-event.nl/en/program/2026/controlled/2960641/
+- **DANCÆ** — https://www.amsterdam-dance-event.nl/en/program/2026/dancae-by-chlar/2961192/
+- **Dantes Hifi W Amsterdam White Flow 2026** — https://www.amsterdam-dance-event.nl/en/program/2026/dantes-hifi-w-amsterdam-white-flow-2026/2960438/
+- **Flaneur Music Presents Thinking Out Loud Ade Invite Only** — https://www.amsterdam-dance-event.nl/en/program/2026/flaneur-music-presents-thinking-out-loud-ade-invite-only/2952162/
+- **Google** — https://www.amsterdam-dance-event.nl/en/program/2026/google-pixel-and-search-ask-for-more/2947954/
+- **HONEYMOON** — https://www.amsterdam-dance-event.nl/en/program/2026/honeymoon/2955929/
+- **Official Ade Silent Disco Boat** — https://www.amsterdam-dance-event.nl/en/program/2026/official-ade-silent-disco-boat/2772698/
+- **Official Ade Silent Disco Boat 23 10** — https://www.amsterdam-dance-event.nl/en/program/2026/official-ade-silent-disco-boat-23-10/2773098/
+- **Official Ade Silent Disco Boat 24 10** — https://www.amsterdam-dance-event.nl/en/program/2026/official-ade-silent-disco-boat-24-10/2773468/
+- **Official Ade Silent Disco Boat 25 10** — https://www.amsterdam-dance-event.nl/en/program/2026/official-ade-silent-disco-boat-25-10/2773484/
+- **Official Ade Silent Disco Boat 26 10** — https://www.amsterdam-dance-event.nl/en/program/2026/official-ade-silent-disco-boat-26-10/2773488/
+- **ROYAL RUSH** — https://www.amsterdam-dance-event.nl/en/program/2026/royal-rush/2956896/
+- **ROYAL RUSH x Overdrive | Official Afterparty** — https://www.amsterdam-dance-event.nl/en/program/2026/royal-rush-x-overdrive-official-afterparty/2957545/
+- **TOURFCKNBIKEAMS** — https://www.amsterdam-dance-event.nl/en/program/2026/tourfcknbikeams/2958586/
+- **TYSON 2.0 Canal Cruise x Wavelength Records (Invite Only)** — https://www.amsterdam-dance-event.nl/en/program/2026/tyson-2-0-canal-cruise-x-wavelength-records-invite-only/2911342/
+- **The Breakaway Society** — https://www.amsterdam-dance-event.nl/en/program/2026/the-breakaway-society/2957623/
+- **ZAMNA x FYM Amsterdam** — https://www.amsterdam-dance-event.nl/en/program/2026/zamna-x-fym-amsterdam/2960508/
+### ➖ Verdwenen (3)
+- **240 KM/H** — https://www.amsterdam-dance-event.nl/en/program/2026/240-km-h/2849721/
+- **Audio Obscura Thursday** — https://www.amsterdam-dance-event.nl/en/program/2026/audio-obscura-thursday/2804358/
+- **EINDER by Boris Acket** — https://www.amsterdam-dance-event.nl/en/program/2026/einder-by-boris-acket/2828960/
+### ✏️ Gewijzigd (55)
+- **1001Tracklists x DJ Lovers Club pres. Open Channel** — https://www.amsterdam-dance-event.nl/en/program/2026/1001tracklists-x-dj-lovers-club-pres-open-channel-ade/2863656/
+    - line-up **+** BEAVE
+    - line-up **−** Baeve
+- **50Hertz Club Train Friday Daytime Trip 1200 1600** — https://www.amsterdam-dance-event.nl/en/program/2026/50hertz-club-train-friday-daytime-trip-1200-1600/2807666/
+    - `start`: '12:00' → '12:30'
+    - `end`: '16:00' → '16:30'
+- **50Hertz Club Train Saturday Sunset Trip 1800 2200** — https://www.amsterdam-dance-event.nl/en/program/2026/50hertz-club-train-saturday-sunset-trip-1800-2200/2807671/
+    - `start`: '18:00' → '17:15'
+- **50Hertz Club Train Sunday Daytime Trip 1200 1600** — https://www.amsterdam-dance-event.nl/en/program/2026/50hertz-club-train-sunday-daytime-trip-1200-1600/2807674/
+    - line-up **+** Carlito
+    - line-up **−** DJ Carlito
+- **50Hertz Club Train Sunday Sunrise Trip 0530 0930** — https://www.amsterdam-dance-event.nl/en/program/2026/50hertz-club-train-sunday-sunrise-trip-0530-0930/2807673/
+    - line-up **+** Barış Berber, HU, Maite Dedecker, Nelayan, O-MAN, The Enveloper
+    - line-up **−** A.D.H.S., LŪCIEN, Sanel
+- **Aca** — https://www.amsterdam-dance-event.nl/en/program/2026/aca/2855042/
+    - line-up **+** ACA, Capron, Fabian Haneke, Jesse Maas, Lauren Steel, Mene, Micky Hurts, Stef Davidse
+- **Ade Random Vinyl Marathon Saturday 24 10 26** — https://www.amsterdam-dance-event.nl/en/program/2026/ade-random-vinyl-marathon-saturday-24-10-26/2900534/
+    - line-up **+** Higgens
+    - line-up **−** John Higgins
+- **Ade X Op Solder** — https://www.amsterdam-dance-event.nl/en/program/2026/ade-x-op-solder/2844954/
+    - line-up **+** Guenter Råler, Miss Mazzy x LAURENCE, Pema Bennardis
+- **Afro House Summit** — https://www.amsterdam-dance-event.nl/en/program/2026/afro-house-summit/2830741/
+    - line-up **+** Idd Aziz, MMZ
+- **Alan Fullmer** — https://www.amsterdam-dance-event.nl/en/program/2026/alan-fullmer/2851515/
+    - `venue`: 'Bar Bacan' → 'Trance'
+- **Amsterdam Trance Event - Daytime Event** — https://www.amsterdam-dance-event.nl/en/program/2026/amsterdam-trance-event-daytime-event/2813014/
+    - line-up **+** Steve Dekay
+- **Atomiser &** — https://www.amsterdam-dance-event.nl/en/program/2026/atomiser-dokzaal/2861735/
+    - `title`: 'Atomiser @ Dokzaal' → 'Atomiser &'
+- **Audio Obscura** — https://www.amsterdam-dance-event.nl/en/program/2026/audio-obscura-ade-w-patrick-mason-b2b-spfdj-tjade-and-friends-anetha/2820925/
+    - `title`: 'Audio Obscura ADE w/ Patrick Mason b2b SPFDJ, Tjade and friends & Anetha' → 'Audio Obscura'
+- **Boogiehouse Soundsystem X Loop51** — https://www.amsterdam-dance-event.nl/en/program/2026/boogiehouse-soundsystem-x-loop51/2948509/
+    - line-up **+** Chudix, Emma Champagne Queen, French Cocotte, Frequency George, Heritage Listed, Kirilski, Laenk, Megan Murray, Meira, Tom Novy, Vasko Parisis
+- **Brewskies with Broskies** — https://www.amsterdam-dance-event.nl/en/program/2026/brewskies-with-broskies/2902026/
+    - line-up **+** Aldor, Steve Dekay
+    - line-up **−** AFTERUS, Meetch
+- **Bwired Presents Bandage Music X Paracou Ade** — https://www.amsterdam-dance-event.nl/en/program/2026/bwired-presents-bandage-music-x-paracou-ade/2836650/
+    - line-up **+** Cristina Lazic
+    - line-up **−** Christina Lazic
+- **DANCÆ** — https://www.amsterdam-dance-event.nl/en/program/2026/dancae-by-chlar/2910783/
+    - `start`: '18:30' → '19:00'
+    - `end`: '21:00' → '19:45'
+- **DISCOVR® DJ HOUSE AMSTERDAM** — https://www.amsterdam-dance-event.nl/en/program/2026/discovr-dj-house-amsterdam/2947385/
+    - `date`: '2026-10-22,2026-10-23' → '2026-10-21'
+- **Fabric X Loud Contact** — https://www.amsterdam-dance-event.nl/en/program/2026/fabric-x-loud-contact/2805830/
+    - line-up **+** Marcel Dettmann
+- **Flagship ADE Pre-Party Cruise |** — https://www.amsterdam-dance-event.nl/en/program/2026/flagship-ade-pre-party-cruise-1900-2030/2955938/
+    - line-up **+** JAG MORA
+- **Flagship ADE Pre-Party Cruise |** — https://www.amsterdam-dance-event.nl/en/program/2026/flagship-ade-pre-party-cruise-2300-0030/2956135/
+    - line-up **+** CØPTER
+- **For Love and Health of House** — https://www.amsterdam-dance-event.nl/en/program/2026/for-love-and-health-of-house/2836442/
+    - `end`: '12:00' → '19:00'
+- **GROOVE ODYSSEY** — https://www.amsterdam-dance-event.nl/en/program/2026/groove-odyssey/2841186/
+    - line-up **+** Carlito
+    - line-up **−** DJ Carlito
+- **Gashouder Presents: Mochakk Calling** — https://www.amsterdam-dance-event.nl/en/program/2026/gashouder-presents-mochakk-calling/2804808/
+    - line-up **+** Eli Iwasa
+- **GoodFellas TOKYO/AMSTERDAM** — https://www.amsterdam-dance-event.nl/en/program/2026/goodfellas-tokyo-amsterdam/2912651/
+    - `end`: '02:00' → '23:00'
+- **Heart&Seoul Ep.2:** — https://www.amsterdam-dance-event.nl/en/program/2026/heart-seoul-ep-2-ade-haejang-x-concept-404/2857603/
+    - line-up **+** AQUA, JUDE, Jason, SunB
+    - line-up **−** isshu
+- **Heart&Seoul Ep.2: HAEJANG** — https://www.amsterdam-dance-event.nl/en/program/2026/heart-seoul-ep-2-haejang/2866435/
+    - line-up **+** H:WHY, cymbi k
+    - line-up **−** isshu
+- **Heart&Seoul Ep.2: HAEJANG** — https://www.amsterdam-dance-event.nl/en/program/2026/heart-seoul-ep-2-haejang/2866508/
+    - line-up **+** ZENNX, isshu
+- **High Voltage x Critical Sounds Label Showcase** — https://www.amsterdam-dance-event.nl/en/program/2026/high-voltage-x-critical-sounds-label-showcase/2829559/
+    - line-up **−** Roman Messer
+- **Jean-Michel Jarre** — https://www.amsterdam-dance-event.nl/en/program/2026/jean-michel-jarre/2802123/
+    - line-up **+** Weval
+- **Joseph Capriati** — https://www.amsterdam-dance-event.nl/en/program/2026/joseph-capriati/2836644/
+    - line-up **+** Cristina Lazic
+- **KOOKOO Records ADE** — https://www.amsterdam-dance-event.nl/en/program/2026/kookoo-records-ade-special/2909829/
+    - `end`: '23:00' → '21:00'
+- **Killa Cutz x Armada Music** — https://www.amsterdam-dance-event.nl/en/program/2026/killa-cutz-x-armada-music/2916509/
+    - line-up **+** Ben Gold, Deveraux, Rozie
+- **LA ZIC SHOWCASE** — https://www.amsterdam-dance-event.nl/en/program/2026/la-zic-showcase/2935276/
+    - line-up **+** Antonio Romano, Cristina Lazic, Lolu Menayed, Reelow, Robin Nicolas, Stacie Fields
+- **LClub Presents:** — https://www.amsterdam-dance-event.nl/en/program/2026/lclub-presents-ade-2026/2947777/
+    - `title`: 'LClub Presents: ADE 2026' → 'LClub Presents:'
+    - line-up **+** Affani, Alex Arnout, Hector Moralez, Querry Veldt, Tom Walsh
+    - line-up **−** 16 Bit Lolitas, DJ B.O.B., Demattei, Elliot Moriarty, Gino Gentili, KIKO, Nick Muir, Paul Sparkes
+- **NAUGHTY PARROT** — https://www.amsterdam-dance-event.nl/en/program/2026/naughty-parrot-present-parrot-in-the-park/2905532/
+    - line-up **+** ADAM ROMO, CHARLIE DELTA, MEERA (UK), ROSS WHISPER, STYLI
+- **Nachtraaf x** — https://www.amsterdam-dance-event.nl/en/program/2026/nachtraaf-x-252/2892900/
+    - line-up **+** BRIMAC, Larisa Santiago
+- **Next Stop ADE-Bus 2026** — https://www.amsterdam-dance-event.nl/en/program/2026/next-stop-ade-bus-2026/2947306/
+    - `venue`: 'NextOn' → 'Next Stop ADE Bus'
+- **REDROOM ADE EDITION** — https://www.amsterdam-dance-event.nl/en/program/2026/redroom-ade-edition/2944664/
+    - `date`: '2026-10-24' → '2026-10-23'
+- **Robotic Rumble vs Pulse Theory** — https://www.amsterdam-dance-event.nl/en/program/2026/robotic-rumble-vs-pulse-theory/2902129/
+    - line-up **+** Meetch, TLUXX
+- **S1N3RGY COLLECTIVE PRESENTS: 30 YEARS OF ADE -** — https://www.amsterdam-dance-event.nl/en/program/2026/s1n3rgy-collective-presents-30-years-of-ade---special-hard-techno-rave/2831858/
+    - line-up **+** KENTO
+    - line-up **−** TEKON
+- **Signals: Hearing a Changing Planet** — https://www.amsterdam-dance-event.nl/en/program/2026/signals-hearing-a-changing-planet/2854968/
+    - line-up **+** Professor Carl Hayden Smith
+    - line-up **−** Carl Hayden Smith (The Museum of Consciousness)
+- **Slimfit x ADE x Our Lord in the Attic Museum -** — https://www.amsterdam-dance-event.nl/en/program/2026/slimfit-x-ade-x-our-lord-in-the-attic-museum/2844964/
+    - line-up **+** Guenter Råler, Miss Mazzy x LAURENCE, Pema Bennardis
+- **Slimfit x ADE x Our Lord in the Attic Museum -** — https://www.amsterdam-dance-event.nl/en/program/2026/slimfit-x-ade-x-our-lord-in-the-attic-museum/2844966/
+    - line-up **+** Guenter Råler, Miss Mazzy x LAURENCE, Pema Bennardis
+- **Sound, Technology and Consciousness** — https://www.amsterdam-dance-event.nl/en/program/2026/sound-technology-and-consciousness/2922559/
+    - line-up **+** Professor Carl Hayden Smith
+    - line-up **−** Carl Hayden Smith (The Museum of Consciousness)
+- **TYSON 2.0 Brandstore x Wavelength Records** — https://www.amsterdam-dance-event.nl/en/program/2026/tyson-2-0-brandstore-x-wavelength-records/2911330/
+    - line-up **+** FIRZA, Mazri, One Sec
+- **Tha Dogg House - Sefron & Friends** — https://www.amsterdam-dance-event.nl/en/program/2026/tha-dogg-house-sefron-friends/2911463/
+    - line-up **+** Mas Amor
+- **Tha Dogg House x 420Kmh** — https://www.amsterdam-dance-event.nl/en/program/2026/tha-dogg-house-x-420kmh/2911465/
+    - `start`: '17:00' → '15:00'
+    - `end`: '22:00' → '21:00'
+    - line-up **+** Adrián Mills, Ines Isla, Zwilling
+- **The Future Sound of Nature & Community Kitchen** — https://www.amsterdam-dance-event.nl/en/program/2026/the-future-sound-of-nature-community-kitchen/2828756/
+    - line-up **+** Professor Carl Hayden Smith
+    - line-up **−** Carl Hayden Smith (The Museum of Consciousness)
+- **The Sanctuary Earth** — https://www.amsterdam-dance-event.nl/en/program/2026/the-sanctuary-earth/2852931/
+    - line-up **+** Professor Carl Hayden Smith
+    - line-up **−** Carl Hayden Smith (The Museum of Consciousness)
+- **Todd Terry x Paharas Music** — https://www.amsterdam-dance-event.nl/en/program/2026/todd-terry-x-paharas-music/2885725/
+    - line-up **+** Doctor Feelgood
+    - line-up **−** Dr Feelgood
+- **Upcycle Get A Personalized Ade Outfit** — https://www.amsterdam-dance-event.nl/en/program/2026/upcycle-get-a-personalized-ade-outfit/2908498/
+    - `title`: 'Upcycle' → 'Upcycle Get A Personalized Ade Outfit'
+- **VIERVIERTEL** — https://www.amsterdam-dance-event.nl/en/program/2026/vierviertel-x-ade/2821054/
+    - line-up **+** Vctor
+- **Wave** — https://www.amsterdam-dance-event.nl/en/program/2026/wave-ade-pre-party-networking-event/2905216/
+    - line-up **+** Leo Sanderson
+- **Yellow House Resident Night w/** — https://www.amsterdam-dance-event.nl/en/program/2026/yellow-house-resident-night-w-andrew-azara-kim-april-mike-the-connector-more/2938514/
+    - `title`: 'Yellow House Resident Night w/ Andrew Azara, Kim April, Mike The Connector & more' → 'Yellow House Resident Night w/'
